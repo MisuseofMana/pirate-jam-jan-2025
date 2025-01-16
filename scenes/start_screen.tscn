@@ -38,13 +38,6 @@ patch_margin_bottom = 50
 axis_stretch_horizontal = 2
 axis_stretch_vertical = 2
 
-[node name="MarginContainer2" type="MarginContainer" parent="Control/MarginContainer/NinePatchRect"]
-layout_mode = 2
-offset_left = 50.0
-offset_top = 50.0
-offset_right = 930.0
-offset_bottom = 570.0
-
 [node name="MarginContainer" type="MarginContainer" parent="Control/MarginContainer/NinePatchRect"]
 layout_mode = 1
 anchors_preset = 15
@@ -59,6 +52,8 @@ theme_override_constants/margin_bottom = 100
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer/NinePatchRect/MarginContainer"]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
 theme_override_constants/separation = 20
 
 [node name="Label" type="Label" parent="Control/MarginContainer/NinePatchRect/MarginContainer/VBoxContainer"]
