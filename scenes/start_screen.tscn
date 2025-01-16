@@ -1,0 +1,79 @@
+[gd_scene load_steps=4 format=3 uid="uid://cp6ju7x807nou"]
+
+[ext_resource type="Script" path="res://scenes/start_screen.gd" id="1_2a4uy"]
+[ext_resource type="Theme" uid="uid://bqqwr73dtswgy" path="res://theme/default_theme.tres" id="3_wphrd"]
+[ext_resource type="Texture2D" uid="uid://d2x6x3t8fhkn0" path="res://art/parchment-ui-background.png" id="4_6351v"]
+
+[node name="StartScreen" type="CanvasLayer"]
+script = ExtResource("1_2a4uy")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_wphrd")
+
+[node name="MarginContainer" type="MarginContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 150
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 150
+theme_override_constants/margin_bottom = 50
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Control/MarginContainer"]
+layout_mode = 2
+texture = ExtResource("4_6351v")
+patch_margin_left = 50
+patch_margin_top = 50
+patch_margin_right = 50
+patch_margin_bottom = 50
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="Control/MarginContainer/NinePatchRect"]
+layout_mode = 2
+offset_left = 50.0
+offset_top = 50.0
+offset_right = 930.0
+offset_bottom = 570.0
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/MarginContainer/NinePatchRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 100
+theme_override_constants/margin_top = 100
+theme_override_constants/margin_right = 100
+theme_override_constants/margin_bottom = 100
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/MarginContainer/NinePatchRect/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="Control/MarginContainer/NinePatchRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Pirate Game Jam - January 2025"
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="Control/MarginContainer/NinePatchRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Start Game"
+
+[node name="Button2" type="Button" parent="Control/MarginContainer/NinePatchRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Secret"
+
+[connection signal="pressed" from="Control/MarginContainer/NinePatchRect/MarginContainer/VBoxContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Control/MarginContainer/NinePatchRect/MarginContainer/VBoxContainer/Button2" to="." method="_on_secret_button_pressed"]
