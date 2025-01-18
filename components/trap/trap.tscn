@@ -1,0 +1,43 @@
+[gd_scene load_steps=7 format=3 uid="uid://due6tipw8kq1h"]
+
+[ext_resource type="Script" path="res://components/trap/trap.gd" id="1_6w5ax"]
+[ext_resource type="Texture2D" uid="uid://rnxkegj4u03d" path="res://art/traps/spike-trap.png" id="2_cgdbm"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fausp"]
+atlas = ExtResource("2_cgdbm")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cxlkw"]
+atlas = ExtResource("2_cgdbm")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_y77fx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fausp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cxlkw")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_h5i5q"]
+radius = 8.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_y77fx")
+script = ExtResource("1_6w5ax")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.3
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_h5i5q")
+
+[connection signal="timeout" from="Timer" to="." method="reset_trap"]
