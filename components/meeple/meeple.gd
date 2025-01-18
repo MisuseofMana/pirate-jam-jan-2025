@@ -12,11 +12,11 @@ class_name Meeple extends Node2D
 @export_range(0, 1, 0.1) var piety: float
 @export var movement_speed: float = 20.0
 
-@export_group("Internal")
-@export var nav_agent: NavigationAgent2D
-
 @export_group("AI")
 @export var macguffin_strategy: MacguffinStrategy
+
+@export_group("Internal")
+@export var nav_agent: NavigationAgent2D
 
 signal die(whoDied)
 
@@ -27,7 +27,8 @@ var target: Node2D:
 		if new_value == target:
 			return
 		target = new_value
-		nav_agent.target_position = target.global_position
+		if target:
+			nav_agent.target_position = target.global_position
 
 var movement_delta: float
 
@@ -41,18 +42,25 @@ func _ready() -> void:
 	_select_target.call_deferred()
 
 func _select_target() -> void:
-	var targets = get_tree().get_nodes_in_group("macguffin")
-	for t in targets:
-		target = t
-		return
+	var macguffins: Array[Node2D] = []
+	for node in get_tree().get_nodes_in_group("macguffin"):
+		if node is Node2D:
+			macguffins.append(node)
+	target = macguffin_strategy.select_macguffin(self, macguffins)
 	
 func _physics_process(delta: float) -> void:
+	if not target:
+		_select_target()
+		return
+
 	nav_agent.target_position = target.global_position
 
 	var is_empty_or_unsynced = NavigationServer2D.map_get_iteration_id(nav_agent.get_navigation_map()) == 0
 	if is_empty_or_unsynced:
 		return
 	if nav_agent.is_navigation_finished():
+		target.queue_free()
+		target = null
 		return
 
 	movement_delta = movement_speed * delta

@@ -1,21 +1,26 @@
-[gd_scene load_steps=15 format=3 uid="uid://d1cw4mndlss2u"]
+[gd_scene load_steps=17 format=3 uid="uid://d1cw4mndlss2u"]
 
 [ext_resource type="Script" path="res://components/meeple/meeple.gd" id="1_d3iq0"]
 [ext_resource type="Script" path="res://components/meeple/ai/macguffin_consideration.gd" id="2_0ce0x"]
-[ext_resource type="Script" path="res://components/meeple/ai/macguffin_considerations/consider_treasure.gd" id="3_keka2"]
 [ext_resource type="Texture2D" uid="uid://blha2ijlclrvp" path="res://art/meeple/gold-thought.png" id="3_kqsni"]
+[ext_resource type="Script" path="res://components/meeple/ai/macguffin_considerations/consider_distance.gd" id="3_wkylo"]
+[ext_resource type="Script" path="res://components/meeple/ai/macguffin_considerations/consider_random.gd" id="4_fo5ew"]
 [ext_resource type="Script" path="res://components/meeple/ai/macguffin_strategy.gd" id="4_o0o2p"]
 [ext_resource type="Texture2D" uid="uid://i8gntnkx5ud6" path="res://art/meeple/cat.png" id="4_v1644"]
 [ext_resource type="Texture2D" uid="uid://b4bj6apqag6em" path="res://art/meeple/heart.png" id="5_24gb6"]
 [ext_resource type="Script" path="res://components/meeple/trap_hitbox.gd" id="5_k20un"]
 
-[sub_resource type="Resource" id="Resource_f88h2"]
-script = ExtResource("3_keka2")
+[sub_resource type="Resource" id="Resource_nme03"]
+script = ExtResource("3_wkylo")
 influence = 1.0
+
+[sub_resource type="Resource" id="Resource_k5f38"]
+script = ExtResource("4_fo5ew")
+influence = 0.1
 
 [sub_resource type="Resource" id="Resource_gx1mg"]
 script = ExtResource("4_o0o2p")
-considerations = Array[ExtResource("2_0ce0x")]([SubResource("Resource_f88h2")])
+considerations = Array[ExtResource("2_0ce0x")]([SubResource("Resource_nme03"), SubResource("Resource_k5f38")])
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ck7fc"]
 radius = 5.0
@@ -46,8 +51,8 @@ animations = [{
 [node name="Meeple" type="Node2D" node_paths=PackedStringArray("nav_agent")]
 z_index = 1
 script = ExtResource("1_d3iq0")
-nav_agent = NodePath("NavigationAgent2D")
 macguffin_strategy = SubResource("Resource_gx1mg")
+nav_agent = NodePath("NavigationAgent2D")
 
 [node name="TrapHitbox" type="Area2D" parent="."]
 position = Vector2(0, -5)
