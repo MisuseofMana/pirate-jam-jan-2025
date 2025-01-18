@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="MeepleStats" load_steps=2 format=3 uid="uid://mtihujnvpeu8"]
+
+[ext_resource type="Script" path="res://components/meeple/meeple_stats.gd" id="1_3e8ge"]
+
+[resource]
+script = ExtResource("1_3e8ge")
+greed = 0.1
+piety = 0.0
+health = 1

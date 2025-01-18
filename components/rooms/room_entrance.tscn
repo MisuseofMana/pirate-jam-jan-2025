@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dyxxlm6eg6wru"]
 
 [ext_resource type="Texture2D" uid="uid://f6uvs1nf3ffh" path="res://art/rooms/basic_base.png" id="1_n745u"]
-[ext_resource type="PackedScene" uid="uid://b8m35lfsgrq3q" path="res://components/meeple/meeple_looter.tscn" id="2_u63d4"]
+[ext_resource type="PackedScene" uid="uid://b8m35lfsgrq3q" path="res://components/meeple/meeple.tscn" id="2_u63d4"]
 
 [node name="Entrance" type="Node2D"]
 

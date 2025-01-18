@@ -1,0 +1,89 @@
+[gd_scene load_steps=12 format=3 uid="uid://b8m35lfsgrq3q"]
+
+[ext_resource type="Script" path="res://components/meeple/meeple.gd" id="1_d3iq0"]
+[ext_resource type="Resource" uid="uid://mtihujnvpeu8" path="res://components/meeple/basic-looter.tres" id="2_ckacs"]
+[ext_resource type="Texture2D" uid="uid://blha2ijlclrvp" path="res://art/meeple/gold-thought.png" id="3_kqsni"]
+[ext_resource type="Texture2D" uid="uid://i8gntnkx5ud6" path="res://art/meeple/cat.png" id="4_v1644"]
+[ext_resource type="Texture2D" uid="uid://b38e45fsk2biw" path="res://art/meeple/hearts.png" id="5_viw1p"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mxf3i"]
+atlas = ExtResource("4_v1644")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wet00"]
+atlas = ExtResource("4_v1644")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vv3vp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mxf3i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wet00")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i63pe"]
+atlas = ExtResource("5_viw1p")
+region = Rect2(0, 0, 5, 4)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ynrcc"]
+atlas = ExtResource("5_viw1p")
+region = Rect2(5, 0, 5, 4)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_uhnp5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i63pe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ynrcc")
+}],
+"loop": true,
+"name": &"hearts",
+"speed": 5.0
+}]
+
+[node name="Meeple" type="Node2D"]
+script = ExtResource("1_d3iq0")
+stats = ExtResource("2_ckacs")
+
+[node name="GoldThought" type="Sprite2D" parent="."]
+position = Vector2(-3, -13)
+texture = ExtResource("3_kqsni")
+
+[node name="Meeple" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_vv3vp")
+autoplay = "default"
+
+[node name="Hearts" type="Node2D" parent="."]
+
+[node name="Heart1" type="AnimatedSprite2D" parent="Hearts"]
+position = Vector2(11, -7)
+sprite_frames = SubResource("SpriteFrames_uhnp5")
+animation = &"hearts"
+frame_progress = 0.742877
+
+[node name="Heart2" type="AnimatedSprite2D" parent="Hearts"]
+position = Vector2(11, -3)
+sprite_frames = SubResource("SpriteFrames_uhnp5")
+animation = &"hearts"
+frame_progress = 0.742877
+
+[node name="Heart3" type="AnimatedSprite2D" parent="Hearts"]
+position = Vector2(11, 1)
+sprite_frames = SubResource("SpriteFrames_uhnp5")
+animation = &"hearts"
+frame_progress = 0.742877
+
+[node name="Heart4" type="AnimatedSprite2D" parent="Hearts"]
+position = Vector2(11, 5)
+sprite_frames = SubResource("SpriteFrames_uhnp5")
+animation = &"hearts"
+frame_progress = 0.742877
