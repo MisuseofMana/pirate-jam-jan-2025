@@ -28,10 +28,9 @@ animations = [{
 }]
 
 [node name="Meeple" type="Node2D" node_paths=PackedStringArray("nav_agent")]
+z_index = 1
 position = Vector2(22, 23)
 script = ExtResource("1_d3iq0")
-health = 2
-max_health = 2
 nav_agent = NodePath("NavigationAgent2D")
 
 [node name="Thought" type="Sprite2D" parent="."]
