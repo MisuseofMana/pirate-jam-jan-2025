@@ -5,10 +5,10 @@ class_name Meeple extends Node2D
 #@export var stats : MeepleStats
 @onready var thought: Sprite2D = $Thought
 
-@export_range(0, 4) var health : int
-@export_range(1, 4) var max_health : int
-@export_range(0, 1, 0.1) var greed : float
-@export_range(0, 1, 0.1) var piety : float
+@export_range(0, 4) var health: int
+@export_range(1, 4) var max_health: int
+@export_range(0, 1, 0.1) var greed: float
+@export_range(0, 1, 0.1) var piety: float
 
 @export var nav_agent: NavigationAgent2D
 @export var movement_speed: float = 20.0
@@ -29,9 +29,9 @@ var movement_delta: float
 func _ready() -> void:
 	nav_agent.velocity_computed.connect(_on_velocity_computed)
 	thought.hide()
-	for i : int in hearts.get_children().size():
+	for i: int in hearts.get_children().size():
 		print(i + 1)
-		if i +1 > max_health:
+		if i + 1 > max_health:
 			hearts.get_child(i).queue_free()
 	_select_target.call_deferred()
 
@@ -64,6 +64,6 @@ func _on_velocity_computed(safe_velocity: Vector2) -> void:
 func take_damage():
 	health -= 1
 	hearts.get_child(-1).texture = BLANK_HEART
-	if(health <= 0):
+	if (health <= 0):
 		die.emit(self)
 		queue_free()
