@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://ch7yme4oavj2p"
+path="res://.godot/imported/STORM MAGIC SPELL - Cinematic Electricity Thunder Whoosh - Weapon Charge    [003791].wav-78a09cc1439b5ad256e64adce791e3be.sample"
+
+[deps]
+
+source_file="res://audio/sfx/Fusehive - Elemental Magic Spells 2 [WAV SD]/STORM MAGIC SPELL - Cinematic Electricity Thunder Whoosh - Weapon Charge    [003791].wav"
+dest_files=["res://.godot/imported/STORM MAGIC SPELL - Cinematic Electricity Thunder Whoosh - Weapon Charge    [003791].wav-78a09cc1439b5ad256e64adce791e3be.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

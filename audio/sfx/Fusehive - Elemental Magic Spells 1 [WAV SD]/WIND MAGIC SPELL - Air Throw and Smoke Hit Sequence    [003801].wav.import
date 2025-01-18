@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://3ro6dastxt2r"
+path="res://.godot/imported/WIND MAGIC SPELL - Air Throw and Smoke Hit Sequence    [003801].wav-67fec8b0e89c52c631053d77de4b1903.sample"
+
+[deps]
+
+source_file="res://audio/sfx/Fusehive - Elemental Magic Spells 1 [WAV SD]/WIND MAGIC SPELL - Air Throw and Smoke Hit Sequence    [003801].wav"
+dest_files=["res://.godot/imported/WIND MAGIC SPELL - Air Throw and Smoke Hit Sequence    [003801].wav-67fec8b0e89c52c631053d77de4b1903.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

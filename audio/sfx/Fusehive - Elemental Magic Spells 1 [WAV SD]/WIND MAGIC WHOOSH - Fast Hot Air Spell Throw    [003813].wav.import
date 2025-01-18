@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://d4k20nfr1iuio"
+path="res://.godot/imported/WIND MAGIC WHOOSH - Fast Hot Air Spell Throw    [003813].wav-eca25c5d107135df514f546bb2969461.sample"
+
+[deps]
+
+source_file="res://audio/sfx/Fusehive - Elemental Magic Spells 1 [WAV SD]/WIND MAGIC WHOOSH - Fast Hot Air Spell Throw    [003813].wav"
+dest_files=["res://.godot/imported/WIND MAGIC WHOOSH - Fast Hot Air Spell Throw    [003813].wav-eca25c5d107135df514f546bb2969461.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

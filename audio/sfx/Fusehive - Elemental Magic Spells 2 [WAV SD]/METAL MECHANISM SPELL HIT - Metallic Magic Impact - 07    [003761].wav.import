@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://5nowf8lb8ukf"
+path="res://.godot/imported/METAL MECHANISM SPELL HIT - Metallic Magic Impact - 07    [003761].wav-98f086e4911c2d545a7f87ca8d3862ff.sample"
+
+[deps]
+
+source_file="res://audio/sfx/Fusehive - Elemental Magic Spells 2 [WAV SD]/METAL MECHANISM SPELL HIT - Metallic Magic Impact - 07    [003761].wav"
+dest_files=["res://.godot/imported/METAL MECHANISM SPELL HIT - Metallic Magic Impact - 07    [003761].wav-98f086e4911c2d545a7f87ca8d3862ff.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dy3f48qfo6c5c"
+path="res://.godot/imported/WIND MAGIC SPELL - Air Throw Whoosh or Smoke Hit - 01    [003807].wav-23b130ee7ff8e2c54b00662af933c789.sample"
+
+[deps]
+
+source_file="res://audio/sfx/Fusehive - Elemental Magic Spells 1 [WAV SD]/WIND MAGIC SPELL - Air Throw Whoosh or Smoke Hit - 01    [003807].wav"
+dest_files=["res://.godot/imported/WIND MAGIC SPELL - Air Throw Whoosh or Smoke Hit - 01    [003807].wav-23b130ee7ff8e2c54b00662af933c789.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

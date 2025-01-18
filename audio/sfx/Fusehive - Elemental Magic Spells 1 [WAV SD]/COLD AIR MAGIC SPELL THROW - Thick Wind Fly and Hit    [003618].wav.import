@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bs2pblar8l4xl"
+path="res://.godot/imported/COLD AIR MAGIC SPELL THROW - Thick Wind Fly and Hit    [003618].wav-eeeccb0743fed07879ea45871d304206.sample"
+
+[deps]
+
+source_file="res://audio/sfx/Fusehive - Elemental Magic Spells 1 [WAV SD]/COLD AIR MAGIC SPELL THROW - Thick Wind Fly and Hit    [003618].wav"
+dest_files=["res://.godot/imported/COLD AIR MAGIC SPELL THROW - Thick Wind Fly and Hit    [003618].wav-eeeccb0743fed07879ea45871d304206.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

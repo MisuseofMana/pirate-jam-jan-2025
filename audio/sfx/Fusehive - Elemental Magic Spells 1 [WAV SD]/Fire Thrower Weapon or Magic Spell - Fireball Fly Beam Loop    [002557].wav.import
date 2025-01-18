@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bn0kl5tthuxmu"
+path="res://.godot/imported/Fire Thrower Weapon or Magic Spell - Fireball Fly Beam Loop    [002557].wav-9297c69af6382fd1b51d535754dcc010.sample"
+
+[deps]
+
+source_file="res://audio/sfx/Fusehive - Elemental Magic Spells 1 [WAV SD]/Fire Thrower Weapon or Magic Spell - Fireball Fly Beam Loop    [002557].wav"
+dest_files=["res://.godot/imported/Fire Thrower Weapon or Magic Spell - Fireball Fly Beam Loop    [002557].wav-9297c69af6382fd1b51d535754dcc010.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

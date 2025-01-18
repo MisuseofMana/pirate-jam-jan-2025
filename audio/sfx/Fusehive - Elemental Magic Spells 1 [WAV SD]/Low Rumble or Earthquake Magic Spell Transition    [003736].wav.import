@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bfnp3dmiiqill"
+path="res://.godot/imported/Low Rumble or Earthquake Magic Spell Transition    [003736].wav-5b1aa3e12f91e440ccc0db0a5076cf65.sample"
+
+[deps]
+
+source_file="res://audio/sfx/Fusehive - Elemental Magic Spells 1 [WAV SD]/Low Rumble or Earthquake Magic Spell Transition    [003736].wav"
+dest_files=["res://.godot/imported/Low Rumble or Earthquake Magic Spell Transition    [003736].wav-5b1aa3e12f91e440ccc0db0a5076cf65.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

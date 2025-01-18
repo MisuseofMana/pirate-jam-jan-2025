@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://y5dgduc6huy"
+path="res://.godot/imported/COLD AIR MAGIC SPELL THROW - Fast Zap Swoosh or Swipe    [003616].wav-c4972cf5230c4c88faf89f9a8d384044.sample"
+
+[deps]
+
+source_file="res://audio/sfx/Fusehive - Elemental Magic Spells 1 [WAV SD]/COLD AIR MAGIC SPELL THROW - Fast Zap Swoosh or Swipe    [003616].wav"
+dest_files=["res://.godot/imported/COLD AIR MAGIC SPELL THROW - Fast Zap Swoosh or Swipe    [003616].wav-c4972cf5230c4c88faf89f9a8d384044.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

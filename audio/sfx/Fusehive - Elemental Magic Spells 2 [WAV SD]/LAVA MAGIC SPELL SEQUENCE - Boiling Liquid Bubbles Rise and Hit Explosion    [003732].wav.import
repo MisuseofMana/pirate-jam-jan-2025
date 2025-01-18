@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bjsfajsh17mc2"
+path="res://.godot/imported/LAVA MAGIC SPELL SEQUENCE - Boiling Liquid Bubbles Rise and Hit Explosion    [003732].wav-fb831599e1e8baca06287ed9aaf018ef.sample"
+
+[deps]
+
+source_file="res://audio/sfx/Fusehive - Elemental Magic Spells 2 [WAV SD]/LAVA MAGIC SPELL SEQUENCE - Boiling Liquid Bubbles Rise and Hit Explosion    [003732].wav"
+dest_files=["res://.godot/imported/LAVA MAGIC SPELL SEQUENCE - Boiling Liquid Bubbles Rise and Hit Explosion    [003732].wav-fb831599e1e8baca06287ed9aaf018ef.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

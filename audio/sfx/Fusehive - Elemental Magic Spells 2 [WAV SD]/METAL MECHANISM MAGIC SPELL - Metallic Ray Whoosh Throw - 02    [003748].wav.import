@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://b84nataiua0kb"
+path="res://.godot/imported/METAL MECHANISM MAGIC SPELL - Metallic Ray Whoosh Throw - 02    [003748].wav-f487cb35abb3da6a962ceaf51ee756ed.sample"
+
+[deps]
+
+source_file="res://audio/sfx/Fusehive - Elemental Magic Spells 2 [WAV SD]/METAL MECHANISM MAGIC SPELL - Metallic Ray Whoosh Throw - 02    [003748].wav"
+dest_files=["res://.godot/imported/METAL MECHANISM MAGIC SPELL - Metallic Ray Whoosh Throw - 02    [003748].wav-f487cb35abb3da6a962ceaf51ee756ed.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

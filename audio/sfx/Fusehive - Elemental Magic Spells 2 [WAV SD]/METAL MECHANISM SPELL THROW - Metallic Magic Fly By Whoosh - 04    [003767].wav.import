@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cbjsmaq2iqd4s"
+path="res://.godot/imported/METAL MECHANISM SPELL THROW - Metallic Magic Fly By Whoosh - 04    [003767].wav-d55e472b67b508dc142b1b96f485d742.sample"
+
+[deps]
+
+source_file="res://audio/sfx/Fusehive - Elemental Magic Spells 2 [WAV SD]/METAL MECHANISM SPELL THROW - Metallic Magic Fly By Whoosh - 04    [003767].wav"
+dest_files=["res://.godot/imported/METAL MECHANISM SPELL THROW - Metallic Magic Fly By Whoosh - 04    [003767].wav-d55e472b67b508dc142b1b96f485d742.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

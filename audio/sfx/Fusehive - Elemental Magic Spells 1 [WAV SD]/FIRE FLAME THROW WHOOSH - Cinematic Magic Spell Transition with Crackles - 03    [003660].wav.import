@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://djf3qrsa1e06v"
+path="res://.godot/imported/FIRE FLAME THROW WHOOSH - Cinematic Magic Spell Transition with Crackles - 03    [003660].wav-8c57216a6b5ea782066ebd8e32212230.sample"
+
+[deps]
+
+source_file="res://audio/sfx/Fusehive - Elemental Magic Spells 1 [WAV SD]/FIRE FLAME THROW WHOOSH - Cinematic Magic Spell Transition with Crackles - 03    [003660].wav"
+dest_files=["res://.godot/imported/FIRE FLAME THROW WHOOSH - Cinematic Magic Spell Transition with Crackles - 03    [003660].wav-8c57216a6b5ea782066ebd8e32212230.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

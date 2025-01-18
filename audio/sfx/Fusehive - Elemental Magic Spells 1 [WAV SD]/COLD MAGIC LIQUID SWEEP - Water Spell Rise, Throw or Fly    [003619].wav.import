@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://ui73k7p4ncwb"
+path="res://.godot/imported/COLD MAGIC LIQUID SWEEP - Water Spell Rise, Throw or Fly    [003619].wav-7b55441c0a202fa84a3746b8572688fa.sample"
+
+[deps]
+
+source_file="res://audio/sfx/Fusehive - Elemental Magic Spells 1 [WAV SD]/COLD MAGIC LIQUID SWEEP - Water Spell Rise, Throw or Fly    [003619].wav"
+dest_files=["res://.godot/imported/COLD MAGIC LIQUID SWEEP - Water Spell Rise, Throw or Fly    [003619].wav-7b55441c0a202fa84a3746b8572688fa.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

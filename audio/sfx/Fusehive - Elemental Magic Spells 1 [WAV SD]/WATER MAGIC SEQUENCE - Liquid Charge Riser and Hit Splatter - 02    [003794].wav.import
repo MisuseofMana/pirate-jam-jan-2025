@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://mbjfmw656cbc"
+path="res://.godot/imported/WATER MAGIC SEQUENCE - Liquid Charge Riser and Hit Splatter - 02    [003794].wav-015666a1df713fb7430e48bd9a4d5e2b.sample"
+
+[deps]
+
+source_file="res://audio/sfx/Fusehive - Elemental Magic Spells 1 [WAV SD]/WATER MAGIC SEQUENCE - Liquid Charge Riser and Hit Splatter - 02    [003794].wav"
+dest_files=["res://.godot/imported/WATER MAGIC SEQUENCE - Liquid Charge Riser and Hit Splatter - 02    [003794].wav-015666a1df713fb7430e48bd9a4d5e2b.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

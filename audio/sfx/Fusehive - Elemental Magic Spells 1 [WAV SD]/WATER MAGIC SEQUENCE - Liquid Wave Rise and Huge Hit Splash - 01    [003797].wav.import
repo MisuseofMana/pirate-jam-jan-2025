@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bav20satfeugj"
+path="res://.godot/imported/WATER MAGIC SEQUENCE - Liquid Wave Rise and Huge Hit Splash - 01    [003797].wav-eee1e9f01267a95cdf2ac36785a881b9.sample"
+
+[deps]
+
+source_file="res://audio/sfx/Fusehive - Elemental Magic Spells 1 [WAV SD]/WATER MAGIC SEQUENCE - Liquid Wave Rise and Huge Hit Splash - 01    [003797].wav"
+dest_files=["res://.godot/imported/WATER MAGIC SEQUENCE - Liquid Wave Rise and Huge Hit Splash - 01    [003797].wav-eee1e9f01267a95cdf2ac36785a881b9.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

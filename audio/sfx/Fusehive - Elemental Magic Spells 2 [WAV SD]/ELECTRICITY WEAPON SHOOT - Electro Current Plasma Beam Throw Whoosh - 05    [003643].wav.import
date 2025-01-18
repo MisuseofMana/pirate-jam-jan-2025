@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://ciorimoucej73"
+path="res://.godot/imported/ELECTRICITY WEAPON SHOOT - Electro Current Plasma Beam Throw Whoosh - 05    [003643].wav-82dbcb7ff81a6ef697fa0419bff31fa0.sample"
+
+[deps]
+
+source_file="res://audio/sfx/Fusehive - Elemental Magic Spells 2 [WAV SD]/ELECTRICITY WEAPON SHOOT - Electro Current Plasma Beam Throw Whoosh - 05    [003643].wav"
+dest_files=["res://.godot/imported/ELECTRICITY WEAPON SHOOT - Electro Current Plasma Beam Throw Whoosh - 05    [003643].wav-82dbcb7ff81a6ef697fa0419bff31fa0.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

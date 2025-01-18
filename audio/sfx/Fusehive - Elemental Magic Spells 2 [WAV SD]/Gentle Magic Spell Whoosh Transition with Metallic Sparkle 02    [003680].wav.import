@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://c2jo4ihcgsk61"
+path="res://.godot/imported/Gentle Magic Spell Whoosh Transition with Metallic Sparkle 02    [003680].wav-0e66c143d7ff51b32b3af50b417f0655.sample"
+
+[deps]
+
+source_file="res://audio/sfx/Fusehive - Elemental Magic Spells 2 [WAV SD]/Gentle Magic Spell Whoosh Transition with Metallic Sparkle 02    [003680].wav"
+dest_files=["res://.godot/imported/Gentle Magic Spell Whoosh Transition with Metallic Sparkle 02    [003680].wav-0e66c143d7ff51b32b3af50b417f0655.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0
