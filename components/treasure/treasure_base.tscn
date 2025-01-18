@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://csw3vkdw4erk5"]
+
+[node name="Treasure" type="Node2D" groups=["macguffin"]]

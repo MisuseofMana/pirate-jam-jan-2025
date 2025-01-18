@@ -1,14 +1,14 @@
 [gd_scene load_steps=6 format=4 uid="uid://co46cl4xglan8"]
 
-[ext_resource type="PackedScene" uid="uid://dqr12wo3gio00" path="res://components/rooms/room_basic_base.tscn" id="1_bw1cb"]
 [ext_resource type="PackedScene" uid="uid://dyxxlm6eg6wru" path="res://components/rooms/room_entrance.tscn" id="2_woh4p"]
 [ext_resource type="PackedScene" uid="uid://ddgevfwlgcn8t" path="res://components/rooms/room_sword.tscn" id="3_yf8os"]
+[ext_resource type="PackedScene" uid="uid://btt0xk5r72j5t" path="res://components/rooms/room_basic_1.tscn" id="3_yosgr"]
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_5pp3v"]
 resource_name = "Rooms"
-scenes/1/scene = ExtResource("1_bw1cb")
 scenes/2/scene = ExtResource("2_woh4p")
 scenes/3/scene = ExtResource("3_yf8os")
+scenes/4/scene = ExtResource("3_yosgr")
 
 [sub_resource type="TileSet" id="TileSet_prfm3"]
 tile_size = Vector2i(64, 64)
@@ -18,7 +18,7 @@ sources/0 = SubResource("TileSetScenesCollectionSource_5pp3v")
 [node name="Basic Test" type="Node2D"]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
-tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAQAAAAEAAAAAAAAAAQABAAEAAAAAAAAAAQABAAAAAAAAAAAAAQACAAAAAAAAAAAAAQACAAEAAAAAAAAAAQABAAIAAAAAAAAAAQAAAAIAAAAAAAAAAQABAP//AAAAAAAAAwD//wIAAAAAAAAAAgA=")
+tile_map_data = PackedByteArray("AAABAP//AAAAAAAAAwD//wIAAAAAAAAAAgAAAAIAAAAAAAAABAABAAIAAAAAAAAABAACAAIAAAAAAAAABAACAAEAAAAAAAAABAABAAEAAAAAAAAABAAAAAEAAAAAAAAABAAAAAAAAAAAAAAABAABAAAAAAAAAAAABAACAAAAAAAAAAAABAA=")
 tile_set = SubResource("TileSet_prfm3")
 
 [node name="Camera2D" type="Camera2D" parent="."]
