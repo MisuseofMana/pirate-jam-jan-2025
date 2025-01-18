@@ -15,6 +15,9 @@ class_name Meeple extends Node2D
 @export_group("Internal")
 @export var nav_agent: NavigationAgent2D
 
+@export_group("AI")
+@export var macguffin_strategy: MacguffinStrategy
+
 signal die(whoDied)
 
 const BLANK_HEART = preload("res://art/meeple/blank-heart.png")
