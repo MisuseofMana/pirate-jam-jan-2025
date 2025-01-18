@@ -5,13 +5,15 @@ class_name Meeple extends Node2D
 #@export var stats : MeepleStats
 @onready var thought: Sprite2D = $Thought
 
+@export_group("Stats")
 @export_range(0, 4) var health: int
 @export_range(1, 4) var max_health: int
 @export_range(0, 1, 0.1) var greed: float
 @export_range(0, 1, 0.1) var piety: float
-
-@export var nav_agent: NavigationAgent2D
 @export var movement_speed: float = 20.0
+
+@export_group("Internal")
+@export var nav_agent: NavigationAgent2D
 
 signal die(whoDied)
 
