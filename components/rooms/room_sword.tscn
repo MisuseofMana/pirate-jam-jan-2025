@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://ddgevfwlgcn8t"]
+
+[ext_resource type="Texture2D" uid="uid://f6uvs1nf3ffh" path="res://art/rooms/basic_base.png" id="1_tilbc"]
+
+[node name="Sword Room" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+self_modulate = Color(0.479853, 0.612378, 1, 1)
+texture = ExtResource("1_tilbc")
