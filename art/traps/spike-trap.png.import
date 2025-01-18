@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://blha2ijlclrvp"
-path="res://.godot/imported/gold-thought.png-9e7cd3fad41124d2d9149bb03033167a.ctex"
+uid="uid://rnxkegj4u03d"
+path="res://.godot/imported/spike-trap.png-16f4e7a30533f085da4084f622fcf940.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/meeple/gold-thought.png"
-dest_files=["res://.godot/imported/gold-thought.png-9e7cd3fad41124d2d9149bb03033167a.ctex"]
+source_file="res://art/traps/spike-trap.png"
+dest_files=["res://.godot/imported/spike-trap.png-16f4e7a30533f085da4084f622fcf940.ctex"]
 
 [params]
 
