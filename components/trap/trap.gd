@@ -1,18 +1,24 @@
 extends AnimatedSprite2D
 class_name Trap
 
-@onready var timer: Timer = $Timer
 @export_range(0.25, 10, 0.25) var trap_cooldown : float = 0.25
+
+@onready var timer: Timer = $Timer
 @onready var coll: CollisionShape2D = $DamageArea/CollisionShape2D
+@onready var reset_clock: TextureProgressBar = $ResetClock
 
 func _ready():
 	timer.wait_time = trap_cooldown
+	reset_clock.hide()
 
 func trigger_trap():
 	if frame != 1:
 		frame = 1
 		timer.start()
+		reset_clock.show()
+		get_tree().create_tween().tween_property(reset_clock, "value", 100, trap_cooldown)
 	
 func reset_trap():
 	frame = 0
 	coll.disabled = false
+	reset_clock.hide()

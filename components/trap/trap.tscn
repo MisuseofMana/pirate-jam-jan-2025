@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://due6tipw8kq1h"]
+[gd_scene load_steps=11 format=3 uid="uid://due6tipw8kq1h"]
 
 [ext_resource type="Script" path="res://components/trap/trap.gd" id="1_6w5ax"]
 [ext_resource type="Texture2D" uid="uid://rnxkegj4u03d" path="res://art/traps/spike-trap.png" id="2_cgdbm"]
 [ext_resource type="Script" path="res://components/trap/damage_area.gd" id="3_kshbm"]
-[ext_resource type="Texture2D" uid="uid://cf6g4v88nhpyq" path="res://art/traps/spike-trap-timer-bg.png" id="4_64jnn"]
-[ext_resource type="Texture2D" uid="uid://c0k746ay2j1sr" path="res://art/traps/spike-trap-timer.png" id="5_iwj83"]
+[ext_resource type="Texture2D" uid="uid://cf6g4v88nhpyq" path="res://art/traps/timer-under.png" id="4_3xxjc"]
+[ext_resource type="Texture2D" uid="uid://c0k746ay2j1sr" path="res://art/traps/timer-over.png" id="5_oeflf"]
+[ext_resource type="Texture2D" uid="uid://dhsbk6xeaxx6o" path="res://art/traps/timer-progress.png" id="6_qlc0b"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fausp"]
 atlas = ExtResource("2_cgdbm")
@@ -45,15 +46,18 @@ script = ExtResource("3_kshbm")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea"]
 shape = SubResource("CircleShape2D_h5i5q")
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
-offset_right = 16.0
-offset_bottom = 16.0
-step = 10.0
-value = 100.0
+[node name="ResetClock" type="TextureProgressBar" parent="."]
+offset_left = 4.0
+offset_top = -13.0
+offset_right = 20.0
+offset_bottom = 3.0
+scale = Vector2(0.5, 0.5)
+step = 5.0
+value = 20.0
 fill_mode = 5
-texture_under = ExtResource("4_64jnn")
-texture_over = ExtResource("5_iwj83")
-texture_progress = ExtResource("4_64jnn")
+texture_under = ExtResource("4_3xxjc")
+texture_over = ExtResource("5_oeflf")
+texture_progress = ExtResource("6_qlc0b")
 
 [connection signal="timeout" from="Timer" to="." method="reset_trap"]
 [connection signal="area_entered" from="DamageArea" to="DamageArea" method="_on_area_entered"]

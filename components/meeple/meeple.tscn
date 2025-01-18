@@ -51,6 +51,7 @@ animations = [{
 [node name="Meeple" type="Node2D" node_paths=PackedStringArray("nav_agent")]
 z_index = 1
 script = ExtResource("1_d3iq0")
+health = 1
 macguffin_strategy = SubResource("Resource_gx1mg")
 nav_agent = NodePath("NavigationAgent2D")
 
@@ -95,6 +96,5 @@ texture = ExtResource("5_24gb6")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 
-[connection signal="area_entered" from="TrapHitbox" to="." method="take_damage"]
 [connection signal="area_entered" from="TrapHitbox" to="TrapHitbox" method="_on_area_entered"]
 [connection signal="stepped_on_trap" from="TrapHitbox" to="." method="take_damage"]
