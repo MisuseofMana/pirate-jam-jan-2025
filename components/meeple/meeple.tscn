@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://d1cw4mndlss2u"]
+[gd_scene load_steps=15 format=3 uid="uid://d1cw4mndlss2u"]
 
 [ext_resource type="Script" path="res://components/meeple/meeple.gd" id="1_d3iq0"]
 [ext_resource type="Script" path="res://components/meeple/ai/macguffin_consideration.gd" id="2_0ce0x"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://components/meeple/ai/macguffin_strategy.gd" id="4_o0o2p"]
 [ext_resource type="Texture2D" uid="uid://i8gntnkx5ud6" path="res://art/meeple/cat.png" id="4_v1644"]
 [ext_resource type="Texture2D" uid="uid://b4bj6apqag6em" path="res://art/meeple/heart.png" id="5_24gb6"]
+[ext_resource type="Script" path="res://components/meeple/trap_hitbox.gd" id="5_k20un"]
 
 [sub_resource type="Resource" id="Resource_f88h2"]
 script = ExtResource("3_keka2")
@@ -15,6 +16,10 @@ influence = 1.0
 [sub_resource type="Resource" id="Resource_gx1mg"]
 script = ExtResource("4_o0o2p")
 considerations = Array[ExtResource("2_0ce0x")]([SubResource("Resource_f88h2")])
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ck7fc"]
+radius = 5.0
+height = 16.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mxf3i"]
 atlas = ExtResource("4_v1644")
@@ -44,6 +49,15 @@ script = ExtResource("1_d3iq0")
 nav_agent = NodePath("NavigationAgent2D")
 macguffin_strategy = SubResource("Resource_gx1mg")
 
+[node name="TrapHitbox" type="Area2D" parent="."]
+position = Vector2(0, -5)
+rotation = 1.5708
+input_pickable = false
+script = ExtResource("5_k20un")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TrapHitbox"]
+shape = SubResource("CapsuleShape2D_ck7fc")
+
 [node name="Thought" type="Sprite2D" parent="."]
 position = Vector2(-3, -21)
 texture = ExtResource("3_kqsni")
@@ -52,6 +66,8 @@ texture = ExtResource("3_kqsni")
 position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_vv3vp")
 autoplay = "default"
+frame = 1
+frame_progress = 0.286806
 
 [node name="Hearts" type="Node2D" parent="."]
 position = Vector2(0, -7)
@@ -73,3 +89,7 @@ position = Vector2(11, 5)
 texture = ExtResource("5_24gb6")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
+[connection signal="area_entered" from="TrapHitbox" to="." method="take_damage"]
+[connection signal="area_entered" from="TrapHitbox" to="TrapHitbox" method="_on_area_entered"]
+[connection signal="stepped_on_trap" from="TrapHitbox" to="." method="take_damage"]

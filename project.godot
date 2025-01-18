@@ -31,6 +31,10 @@ window/stretch/scale_mode="integer"
 
 macguffin=""
 
+[layer_names]
+
+2d_physics/layer_1="TrapDetection"
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
