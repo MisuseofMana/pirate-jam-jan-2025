@@ -1,8 +1,17 @@
-[gd_scene load_steps=2 format=3 uid="uid://dqr12wo3gio00"]
+[gd_scene load_steps=3 format=3 uid="uid://dqr12wo3gio00"]
 
 [ext_resource type="Texture2D" uid="uid://f6uvs1nf3ffh" path="res://art/rooms/basic_base.png" id="1_mokcw"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_i64ex"]
+vertices = PackedVector2Array(6, -25, 25, -25, 25, -6, -25, 5, 32, -6, 32, 5, 25, 5, 25, 25, 6, 25, 6, 31, -7, 31, -7, 25, -25, 25, -31, 5, -31, -7, -25, -7, -25, -25, -7, -25, -7, -32, 6, -32)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(2, 4, 5, 6), PackedInt32Array(6, 7, 8, 3), PackedInt32Array(8, 9, 10, 11), PackedInt32Array(11, 12, 3), PackedInt32Array(3, 13, 14, 15), PackedInt32Array(15, 16, 17), PackedInt32Array(17, 18, 19, 0), PackedInt32Array(8, 11, 3), PackedInt32Array(2, 6, 3), PackedInt32Array(17, 0, 3, 15)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-25, -25, -7, -25, -7, -32, 6, -32, 6, -25, 25, -25, 25, -6, 32, -6, 32, 5, 25, 5, 25, 25, 6, 25, 6, 32, -7, 32, -7, 25, -25, 25, -25, 5, -32, 5, -32, -7, -25, -7)])
+agent_radius = 0.0
 
 [node name="Basic Room" type="Node2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_mokcw")
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+navigation_polygon = SubResource("NavigationPolygon_i64ex")

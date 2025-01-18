@@ -1,7 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://b8m35lfsgrq3q"]
+[gd_scene load_steps=12 format=3 uid="uid://d1cw4mndlss2u"]
 
 [ext_resource type="Script" path="res://components/meeple/meeple.gd" id="1_d3iq0"]
-[ext_resource type="Resource" uid="uid://mtihujnvpeu8" path="res://components/meeple/basic-looter.tres" id="2_ckacs"]
+[ext_resource type="Resource" path="res://components/meeple/basic-looter.tres" id="2_ckacs"]
 [ext_resource type="Texture2D" uid="uid://blha2ijlclrvp" path="res://art/meeple/gold-thought.png" id="3_kqsni"]
 [ext_resource type="Texture2D" uid="uid://i8gntnkx5ud6" path="res://art/meeple/cat.png" id="4_v1644"]
 [ext_resource type="Texture2D" uid="uid://b38e45fsk2biw" path="res://art/meeple/hearts.png" id="5_viw1p"]
@@ -50,9 +50,13 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Meeple" type="Node2D"]
+[node name="Meeple" type="Node2D" node_paths=PackedStringArray("nav_agent")]
 script = ExtResource("1_d3iq0")
 stats = ExtResource("2_ckacs")
+nav_agent = NodePath("NavigationAgent2D")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+path_postprocessing = 1
 
 [node name="GoldThought" type="Sprite2D" parent="."]
 position = Vector2(-3, -13)

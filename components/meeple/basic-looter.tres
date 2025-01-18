@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MeepleStats" load_steps=2 format=3 uid="uid://mtihujnvpeu8"]
+[gd_resource type="Resource" script_class="MeepleStats" load_steps=2 format=3 uid="uid://u5jea6bd37ib"]
 
 [ext_resource type="Script" path="res://components/meeple/meeple_stats.gd" id="1_3e8ge"]
 

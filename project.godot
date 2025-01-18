@@ -27,6 +27,10 @@ window/size/window_height_override=960
 window/stretch/mode="viewport"
 window/stretch/scale_mode="integer"
 
+[global_group]
+
+macguffin=""
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
