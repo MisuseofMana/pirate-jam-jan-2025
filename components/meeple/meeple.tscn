@@ -66,7 +66,7 @@ script = ExtResource("5_k20un")
 shape = SubResource("CapsuleShape2D_ck7fc")
 
 [node name="Thought" type="Sprite2D" parent="."]
-position = Vector2(-3, -21)
+position = Vector2(-3, -22)
 texture = ExtResource("3_kqsni")
 
 [node name="Meeple" type="AnimatedSprite2D" parent="."]
