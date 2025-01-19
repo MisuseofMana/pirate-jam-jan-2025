@@ -42,9 +42,7 @@ func _ready() -> void:
 
 func _select_target() -> void:
 	var macguffins: Array[Node2D] = []
-	for node in get_tree().get_nodes_in_group("macguffin"):
-		if node is Node2D:
-			macguffins.append(node)
+	macguffins.assign(get_tree().get_nodes_in_group("macguffin"))
 	target = macguffin_strategy.select_macguffin(self, macguffins)
 	
 func _physics_process(delta: float) -> void:
@@ -75,7 +73,6 @@ func _on_velocity_computed(safe_velocity: Vector2) -> void:
 
 func take_damage():
 	health -= 1
-	print(hearts.get_children())
 	hearts.get_child(-1).texture = BLANK_HEART
 	if (health <= 0):
 		die.emit(self)

@@ -11,11 +11,11 @@ func _init() -> void:
 	_update_description()
 
 ## A score of 1.0 means the action is not penalized. A score of 0.0 means the choice will not be selected. Everything in between means the action is suboptimal, but acceptable.
-func get_score(subject: Object, object: Object) -> float:
+func get_score(subject, object) -> float:
 	var raw_score := clampf(_get_score(subject, object), 0.0, 1.0)
 	return lerp((1.0 - influence), 1.0, raw_score)
 	
-func _get_score(_subject: Object, _object: Object) -> float:
+func _get_score(_subject, _object) -> float:
 	assert(false, "_get_score() must be overridden in derived classes.")
 	return 1.0
 

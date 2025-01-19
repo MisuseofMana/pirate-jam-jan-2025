@@ -22,7 +22,6 @@ SceneSwitcher="*res://SceneSwitcher.gd"
 
 window/size/viewport_width=480
 window/size/viewport_height=480
-window/size/mode=3
 window/size/window_width_override=1920
 window/size/window_height_override=1920
 window/stretch/mode="viewport"

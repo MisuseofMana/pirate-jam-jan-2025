@@ -96,6 +96,7 @@ position = Vector2(11, 5)
 texture = ExtResource("5_24gb6")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+debug_enabled = true
 
 [connection signal="area_entered" from="TrapHitbox" to="TrapHitbox" method="_on_area_entered"]
 [connection signal="stepped_on_trap" from="TrapHitbox" to="." method="take_damage"]

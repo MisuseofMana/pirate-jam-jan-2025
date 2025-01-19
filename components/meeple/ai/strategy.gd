@@ -1,7 +1,8 @@
+@tool
 class_name Strategy extends Resource
 
-func _select(subject: Object, objects: Array) -> Object:
-	var score_descriptions := _get_score_descriptions(subject, objects)
+func _select(subject, objects: Array) -> Object:
+	var score_descriptions := get_scores(subject, objects)
 	if score_descriptions.size() > 0:
 		var selected = score_descriptions[0]
 		return selected.object
@@ -11,14 +12,14 @@ func _get_considerations() -> Array[Consideration]:
 	assert(false, "_get_considerations() must be overridden in derived classes.")
 	return []
 
-func _get_score_descriptions(subject: Object, objects: Array) -> Array[Strategy.Score]:
+func get_scores(subject, objects: Array) -> Array[Strategy.Score]:
 	var score_descriptions: Array[Strategy.Score] = []
 	for object in objects:
-		score_descriptions.append(_get_score_description(subject, object))
+		score_descriptions.append(get_score(subject, object))
 	score_descriptions.sort_custom(Strategy.Score.sort_descending)
 	return score_descriptions
 
-func _get_score_description(subject: Object, object: Object) -> Strategy.Score:
+func get_score(subject, object) -> Strategy.Score:
 	var overall_score := 1.0
 	var consideration_scores: Array[Strategy.ConsiderationScore] = []
 	for consideration in _get_considerations():
