@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://5hvwgp6ac3v7"]
+
+[ext_resource type="Texture2D" uid="uid://cgx6emdsjwn1i" path="res://art/meeple/meeple_soul.png" id="1_fpfb5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2wstx"]
+atlas = ExtResource("1_fpfb5")
+region = Rect2(0, 0, 10, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xvft8"]
+atlas = ExtResource("1_fpfb5")
+region = Rect2(10, 0, 10, 14)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ck51y"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2wstx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xvft8")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Node2D" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_ck51y")
+autoplay = "default"
+frame_progress = 0.0199614
+offset = Vector2(0, -7)

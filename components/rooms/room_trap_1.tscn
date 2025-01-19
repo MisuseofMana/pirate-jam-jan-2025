@@ -9,3 +9,4 @@
 self_modulate = Color(1, 0.517647, 0, 1)
 
 [node name="AnimatedSprite2D" parent="." index="2" instance=ExtResource("2_qsu68")]
+trap_cooldown = 5.0

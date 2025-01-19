@@ -1,0 +1,92 @@
+[gd_scene load_steps=17 format=3 uid="uid://d1cw4mndlss2u"]
+
+[ext_resource type="Script" path="res://components/meeple/meeple.gd" id="1_d3iq0"]
+[ext_resource type="Script" path="res://components/meeple/ai/macguffin_consideration.gd" id="2_0ce0x"]
+[ext_resource type="Texture2D" uid="uid://blha2ijlclrvp" path="res://art/meeple/gold-thought.png" id="3_kqsni"]
+[ext_resource type="Script" path="res://components/meeple/ai/macguffin_considerations/consider_distance.gd" id="3_wkylo"]
+[ext_resource type="Script" path="res://components/meeple/ai/macguffin_considerations/consider_random.gd" id="4_fo5ew"]
+[ext_resource type="Script" path="res://components/meeple/ai/macguffin_strategy.gd" id="4_o0o2p"]
+[ext_resource type="Texture2D" uid="uid://i8gntnkx5ud6" path="res://art/meeple/cat.png" id="4_v1644"]
+[ext_resource type="Script" path="res://components/meeple/trap_hitbox.gd" id="5_k20un"]
+[ext_resource type="Texture2D" uid="uid://dn2svn7g0eiou" path="res://art/meeple/thought-heart-half.png" id="9_4fjo2"]
+
+[sub_resource type="Resource" id="Resource_nme03"]
+script = ExtResource("3_wkylo")
+influence = 1.0
+
+[sub_resource type="Resource" id="Resource_k5f38"]
+script = ExtResource("4_fo5ew")
+influence = 0.1
+
+[sub_resource type="Resource" id="Resource_gx1mg"]
+script = ExtResource("4_o0o2p")
+considerations = Array[ExtResource("2_0ce0x")]([SubResource("Resource_nme03"), SubResource("Resource_k5f38")])
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ck7fc"]
+radius = 5.0
+height = 16.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mxf3i"]
+atlas = ExtResource("4_v1644")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wet00"]
+atlas = ExtResource("4_v1644")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vv3vp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mxf3i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wet00")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Meeple" type="Node2D" node_paths=PackedStringArray("nav_agent")]
+z_index = 1
+position = Vector2(16, 31)
+script = ExtResource("1_d3iq0")
+health = 1
+macguffin_strategy = SubResource("Resource_gx1mg")
+nav_agent = NodePath("NavigationAgent2D")
+
+[node name="TrapHitbox" type="Area2D" parent="."]
+position = Vector2(0, -5)
+rotation = 1.5708
+collision_layer = 2
+input_pickable = false
+script = ExtResource("5_k20un")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TrapHitbox"]
+shape = SubResource("CapsuleShape2D_ck7fc")
+
+[node name="Thought" type="Sprite2D" parent="."]
+position = Vector2(-3, -22)
+texture = ExtResource("3_kqsni")
+
+[node name="Meeple" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -8)
+sprite_frames = SubResource("SpriteFrames_vv3vp")
+autoplay = "default"
+frame = 1
+frame_progress = 0.286806
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+debug_enabled = true
+
+[node name="TextureButton" type="TextureButton" parent="."]
+offset_left = 20.0
+offset_top = -17.0
+offset_right = 33.0
+offset_bottom = -8.0
+texture_normal = ExtResource("9_4fjo2")
+
+[connection signal="area_entered" from="TrapHitbox" to="TrapHitbox" method="_on_area_entered"]
+[connection signal="stepped_on_trap" from="TrapHitbox" to="." method="take_damage"]
+[connection signal="pressed" from="TextureButton" to="." method="take_damage"]

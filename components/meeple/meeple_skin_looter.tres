@@ -1,0 +1,45 @@
+[gd_resource type="SpriteFrames" load_steps=7 format=3 uid="uid://vpy0ykv26me6"]
+
+[ext_resource type="Texture2D" uid="uid://i8gntnkx5ud6" path="res://art/meeple/cat.png" id="1_c1a5g"]
+[ext_resource type="Texture2D" uid="uid://cu01b0vti7hby" path="res://art/meeple/dog.png" id="2_aidxj"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mxf3i"]
+atlas = ExtResource("1_c1a5g")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wet00"]
+atlas = ExtResource("1_c1a5g")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ivqmo"]
+atlas = ExtResource("2_aidxj")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_67cny"]
+atlas = ExtResource("2_aidxj")
+region = Rect2(16, 0, 16, 16)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mxf3i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wet00")
+}],
+"loop": true,
+"name": &"looter",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ivqmo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_67cny")
+}],
+"loop": true,
+"name": &"priest",
+"speed": 5.0
+}]

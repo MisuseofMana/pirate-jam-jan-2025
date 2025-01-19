@@ -19,13 +19,10 @@ texture = ExtResource("1_n745u")
 navigation_polygon = SubResource("NavigationPolygon_kylex")
 
 [node name="Meeple3" parent="." instance=ExtResource("2_ghigw")]
-position = Vector2(-6, 0)
-health = 2
+position = Vector2(-14, 22)
+health = 1
 
-[node name="Meeple2" parent="." instance=ExtResource("2_ghigw")]
-position = Vector2(10, 22)
-health = 3
-
-[node name="Meeple" parent="." instance=ExtResource("2_ghigw")]
-position = Vector2(-16, 22)
-health = 4
+[node name="Meeple4" parent="." instance=ExtResource("2_ghigw")]
+position = Vector2(11, 15)
+meeple_skin = "priest"
+health = 1

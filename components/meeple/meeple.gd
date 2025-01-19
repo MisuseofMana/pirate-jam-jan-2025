@@ -1,13 +1,17 @@
 class_name Meeple extends Node2D
 
-@onready var hearts: Node2D = $Hearts
-
 #@export var stats : MeepleStats
-@onready var thought: Sprite2D = $Thought
+@onready var thought : Sprite2D = $Thought
+@onready var thought_timer = $ThoughtTimer
+@onready var anims = $AnimationPlayer
+@onready var hurtbox = $TrapHitbox/CollisionShape2D
+@onready var sprite = $Meeple
+
+@export_group("Visuals")
+@export_enum("looter", "priest") var meeple_skin: String = 'looter'
 
 @export_group("Stats")
 @export_range(1, 4) var health: int
-@export_range(1, 4) var max_health: int = 4
 @export_range(0, 1, 0.1) var greed: float
 @export_range(0, 1, 0.1) var piety: float
 @export var movement_speed: float = 20.0
@@ -18,9 +22,13 @@ class_name Meeple extends Node2D
 @export_group("Internal")
 @export var nav_agent: NavigationAgent2D
 
-signal die(whoDied)
+const THOUGHT_HEART_EMPTY = preload("res://art/meeple/thought-heart-empty.png")
+const THOUGHT_HEART_QUARTER = preload("res://art/meeple/thought-heart-quarter.png")
+const THOUGHT_HEART_HALF = preload("res://art/meeple/thought-heart-half.png")
+const THOUGHT_HEART_THREEQUARTER = preload("res://art/meeple/thought-heart-threequarter.png")
+const THOUGHT_HEART_FULL = preload("res://art/meeple/thought-heart-full.png")
 
-const BLANK_HEART = preload("res://art/meeple/blank-heart.png")
+signal die(whoDied)
 
 var target: Node2D:
 	set(new_value):
@@ -35,11 +43,9 @@ var movement_delta: float
 func _ready() -> void:
 	nav_agent.velocity_computed.connect(_on_velocity_computed)
 	thought.hide()
-	for i: int in hearts.get_children().size():
-		if i + 1 > max_health:
-			hearts.get_child(i).queue_free()
+	sprite.animation = meeple_skin
 	_select_target.call_deferred()
-
+			
 func _select_target() -> void:
 	var macguffins: Array[Node2D] = []
 	macguffins.assign(get_tree().get_nodes_in_group("macguffin"))
@@ -72,8 +78,48 @@ func _on_velocity_computed(safe_velocity: Vector2) -> void:
 	global_position = global_position.move_toward(global_position + safe_velocity, movement_delta)
 
 func take_damage():
+	thought.show()
+	
+	var thought_hearts_array : Array[CompressedTexture2D] = [
+		THOUGHT_HEART_EMPTY,
+		THOUGHT_HEART_QUARTER,
+		THOUGHT_HEART_HALF,
+		THOUGHT_HEART_THREEQUARTER,
+		THOUGHT_HEART_FULL,
+	]
+	var oldHealth : int = health
 	health -= 1
-	hearts.get_child(-1).texture = BLANK_HEART
+	
+	thought.texture = thought_hearts_array[oldHealth]
+	thought.show()
+	thought_timer.wait_time = 0.1
+	
+#	animate the damage indicator as a thought bubble
+	for i in 2:
+		thought_timer.start()
+		await thought_timer.timeout
+		thought.texture = thought_hearts_array[health]
+		thought_timer.start()
+		await thought_timer.timeout
+		thought.texture = thought_hearts_array[oldHealth]
+	
+	thought.texture = thought_hearts_array[health]
+	thought_timer.wait_time = 0.3
+	thought_timer.start()
+	await thought_timer.timeout
+	thought.hide()
+	
 	if (health <= 0):
+		anims.play('die')
+	
+	thought_timer.wait_time = 0.8
+	thought_timer.start()
+	await thought_timer.timeout
+	hurtbox.disabled = false
+
+func _on_animation_player_animation_finished(anim_name):
+	if anim_name == 'die':
 		die.emit(self)
+#		spawn soul in scene, give it values, send it to 
+		
 		queue_free()

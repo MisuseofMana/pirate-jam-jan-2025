@@ -2,13 +2,12 @@
 
 [ext_resource type="Script" path="res://components/meeple/meeple.gd" id="1_d3iq0"]
 [ext_resource type="Script" path="res://components/meeple/ai/macguffin_consideration.gd" id="2_0ce0x"]
-[ext_resource type="Texture2D" uid="uid://blha2ijlclrvp" path="res://art/meeple/gold-thought.png" id="3_kqsni"]
 [ext_resource type="Script" path="res://components/meeple/ai/macguffin_considerations/consider_distance.gd" id="3_wkylo"]
 [ext_resource type="Script" path="res://components/meeple/ai/macguffin_considerations/consider_random.gd" id="4_fo5ew"]
 [ext_resource type="Script" path="res://components/meeple/ai/macguffin_strategy.gd" id="4_o0o2p"]
-[ext_resource type="Texture2D" uid="uid://i8gntnkx5ud6" path="res://art/meeple/cat.png" id="4_v1644"]
-[ext_resource type="Texture2D" uid="uid://b4bj6apqag6em" path="res://art/meeple/heart.png" id="5_24gb6"]
 [ext_resource type="Script" path="res://components/meeple/trap_hitbox.gd" id="5_k20un"]
+[ext_resource type="Texture2D" uid="uid://bjb4rhyvft06h" path="res://art/meeple/thought-treasure.png" id="7_cakhk"]
+[ext_resource type="SpriteFrames" uid="uid://vpy0ykv26me6" path="res://components/meeple/meeple_skin_looter.tres" id="8_xu5gw"]
 
 [sub_resource type="Resource" id="Resource_nme03"]
 script = ExtResource("3_wkylo")
@@ -26,32 +25,158 @@ considerations = Array[ExtResource("2_0ce0x")]([SubResource("Resource_nme03"), S
 radius = 5.0
 height = 16.0
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_mxf3i"]
-atlas = ExtResource("4_v1644")
-region = Rect2(0, 0, 16, 16)
+[sub_resource type="Animation" id="Animation_uum1y"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Meeple:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Meeple:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Meeple:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Meeple:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("GPUParticles2D:emitting")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_wet00"]
-atlas = ExtResource("4_v1644")
-region = Rect2(16, 0, 16, 16)
+[sub_resource type="Animation" id="Animation_sfenp"]
+resource_name = "die"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Meeple:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 0, 0, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Meeple:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1),
+"transitions": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-1, 0), Vector2(0, -1), Vector2(1, 0), Vector2(-1, 1), Vector2(1, -2), Vector2(-2, 3), Vector2(-3, 2), Vector2(-1, -3), Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Meeple:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1.2, 1.3, 1.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.3, 1.3), Vector2(0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Meeple:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(1.2, 1.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -3.14159]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("GPUParticles2D:emitting")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(1.2),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_vv3vp"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_mxf3i")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_wet00")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_g4t3e"]
+_data = {
+"RESET": SubResource("Animation_uum1y"),
+"die": SubResource("Animation_sfenp")
+}
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qd27o"]
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(5, 5, 1)
+emission_shape = 1
+emission_sphere_radius = 1.0
+spread = 100.0
+radial_velocity_min = -20.0
+radial_velocity_max = 20.0
+gravity = Vector3(0, 0, 0)
+radial_accel_min = -2.23517e-06
+radial_accel_max = 10.0
+tangential_accel_min = -2.23517e-06
+tangential_accel_max = 10.0
+color = Color(0.588235, 0, 0, 1)
 
 [node name="Meeple" type="Node2D" node_paths=PackedStringArray("nav_agent")]
 z_index = 1
 script = ExtResource("1_d3iq0")
-health = 1
+health = 4
 macguffin_strategy = SubResource("Resource_gx1mg")
 nav_agent = NodePath("NavigationAgent2D")
 
@@ -66,37 +191,37 @@ script = ExtResource("5_k20un")
 shape = SubResource("CapsuleShape2D_ck7fc")
 
 [node name="Thought" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(-3, -22)
-texture = ExtResource("3_kqsni")
+texture = ExtResource("7_cakhk")
 
 [node name="Meeple" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -8)
-sprite_frames = SubResource("SpriteFrames_vv3vp")
-autoplay = "default"
-frame = 1
-frame_progress = 0.286806
-
-[node name="Hearts" type="Node2D" parent="."]
-position = Vector2(0, -7)
-
-[node name="Heart1" type="Sprite2D" parent="Hearts"]
-position = Vector2(11, -7)
-texture = ExtResource("5_24gb6")
-
-[node name="Heart2" type="Sprite2D" parent="Hearts"]
-position = Vector2(11, -3)
-texture = ExtResource("5_24gb6")
-
-[node name="Heart3" type="Sprite2D" parent="Hearts"]
-position = Vector2(11, 1)
-texture = ExtResource("5_24gb6")
-
-[node name="Heart4" type="Sprite2D" parent="Hearts"]
-position = Vector2(11, 5)
-texture = ExtResource("5_24gb6")
+sprite_frames = ExtResource("8_xu5gw")
+animation = &"priest"
+autoplay = "looter"
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 debug_enabled = true
 
+[node name="ThoughtTimer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_g4t3e")
+}
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+position = Vector2(0, -8)
+emitting = false
+amount = 16
+process_material = SubResource("ParticleProcessMaterial_qd27o")
+lifetime = 0.3
+one_shot = true
+explosiveness = 1.0
+
 [connection signal="area_entered" from="TrapHitbox" to="TrapHitbox" method="_on_area_entered"]
 [connection signal="stepped_on_trap" from="TrapHitbox" to="." method="take_damage"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
