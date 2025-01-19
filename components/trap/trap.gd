@@ -2,6 +2,7 @@ extends AnimatedSprite2D
 class_name Trap
 
 @export_range(0.25, 10, 0.25) var trap_cooldown : float = 0.25
+@onready var area: DamageArea = $DamageArea
 
 @onready var timer: Timer = $Timer
 @onready var coll: CollisionShape2D = $DamageArea/CollisionShape2D
@@ -20,5 +21,5 @@ func trigger_trap():
 	
 func reset_trap():
 	frame = 0
-	coll.disabled = false
 	reset_clock.hide()
+	area.enable_collision()

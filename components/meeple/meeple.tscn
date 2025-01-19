@@ -58,6 +58,7 @@ nav_agent = NodePath("NavigationAgent2D")
 [node name="TrapHitbox" type="Area2D" parent="."]
 position = Vector2(0, -5)
 rotation = 1.5708
+collision_layer = 2
 input_pickable = false
 script = ExtResource("5_k20un")
 

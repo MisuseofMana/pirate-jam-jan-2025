@@ -1,4 +1,5 @@
 extends Area2D
+class_name DamageArea
 
 signal trap_triggered()
 
@@ -6,7 +7,10 @@ signal trap_triggered()
 
 func _on_area_entered(area: Area2D) -> void:
 	trap_triggered.emit()
-	coll.disabled = true
+	call_deferred("disable_collision")
 
 func enable_collision():
 	coll.disabled = false
+
+func disable_collision():
+	coll.disabled = true

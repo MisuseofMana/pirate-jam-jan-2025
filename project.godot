@@ -35,6 +35,7 @@ macguffin=""
 [layer_names]
 
 2d_physics/layer_1="TrapDetection"
+2d_physics/layer_2="MeepleDetection"
 
 [rendering]
 

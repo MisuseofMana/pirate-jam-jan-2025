@@ -40,6 +40,7 @@ script = ExtResource("1_6w5ax")
 wait_time = 0.3
 
 [node name="DamageArea" type="Area2D" parent="."]
+collision_mask = 2
 input_pickable = false
 script = ExtResource("3_kshbm")
 
