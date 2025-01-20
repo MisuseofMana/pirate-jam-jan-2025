@@ -1,3 +1,6 @@
-[gd_scene format=3 uid="uid://csw3vkdw4erk5"]
+[gd_scene load_steps=2 format=3 uid="uid://csw3vkdw4erk5"]
+
+[ext_resource type="Script" path="res://components/treasure/treasure.gd" id="1_4mxfk"]
 
 [node name="Treasure" type="Node2D" groups=["macguffin"]]
+script = ExtResource("1_4mxfk")
