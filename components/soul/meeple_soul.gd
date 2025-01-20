@@ -3,6 +3,9 @@ class_name MeepleSoul
 
 @onready var soul_sprite : AnimatedSprite2D = $SoulSprite
 @onready var thought : Sprite2D = $Thought
+@onready var timer = $Timer
+@onready var chime = $Chime
+@onready var summon = $Summon
 
 @export_range(1, 99) var soul_value : int = 1
 @export var movement_speed: float = 40.0
@@ -15,6 +18,7 @@ var agent_map_is_empty_or_unsynced: bool:
 	get(): return NavigationServer2D.map_get_iteration_id(nav_agent.get_navigation_map()) == 0
 
 func _ready():
+	summon.play()
 	thought.hide()
 	nav_agent.velocity_computed.connect(_on_velocity_computed)
 	nav_agent.target_reached.connect(_on_target_reached)
@@ -42,7 +46,9 @@ func _physics_process(delta: float) -> void:
 
 func _on_target_reached() -> void:
 	GameState.souls += soul_value
-	soul_sprite.play("disentigrate")
+	timer.start()
+	thought.show()
+	chime.play()
 	
 func _on_velocity_computed(safe_velocity: Vector2) -> void:
 	global_position = global_position.move_toward(global_position + safe_velocity, movement_delta)
@@ -50,3 +56,6 @@ func _on_velocity_computed(safe_velocity: Vector2) -> void:
 func go_to_sword():
 	nav_agent.target_position = get_tree().get_first_node_in_group("sword").global_position
 	
+func _on_timer_timeout():
+	thought.hide()
+	soul_sprite.play("disentigrate")

@@ -17,7 +17,7 @@
 [ext_resource type="Script" path="res://components/meeple/ai/room/considerations/avoid_entrance.gd" id="10_6oe14"]
 [ext_resource type="Script" path="res://components/meeple/ai/room/room_strategy.gd" id="10_vudfp"]
 [ext_resource type="Texture2D" uid="uid://cc0tgjvoa7jhp" path="res://art/meeple/thought-question.png" id="12_qeyom"]
-[ext_resource type="SpriteFrames" uid="uid://cmmyyadrcpoof" path="res://components/soul/soul_sprite_frames.tres" id="14_bbk5c"]
+[ext_resource type="SpriteFrames" uid="uid://ds53irrjhgrua" path="res://components/meeple/meeple_looter_skin.tres" id="14_ofm7m"]
 
 [sub_resource type="Resource" id="Resource_rtrl7"]
 script = ExtResource("3_uijck")
@@ -119,30 +119,6 @@ tracks/4/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("Meeple:animation")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"spawn_soul"]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("Meeple:sprite_frames")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("14_bbk5c")]
 }
 
 [sub_resource type="Animation" id="Animation_sfenp"]
@@ -281,8 +257,7 @@ texture = ExtResource("12_qeyom")
 
 [node name="Meeple" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -8)
-sprite_frames = ExtResource("14_bbk5c")
-animation = &"spawn_soul"
+sprite_frames = ExtResource("14_ofm7m")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 path_desired_distance = 2.0

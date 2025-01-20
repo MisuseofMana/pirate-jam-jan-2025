@@ -1,8 +1,20 @@
-[gd_scene load_steps=4 format=3 uid="uid://b1mf5l08h7qbi"]
+[gd_scene load_steps=8 format=3 uid="uid://b1mf5l08h7qbi"]
 
 [ext_resource type="Script" path="res://components/soul/meeple_soul.gd" id="1_2kqqy"]
 [ext_resource type="Texture2D" uid="uid://lqalynyp1qac" path="res://art/meeple/thought-mystic.png" id="2_kn6en"]
-[ext_resource type="SpriteFrames" uid="uid://cmmyyadrcpoof" path="res://components/soul/soul_sprite_frames.tres" id="3_o46gq"]
+[ext_resource type="SpriteFrames" uid="uid://cttoimt6e787r" path="res://components/soul/meeple_soul.tres" id="3_o46gq"]
+[ext_resource type="AudioStream" uid="uid://bsft7it7c3qg2" path="res://audio/sfx/MUSIC_OF_THE_WINDS/sfxX03.wav" id="4_aqxkw"]
+[ext_resource type="AudioStream" uid="uid://3mgfwhxcguut" path="res://audio/sfx/MUSIC_OF_THE_WINDS/sfxX06.wav" id="5_niejs"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_3dykx"]
+random_pitch = 1.2
+streams_count = 1
+stream_0/stream = ExtResource("4_aqxkw")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_q0qrp"]
+random_pitch = 1.2
+streams_count = 1
+stream_0/stream = ExtResource("5_niejs")
 
 [node name="MeepleSoul" type="Node2D" node_paths=PackedStringArray("nav_agent")]
 z_index = 1
@@ -21,4 +33,17 @@ autoplay = "default"
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="Chime" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_3dykx")
+volume_db = -10.0
+pitch_scale = 0.5
+
+[node name="Summon" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_q0qrp")
+pitch_scale = 0.5
+
 [connection signal="animation_finished" from="SoulSprite" to="." method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

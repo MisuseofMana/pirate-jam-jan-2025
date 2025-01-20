@@ -7,7 +7,8 @@ class_name Meeple extends Node2D
 @onready var meeple_sprite = $Meeple
 
 @export_group("Visuals")
-@export var meeple_skin: SpriteFrames = preload("res://components/meeple/meeple_skin_looter.tres")
+@export var meeple_skin : SpriteFrames = preload("res://components/meeple/meeple_looter_skin.tres")
+
 @export_group("Stats")
 @export_range(1, 4) var health: int = 4
 @export_range(0, 1, 0.1) var greed: float = 0.1

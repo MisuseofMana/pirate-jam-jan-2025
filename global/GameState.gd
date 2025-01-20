@@ -11,7 +11,6 @@ var souls : int = 10 :
 		var isReducing : bool = oldValue > value
 		while oldValue != value:
 			oldValue = oldValue - 1 if isReducing else oldValue + 1
-			print(oldValue)
 			souls_changed.emit(oldValue)
 
 var consumed_priests : int = 0
