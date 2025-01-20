@@ -16,6 +16,7 @@
 [ext_resource type="SpriteFrames" uid="uid://lygikj06hx40" path="res://components/meeple/meeple_skin_looter.tres" id="8_xu5gw"]
 [ext_resource type="Script" path="res://components/meeple/ai/room/considerations/consider_random_room.gd" id="9_wcewj"]
 [ext_resource type="Script" path="res://components/meeple/ai/room/room_strategy.gd" id="10_vudfp"]
+[ext_resource type="Texture2D" uid="uid://cc0tgjvoa7jhp" path="res://art/meeple/thought-question.png" id="12_qeyom"]
 
 [sub_resource type="Resource" id="Resource_rtrl7"]
 script = ExtResource("3_uijck")
@@ -51,9 +52,6 @@ radius = 8.0
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ck7fc"]
 radius = 5.0
 height = 16.0
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_y1n7c"]
-load_path = "res://.godot/imported/thought-treasure.png-9bc03c70b2564a298f7f2a457e108e6e.ctex"
 
 [sub_resource type="Animation" id="Animation_uum1y"]
 length = 0.001
@@ -233,9 +231,8 @@ script = ExtResource("5_k20un")
 shape = SubResource("CapsuleShape2D_ck7fc")
 
 [node name="Thought" type="Sprite2D" parent="."]
-visible = false
 position = Vector2(-3, -22)
-texture = SubResource("CompressedTexture2D_y1n7c")
+texture = ExtResource("12_qeyom")
 
 [node name="Meeple" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -8)
