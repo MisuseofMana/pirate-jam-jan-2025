@@ -7,7 +7,7 @@
 [ext_resource type="Script" path="res://components/meeple/ai/macguffin_strategy.gd" id="4_o0o2p"]
 [ext_resource type="Script" path="res://components/meeple/trap_hitbox.gd" id="5_k20un"]
 [ext_resource type="Texture2D" uid="uid://bjb4rhyvft06h" path="res://art/meeple/thought-treasure.png" id="7_cakhk"]
-[ext_resource type="SpriteFrames" uid="uid://vpy0ykv26me6" path="res://components/meeple/meeple_skin_looter.tres" id="8_xu5gw"]
+[ext_resource type="SpriteFrames" uid="uid://lygikj06hx40" path="res://components/meeple/meeple_skin_looter.tres" id="8_xu5gw"]
 
 [sub_resource type="Resource" id="Resource_nme03"]
 script = ExtResource("3_wkylo")

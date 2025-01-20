@@ -9,7 +9,6 @@ class_name Meeple extends Node2D
 
 @export_group("Visuals")
 @export_enum("looter", "priest") var meeple_skin: String = 'looter'
-
 @export_group("Stats")
 @export_range(1, 4) var health: int
 @export_range(0, 1, 0.1) var greed: float
@@ -21,6 +20,8 @@ class_name Meeple extends Node2D
 
 @export_group("Internal")
 @export var nav_agent: NavigationAgent2D
+
+const MEEPLE_SOUL = preload("res://components/meeple/meeple_soul.tscn")
 
 const THOUGHT_HEART_EMPTY = preload("res://art/meeple/thought-heart-empty.png")
 const THOUGHT_HEART_QUARTER = preload("res://art/meeple/thought-heart-quarter.png")
@@ -121,5 +122,7 @@ func _on_animation_player_animation_finished(anim_name):
 	if anim_name == 'die':
 		die.emit(self)
 #		spawn soul in scene, give it values, send it to 
-		
+		var soul = MEEPLE_SOUL.instantiate()
+		soul.global_position = global_position
+		get_tree().get_root().get_child(-1).add_child(soul)
 		queue_free()
