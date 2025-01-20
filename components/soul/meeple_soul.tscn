@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://b1mf5l08h7qbi"]
+
+[ext_resource type="Script" path="res://components/soul/meeple_soul.gd" id="1_2kqqy"]
+[ext_resource type="Texture2D" uid="uid://lqalynyp1qac" path="res://art/meeple/thought-mystic.png" id="2_kn6en"]
+[ext_resource type="SpriteFrames" uid="uid://cmmyyadrcpoof" path="res://components/soul/soul_sprite_frames.tres" id="3_o46gq"]
+
+[node name="MeepleSoul" type="Node2D" node_paths=PackedStringArray("nav_agent")]
+z_index = 1
+script = ExtResource("1_2kqqy")
+nav_agent = NodePath("NavigationAgent2D")
+
+[node name="Thought" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-3, -15)
+texture = ExtResource("2_kn6en")
+
+[node name="SoulSprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = ExtResource("3_o46gq")
+animation = &"move"
+autoplay = "default"
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
+[connection signal="animation_finished" from="SoulSprite" to="." method="_on_animated_sprite_2d_animation_finished"]

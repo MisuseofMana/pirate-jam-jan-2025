@@ -5,7 +5,6 @@ class_name Meeple extends Node2D
 @onready var anims = $AnimationPlayer
 @onready var hurtbox = $TrapHitbox/CollisionShape2D
 @onready var meeple_sprite = $Meeple
-@onready var soul_sprite = $Soul
 
 @export_group("Visuals")
 @export var meeple_skin: SpriteFrames = preload("res://components/meeple/meeple_skin_looter.tres")
@@ -13,7 +12,7 @@ class_name Meeple extends Node2D
 @export_range(1, 4) var health: int = 4
 @export_range(0, 1, 0.1) var greed: float = 0.1
 @export_range(0, 1, 0.1) var piety: float = 0.1
-@export_range(1, 99) var soul_value : int = 1
+@export_range(1, 99) var soul_value: int = 1
 @export var movement_speed: float = 20.0
 
 @export_group("AI")
@@ -24,13 +23,13 @@ class_name Meeple extends Node2D
 @export var nav_agent: NavigationAgent2D
 @export var brain: StateChart
 
+const MEEPLE_SOUL = preload("res://components/soul/meeple_soul.tscn")
+
 const THOUGHT_HEART_EMPTY = preload("res://art/meeple/thought-heart-empty.png")
 const THOUGHT_HEART_QUARTER = preload("res://art/meeple/thought-heart-quarter.png")
 const THOUGHT_HEART_HALF = preload("res://art/meeple/thought-heart-half.png")
 const THOUGHT_HEART_THREEQUARTER = preload("res://art/meeple/thought-heart-threequarter.png")
 const THOUGHT_HEART_FULL = preload("res://art/meeple/thought-heart-full.png")
-
-signal die(whoDied)
 
 var movement_delta: float
 
@@ -144,22 +143,12 @@ func take_damage():
 
 func _on_animation_player_animation_finished(anim_name):
 	if anim_name == "die":
-		die.emit(self)
-		meeple_sprite.hide()
-		brain.send_event("become_soul")
-		print('reached become_soul')
-		
-func become_soul():
-	soul_sprite.show()
-	soul_sprite.play("spawn_soul")
-	brain.send_event("go_to_sword")
-	
-func go_to_sword():
-	nav_agent.target_position = get_tree().get_first_node_in_group("sword").global_position
-
-func tithe_soul():
-	GameState.souls += soul_value
-#	destroy self
+		pass
+		var soul : MeepleSoul = MEEPLE_SOUL.instantiate()
+		soul.soul_value = soul_value
+		soul.position = position
+		owner.add_child(soul)
+		queue_free()
 	
 # region State Charts Stuff
 func _on_target_reached() -> void:

@@ -29,6 +29,7 @@ navigation_polygon = SubResource("NavigationPolygon_kylex")
 [node name="Meeple3" parent="." instance=ExtResource("2_ghigw")]
 position = Vector2(-14, 22)
 health = 1
+soul_value = 17
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_r7kuv")

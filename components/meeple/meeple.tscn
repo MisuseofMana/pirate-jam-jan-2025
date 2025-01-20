@@ -17,7 +17,7 @@
 [ext_resource type="Script" path="res://components/meeple/ai/room/considerations/avoid_entrance.gd" id="10_6oe14"]
 [ext_resource type="Script" path="res://components/meeple/ai/room/room_strategy.gd" id="10_vudfp"]
 [ext_resource type="Texture2D" uid="uid://cc0tgjvoa7jhp" path="res://art/meeple/thought-question.png" id="12_qeyom"]
-[ext_resource type="SpriteFrames" uid="uid://drgesvqj56kam" path="res://components/meeple/meeple_skin_soul.tres" id="14_fd6iu"]
+[ext_resource type="SpriteFrames" uid="uid://cmmyyadrcpoof" path="res://components/soul/soul_sprite_frames.tres" id="14_bbk5c"]
 
 [sub_resource type="Resource" id="Resource_rtrl7"]
 script = ExtResource("3_uijck")
@@ -142,7 +142,7 @@ tracks/6/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("14_fd6iu")]
+"values": [ExtResource("14_bbk5c")]
 }
 
 [sub_resource type="Animation" id="Animation_sfenp"]
@@ -281,13 +281,8 @@ texture = ExtResource("12_qeyom")
 
 [node name="Meeple" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -8)
-sprite_frames = ExtResource("14_fd6iu")
+sprite_frames = ExtResource("14_bbk5c")
 animation = &"spawn_soul"
-
-[node name="Soul" type="AnimatedSprite2D" parent="."]
-visible = false
-position = Vector2(0, -8)
-sprite_frames = ExtResource("14_fd6iu")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 path_desired_distance = 2.0
@@ -435,40 +430,6 @@ delay_in_seconds = "0.0"
 [node name="Exit" type="Node" parent="Brain/Root/Leave Dungeon"]
 script = ExtResource("7_jmllr")
 
-[node name="Death" type="Node" parent="Brain/Root"]
-script = ExtResource("6_hp8wo")
-initial_state = NodePath("Become Soul")
-
-[node name="Die" type="Node" parent="Brain/Root/Death"]
-script = ExtResource("7_jmllr")
-
-[node name="To Become Soul" type="Node" parent="Brain/Root/Death/Die"]
-script = ExtResource("8_ahky0")
-to = NodePath("../../Become Soul")
-event = &"become_soul"
-delay_in_seconds = "0.0"
-
-[node name="Become Soul" type="Node" parent="Brain/Root/Death"]
-script = ExtResource("7_jmllr")
-
-[node name="To Go to Sword" type="Node" parent="Brain/Root/Death/Become Soul"]
-script = ExtResource("8_ahky0")
-to = NodePath("../../Go To Sword")
-event = &"go_to_sword"
-delay_in_seconds = "0.3"
-
-[node name="Go To Sword" type="Node" parent="Brain/Root/Death"]
-script = ExtResource("7_jmllr")
-
-[node name="To Tithe Soul" type="Node" parent="Brain/Root/Death/Go To Sword"]
-script = ExtResource("8_ahky0")
-to = NodePath("../../Tithe Soul")
-event = &"target_reached"
-delay_in_seconds = "0.0"
-
-[node name="Tithe Soul" type="Node" parent="Brain/Root/Death"]
-script = ExtResource("7_jmllr")
-
 [connection signal="area_entered" from="Room Hitbox" to="." method="_on_room_hitbox_entered"]
 [connection signal="area_exited" from="Room Hitbox" to="." method="_on_room_hitbox_exited"]
 [connection signal="area_entered" from="TrapHitbox" to="TrapHitbox" method="_on_area_entered"]
@@ -482,6 +443,3 @@ script = ExtResource("7_jmllr")
 [connection signal="state_entered" from="Brain/Root/Explore Dungon/Next Room" to="." method="go_to_next_room"]
 [connection signal="state_entered" from="Brain/Root/Leave Dungeon/Go To Entrance" to="." method="go_to_entrance"]
 [connection signal="state_entered" from="Brain/Root/Leave Dungeon/Exit" to="." method="exit_dungon"]
-[connection signal="state_entered" from="Brain/Root/Death/Become Soul" to="." method="become_soul"]
-[connection signal="state_entered" from="Brain/Root/Death/Go To Sword" to="." method="go_to_sword"]
-[connection signal="state_entered" from="Brain/Root/Death/Tithe Soul" to="." method="tithe_soul"]
