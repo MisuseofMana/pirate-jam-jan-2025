@@ -37,6 +37,7 @@ enabled=PackedStringArray("res://addons/godot_state_charts/plugin.cfg")
 macguffin=""
 room=""
 meeple=""
+sword=""
 
 [layer_names]
 

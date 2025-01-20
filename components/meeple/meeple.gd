@@ -4,14 +4,16 @@ class_name Meeple extends Node2D
 @onready var thought: Sprite2D = $Thought
 @onready var anims = $AnimationPlayer
 @onready var hurtbox = $TrapHitbox/CollisionShape2D
-@onready var sprite = $Meeple
+@onready var meeple_sprite = $Meeple
+@onready var soul_sprite = $Soul
 
 @export_group("Visuals")
-@export_enum("looter", "priest") var meeple_skin: String = 'looter'
+@export var meeple_skin: SpriteFrames = preload("res://components/meeple/meeple_skin_looter.tres")
 @export_group("Stats")
-@export_range(1, 4) var health: int
-@export_range(0, 1, 0.1) var greed: float
-@export_range(0, 1, 0.1) var piety: float
+@export_range(1, 4) var health: int = 4
+@export_range(0, 1, 0.1) var greed: float = 0.1
+@export_range(0, 1, 0.1) var piety: float = 0.1
+@export_range(1, 99) var soul_value : int = 1
 @export var movement_speed: float = 20.0
 
 @export_group("AI")
@@ -21,8 +23,6 @@ class_name Meeple extends Node2D
 @export_group("Internal")
 @export var nav_agent: NavigationAgent2D
 @export var brain: StateChart
-
-const MEEPLE_SOUL = preload("res://components/meeple/meeple_soul.tscn")
 
 const THOUGHT_HEART_EMPTY = preload("res://art/meeple/thought-heart-empty.png")
 const THOUGHT_HEART_QUARTER = preload("res://art/meeple/thought-heart-quarter.png")
@@ -47,7 +47,8 @@ func _ready() -> void:
 	nav_agent.velocity_computed.connect(_on_velocity_computed)
 	nav_agent.target_reached.connect(_on_target_reached)
 	thought.hide()
-	sprite.animation = meeple_skin
+	meeple_sprite.sprite_frames = meeple_skin
+	meeple_sprite.play("default")
 
 func _on_room_hitbox_entered(area: Area2D) -> void:
 	if not area is Room:
@@ -134,7 +135,7 @@ func take_damage():
 	thought.hide()
 	
 	if (health <= 0):
-		anims.play('die')
+		anims.play("die")
 #		early return if dead to prevent re-enabling hurtbox
 		return
 	
@@ -142,14 +143,24 @@ func take_damage():
 	hurtbox.disabled = false
 
 func _on_animation_player_animation_finished(anim_name):
-	if anim_name == 'die':
+	if anim_name == "die":
 		die.emit(self)
-#		spawn soul in scene
-		var soul = MEEPLE_SOUL.instantiate()
-		soul.global_position = global_position
-		get_tree().get_root().get_child(-1).add_child(soul)
-		queue_free()
+		meeple_sprite.hide()
+		brain.send_event("become_soul")
+		print('reached become_soul')
+		
+func become_soul():
+	soul_sprite.show()
+	soul_sprite.play("spawn_soul")
+	brain.send_event("go_to_sword")
+	
+func go_to_sword():
+	nav_agent.target_position = get_tree().get_first_node_in_group("sword").global_position
 
+func tithe_soul():
+	GameState.souls += soul_value
+#	destroy self
+	
 # region State Charts Stuff
 func _on_target_reached() -> void:
 	brain.send_event.call_deferred("target_reached")
@@ -222,3 +233,4 @@ func go_to_entrance():
 
 func exit_dungon() -> void:
 	queue_free()
+	

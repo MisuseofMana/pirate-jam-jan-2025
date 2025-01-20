@@ -59,11 +59,15 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="SoulSprite" type="AnimatedSprite2D"]
+[node name="MeepleSoul" type="Node2D"]
+script = ExtResource("3_r87d7")
+
+[node name="SoulSprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_ck51y")
 animation = &"summon"
 autoplay = "summon"
 offset = Vector2(0, -8)
-script = ExtResource("3_r87d7")
 
-[connection signal="animation_finished" from="." to="." method="_on_animation_finished"]
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
+[connection signal="animation_finished" from="SoulSprite" to="SoulSprite" method="_on_animation_finished"]

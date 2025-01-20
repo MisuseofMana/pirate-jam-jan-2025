@@ -25,7 +25,7 @@ script = ExtResource("1_hxway")
 self_modulate = Color(0.479853, 0.612378, 1, 1)
 texture = ExtResource("1_tilbc")
 
-[node name="Sword" type="Sprite2D" parent="." groups=["macguffin"]]
+[node name="Sword" type="Sprite2D" parent="." groups=["macguffin", "sword"]]
 position = Vector2(-1, -2)
 scale = Vector2(2.5, 2.5)
 texture = ExtResource("2_b7khe")

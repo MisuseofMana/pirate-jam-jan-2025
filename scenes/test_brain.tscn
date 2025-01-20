@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=4 uid="uid://dw8mkm6yy5315"]
+[gd_scene load_steps=4 format=4 uid="uid://bb0iyh2f7a63v"]
 
 [ext_resource type="TileSet" uid="uid://mrguig7k625p" path="res://tilesets/default_tileset.tres" id="2_goc0p"]
 [ext_resource type="PackedScene" uid="uid://bcwkugn6v3oy7" path="res://addons/godot_state_charts/utilities/state_chart_debugger.tscn" id="6_57pea"]
