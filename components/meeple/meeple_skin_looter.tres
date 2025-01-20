@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=7 format=3 uid="uid://lygikj06hx40"]
+[gd_resource type="SpriteFrames" load_steps=7 format=3 uid="uid://vpy0ykv26me6"]
 
 [ext_resource type="Texture2D" uid="uid://i8gntnkx5ud6" path="res://art/meeple/cat.png" id="1_c1a5g"]
 [ext_resource type="Texture2D" uid="uid://cu01b0vti7hby" path="res://art/meeple/dog.png" id="2_aidxj"]

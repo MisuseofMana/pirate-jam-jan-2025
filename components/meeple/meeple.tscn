@@ -293,7 +293,7 @@ delay_in_seconds = "0.0"
 script = ExtResource("8_ahky0")
 to = NodePath("../../../Next Room")
 event = &"next_room"
-delay_in_seconds = "0.0"
+delay_in_seconds = "randf_range(1.0, 1.8)"
 
 [node name="Look for Macguffins" type="Node" parent="Brain/Root/Explore Dungon/Explore Current Room"]
 script = ExtResource("6_hp8wo")
@@ -348,7 +348,7 @@ script = ExtResource("7_jmllr")
 script = ExtResource("8_ahky0")
 to = NodePath("../../Take or Ignore")
 event = &"target_reached"
-delay_in_seconds = "0.0"
+delay_in_seconds = "randf_range(1.0, 1.8)"
 
 [node name="Take or Ignore" type="Node" parent="Brain/Root/Explore Dungon/Explore Current Room/Interact with Macguffin"]
 script = ExtResource("7_jmllr")

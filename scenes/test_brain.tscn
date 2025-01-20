@@ -1,0 +1,57 @@
+[gd_scene load_steps=10 format=4 uid="uid://4udlfh3ngpjj"]
+
+[ext_resource type="PackedScene" uid="uid://bnehcvlrpgq2w" path="res://components/rooms/room_basic_trap_1.tscn" id="1_yjy3y"]
+[ext_resource type="PackedScene" uid="uid://dyxxlm6eg6wru" path="res://components/rooms/room_entrance.tscn" id="2_swdsc"]
+[ext_resource type="PackedScene" uid="uid://ddgevfwlgcn8t" path="res://components/rooms/room_sword.tscn" id="3_8cpqu"]
+[ext_resource type="PackedScene" uid="uid://btt0xk5r72j5t" path="res://components/rooms/room_basic_1.tscn" id="4_a2q5a"]
+[ext_resource type="PackedScene" uid="uid://bus7x3mlryq4a" path="res://components/rooms/room_basic_2.tscn" id="5_33ita"]
+[ext_resource type="PackedScene" uid="uid://bcwkugn6v3oy7" path="res://addons/godot_state_charts/utilities/state_chart_debugger.tscn" id="6_57pea"]
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_5pp3v"]
+resource_name = "Rooms"
+scenes/1/scene = ExtResource("1_yjy3y")
+scenes/2/scene = ExtResource("2_swdsc")
+scenes/3/scene = ExtResource("3_8cpqu")
+scenes/4/scene = ExtResource("4_a2q5a")
+scenes/5/scene = ExtResource("5_33ita")
+scenes/6/scene = ExtResource("1_yjy3y")
+
+[sub_resource type="TileSet" id="TileSet_prfm3"]
+tile_size = Vector2i(64, 64)
+navigation_layer_0/layers = 1
+sources/0 = SubResource("TileSetScenesCollectionSource_5pp3v")
+
+[sub_resource type="GDScript" id="GDScript_yo0gh"]
+script/source = "extends Node
+
+const StateChartDebugger := preload(\"res://addons/godot_state_charts/utilities/state_chart_debugger.gd\")
+
+@export var debugger: StateChartDebugger
+
+func _ready() -> void:
+	_attach_to_first_meeple.call_deferred()
+	
+func _attach_to_first_meeple() -> void:
+	var meeple := get_tree().get_nodes_in_group(\"meeple\")
+	if not meeple.is_empty():
+		debugger.debug_node(meeple[0].brain)
+"
+
+[node name="Test Brain" type="Node2D"]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAD//wIAAAAAAAAAAgAAAAIAAAAAAAAABAABAAIAAAAAAAAABQAAAAEAAAAAAAAABgACAAIAAAAAAAAABQADAAIAAAAAAAAAAwACAAEAAAAAAAAABAACAAAAAAAAAAAABAACAP//AAAAAAAABAACAP7/AAAAAAAAAgA=")
+tile_set = SubResource("TileSet_prfm3")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(273, 122)
+
+[node name="StateChartDebugger" parent="." instance=ExtResource("6_57pea")]
+offset_left = 275.0
+offset_top = -191.0
+offset_right = 675.0
+offset_bottom = 373.0
+
+[node name="StateChartDebuggerHelper" type="Node" parent="." node_paths=PackedStringArray("debugger")]
+script = SubResource("GDScript_yo0gh")
+debugger = NodePath("../StateChartDebugger")
