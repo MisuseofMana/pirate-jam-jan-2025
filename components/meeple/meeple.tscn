@@ -13,7 +13,7 @@
 [ext_resource type="Script" path="res://components/meeple/ai/room/considerations/favor_adjacent_room.gd" id="7_nryq3"]
 [ext_resource type="Script" path="res://components/meeple/ai/room/considerations/favor_unvisited_room.gd" id="8_4ij8x"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="8_ahky0"]
-[ext_resource type="SpriteFrames" uid="uid://lygikj06hx40" path="res://components/meeple/meeple_skin_looter.tres" id="8_xu5gw"]
+[ext_resource type="SpriteFrames" uid="uid://vpy0ykv26me6" path="res://components/meeple/meeple_skin_looter.tres" id="8_xu5gw"]
 [ext_resource type="Script" path="res://components/meeple/ai/room/considerations/consider_random_room.gd" id="9_wcewj"]
 [ext_resource type="Script" path="res://components/meeple/ai/room/considerations/avoid_entrance.gd" id="10_6oe14"]
 [ext_resource type="Script" path="res://components/meeple/ai/room/room_strategy.gd" id="10_vudfp"]
@@ -196,7 +196,10 @@ particle_flag_disable_z = true
 emission_shape_scale = Vector3(5, 5, 1)
 emission_shape = 1
 emission_sphere_radius = 1.0
-spread = 100.0
+direction = Vector3(5, 5, 0)
+spread = 150.0
+initial_velocity_min = -5.0
+initial_velocity_max = 10.0
 radial_velocity_min = -20.0
 radial_velocity_max = 20.0
 gravity = Vector3(0, 0, 0)
@@ -204,6 +207,8 @@ radial_accel_min = -2.23517e-06
 radial_accel_max = 10.0
 tangential_accel_min = -2.23517e-06
 tangential_accel_max = 10.0
+scale_min = 0.8
+scale_max = 1.2
 color = Color(0.588235, 0, 0, 1)
 
 [node name="Meeple" type="Node2D" node_paths=PackedStringArray("nav_agent", "brain") groups=["meeple"]]
@@ -259,11 +264,12 @@ libraries = {
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 position = Vector2(0, -8)
 emitting = false
-amount = 16
+amount = 30
 process_material = SubResource("ParticleProcessMaterial_qd27o")
-lifetime = 0.3
+lifetime = 0.5
 one_shot = true
 explosiveness = 1.0
+randomness = 1.0
 
 [node name="Brain" type="Node" parent="."]
 script = ExtResource("5_dkyyg")

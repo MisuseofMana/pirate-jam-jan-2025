@@ -1,20 +1,19 @@
 [gd_resource type="TileSet" load_steps=8 format=3 uid="uid://mrguig7k625p"]
 
-[ext_resource type="PackedScene" uid="uid://bnehcvlrpgq2w" path="res://components/rooms/room_basic_trap_1.tscn" id="1_cw18h"]
+[ext_resource type="PackedScene" path="res://components/rooms/room_basic_trap_1.tscn" id="1_qmr5m"]
 [ext_resource type="PackedScene" uid="uid://dyxxlm6eg6wru" path="res://components/rooms/room_entrance.tscn" id="2_oex32"]
 [ext_resource type="PackedScene" uid="uid://ddgevfwlgcn8t" path="res://components/rooms/room_sword.tscn" id="3_llxhb"]
-[ext_resource type="PackedScene" uid="uid://btt0xk5r72j5t" path="res://components/rooms/room_basic_1.tscn" id="4_yi200"]
+[ext_resource type="PackedScene" uid="uid://ca1edcsqoch32" path="res://components/rooms/room_basic_1.tscn" id="4_yi200"]
 [ext_resource type="PackedScene" uid="uid://bus7x3mlryq4a" path="res://components/rooms/room_basic_2.tscn" id="5_usjtd"]
-[ext_resource type="PackedScene" uid="uid://cr7ya361a2ep1" path="res://components/rooms/room_basic_trap_2.tscn" id="6_ypk2g"]
+[ext_resource type="PackedScene" path="res://components/rooms/room_basic_trap_2.tscn" id="6_ypk2g"]
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_5pp3v"]
 resource_name = "Rooms"
-scenes/1/scene = ExtResource("1_cw18h")
+scenes/1/scene = ExtResource("1_qmr5m")
 scenes/2/scene = ExtResource("2_oex32")
 scenes/3/scene = ExtResource("3_llxhb")
 scenes/4/scene = ExtResource("4_yi200")
 scenes/5/scene = ExtResource("5_usjtd")
-scenes/6/scene = ExtResource("1_cw18h")
 scenes/7/scene = ExtResource("6_ypk2g")
 
 [resource]

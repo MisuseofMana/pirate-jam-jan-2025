@@ -47,6 +47,8 @@ radius = 8.0
 [node name="AnimatedSprite2D" type="AnimatedSprite2D"]
 sprite_frames = SubResource("SpriteFrames_y77fx")
 animation = &"activate"
+frame = 5
+frame_progress = 1.0
 script = ExtResource("1_6w5ax")
 
 [node name="Timer" type="Timer" parent="."]
