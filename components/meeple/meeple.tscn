@@ -9,12 +9,11 @@
 [ext_resource type="Script" path="res://components/meeple/trap_hitbox.gd" id="5_k20un"]
 [ext_resource type="Script" path="res://components/meeple/ai/room/room_consideration.gd" id="6_6mu71"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="6_hp8wo"]
-[ext_resource type="Texture2D" uid="uid://bjb4rhyvft06h" path="res://art/meeple/thought-treasure.png" id="7_cakhk"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="7_jmllr"]
 [ext_resource type="Script" path="res://components/meeple/ai/room/considerations/favor_adjacent_room.gd" id="7_nryq3"]
 [ext_resource type="Script" path="res://components/meeple/ai/room/considerations/favor_unvisited_room.gd" id="8_4ij8x"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="8_ahky0"]
-[ext_resource type="SpriteFrames" uid="uid://vpy0ykv26me6" path="res://components/meeple/meeple_skin_looter.tres" id="8_xu5gw"]
+[ext_resource type="SpriteFrames" uid="uid://lygikj06hx40" path="res://components/meeple/meeple_skin_looter.tres" id="8_xu5gw"]
 [ext_resource type="Script" path="res://components/meeple/ai/room/considerations/consider_random_room.gd" id="9_wcewj"]
 [ext_resource type="Script" path="res://components/meeple/ai/room/room_strategy.gd" id="10_vudfp"]
 
@@ -52,6 +51,9 @@ radius = 8.0
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ck7fc"]
 radius = 5.0
 height = 16.0
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_y1n7c"]
+load_path = "res://.godot/imported/thought-treasure.png-9bc03c70b2564a298f7f2a457e108e6e.ctex"
 
 [sub_resource type="Animation" id="Animation_uum1y"]
 length = 0.001
@@ -233,7 +235,7 @@ shape = SubResource("CapsuleShape2D_ck7fc")
 [node name="Thought" type="Sprite2D" parent="."]
 visible = false
 position = Vector2(-3, -22)
-texture = ExtResource("7_cakhk")
+texture = SubResource("CompressedTexture2D_y1n7c")
 
 [node name="Meeple" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -8)
@@ -246,10 +248,6 @@ path_desired_distance = 2.0
 target_desired_distance = 2.0
 path_max_distance = 20.0
 debug_enabled = true
-
-[node name="ThoughtTimer" type="Timer" parent="."]
-wait_time = 0.2
-one_shot = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

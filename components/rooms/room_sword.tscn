@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://ddgevfwlgcn8t"]
+[gd_scene load_steps=8 format=3 uid="uid://ddgevfwlgcn8t"]
 
 [ext_resource type="Script" path="res://components/rooms/room.gd" id="1_hxway"]
 [ext_resource type="Texture2D" uid="uid://f6uvs1nf3ffh" path="res://art/rooms/basic_base.png" id="1_tilbc"]
-[ext_resource type="Texture2D" uid="uid://b14q6ijscifbj" path="res://art/loot-icons/key_t_03.png" id="2_kps1y"]
+[ext_resource type="Texture2D" uid="uid://cvibg31lbdy7h" path="res://art/rooms/sword.png" id="2_b7khe"]
+[ext_resource type="Texture2D" uid="uid://ca4oky2mjyse4" path="res://art/rooms/sword_thoughts.png" id="3_2k578"]
+[ext_resource type="Script" path="res://components/rooms/sword_thought.gd" id="5_1f0li"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_1penr"]
 vertices = PackedVector2Array(6, -25, 25, -25, 25, -6, -25, 5, 32, -6, 32, 5, 25, 5, 25, 25, 6, 25, 6, 32, -7, 32, -7, 25, -25, 25, -32, 5, -32, -7, -25, -7, -25, -25, -7, -25, -7, -32, 6, -32)
@@ -24,11 +26,28 @@ self_modulate = Color(0.479853, 0.612378, 1, 1)
 texture = ExtResource("1_tilbc")
 
 [node name="Sword" type="Sprite2D" parent="." groups=["macguffin"]]
-scale = Vector2(0.101562, 0.101562)
-texture = ExtResource("2_kps1y")
+position = Vector2(-1, -2)
+scale = Vector2(2.5, 2.5)
+texture = ExtResource("2_b7khe")
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="." groups=["room"]]
 navigation_polygon = SubResource("NavigationPolygon_1penr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_ev8xa")
+
+[node name="SwordThought" type="Sprite2D" parent="."]
+position = Vector2(-12, -29)
+texture = ExtResource("3_2k578")
+script = ExtResource("5_1f0li")
+
+[node name="Label" type="Label" parent="SwordThought"]
+offset_left = -1.0
+offset_top = -12.0
+offset_right = 13.0
+offset_bottom = 5.0
+theme_override_colors/font_color = Color(0.34902, 0.376471, 0.439216, 1)
+theme_override_font_sizes/font_size = 12
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1

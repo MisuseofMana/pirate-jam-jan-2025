@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cfs5hx46e30fx"
-path="res://.godot/imported/gotem.png-2931b4e57ed67946ecb0272f78364f9c.ctex"
+uid="uid://cc0tgjvoa7jhp"
+path="res://.godot/imported/thought-question.png-99c2336baa3e2a4e58b3b91e6c7725b7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/gotem.png"
-dest_files=["res://.godot/imported/gotem.png-2931b4e57ed67946ecb0272f78364f9c.ctex"]
+source_file="res://art/meeple/thought-question.png"
+dest_files=["res://.godot/imported/thought-question.png-99c2336baa3e2a4e58b3b91e6c7725b7.ctex"]
 
 [params]
 

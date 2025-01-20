@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://cr7ya361a2ep1"]
+
+[ext_resource type="PackedScene" uid="uid://dqr12wo3gio00" path="res://components/rooms/room_basic_base.tscn" id="1_52npl"]
+[ext_resource type="PackedScene" uid="uid://due6tipw8kq1h" path="res://components/trap/trap.tscn" id="2_x5d8t"]
+
+[node name="Basic Room" instance=ExtResource("1_52npl")]
+
+[node name="Sprite2D" parent="." index="0"]
+self_modulate = Color(1, 0.517647, 0, 1)
+
+[node name="AnimatedSprite2D" parent="." index="2" instance=ExtResource("2_x5d8t")]
+position = Vector2(-12, -11)
+trap_cooldown = 5.0
+
+[node name="AnimatedSprite2D2" parent="." index="3" instance=ExtResource("2_x5d8t")]
+position = Vector2(12, 12)
+trap_cooldown = 5.0

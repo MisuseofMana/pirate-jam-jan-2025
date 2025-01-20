@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c017uoyibced6"
-path="res://.godot/imported/panel.png-44ce4ba3ab3a7afd0b84e28fc7225e9d.ctex"
+uid="uid://b6twbc4c35e6t"
+path="res://.godot/imported/thought-treasure-full.png-446916810bbdabe995642facc638bcaa.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/panel.png"
-dest_files=["res://.godot/imported/panel.png-44ce4ba3ab3a7afd0b84e28fc7225e9d.ctex"]
+source_file="res://art/meeple/thought-treasure-full.png"
+dest_files=["res://.godot/imported/thought-treasure-full.png-446916810bbdabe995642facc638bcaa.ctex"]
 
 [params]
 

@@ -1,31 +1,69 @@
-[gd_scene load_steps=5 format=3 uid="uid://ci07xr0hndq0e"]
+[gd_scene load_steps=11 format=3 uid="uid://ci07xr0hndq0e"]
 
 [ext_resource type="Texture2D" uid="uid://cgx6emdsjwn1i" path="res://art/meeple/meeple_soul.png" id="1_fpfb5"]
+[ext_resource type="Texture2D" uid="uid://cj0m1uedqex0u" path="res://art/meeple/soul-summon.png" id="2_jhu0a"]
+[ext_resource type="Script" path="res://components/meeple/meeple_soul.gd" id="3_r87d7"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_2wstx"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_ynuw2"]
 atlas = ExtResource("1_fpfb5")
-region = Rect2(0, 0, 10, 14)
+region = Rect2(0, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_xvft8"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_ongiu"]
 atlas = ExtResource("1_fpfb5")
-region = Rect2(10, 0, 10, 14)
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_84nox"]
+atlas = ExtResource("2_jhu0a")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_axkgs"]
+atlas = ExtResource("2_jhu0a")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1x3ua"]
+atlas = ExtResource("2_jhu0a")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0w2ad"]
+atlas = ExtResource("2_jhu0a")
+region = Rect2(48, 0, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ck51y"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_2wstx")
+"texture": SubResource("AtlasTexture_ynuw2")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_xvft8")
+"texture": SubResource("AtlasTexture_ongiu")
 }],
 "loop": true,
 "name": &"default",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_84nox")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_axkgs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1x3ua")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0w2ad")
+}],
+"loop": false,
+"name": &"summon",
+"speed": 5.0
 }]
 
-[node name="Node2D" type="AnimatedSprite2D"]
+[node name="SoulSprite" type="AnimatedSprite2D"]
 sprite_frames = SubResource("SpriteFrames_ck51y")
-autoplay = "default"
-frame_progress = 0.0199614
-offset = Vector2(0, -7)
+animation = &"summon"
+autoplay = "summon"
+offset = Vector2(0, -8)
+script = ExtResource("3_r87d7")
+
+[connection signal="animation_finished" from="." to="." method="_on_animation_finished"]

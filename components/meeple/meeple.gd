@@ -2,7 +2,6 @@ class_name Meeple extends Node2D
 
 #@export var stats : MeepleStats
 @onready var thought: Sprite2D = $Thought
-@onready var thought_timer = $ThoughtTimer
 @onready var anims = $AnimationPlayer
 @onready var hurtbox = $TrapHitbox/CollisionShape2D
 @onready var sprite = $Meeple
@@ -119,35 +118,33 @@ func take_damage():
 	
 	thought.texture = thought_hearts_array[oldHealth]
 	thought.show()
-	thought_timer.wait_time = 0.1
 	
 #	animate the damage indicator as a thought bubble
+#	flash between old health and new health two times
 	for i in 2:
-		thought_timer.start()
-		await thought_timer.timeout
+		await get_tree().create_timer(0.1).timeout
 		thought.texture = thought_hearts_array[health]
-		thought_timer.start()
-		await thought_timer.timeout
+		await get_tree().create_timer(0.1).timeout
 		thought.texture = thought_hearts_array[oldHealth]
 	
+#	set health thought icon to new health value
 	thought.texture = thought_hearts_array[health]
-	thought_timer.wait_time = 0.3
-	thought_timer.start()
-	await thought_timer.timeout
+	
+	await get_tree().create_timer(0.3).timeout
 	thought.hide()
 	
 	if (health <= 0):
 		anims.play('die')
+#		early return if dead to prevent re-enabling hurtbox
+		return
 	
-	thought_timer.wait_time = 0.8
-	thought_timer.start()
-	await thought_timer.timeout
+	await get_tree().create_timer(0.8).timeout
 	hurtbox.disabled = false
 
 func _on_animation_player_animation_finished(anim_name):
 	if anim_name == 'die':
 		die.emit(self)
-#		spawn soul in scene, give it values, send it to 
+#		spawn soul in scene
 		var soul = MEEPLE_SOUL.instantiate()
 		soul.global_position = global_position
 		get_tree().get_root().get_child(-1).add_child(soul)
