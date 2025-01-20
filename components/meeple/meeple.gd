@@ -16,7 +16,7 @@ class_name Meeple extends Node2D
 
 @export_group("AI")
 @export var macguffin_strategy: MacguffinStrategy
-@export var room_strategy: RoomStrategy
+@export var explore_room_strategy: RoomStrategy
 
 @export_group("Internal")
 @export var nav_agent: NavigationAgent2D
@@ -36,7 +36,7 @@ var movement_delta: float
 
 @onready var current_room: Room = get_parent()
 @onready var overlapping_rooms: Array[Room] = [current_room]
-var visited_rooms: Array[Node2D] = [current_room]
+@onready var visited_rooms: Array[Node2D] = [current_room]
 
 var target_macguffin: Node2D = null
 
@@ -157,6 +157,8 @@ func _on_target_reached() -> void:
 func pick_room_action():
 	if randf() < 0.5:
 		brain.send_event("look_for_macguffins")
+	elif randf() < 0.2:
+		brain.send_event("leave_dungeon")
 	else:
 		brain.send_event("next_room")
 
@@ -207,5 +209,16 @@ func take_or_ignore_chosen_macguffin():
 	brain.send_event("interacted_with_macguffin")
 
 func go_to_next_room():
-	var next_room: Node2D = room_strategy.select_room(self, _get_other_known_rooms())
+	var next_room := explore_room_strategy.select_room(self, _get_other_known_rooms())
 	nav_agent.target_position = next_room.global_position
+
+func go_to_entrance():
+	var entrance: Room = null
+	for room in visited_rooms:
+		if room is EntranceRoom:
+			entrance = room
+			break
+	nav_agent.target_position = entrance.global_position
+
+func exit_dungon() -> void:
+	queue_free()

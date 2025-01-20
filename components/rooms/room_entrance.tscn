@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://dyxxlm6eg6wru"]
 
-[ext_resource type="Script" path="res://components/rooms/room.gd" id="1_7kauv"]
+[ext_resource type="Script" path="res://components/rooms/entrance_room.gd" id="1_67rxf"]
 [ext_resource type="Texture2D" uid="uid://f6uvs1nf3ffh" path="res://art/rooms/basic_base.png" id="1_n745u"]
 [ext_resource type="PackedScene" uid="uid://d1cw4mndlss2u" path="res://components/meeple/meeple.tscn" id="2_ghigw"]
 
@@ -17,7 +17,7 @@ size = Vector2(64, 64)
 collision_layer = 4
 collision_mask = 0
 monitoring = false
-script = ExtResource("1_7kauv")
+script = ExtResource("1_67rxf")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 self_modulate = Color(0.419608, 0.713726, 0.478431, 1)

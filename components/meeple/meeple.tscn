@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://d1cw4mndlss2u"]
+[gd_scene load_steps=33 format=3 uid="uid://d1cw4mndlss2u"]
 
 [ext_resource type="Script" path="res://components/meeple/meeple.gd" id="1_d3iq0"]
 [ext_resource type="Script" path="res://components/meeple/ai/macguffin/macguffin_consideration.gd" id="2_32q1j"]
@@ -15,6 +15,7 @@
 [ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="8_ahky0"]
 [ext_resource type="SpriteFrames" uid="uid://lygikj06hx40" path="res://components/meeple/meeple_skin_looter.tres" id="8_xu5gw"]
 [ext_resource type="Script" path="res://components/meeple/ai/room/considerations/consider_random_room.gd" id="9_wcewj"]
+[ext_resource type="Script" path="res://components/meeple/ai/room/considerations/avoid_entrance.gd" id="10_6oe14"]
 [ext_resource type="Script" path="res://components/meeple/ai/room/room_strategy.gd" id="10_vudfp"]
 [ext_resource type="Texture2D" uid="uid://cc0tgjvoa7jhp" path="res://art/meeple/thought-question.png" id="12_qeyom"]
 
@@ -42,9 +43,13 @@ influence = 0.85
 script = ExtResource("9_wcewj")
 influence = 0.15
 
+[sub_resource type="Resource" id="Resource_mlbmy"]
+script = ExtResource("10_6oe14")
+influence = 0.8
+
 [sub_resource type="Resource" id="Resource_tnmlj"]
 script = ExtResource("10_vudfp")
-considerations = Array[ExtResource("6_6mu71")]([SubResource("Resource_srrbs"), SubResource("Resource_qv6mk"), SubResource("Resource_8rent")])
+considerations = Array[ExtResource("6_6mu71")]([SubResource("Resource_srrbs"), SubResource("Resource_qv6mk"), SubResource("Resource_8rent"), SubResource("Resource_mlbmy")])
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_50mka"]
 radius = 8.0
@@ -206,7 +211,7 @@ z_index = 1
 script = ExtResource("1_d3iq0")
 health = 4
 macguffin_strategy = SubResource("Resource_3ma6w")
-room_strategy = SubResource("Resource_tnmlj")
+explore_room_strategy = SubResource("Resource_tnmlj")
 nav_agent = NodePath("NavigationAgent2D")
 brain = NodePath("Brain")
 
@@ -290,6 +295,12 @@ to = NodePath("../../../Next Room")
 event = &"next_room"
 delay_in_seconds = "randf_range(1.0, 1.8)"
 
+[node name="To Leave Dungeon" type="Node" parent="Brain/Root/Explore Dungon/Explore Current Room/Pick Action"]
+script = ExtResource("8_ahky0")
+to = NodePath("../../../../Leave Dungeon")
+event = &"leave_dungeon"
+delay_in_seconds = "0.0"
+
 [node name="Look for Macguffins" type="Node" parent="Brain/Root/Explore Dungon/Explore Current Room"]
 script = ExtResource("6_hp8wo")
 initial_state = NodePath("Wander")
@@ -364,6 +375,19 @@ event = &"target_reached"
 delay_in_seconds = "0.0"
 
 [node name="Leave Dungeon" type="Node" parent="Brain/Root"]
+script = ExtResource("6_hp8wo")
+initial_state = NodePath("Go To Entrance")
+
+[node name="Go To Entrance" type="Node" parent="Brain/Root/Leave Dungeon"]
+script = ExtResource("7_jmllr")
+
+[node name="To Exit" type="Node" parent="Brain/Root/Leave Dungeon/Go To Entrance"]
+script = ExtResource("8_ahky0")
+to = NodePath("../../Exit")
+event = &"target_reached"
+delay_in_seconds = "0.0"
+
+[node name="Exit" type="Node" parent="Brain/Root/Leave Dungeon"]
 script = ExtResource("7_jmllr")
 
 [connection signal="area_entered" from="Room Hitbox" to="." method="_on_room_hitbox_entered"]
@@ -377,3 +401,5 @@ script = ExtResource("7_jmllr")
 [connection signal="state_entered" from="Brain/Root/Explore Dungon/Explore Current Room/Interact with Macguffin/Approach" to="." method="go_to_chosen_macguffin"]
 [connection signal="state_entered" from="Brain/Root/Explore Dungon/Explore Current Room/Interact with Macguffin/Take or Ignore" to="." method="take_or_ignore_chosen_macguffin"]
 [connection signal="state_entered" from="Brain/Root/Explore Dungon/Next Room" to="." method="go_to_next_room"]
+[connection signal="state_entered" from="Brain/Root/Leave Dungeon/Go To Entrance" to="." method="go_to_entrance"]
+[connection signal="state_entered" from="Brain/Root/Leave Dungeon/Exit" to="." method="exit_dungon"]
