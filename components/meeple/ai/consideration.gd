@@ -1,5 +1,6 @@
 @tool
 class_name Consideration extends Resource
+## Base class for considerations. Considerations are aspects of a decision that are taken into account when making a choice.
 
 ## An influence of 1.0 means the consideration is fully considered. An influence of 0.0 means the consideration is ignored. A value in between influences the relative importance of the consideration.
 @export_range(0, 1) var influence: float = 1.0:
@@ -10,18 +11,20 @@ class_name Consideration extends Resource
 func _init() -> void:
 	_update_description()
 
-## A score of 1.0 means the action is not penalized. A score of 0.0 means the choice will not be selected. Everything in between means the action is suboptimal, but acceptable.
+## A score of 1.0 means the choice is not penalized. A score of 0.0 means the choice will not be selected. Everything in between means the choice is suboptimal, but acceptable.
 func get_score(subject, object) -> float:
 	var raw_score := clampf(_get_score(subject, object), 0.0, 1.0)
 	return lerp((1.0 - influence), 1.0, raw_score)
-	
-func _get_score(_subject, _object) -> float:
-	assert(false, "_get_score() must be overridden in derived classes.")
-	return 1.0
 
+## Subclasses should override this method to provide a score for the consideration.
+func _get_score(_subject, _object) -> float:
+	return ErrorUtil.assert_abstract()
+
+## A readable description of the consideration.
 func description() -> String:
 	return "%s (%.2f)" % [_description(), influence]
 
+## Subclasses should override this method to provide a more specific description of the consideration.
 func _description() -> String:
 	return "Consideration"
 

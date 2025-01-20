@@ -1,5 +1,35 @@
-[gd_scene load_steps=2 format=3 uid="uid://c3l63q2r3uvrh"]
+[gd_scene load_steps=4 format=3 uid="uid://c3l63q2r3uvrh"]
 
 [ext_resource type="PackedScene" uid="uid://co46cl4xglan8" path="res://scenes/test_basic.tscn" id="1_l0him"]
+[ext_resource type="PackedScene" uid="uid://bcwkugn6v3oy7" path="res://addons/godot_state_charts/utilities/state_chart_debugger.tscn" id="2_752nc"]
+
+[sub_resource type="GDScript" id="GDScript_aiv0c"]
+script/source = "extends Node
+
+const StateChartDebugger := preload(\"res://addons/godot_state_charts/utilities/state_chart_debugger.gd\")
+
+@export var debugger: StateChartDebugger
+
+func _ready() -> void:
+	_attach_to_first_meeple.call_deferred()
+	
+func _attach_to_first_meeple() -> void:
+	var meeple := get_tree().get_nodes_in_group(\"meeple\")
+	if not meeple.is_empty():
+		debugger.debug_node(meeple[0].brain)
+"
 
 [node name="Basic Test" instance=ExtResource("1_l0him")]
+
+[node name="Camera2D" parent="." index="1"]
+position = Vector2(326, 96)
+
+[node name="StateChartDebugger" parent="." index="2" instance=ExtResource("2_752nc")]
+offset_left = 275.0
+offset_top = -191.0
+offset_right = 675.0
+offset_bottom = 373.0
+
+[node name="Node" type="Node" parent="." index="3" node_paths=PackedStringArray("debugger")]
+script = SubResource("GDScript_aiv0c")
+debugger = NodePath("../StateChartDebugger")

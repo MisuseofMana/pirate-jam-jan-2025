@@ -1,4 +1,4 @@
-class_name ConsiderDistance extends MacguffinConsideration
+class_name FavorClosestMacguffinConsideration extends MacguffinConsideration
 
 func _get_macguffin_score(meeple: Meeple, macguffin: Node2D) -> float:
 	var raw_distance := meeple.global_position.distance_to(macguffin.global_position)

@@ -19,19 +19,26 @@ SceneSwitcher="*res://SceneSwitcher.gd"
 
 [display]
 
-window/size/viewport_width=480
-window/size/viewport_height=480
+window/size/viewport_width=1000
+window/size/viewport_height=1000
 window/stretch/mode="viewport"
 window/stretch/scale_mode="integer"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/godot_state_charts/plugin.cfg")
 
 [global_group]
 
 macguffin=""
+room=""
+meeple=""
 
 [layer_names]
 
 2d_physics/layer_1="TrapDetection"
 2d_physics/layer_2="MeepleDetection"
+2d_physics/layer_3="Room"
 
 [rendering]
 
