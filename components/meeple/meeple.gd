@@ -56,7 +56,7 @@ func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("toggle_debug_mode"):
 		debug = not debug
 		nav_agent.debug_enabled = debug
-
+	
 func _on_room_hitbox_entered(area: Area2D) -> void:
 	if not area is Room:
 		return
@@ -78,7 +78,7 @@ func _on_room_hitbox_exited(area: Area2D) -> void:
 			current_room = null
 		else:
 			current_room = overlapping_rooms.back()
-
+			
 func _get_known_macguffins() -> Array[Node2D]:
 	var macguffins: Array[Node2D] = []
 	for macguffin in get_tree().get_nodes_in_group("macguffin"):
@@ -164,7 +164,7 @@ func _on_target_reached() -> void:
 func pick_room_action():
 	if randf() < 0.5:
 		brain.send_event("look_for_macguffins")
-	elif randf() < 0.2:
+	elif randf() < 0.01:
 		brain.send_event("leave_dungeon")
 	else:
 		brain.send_event("next_room")

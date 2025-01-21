@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://d1cw4mndlss2u"]
+[gd_scene load_steps=35 format=3 uid="uid://d1cw4mndlss2u"]
 
 [ext_resource type="Script" path="res://components/meeple/meeple.gd" id="1_d3iq0"]
 [ext_resource type="Script" path="res://components/meeple/ai/macguffin/macguffin_consideration.gd" id="2_32q1j"]
@@ -16,8 +16,9 @@
 [ext_resource type="Script" path="res://components/meeple/ai/room/considerations/consider_random_room.gd" id="9_wcewj"]
 [ext_resource type="Script" path="res://components/meeple/ai/room/considerations/avoid_entrance.gd" id="10_6oe14"]
 [ext_resource type="Script" path="res://components/meeple/ai/room/room_strategy.gd" id="10_vudfp"]
+[ext_resource type="Script" path="res://components/meeple/ai/room/considerations/favor_treasure.gd" id="11_gv2xq"]
 [ext_resource type="Texture2D" uid="uid://cc0tgjvoa7jhp" path="res://art/meeple/thought-question.png" id="12_qeyom"]
-[ext_resource type="SpriteFrames" uid="uid://ds53irrjhgrua" path="res://components/meeple/meeple_looter_skin.tres" id="14_ofm7m"]
+[ext_resource type="SpriteFrames" uid="uid://do3tj5pa4ek3u" path="res://components/meeple/meeple_looter_skin.tres" id="14_ofm7m"]
 
 [sub_resource type="Resource" id="Resource_rtrl7"]
 script = ExtResource("3_uijck")
@@ -45,11 +46,15 @@ influence = 0.15
 
 [sub_resource type="Resource" id="Resource_mlbmy"]
 script = ExtResource("10_6oe14")
+influence = 0.9
+
+[sub_resource type="Resource" id="Resource_7sen1"]
+script = ExtResource("11_gv2xq")
 influence = 0.8
 
 [sub_resource type="Resource" id="Resource_tnmlj"]
 script = ExtResource("10_vudfp")
-considerations = Array[ExtResource("6_6mu71")]([SubResource("Resource_srrbs"), SubResource("Resource_qv6mk"), SubResource("Resource_8rent"), SubResource("Resource_mlbmy")])
+considerations = Array[ExtResource("6_6mu71")]([SubResource("Resource_srrbs"), SubResource("Resource_qv6mk"), SubResource("Resource_8rent"), SubResource("Resource_mlbmy"), SubResource("Resource_7sen1")])
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_50mka"]
 radius = 8.0
