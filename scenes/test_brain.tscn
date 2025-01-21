@@ -1,36 +1,9 @@
-[gd_scene load_steps=4 format=4 uid="uid://bb0iyh2f7a63v"]
+[gd_scene load_steps=3 format=4 uid="uid://bb0iyh2f7a63v"]
 
 [ext_resource type="TileSet" uid="uid://mrguig7k625p" path="res://tilesets/default_tileset.tres" id="2_goc0p"]
-[ext_resource type="PackedScene" uid="uid://bcwkugn6v3oy7" path="res://addons/godot_state_charts/utilities/state_chart_debugger.tscn" id="6_57pea"]
-
-[sub_resource type="GDScript" id="GDScript_yo0gh"]
-script/source = "extends Node
-
-const StateChartDebugger := preload(\"res://addons/godot_state_charts/utilities/state_chart_debugger.gd\")
-
-@export var debugger: StateChartDebugger
-
-func _ready() -> void:
-	_attach_to_first_meeple.call_deferred()
-	
-func _attach_to_first_meeple() -> void:
-	var meeple := get_tree().get_nodes_in_group(\"meeple\")
-	if not meeple.is_empty():
-		debugger.debug_node(meeple[0].brain)
-"
+[ext_resource type="PackedScene" uid="uid://c7dl5xvrxk5u6" path="res://utilities/meeple_brain_debugger.tscn" id="2_obl38"]
 
 [node name="Test Brain" type="Node2D"]
-
-[node name="StateChartDebugger" parent="." instance=ExtResource("6_57pea")]
-offset_left = -195.0
-offset_top = -195.0
-offset_right = 205.0
-offset_bottom = 369.0
-scale = Vector2(0.5, 0.5)
-
-[node name="StateChartDebuggerHelper" type="Node" parent="StateChartDebugger" node_paths=PackedStringArray("debugger")]
-script = SubResource("GDScript_yo0gh")
-debugger = NodePath("..")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 tile_map_data = PackedByteArray("AAD//wIAAAAAAAAABAAAAAIAAAAAAAAABQABAAIAAAAAAAAABQACAAIAAAAAAAAAAwD//wEAAAAAAAAABgABAP7/AAAAAAAAAgABAP//AAAAAAAABAABAAAAAAAAAAAABAABAAEAAAAAAAAABAA=")
@@ -38,3 +11,10 @@ tile_set = ExtResource("2_goc0p")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(32, 32)
+
+[node name="Meeple Brain Debugger" parent="." instance=ExtResource("2_obl38")]
+offset_left = -182.0
+offset_top = -162.0
+offset_right = 242.0
+offset_bottom = 380.0
+scale = Vector2(0.5, 0.5)

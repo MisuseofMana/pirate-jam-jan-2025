@@ -28,7 +28,7 @@ texture = ExtResource("2_kn6en")
 
 [node name="SoulSprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = ExtResource("3_o46gq")
-animation = &"move"
+animation = &"disentigrate"
 autoplay = "default"
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]

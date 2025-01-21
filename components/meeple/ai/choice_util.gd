@@ -1,7 +1,7 @@
 class_name ChoiceUtil
 ## Base class for strategies. Strategies allow "contexts" (e.g. Meeple) to choose between "Choices" (e.g. Behaviors).
 
-## Subclasses should implement a more specific, typed version of this method that calls it
+## Selects the best choice from a list of choices based on the context and considerations.
 static func select(context, choices: Array, considerations: Array) -> Object:
 	var scores := get_scores(context, choices, considerations)
 	if scores.size() > 0:
@@ -55,8 +55,8 @@ class Score:
 		self.object = p_object
 
 	func _to_string() -> String:
-		var formatted := "Overall: " + str(self.overall_score) + "\n"
+		var formatted := "Choice: " + str(self.object) + "\n"
+		formatted += "Overall: " + str(self.overall_score) + "\n"
 		for consideration in self.considerations:
 			formatted += "  " + consideration.name + ": " + str(consideration.score) + "\n"
-		formatted += "\n"
 		return formatted

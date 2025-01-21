@@ -7,7 +7,7 @@ class_name Meeple extends Node2D
 @onready var meeple_sprite = $Meeple
 
 @export_group("Visuals")
-@export var meeple_skin : SpriteFrames = preload("res://components/meeple/meeple_looter_skin.tres")
+@export var meeple_skin: SpriteFrames = preload("res://components/meeple/meeple_looter_skin.tres")
 
 @export_group("Stats")
 @export_range(1, 4) var health: int = 4
@@ -15,6 +15,8 @@ class_name Meeple extends Node2D
 @export_range(0, 1, 0.1) var piety: float = 0.1
 @export_range(1, 99) var soul_value: int = 1
 @export var movement_speed: float = 20.0
+@export var treasure_collected: int = 0
+@export var max_treasure: int = 3
 
 @export_group("AI")
 @export var macguffin_strategy: MacguffinStrategy
@@ -23,6 +25,8 @@ class_name Meeple extends Node2D
 @export_group("Internal")
 @export var nav_agent: NavigationAgent2D
 @export var brain: StateChart
+
+var debug: bool = false
 
 const MEEPLE_SOUL = preload("res://components/soul/meeple_soul.tscn")
 
@@ -43,13 +47,26 @@ var target_macguffin: Node2D = null
 var agent_map_is_empty_or_unsynced: bool:
 	get(): return NavigationServer2D.map_get_iteration_id(nav_agent.get_navigation_map()) == 0
 
+static func get_all(node_in_tree: Node) -> Array[Meeple]:
+	var meeples: Array[Meeple] = []
+	for child in node_in_tree.get_tree().get_nodes_in_group("meeple"):
+		if child is Meeple:
+			meeples.append(child)
+	return meeples
+
 func _ready() -> void:
+	add_to_group("meeple")
 	nav_agent.velocity_computed.connect(_on_velocity_computed)
 	nav_agent.target_reached.connect(_on_target_reached)
 	thought.hide()
 	meeple_sprite.sprite_frames = meeple_skin
 	meeple_sprite.play("default")
 
+func _process(_delta: float) -> void:
+	if Input.is_action_just_pressed("toggle_debug_mode"):
+		debug = not debug
+		nav_agent.debug_enabled = debug
+	
 func _on_room_hitbox_entered(area: Area2D) -> void:
 	if not area is Room:
 		return
@@ -72,7 +89,6 @@ func _on_room_hitbox_exited(area: Area2D) -> void:
 		else:
 			current_room = overlapping_rooms.back()
 			
-
 func _get_known_macguffins() -> Array[Node2D]:
 	var macguffins: Array[Node2D] = []
 	for macguffin in get_tree().get_nodes_in_group("macguffin"):
@@ -123,9 +139,9 @@ func take_damage():
 #	animate the damage indicator as a thought bubble
 #	flash between old health and new health two times
 	for i in 2:
-		await get_tree().create_timer(0.1).timeout
+		await get_tree().create_timer(0.2).timeout
 		thought.texture = thought_hearts_array[health]
-		await get_tree().create_timer(0.1).timeout
+		await get_tree().create_timer(0.2).timeout
 		thought.texture = thought_hearts_array[oldHealth]
 	
 #	set health thought icon to new health value
@@ -144,38 +160,33 @@ func take_damage():
 
 func _on_animation_player_animation_finished(anim_name):
 	if anim_name == "die":
-		pass
-		var soul : MeepleSoul = MEEPLE_SOUL.instantiate()
+		var soul: MeepleSoul = MEEPLE_SOUL.instantiate()
 		soul.soul_value = soul_value
 		soul.position = position
-		owner.add_child(soul)
+		get_parent().add_child(soul)
 		queue_free()
+
+func notify_wave_started() -> void:
+	brain.send_event("wave_started")
 	
 # region State Charts Stuff
 func _on_target_reached() -> void:
 	brain.send_event.call_deferred("target_reached")
 
 func pick_room_action():
-	if randf() < 0.5:
-		brain.send_event("look_for_macguffins")
-	elif randf() < 0.2:
+	if treasure_collected >= max_treasure:
 		brain.send_event("leave_dungeon")
+	if randf() < 0.8:
+		brain.send_event("look_for_macguffins")
 	else:
 		brain.send_event("next_room")
 
 func go_to_random_position_in_room():
-	var margin := 16
-
 	if agent_map_is_empty_or_unsynced:
 		await NavigationServer2D.map_changed
 
 	while true:
-		var width := 64.
-		var height := 64
-		nav_agent.target_position = current_room.global_position + Vector2(
-			-width / 2.0 + randf_range(margin, width - margin * 2),
-			-height / 2.0 + randf_range(margin, height - margin * 2)
-		)
+		nav_agent.target_position = current_room.get_random_walkable_global_position()
 		if nav_agent.is_target_reachable():
 			break
 
@@ -186,9 +197,14 @@ func decide_to_keep_exploring_current_room():
 		brain.send_event("next_room")
 
 func decide_look_for_macguffin_action():
-	var macguffin = macguffin_strategy.select_macguffin(self, _get_known_macguffins())
-	if macguffin and randf() < 0.5:
-		target_macguffin = macguffin
+	var scores = macguffin_strategy.get_macguffin_scores(self, _get_known_macguffins())
+
+	if not scores.is_empty() and randf() < 0.9:
+		target_macguffin = scores[0].object
+		if debug:
+			print("Chose Macguffin " + target_macguffin.name + ":")
+			for score in scores:
+				print(score._to_string())
 		brain.send_event("targeted_macguffin")
 	elif randf() < 0.5:
 		brain.send_event("look_for_macguffins")
@@ -202,15 +218,23 @@ func take_or_ignore_chosen_macguffin():
 	if target_macguffin == null:
 		return
 		
-	if randf() < 0.5:
+	if randf() < 0.8:
 		target_macguffin.queue_free()
+		treasure_collected += 1
 	
 	target_macguffin = null
 		
 	brain.send_event("interacted_with_macguffin")
 
 func go_to_next_room():
-	var next_room := explore_room_strategy.select_room(self, _get_other_known_rooms())
+	var scores := explore_room_strategy.get_room_scores(self, _get_other_known_rooms())
+	assert(not scores.is_empty())
+	
+	var next_room: Room = scores[0].object
+	if debug:
+		print("Chose Room " + next_room.name + ":")
+		for score in scores:
+			print(score._to_string())
 	nav_agent.target_position = next_room.global_position
 
 func go_to_entrance():
@@ -223,4 +247,3 @@ func go_to_entrance():
 
 func exit_dungon() -> void:
 	queue_free()
-	

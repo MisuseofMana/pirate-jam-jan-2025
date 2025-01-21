@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://ddgevfwlgcn8t" path="res://components/rooms/room_sword.tscn" id="3_llxhb"]
 [ext_resource type="PackedScene" uid="uid://ca1edcsqoch32" path="res://components/rooms/room_basic_1.tscn" id="4_yi200"]
 [ext_resource type="PackedScene" uid="uid://bus7x3mlryq4a" path="res://components/rooms/room_basic_2.tscn" id="5_usjtd"]
-[ext_resource type="PackedScene" path="res://components/rooms/room_basic_trap_2.tscn" id="6_ypk2g"]
+[ext_resource type="PackedScene" uid="uid://cr7ya361a2ep1" path="res://components/rooms/room_basic_trap_2.tscn" id="6_ypk2g"]
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_5pp3v"]
 resource_name = "Rooms"

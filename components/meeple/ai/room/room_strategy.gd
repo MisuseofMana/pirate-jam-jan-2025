@@ -7,11 +7,5 @@ class_name RoomStrategy extends Resource
 func select_room(meeple: Meeple, rooms: Array[Room]) -> Room:
 	return ChoiceUtil.select(meeple, rooms, considerations)
 
-func get_room_scores(meeple: Meeple, rooms: Array[Room]) -> Dictionary:
-	var results: Dictionary = {}
-	for room in rooms:
-		var score = 0.0
-		for consideration in considerations:
-			score += consideration.get_room_score(meeple, room)
-		results[room] = score
-	return results
+func get_room_scores(meeple: Meeple, rooms: Array[Room]) -> Array[ChoiceUtil.Score]:
+	return ChoiceUtil.get_scores(meeple, rooms, considerations)

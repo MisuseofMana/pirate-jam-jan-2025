@@ -6,3 +6,6 @@ class_name MacguffinStrategy extends Resource
 
 func select_macguffin(meeple: Meeple, macguffins: Array[Node2D]) -> Node2D:
 	return ChoiceUtil.select(meeple, macguffins, considerations)
+
+func get_macguffin_scores(meeple: Meeple, macguffins: Array[Node2D]) -> Array[ChoiceUtil.Score]:
+	return ChoiceUtil.get_scores(meeple, macguffins, considerations)
