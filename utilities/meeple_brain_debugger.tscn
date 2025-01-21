@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://c7dl5xvrxk5u6"]
+
+[ext_resource type="PackedScene" uid="uid://bcwkugn6v3oy7" path="res://addons/godot_state_charts/utilities/state_chart_debugger.tscn" id="1_weavx"]
+[ext_resource type="Script" path="res://utilities/meeple_brain_debugger.gd" id="2_2c6s1"]
+
+[node name="Meeple Brain Debugger" instance=ExtResource("1_weavx")]
+script = ExtResource("2_2c6s1")
+pick_layers = 8
+
+[node name="TabContainer" parent="." index="0"]
+current_tab = 0
+
+[node name="StateChart" parent="TabContainer" index="1"]
+metadata/_tab_index = 0
+
+[node name="History" parent="TabContainer" index="2"]
+metadata/_tab_index = 1
+
+[node name="Settings" parent="TabContainer" index="3"]
+metadata/_tab_index = 2

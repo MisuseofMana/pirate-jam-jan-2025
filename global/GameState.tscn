@@ -1,0 +1,60 @@
+[gd_scene load_steps=6 format=3 uid="uid://bmifa8hlavga4"]
+
+[ext_resource type="Script" path="res://global/GameState.gd" id="1_6ccbp"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="2_7yvp7"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="3_yhpqw"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="4_ur7yj"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="5_mrhtl"]
+
+[node name="GameState" type="Node" node_paths=PackedStringArray("wave_state")]
+script = ExtResource("1_6ccbp")
+wave_state = NodePath("Waves")
+
+[node name="Waves" type="Node" parent="."]
+script = ExtResource("2_7yvp7")
+initial_expression_properties = {
+"time_between_meeple": 3.0,
+"time_between_waves": 30.0
+}
+
+[node name="Root" type="Node" parent="Waves"]
+script = ExtResource("3_yhpqw")
+initial_state = NodePath("Wave Gathering")
+
+[node name="Wave Gathering" type="Node" parent="Waves/Root"]
+script = ExtResource("3_yhpqw")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="Waves/Root/Wave Gathering"]
+script = ExtResource("4_ur7yj")
+
+[node name="Spawn" type="Node" parent="Waves/Root/Wave Gathering/Idle"]
+script = ExtResource("5_mrhtl")
+to = NodePath("../../Spawning")
+delay_in_seconds = "time_between_meeple"
+
+[node name="Spawning" type="Node" parent="Waves/Root/Wave Gathering"]
+script = ExtResource("4_ur7yj")
+
+[node name="Keep Spawning" type="Node" parent="Waves/Root/Wave Gathering/Spawning"]
+script = ExtResource("5_mrhtl")
+to = NodePath("../../Idle")
+event = &"keep_spawning"
+delay_in_seconds = "0"
+
+[node name="Release" type="Node" parent="Waves/Root/Wave Gathering/Spawning"]
+script = ExtResource("5_mrhtl")
+to = NodePath("../../../Between Waves")
+event = &"release_wave"
+delay_in_seconds = "0.0"
+
+[node name="Between Waves" type="Node" parent="Waves/Root"]
+script = ExtResource("4_ur7yj")
+
+[node name="To Wave Gathering" type="Node" parent="Waves/Root/Between Waves"]
+script = ExtResource("5_mrhtl")
+to = NodePath("../../Wave Gathering")
+delay_in_seconds = "time_between_waves"
+
+[connection signal="state_entered" from="Waves/Root/Wave Gathering/Spawning" to="." method="spawn_meeple"]
+[connection signal="taken" from="Waves/Root/Wave Gathering/Spawning/Release" to="." method="release_wave"]

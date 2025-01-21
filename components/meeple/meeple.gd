@@ -7,7 +7,7 @@ class_name Meeple extends Node2D
 @onready var meeple_sprite = $Meeple
 
 @export_group("Visuals")
-@export var meeple_skin : SpriteFrames = preload("res://components/meeple/meeple_looter_skin.tres")
+@export var meeple_skin: SpriteFrames = preload("res://components/meeple/meeple_looter_skin.tres")
 
 @export_group("Stats")
 @export_range(1, 4) var health: int = 4
@@ -47,7 +47,15 @@ var target_macguffin: Node2D = null
 var agent_map_is_empty_or_unsynced: bool:
 	get(): return NavigationServer2D.map_get_iteration_id(nav_agent.get_navigation_map()) == 0
 
+static func get_all(node_in_tree: Node) -> Array[Meeple]:
+	var meeples: Array[Meeple] = []
+	for child in node_in_tree.get_tree().get_nodes_in_group("meeple"):
+		if child is Meeple:
+			meeples.append(child)
+	return meeples
+
 func _ready() -> void:
+	add_to_group("meeple")
 	nav_agent.velocity_computed.connect(_on_velocity_computed)
 	nav_agent.target_reached.connect(_on_target_reached)
 	thought.hide()
@@ -153,11 +161,14 @@ func take_damage():
 func _on_animation_player_animation_finished(anim_name):
 	if anim_name == "die":
 		pass
-		var soul : MeepleSoul = MEEPLE_SOUL.instantiate()
+		var soul: MeepleSoul = MEEPLE_SOUL.instantiate()
 		soul.soul_value = soul_value
 		soul.position = position
 		owner.add_child(soul)
 		queue_free()
+
+func notify_wave_started() -> void:
+	brain.send_event("wave_started")
 	
 # region State Charts Stuff
 func _on_target_reached() -> void:
@@ -172,18 +183,11 @@ func pick_room_action():
 		brain.send_event("next_room")
 
 func go_to_random_position_in_room():
-	var margin := 16
-
 	if agent_map_is_empty_or_unsynced:
 		await NavigationServer2D.map_changed
 
 	while true:
-		var width := 64.
-		var height := 64
-		nav_agent.target_position = current_room.global_position + Vector2(
-			-width / 2.0 + randf_range(margin, width - margin * 2),
-			-height / 2.0 + randf_range(margin, height - margin * 2)
-		)
+		nav_agent.target_position = current_room.get_random_walkable_global_position()
 		if nav_agent.is_target_reachable():
 			break
 
@@ -244,4 +248,3 @@ func go_to_entrance():
 
 func exit_dungon() -> void:
 	queue_free()
-	

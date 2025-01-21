@@ -17,7 +17,7 @@ config/features=PackedStringArray("4.3", "Forward Plus")
 [autoload]
 
 SceneSwitcher="*res://SceneSwitcher.gd"
-GameState="*res://global/GameState.gd"
+GameState="*res://global/GameState.tscn"
 
 [display]
 
@@ -38,6 +38,7 @@ macguffin=""
 room=""
 meeple=""
 sword=""
+entrance=""
 
 [input]
 
@@ -52,6 +53,7 @@ toggle_debug_mode={
 2d_physics/layer_1="TrapDetection"
 2d_physics/layer_2="MeepleDetection"
 2d_physics/layer_3="Room"
+2d_physics/layer_4="Meeple"
 
 [rendering]
 

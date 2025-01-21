@@ -238,9 +238,8 @@ brain = NodePath("Brain")
 
 [node name="Room Hitbox" type="Area2D" parent="."]
 position = Vector2(1, -1)
-collision_layer = 0
+collision_layer = 8
 collision_mask = 4
-monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Room Hitbox"]
 position = Vector2(-1, -6)
@@ -289,7 +288,16 @@ script = ExtResource("5_dkyyg")
 
 [node name="Root" type="Node" parent="Brain"]
 script = ExtResource("6_hp8wo")
-initial_state = NodePath("Explore Dungon")
+initial_state = NodePath("Waiting For Wave")
+
+[node name="Waiting For Wave" type="Node" parent="Brain/Root"]
+script = ExtResource("7_jmllr")
+
+[node name="To Explore Dungeon" type="Node" parent="Brain/Root/Waiting For Wave"]
+script = ExtResource("8_ahky0")
+to = NodePath("../../Explore Dungon")
+event = &"wave_started"
+delay_in_seconds = "0.0"
 
 [node name="Explore Dungon" type="Node" parent="Brain/Root"]
 script = ExtResource("6_hp8wo")
