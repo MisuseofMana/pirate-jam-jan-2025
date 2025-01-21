@@ -231,6 +231,7 @@ color = Color(0.588235, 0, 0, 1)
 [node name="Meeple" type="Node2D" node_paths=PackedStringArray("nav_agent", "brain") groups=["meeple"]]
 z_index = 1
 script = ExtResource("1_d3iq0")
+health = 1
 macguffin_strategy = SubResource("Resource_3ma6w")
 explore_room_strategy = SubResource("Resource_tnmlj")
 nav_agent = NodePath("NavigationAgent2D")

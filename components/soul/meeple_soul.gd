@@ -47,8 +47,8 @@ func _physics_process(delta: float) -> void:
 func _on_target_reached() -> void:
 	GameState.souls += soul_value
 	timer.start()
-	thought.show()
 	chime.play()
+	thought.show()
 	
 func _on_velocity_computed(safe_velocity: Vector2) -> void:
 	global_position = global_position.move_toward(global_position + safe_velocity, movement_delta)

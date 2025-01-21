@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://bshaueh71brjr"]
+[gd_scene load_steps=3 format=4 uid="uid://bshaueh71brjr"]
 
 [ext_resource type="TileSet" uid="uid://mrguig7k625p" path="res://tilesets/default_tileset.tres" id="1_1qniv"]
 [ext_resource type="PackedScene" uid="uid://c7dl5xvrxk5u6" path="res://utilities/meeple_brain_debugger.tscn" id="1_xn256"]
@@ -6,14 +6,14 @@
 [node name="Basic Test" type="Node2D"]
 
 [node name="Meeple Brain Debugger" parent="." instance=ExtResource("1_xn256")]
-offset_left = -78.0
-offset_top = -178.0
-offset_right = 346.0
-offset_bottom = 364.0
+offset_left = -163.0
+offset_top = -158.0
+offset_right = 261.0
+offset_bottom = 384.0
 scale = Vector2(0.5, 0.5)
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
-tile_map_data = PackedByteArray(0, 0, 255, 255, 2, 0, 0, 0, 0, 0, 0, 0, 1, 0, 254, 255, 2, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 4, 0, 1, 0, 2, 0, 0, 0, 0, 0, 0, 0, 3, 0)
+tile_map_data = PackedByteArray("AAD//wIAAAAAAAAAAQD+/wIAAAAAAAAAAgAAAAIAAAAAAAAABQABAAIAAAAAAAAAAQAAAAMAAAAAAAAABAACAAMAAAAAAAAABAD+/wMAAAAAAAAABQD//wMAAAAAAAAABwABAAMAAAAAAAAAAQACAAEAAAAAAAAAAQADAAEAAAAAAAAABwADAAMAAAAAAAAABwADAAIAAAAAAAAAAwABAAEAAAAAAAAABAA=")
 tile_set = ExtResource("1_1qniv")
 
 [node name="Camera2D" type="Camera2D" parent="."]

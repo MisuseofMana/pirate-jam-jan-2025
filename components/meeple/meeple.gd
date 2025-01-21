@@ -139,9 +139,9 @@ func take_damage():
 #	animate the damage indicator as a thought bubble
 #	flash between old health and new health two times
 	for i in 2:
-		await get_tree().create_timer(0.1).timeout
+		await get_tree().create_timer(0.2).timeout
 		thought.texture = thought_hearts_array[health]
-		await get_tree().create_timer(0.1).timeout
+		await get_tree().create_timer(0.2).timeout
 		thought.texture = thought_hearts_array[oldHealth]
 	
 #	set health thought icon to new health value
@@ -160,11 +160,10 @@ func take_damage():
 
 func _on_animation_player_animation_finished(anim_name):
 	if anim_name == "die":
-		pass
 		var soul: MeepleSoul = MEEPLE_SOUL.instantiate()
 		soul.soul_value = soul_value
 		soul.position = position
-		owner.add_child(soul)
+		get_parent().add_child(soul)
 		queue_free()
 
 func notify_wave_started() -> void:
