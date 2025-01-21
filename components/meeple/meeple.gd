@@ -192,7 +192,7 @@ func decide_to_keep_exploring_current_room():
 		brain.send_event("next_room")
 
 func decide_look_for_macguffin_action():
-	var scores = macguffin_strategy.get_scores(self, _get_known_macguffins())
+	var scores = macguffin_strategy.get_macguffin_scores(self, _get_known_macguffins())
 	if not scores.is_empty() and randf() < 0.5:
 		target_macguffin = scores[0].object
 		if debug:
@@ -220,7 +220,14 @@ func take_or_ignore_chosen_macguffin():
 	brain.send_event("interacted_with_macguffin")
 
 func go_to_next_room():
-	var next_room := explore_room_strategy.select_room(self, _get_other_known_rooms())
+	var scores := explore_room_strategy.get_room_scores(self, _get_other_known_rooms())
+	assert(not scores.is_empty())
+	
+	var next_room: Room = scores[0].object
+	if debug:
+		print("Chose Room " + next_room.name + ":")
+		for score in scores:
+			print(score._to_string())
 	nav_agent.target_position = next_room.global_position
 
 func go_to_entrance():

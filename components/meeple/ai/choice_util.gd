@@ -55,8 +55,8 @@ class Score:
 		self.object = p_object
 
 	func _to_string() -> String:
-		var formatted := "Overall: " + str(self.overall_score) + "\n"
+		var formatted := "Choice: " + str(self.object) + "\n"
+		formatted += "Overall: " + str(self.overall_score) + "\n"
 		for consideration in self.considerations:
 			formatted += "  " + consideration.name + ": " + str(consideration.score) + "\n"
-		formatted += "\n"
 		return formatted
