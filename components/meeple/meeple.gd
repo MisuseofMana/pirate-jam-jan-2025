@@ -24,6 +24,8 @@ class_name Meeple extends Node2D
 @export var nav_agent: NavigationAgent2D
 @export var brain: StateChart
 
+var debug: bool = false
+
 const MEEPLE_SOUL = preload("res://components/soul/meeple_soul.tscn")
 
 const THOUGHT_HEART_EMPTY = preload("res://art/meeple/thought-heart-empty.png")
@@ -50,6 +52,11 @@ func _ready() -> void:
 	meeple_sprite.sprite_frames = meeple_skin
 	meeple_sprite.play("default")
 
+func _process(_delta: float) -> void:
+	if Input.is_action_just_pressed("toggle_debug_mode"):
+		debug = not debug
+		nav_agent.debug_enabled = debug
+
 func _on_room_hitbox_entered(area: Area2D) -> void:
 	if not area is Room:
 		return
@@ -71,7 +78,6 @@ func _on_room_hitbox_exited(area: Area2D) -> void:
 			current_room = null
 		else:
 			current_room = overlapping_rooms.back()
-			
 
 func _get_known_macguffins() -> Array[Node2D]:
 	var macguffins: Array[Node2D] = []
@@ -186,9 +192,13 @@ func decide_to_keep_exploring_current_room():
 		brain.send_event("next_room")
 
 func decide_look_for_macguffin_action():
-	var macguffin = macguffin_strategy.select_macguffin(self, _get_known_macguffins())
-	if macguffin and randf() < 0.5:
-		target_macguffin = macguffin
+	var scores = macguffin_strategy.get_scores(self, _get_known_macguffins())
+	if not scores.is_empty() and randf() < 0.5:
+		target_macguffin = scores[0].object
+		if debug:
+			print("Chose Macguffin " + target_macguffin.name + ":")
+			for score in scores:
+				print(score._to_string())
 		brain.send_event("targeted_macguffin")
 	elif randf() < 0.5:
 		brain.send_event("look_for_macguffins")
