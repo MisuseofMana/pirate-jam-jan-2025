@@ -15,6 +15,8 @@ class_name Meeple extends Node2D
 @export_range(0, 1, 0.1) var piety: float = 0.1
 @export_range(1, 99) var soul_value: int = 1
 @export var movement_speed: float = 20.0
+@export var treasure_collected: int = 0
+@export var max_treasure: int = 3
 
 @export_group("AI")
 @export var macguffin_strategy: MacguffinStrategy
@@ -162,10 +164,10 @@ func _on_target_reached() -> void:
 	brain.send_event.call_deferred("target_reached")
 
 func pick_room_action():
-	if randf() < 0.5:
-		brain.send_event("look_for_macguffins")
-	elif randf() < 0.01:
+	if treasure_collected >= max_treasure:
 		brain.send_event("leave_dungeon")
+	if randf() < 0.8:
+		brain.send_event("look_for_macguffins")
 	else:
 		brain.send_event("next_room")
 
@@ -193,7 +195,8 @@ func decide_to_keep_exploring_current_room():
 
 func decide_look_for_macguffin_action():
 	var scores = macguffin_strategy.get_macguffin_scores(self, _get_known_macguffins())
-	if not scores.is_empty() and randf() < 0.5:
+
+	if not scores.is_empty() and randf() < 0.9:
 		target_macguffin = scores[0].object
 		if debug:
 			print("Chose Macguffin " + target_macguffin.name + ":")
@@ -212,8 +215,9 @@ func take_or_ignore_chosen_macguffin():
 	if target_macguffin == null:
 		return
 		
-	if randf() < 0.5:
+	if randf() < 0.8:
 		target_macguffin.queue_free()
+		treasure_collected += 1
 	
 	target_macguffin = null
 		
