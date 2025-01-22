@@ -27,7 +27,7 @@ texture = ExtResource("1_tilbc")
 
 [node name="Sword" type="Sprite2D" parent="." groups=["macguffin", "sword"]]
 position = Vector2(-1, -2)
-scale = Vector2(2.5, 2.5)
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_b7khe")
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="." groups=["room"]]

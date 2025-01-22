@@ -1,7 +1,127 @@
-[gd_scene load_steps=5 format=3 uid="uid://dqr12wo3gio00"]
+[gd_scene load_steps=22 format=3 uid="uid://dqr12wo3gio00"]
 
 [ext_resource type="Script" path="res://components/rooms/room.gd" id="1_fq4wr"]
-[ext_resource type="Texture2D" uid="uid://f6uvs1nf3ffh" path="res://art/rooms/basic_base.png" id="1_mokcw"]
+[ext_resource type="Texture2D" uid="uid://5uxiiodikmwa" path="res://art/rooms/room-variants.png" id="2_y2grr"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_283nl"]
+atlas = ExtResource("2_y2grr")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8av6d"]
+atlas = ExtResource("2_y2grr")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hd81m"]
+atlas = ExtResource("2_y2grr")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v46yh"]
+atlas = ExtResource("2_y2grr")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qpf1s"]
+atlas = ExtResource("2_y2grr")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0vgyw"]
+atlas = ExtResource("2_y2grr")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g5bse"]
+atlas = ExtResource("2_y2grr")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dqkkc"]
+atlas = ExtResource("2_y2grr")
+region = Rect2(448, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_16ffm"]
+atlas = ExtResource("2_y2grr")
+region = Rect2(512, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_phae6"]
+atlas = ExtResource("2_y2grr")
+region = Rect2(576, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qoqx7"]
+atlas = ExtResource("2_y2grr")
+region = Rect2(640, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yc2ua"]
+atlas = ExtResource("2_y2grr")
+region = Rect2(704, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wj8rm"]
+atlas = ExtResource("2_y2grr")
+region = Rect2(768, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ven41"]
+atlas = ExtResource("2_y2grr")
+region = Rect2(832, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vr84a"]
+atlas = ExtResource("2_y2grr")
+region = Rect2(896, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_86rji"]
+atlas = ExtResource("2_y2grr")
+region = Rect2(960, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6o3vk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_283nl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8av6d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hd81m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v46yh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qpf1s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0vgyw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g5bse")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dqkkc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_16ffm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_phae6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qoqx7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yc2ua")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wj8rm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ven41")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vr84a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_86rji")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_i64ex"]
 vertices = PackedVector2Array(6, -25, 25, -25, 25, -6, 32, -6, 32, 6, 25, 6, 25, 25, 6, 25, -25, -6, 6, 32, -6, 32, -6, 25, -25, 25, -25, 6, -32, 6, -32, -6, -25, -25, -6, -25, -6, -32, 6, -32)
@@ -18,8 +138,8 @@ collision_mask = 0
 monitoring = false
 script = ExtResource("1_fq4wr")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_mokcw")
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_6o3vk")
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 navigation_polygon = SubResource("NavigationPolygon_i64ex")
