@@ -36,10 +36,18 @@ func reskin_tiles():
 		
 #		checks top, right, bottom, left
 		for neighbor in possible_connections:
-			cardinal_neighbors_filled.append(1 if get_cell_alternative_tile(neighbor) >= 0 else 0)
+			cardinal_neighbors_filled.append(1 if get_cell_source_id(neighbor) >= 0 else 0)
 
 		var atlas_decode = "".join(cardinal_neighbors_filled.map(str))
+		var cellData = get_cell_tile_data(cell)
+	
+
+		if cellData.get_custom_data("isSwordRoom") == true:
+			set_cell(cell, 0, atlas_register[atlas_decode], 1)
+		elif cellData.get_custom_data("isEntranceRoom") == true:
+			set_cell(cell, 0, atlas_register[atlas_decode], 2)
+		else:
+			set_cell(cell, 0, atlas_register[atlas_decode])
 			
-		set_cell(cell, 0, atlas_register[atlas_decode])
 		
 		
