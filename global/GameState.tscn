@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://bmifa8hlavga4"]
+[gd_scene load_steps=7 format=3 uid="uid://bmifa8hlavga4"]
 
 [ext_resource type="Script" path="res://global/GameState.gd" id="1_6ccbp"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="2_7yvp7"]
+[ext_resource type="AudioStream" uid="uid://btlkfdy3vbvtu" path="res://audio/ambient_choir_taiko.mp3" id="2_temxw"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="3_yhpqw"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="4_ur7yj"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="5_mrhtl"]
@@ -9,6 +10,10 @@
 [node name="GameState" type="Node" node_paths=PackedStringArray("wave_state")]
 script = ExtResource("1_6ccbp")
 wave_state = NodePath("Waves")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_temxw")
+autoplay = true
 
 [node name="Waves" type="Node" parent="."]
 script = ExtResource("2_7yvp7")
