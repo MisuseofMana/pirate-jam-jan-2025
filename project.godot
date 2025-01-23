@@ -32,6 +32,12 @@ window/stretch/scale_mode="integer"
 
 enabled=PackedStringArray("res://addons/godot_state_charts/plugin.cfg")
 
+[file_customization]
+
+folder_colors={
+"res://components/rooms/nav_regions/": "orange"
+}
+
 [global_group]
 
 macguffin=""
@@ -39,6 +45,7 @@ room=""
 meeple=""
 sword=""
 entrance=""
+furniture=""
 
 [input]
 
@@ -54,6 +61,7 @@ toggle_debug_mode={
 2d_physics/layer_2="MeepleDetection"
 2d_physics/layer_3="Room"
 2d_physics/layer_4="Meeple"
+2d_physics/layer_5="RoomClickDetection"
 
 [rendering]
 

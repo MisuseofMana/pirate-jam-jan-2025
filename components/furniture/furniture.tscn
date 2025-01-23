@@ -1,0 +1,37 @@
+[gd_scene load_steps=7 format=3 uid="uid://djdb3leiduao5"]
+
+[ext_resource type="Texture2D" uid="uid://ccu4hx0pq3etj" path="res://art/rooms/dungeon_furniture.png" id="1_c8swd"]
+[ext_resource type="Script" path="res://components/furniture/furniture.gd" id="2_02ymn"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xijxn"]
+atlas = ExtResource("1_c8swd")
+region = Rect2(0, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tw7ow"]
+atlas = ExtResource("1_c8swd")
+region = Rect2(8, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5yhe2"]
+atlas = ExtResource("1_c8swd")
+region = Rect2(0, 8, 8, 8)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ocv2b"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xijxn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tw7ow")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5yhe2")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Furniture" type="AnimatedSprite2D" groups=["furniture"]]
+sprite_frames = SubResource("SpriteFrames_ocv2b")
+script = ExtResource("2_02ymn")

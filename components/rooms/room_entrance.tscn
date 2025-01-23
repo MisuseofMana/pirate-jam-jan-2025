@@ -1,137 +1,13 @@
-[gd_scene load_steps=23 format=3 uid="uid://dyxxlm6eg6wru"]
+[gd_scene load_steps=7 format=3 uid="uid://dyxxlm6eg6wru"]
 
 [ext_resource type="Script" path="res://components/rooms/entrance_room.gd" id="1_67rxf"]
 [ext_resource type="PackedScene" uid="uid://d1cw4mndlss2u" path="res://components/meeple/meeple.tscn" id="2_ghigw"]
-[ext_resource type="Texture2D" uid="uid://5uxiiodikmwa" path="res://art/rooms/room-variants.png" id="3_cgt1r"]
-
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_kylex"]
-vertices = PackedVector2Array(6, -25, 25, -25, 25, -6, -25, 6, 32, -6, 32, 6, 25, 6, 25, 25, 6, 25, 6, 32, -7, 32, -7, 25, -25, 25, -32, 6, -32, -7, -25, -7, -25, -25, -7, -25, -7, -32, 6, -32)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(2, 4, 5, 6), PackedInt32Array(6, 7, 8, 3), PackedInt32Array(8, 9, 10, 11), PackedInt32Array(11, 12, 3), PackedInt32Array(3, 13, 14, 15), PackedInt32Array(15, 16, 17), PackedInt32Array(17, 18, 19, 0), PackedInt32Array(8, 11, 3), PackedInt32Array(2, 6, 3), PackedInt32Array(17, 0, 3, 15)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-25, -25, -7, -25, -7, -32, 6, -32, 6, -25, 25, -25, 25, -6, 32, -6, 32, 6, 25, 6, 25, 25, 6, 25, 6, 32, -7, 32, -7, 25, -25, 25, -25, 6, -32, 6, -32, -7, -25, -7)])
-agent_radius = 0.0
+[ext_resource type="Texture2D" uid="uid://cy2lv2myk6ixs" path="res://art/rooms/room_sprite0.png" id="3_rsle2"]
+[ext_resource type="Texture2D" uid="uid://b4sqf4yhiedef" path="res://art/rooms/entrance.png" id="4_xc40b"]
+[ext_resource type="NavigationPolygon" uid="uid://dl6paxiymrj47" path="res://components/rooms/nav_regions/no_exits.tres" id="5_uxfk6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r7kuv"]
 size = Vector2(64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_n64gx"]
-atlas = ExtResource("3_cgt1r")
-region = Rect2(0, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_t1p20"]
-atlas = ExtResource("3_cgt1r")
-region = Rect2(64, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_yyl4a"]
-atlas = ExtResource("3_cgt1r")
-region = Rect2(128, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_jijc4"]
-atlas = ExtResource("3_cgt1r")
-region = Rect2(192, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_bbhna"]
-atlas = ExtResource("3_cgt1r")
-region = Rect2(0, 64, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_p0unk"]
-atlas = ExtResource("3_cgt1r")
-region = Rect2(64, 64, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_gtibq"]
-atlas = ExtResource("3_cgt1r")
-region = Rect2(128, 64, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_12kay"]
-atlas = ExtResource("3_cgt1r")
-region = Rect2(192, 64, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_l7e6c"]
-atlas = ExtResource("3_cgt1r")
-region = Rect2(0, 128, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_qfdkt"]
-atlas = ExtResource("3_cgt1r")
-region = Rect2(64, 128, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ultaj"]
-atlas = ExtResource("3_cgt1r")
-region = Rect2(128, 128, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_x08mw"]
-atlas = ExtResource("3_cgt1r")
-region = Rect2(192, 128, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_q55gd"]
-atlas = ExtResource("3_cgt1r")
-region = Rect2(0, 192, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ri2lj"]
-atlas = ExtResource("3_cgt1r")
-region = Rect2(64, 192, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_8n83e"]
-atlas = ExtResource("3_cgt1r")
-region = Rect2(128, 192, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_4lysk"]
-atlas = ExtResource("3_cgt1r")
-region = Rect2(192, 192, 64, 64)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_sqc3g"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_n64gx")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_t1p20")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_yyl4a")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_jijc4")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_bbhna")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_p0unk")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_gtibq")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_12kay")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_l7e6c")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_qfdkt")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ultaj")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_x08mw")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_q55gd")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ri2lj")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_8n83e")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_4lysk")
-}],
-"loop": false,
-"name": &"default",
-"speed": 5.0
-}]
 
 [node name="Entrance" type="Area2D" groups=["entrance", "room"]]
 collision_layer = 4
@@ -140,12 +16,15 @@ monitoring = false
 script = ExtResource("1_67rxf")
 spawnable_meeple = Array[PackedScene]([ExtResource("2_ghigw")])
 
-[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
-navigation_polygon = SubResource("NavigationPolygon_kylex")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_r7kuv")
 
-[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+[node name="DungeonTile" type="Sprite2D" parent="."]
 self_modulate = Color(0, 0.833287, 0.384975, 1)
-sprite_frames = SubResource("SpriteFrames_sqc3g")
+texture = ExtResource("3_rsle2")
+
+[node name="EntranceSprite" type="Sprite2D" parent="."]
+texture = ExtResource("4_xc40b")
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+navigation_polygon = ExtResource("5_uxfk6")

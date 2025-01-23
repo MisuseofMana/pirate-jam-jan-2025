@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=3 uid="uid://6jtjr8wj4snc"]
+
+[ext_resource type="PackedScene" uid="uid://dqr12wo3gio00" path="res://components/rooms/room_basic_base.tscn" id="1_ac2b1"]
+[ext_resource type="Shader" path="res://components/rooms/room_outline.gdshader" id="2_3jsik"]
+[ext_resource type="Texture2D" uid="uid://d4ha56lgt4c1o" path="res://art/rooms/tilemap_sword.png" id="2_qt2is"]
+[ext_resource type="Texture2D" uid="uid://ca4oky2mjyse4" path="res://art/rooms/sword_thoughts.png" id="3_dgs8d"]
+[ext_resource type="Script" path="res://components/rooms/sword_thought.gd" id="4_3oocj"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uyu10"]
+resource_local_to_scene = true
+shader = ExtResource("2_3jsik")
+shader_parameter/maxLineWidth = 0.0
+shader_parameter/minLineWidth = 0.0
+shader_parameter/speed = 1.0
+shader_parameter/blockSize = 20.0
+shader_parameter/color = Color(0.828964, 0.405913, 1, 1)
+shader_parameter/tolerance = 0.0
+
+[node name="Basic Room" instance=ExtResource("1_ac2b1")]
+
+[node name="DungeonTile" parent="." index="3"]
+self_modulate = Color(0.966787, 0.000782799, 0.966781, 1)
+material = SubResource("ShaderMaterial_uyu10")
+
+[node name="Sword" type="Sprite2D" parent="." index="4" groups=["macguffin", "sword"]]
+texture = ExtResource("2_qt2is")
+
+[node name="SwordThought" type="Sprite2D" parent="." index="5"]
+position = Vector2(5.96046e-08, -18)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("3_dgs8d")
+script = ExtResource("4_3oocj")
+metadata/_edit_group_ = true
+
+[node name="Label" type="Label" parent="SwordThought" index="0"]
+offset_left = -1.0
+offset_top = -12.0
+offset_right = 13.0
+offset_bottom = 5.0
+theme_override_colors/font_color = Color(0.34902, 0.376471, 0.439216, 1)
+theme_override_font_sizes/font_size = 12
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1

@@ -107,4 +107,3 @@ func _on_state_exited(state:StateChartState):
 func _on_transition_pending(num1, remaining, state:StateChartState):
 	DebuggerMessage.transition_pending(_state_chart, state, state._pending_transition, remaining)
 		
-

@@ -44,7 +44,7 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_h5i5q"]
 radius = 8.0
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D"]
+[node name="Trap" type="AnimatedSprite2D"]
 sprite_frames = SubResource("SpriteFrames_y77fx")
 animation = &"activate"
 frame = 5

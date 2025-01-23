@@ -1,131 +1,38 @@
-[gd_scene load_steps=22 format=3 uid="uid://dqr12wo3gio00"]
+[gd_scene load_steps=14 format=3 uid="uid://dqr12wo3gio00"]
 
 [ext_resource type="Script" path="res://components/rooms/room.gd" id="1_fq4wr"]
-[ext_resource type="Texture2D" uid="uid://5uxiiodikmwa" path="res://art/rooms/room-variants.png" id="2_y2grr"]
-[ext_resource type="NavigationPolygon" uid="uid://cvsvvhe0csh1y" path="res://components/rooms/nav_regions/one-side.tres" id="3_lhonv"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_k12lv"]
-atlas = ExtResource("2_y2grr")
-region = Rect2(0, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_xtvil"]
-atlas = ExtResource("2_y2grr")
-region = Rect2(64, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_0gwra"]
-atlas = ExtResource("2_y2grr")
-region = Rect2(128, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_k5hqe"]
-atlas = ExtResource("2_y2grr")
-region = Rect2(192, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_s2chl"]
-atlas = ExtResource("2_y2grr")
-region = Rect2(0, 64, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_63fat"]
-atlas = ExtResource("2_y2grr")
-region = Rect2(64, 64, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_prghr"]
-atlas = ExtResource("2_y2grr")
-region = Rect2(128, 64, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_d7kw3"]
-atlas = ExtResource("2_y2grr")
-region = Rect2(192, 64, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_j6jg6"]
-atlas = ExtResource("2_y2grr")
-region = Rect2(0, 128, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_2n2f2"]
-atlas = ExtResource("2_y2grr")
-region = Rect2(64, 128, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_uvea4"]
-atlas = ExtResource("2_y2grr")
-region = Rect2(128, 128, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_4kfdo"]
-atlas = ExtResource("2_y2grr")
-region = Rect2(192, 128, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_176g7"]
-atlas = ExtResource("2_y2grr")
-region = Rect2(0, 192, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_p558r"]
-atlas = ExtResource("2_y2grr")
-region = Rect2(64, 192, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_p5jmu"]
-atlas = ExtResource("2_y2grr")
-region = Rect2(128, 192, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_66opk"]
-atlas = ExtResource("2_y2grr")
-region = Rect2(192, 192, 64, 64)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_6o3vk"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_k12lv")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_xtvil")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_0gwra")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_k5hqe")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_s2chl")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_63fat")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_prghr")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_d7kw3")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_j6jg6")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_2n2f2")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_uvea4")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_4kfdo")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_176g7")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_p558r")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_p5jmu")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_66opk")
-}],
-"loop": false,
-"name": &"default",
-"speed": 5.0
-}]
+[ext_resource type="NavigationPolygon" uid="uid://dl6paxiymrj47" path="res://components/rooms/nav_regions/no_exits.tres" id="2_clvmn"]
+[ext_resource type="Shader" path="res://components/rooms/room_outline.gdshader" id="3_psxd6"]
+[ext_resource type="Script" path="res://components/rooms/room_click_detection.gd" id="4_5ngwb"]
+[ext_resource type="Texture2D" uid="uid://cy2lv2myk6ixs" path="res://art/rooms/room_sprite0.png" id="5_h8uem"]
+[ext_resource type="Script" path="res://components/rooms/dungeon_tile.gd" id="6_fo062"]
+[ext_resource type="AudioStream" uid="uid://b60uafwlykrt7" path="res://audio/sfx/UNDER_THE_PILLOW/ActivateRoomSFX.wav" id="7_xia87"]
+[ext_resource type="AudioStream" uid="uid://bccrmglda8e3y" path="res://audio/sfx/PLUCKING_WATER_DROPS/sfxZ12.wav" id="8_ymlgn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_brb8i"]
 size = Vector2(64, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j8fb1"]
+size = Vector2(64, 64)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3kigi"]
+resource_local_to_scene = true
+shader = ExtResource("3_psxd6")
+shader_parameter/maxLineWidth = 0.0
+shader_parameter/minLineWidth = 0.0
+shader_parameter/speed = 1.0
+shader_parameter/blockSize = 20.0
+shader_parameter/color = Color(0.828964, 0.405913, 1, 1)
+shader_parameter/tolerance = 0.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_fgwvc"]
+random_pitch = 1.2
+streams_count = 1
+stream_0/stream = ExtResource("7_xia87")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_uwv4m"]
+streams_count = 1
+stream_0/stream = ExtResource("8_ymlgn")
 
 [node name="Basic Room" type="Area2D" groups=["room"]]
 collision_layer = 4
@@ -133,11 +40,38 @@ collision_mask = 0
 monitoring = false
 script = ExtResource("1_fq4wr")
 
-[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_6o3vk")
-
-[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
-navigation_polygon = ExtResource("3_lhonv")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_brb8i")
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+navigation_polygon = ExtResource("2_clvmn")
+
+[node name="RoomClickDetection" type="Area2D" parent="."]
+z_index = 1
+collision_layer = 16
+collision_mask = 0
+monitorable = false
+script = ExtResource("4_5ngwb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RoomClickDetection"]
+shape = SubResource("RectangleShape2D_j8fb1")
+debug_color = Color(0.654902, 0.517647, 0, 0.164706)
+
+[node name="DungeonTile" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_3kigi")
+texture = ExtResource("5_h8uem")
+region_rect = Rect2(0, 0, 256, 256)
+script = ExtResource("6_fo062")
+
+[node name="ActivateRoomSFX" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_fgwvc")
+pitch_scale = 0.5
+
+[node name="ClickErrorSFX" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_uwv4m")
+pitch_scale = 0.6
+
+[connection signal="input_event" from="RoomClickDetection" to="RoomClickDetection" method="_on_input_event"]
+[connection signal="mouse_entered" from="RoomClickDetection" to="." method="show_outline_on_mouse_enter"]
+[connection signal="mouse_exited" from="RoomClickDetection" to="." method="hide_outline_on_hover_mouse_exit"]
+[connection signal="room_tile_clicked" from="RoomClickDetection" to="." method="handle_room_click"]

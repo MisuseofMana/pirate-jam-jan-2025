@@ -4,7 +4,7 @@ class_name EntranceRoom extends Room
 
 func _ready() -> void:
 	add_to_group("entrance_room")
-	tilemap.changed.connect(update_room_sprite)
+	dungeon_controller.changed.connect(update_room_sprite)
 	update_room_sprite()
 	
 static func get_all(node_in_tree: Node) -> Array[EntranceRoom]:

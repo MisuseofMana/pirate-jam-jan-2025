@@ -1,20 +1,22 @@
-[gd_resource type="TileSet" load_steps=8 format=3 uid="uid://mrguig7k625p"]
+[gd_resource type="TileSet" load_steps=9 format=3 uid="uid://mrguig7k625p"]
 
-[ext_resource type="PackedScene" path="res://components/rooms/room_basic_trap_1.tscn" id="1_qmr5m"]
-[ext_resource type="PackedScene" uid="uid://dyxxlm6eg6wru" path="res://components/rooms/room_entrance.tscn" id="2_oex32"]
-[ext_resource type="PackedScene" uid="uid://ddgevfwlgcn8t" path="res://components/rooms/room_sword.tscn" id="3_llxhb"]
+[ext_resource type="PackedScene" uid="uid://cdhyk8epjuhb1" path="res://components/rooms/room_basic_trap_1.tscn" id="1_qmr5m"]
 [ext_resource type="PackedScene" uid="uid://ca1edcsqoch32" path="res://components/rooms/room_basic_1.tscn" id="4_yi200"]
 [ext_resource type="PackedScene" uid="uid://bus7x3mlryq4a" path="res://components/rooms/room_basic_2.tscn" id="5_usjtd"]
-[ext_resource type="PackedScene" path="res://components/rooms/room_basic_trap_2.tscn" id="6_ypk2g"]
+[ext_resource type="PackedScene" uid="uid://6jtjr8wj4snc" path="res://components/rooms/room_sword_new.tscn" id="6_21h7d"]
+[ext_resource type="PackedScene" uid="uid://b5d5j5jutd54a" path="res://components/rooms/room_entrance_new.tscn" id="6_mjgmi"]
+[ext_resource type="PackedScene" uid="uid://cwparulgglwjy" path="res://components/rooms/room_basic_trap_2.tscn" id="6_ypk2g"]
+[ext_resource type="PackedScene" uid="uid://6smdcxogrgbi" path="res://components/rooms/room_empty.tscn" id="7_1m1ni"]
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_5pp3v"]
 resource_name = "Rooms"
 scenes/1/scene = ExtResource("1_qmr5m")
-scenes/2/scene = ExtResource("2_oex32")
-scenes/3/scene = ExtResource("3_llxhb")
 scenes/4/scene = ExtResource("4_yi200")
 scenes/5/scene = ExtResource("5_usjtd")
+scenes/6/scene = ExtResource("6_mjgmi")
 scenes/7/scene = ExtResource("6_ypk2g")
+scenes/8/scene = ExtResource("6_21h7d")
+scenes/9/scene = ExtResource("7_1m1ni")
 
 [resource]
 tile_size = Vector2i(64, 64)

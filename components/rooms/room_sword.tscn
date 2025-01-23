@@ -1,139 +1,14 @@
-[gd_scene load_steps=25 format=3 uid="uid://ddgevfwlgcn8t"]
+[gd_scene load_steps=8 format=3 uid="uid://ddgevfwlgcn8t"]
 
 [ext_resource type="Script" path="res://components/rooms/room.gd" id="1_hxway"]
-[ext_resource type="Texture2D" uid="uid://5uxiiodikmwa" path="res://art/rooms/room-variants.png" id="2_7ihmt"]
-[ext_resource type="Texture2D" uid="uid://cvibg31lbdy7h" path="res://art/rooms/sword.png" id="2_b7khe"]
+[ext_resource type="Texture2D" uid="uid://cy2lv2myk6ixs" path="res://art/rooms/room_sprite0.png" id="2_4h37u"]
 [ext_resource type="Texture2D" uid="uid://ca4oky2mjyse4" path="res://art/rooms/sword_thoughts.png" id="3_2k578"]
+[ext_resource type="Texture2D" uid="uid://d4ha56lgt4c1o" path="res://art/rooms/tilemap_sword.png" id="3_388fr"]
 [ext_resource type="Script" path="res://components/rooms/sword_thought.gd" id="5_1f0li"]
-
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_1penr"]
-vertices = PackedVector2Array(6, -25, 25, -25, 25, -5, 32, -5, 32, 6, 25, 6, 25, 25, 6, 25, 6, 32, -6, 32, -6, 25, -25, 25, -25, 6, -32, 6, -32, -6, -25, -6, -25, -25, -6, -25, -6, -32, 6, -32)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2), PackedInt32Array(2, 3, 4, 5), PackedInt32Array(5, 6, 7), PackedInt32Array(7, 8, 9, 10), PackedInt32Array(10, 11, 12, 2), PackedInt32Array(12, 13, 14, 15, 2), PackedInt32Array(15, 16, 17, 2), PackedInt32Array(17, 18, 19, 0), PackedInt32Array(17, 0, 2), PackedInt32Array(7, 10, 2, 5)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-25, -25, -6, -25, -6, -32, 6, -32, 6, -25, 25, -25, 25, -5, 32, -5, 32, 6, 25, 6, 25, 25, 6, 25, 6, 32, -6, 32, -6, 25, -25, 25, -25, 6, -32, 6, -32, -6, -25, -6)])
-agent_radius = 0.0
+[ext_resource type="NavigationPolygon" uid="uid://dl6paxiymrj47" path="res://components/rooms/nav_regions/no_exits.tres" id="6_3ek3k"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ev8xa"]
 size = Vector2(64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_283nl"]
-atlas = ExtResource("2_7ihmt")
-region = Rect2(0, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_8av6d"]
-atlas = ExtResource("2_7ihmt")
-region = Rect2(64, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_hd81m"]
-atlas = ExtResource("2_7ihmt")
-region = Rect2(128, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_v46yh"]
-atlas = ExtResource("2_7ihmt")
-region = Rect2(192, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_qpf1s"]
-atlas = ExtResource("2_7ihmt")
-region = Rect2(256, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_0vgyw"]
-atlas = ExtResource("2_7ihmt")
-region = Rect2(320, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_g5bse"]
-atlas = ExtResource("2_7ihmt")
-region = Rect2(384, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_dqkkc"]
-atlas = ExtResource("2_7ihmt")
-region = Rect2(448, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_16ffm"]
-atlas = ExtResource("2_7ihmt")
-region = Rect2(512, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_phae6"]
-atlas = ExtResource("2_7ihmt")
-region = Rect2(576, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_qoqx7"]
-atlas = ExtResource("2_7ihmt")
-region = Rect2(640, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_yc2ua"]
-atlas = ExtResource("2_7ihmt")
-region = Rect2(704, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_wj8rm"]
-atlas = ExtResource("2_7ihmt")
-region = Rect2(768, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ven41"]
-atlas = ExtResource("2_7ihmt")
-region = Rect2(832, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_vr84a"]
-atlas = ExtResource("2_7ihmt")
-region = Rect2(896, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_86rji"]
-atlas = ExtResource("2_7ihmt")
-region = Rect2(960, 0, 64, 64)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_mmeoy"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_283nl")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_8av6d")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_hd81m")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_v46yh")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_qpf1s")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_0vgyw")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_g5bse")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_dqkkc")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_16ffm")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_phae6")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_qoqx7")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_yc2ua")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_wj8rm")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ven41")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_vr84a")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_86rji")
-}],
-"loop": false,
-"name": &"default",
-"speed": 5.0
-}]
 
 [node name="Sword Room" type="Area2D"]
 collision_layer = 4
@@ -141,22 +16,18 @@ collision_mask = 0
 monitoring = false
 script = ExtResource("1_hxway")
 
-[node name="NavigationRegion2D" type="NavigationRegion2D" parent="." groups=["room"]]
-navigation_polygon = SubResource("NavigationPolygon_1penr")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_ev8xa")
 
-[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
-self_modulate = Color(0.551437, 0.69767, 1, 1)
-sprite_frames = SubResource("SpriteFrames_mmeoy")
+[node name="DungeonTile" type="Sprite2D" parent="."]
+self_modulate = Color(1, 0.524426, 0.94469, 1)
+texture = ExtResource("2_4h37u")
 
 [node name="Sword" type="Sprite2D" parent="." groups=["macguffin", "sword"]]
-position = Vector2(-1, -2)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("2_b7khe")
+texture = ExtResource("3_388fr")
 
 [node name="SwordThought" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(0, -21)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("3_2k578")
@@ -172,3 +43,6 @@ theme_override_font_sizes/font_size = 12
 text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="." groups=["room"]]
+navigation_polygon = ExtResource("6_3ek3k")

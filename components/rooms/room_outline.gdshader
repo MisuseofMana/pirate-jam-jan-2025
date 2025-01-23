@@ -1,11 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://ca1edcsqoch32"]
-
-[ext_resource type="PackedScene" uid="uid://dqr12wo3gio00" path="res://components/rooms/room_basic_base.tscn" id="1_g4f4w"]
-[ext_resource type="PackedScene" uid="uid://djdb3leiduao5" path="res://components/furniture/furniture.tscn" id="2_tf42l"]
-
-[sub_resource type="Shader" id="Shader_xp315"]
-resource_local_to_scene = true
-code = "shader_type canvas_item;
+shader_type canvas_item;
 
 // Max distance from texture.
 uniform float maxLineWidth: hint_range(0.0, 100.0) = 10.0;
@@ -119,31 +112,3 @@ void fragment() {
 		COLOR = newColor;
 	}
 }
-"
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_qjjkt"]
-resource_local_to_scene = true
-shader = SubResource("Shader_xp315")
-shader_parameter/maxLineWidth = 0.0
-shader_parameter/minLineWidth = 0.0
-shader_parameter/speed = 1.0
-shader_parameter/blockSize = 20.0
-shader_parameter/color = Color(0.828964, 0.405913, 1, 1)
-shader_parameter/tolerance = 0.0
-
-[node name="Basic Room" instance=ExtResource("1_g4f4w")]
-
-[node name="DungeonTile" parent="." index="3"]
-material = SubResource("ShaderMaterial_qjjkt")
-
-[node name="Furniture" parent="." index="4" instance=ExtResource("2_tf42l")]
-position = Vector2(-4, -4)
-
-[node name="Furniture2" parent="." index="5" instance=ExtResource("2_tf42l")]
-position = Vector2(8, 8)
-
-[node name="Furniture3" parent="." index="6" instance=ExtResource("2_tf42l")]
-position = Vector2(18, -17)
-
-[node name="Furniture4" parent="." index="7" instance=ExtResource("2_tf42l")]
-position = Vector2(17, -7)
