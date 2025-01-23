@@ -21,4 +21,6 @@ scenes/9/scene = ExtResource("7_1m1ni")
 [resource]
 tile_size = Vector2i(64, 64)
 navigation_layer_0/layers = 1
+custom_data_layer_0/name = "isEmpty"
+custom_data_layer_0/type = 1
 sources/0 = SubResource("TileSetScenesCollectionSource_5pp3v")

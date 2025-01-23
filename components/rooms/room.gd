@@ -99,7 +99,7 @@ var atlas_register : Dictionary = {
 func _ready():
 	dungeon_controller.changed.connect(update_room_sprite)
 	update_room_sprite()
-	
+
 func update_room_sprite():
 	var coords = get_coords()
 		
@@ -114,7 +114,20 @@ func update_room_sprite():
 	
 #		checks top, right, bottom, left
 	for neighbor in possible_connections:
-		atlas_decode += ('1' if dungeon_controller.get_cell_source_id(neighbor) >= 0 else '0')
+		var cell_id : int = dungeon_controller.get_cell_source_id(neighbor)
+		
+		var alt_id = -1
+		
+		var source_id = dungeon_controller.get_cell_source_id(neighbor)
+		if source_id > -1:
+			var scene_source = dungeon_controller.tile_set.get_source(source_id)
+			if scene_source is TileSetScenesCollectionSource:
+				alt_id = dungeon_controller.get_cell_alternative_tile(neighbor)
+		
+		if alt_id == 9 or alt_id == -1:
+			atlas_decode += '0'
+		else:
+			atlas_decode += '1'
 	
 	dungeon_tile.texture = atlas_register[atlas_decode]['dungeon_tile']
 	nav_region.navigation_polygon = atlas_register[atlas_decode]['nav_mesh']

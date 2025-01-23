@@ -16,7 +16,7 @@ size = Vector2(64, 64)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fh8ae"]
 resource_local_to_scene = true
 shader = ExtResource("3_vm48k")
-shader_parameter/maxLineWidth = 1.0
+shader_parameter/maxLineWidth = 0.0
 shader_parameter/minLineWidth = 0.0
 shader_parameter/speed = 3.0
 shader_parameter/blockSize = 20.0
