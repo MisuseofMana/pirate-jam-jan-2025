@@ -1,8 +1,20 @@
 extends Node
 
+signal souls_changed(value)
+
+# Wave frequency is managed in the state chart for now.
+
+@export var waves: Array[Wave] = []
+
+@export_group("References")
 @export var wave_state: StateChart
 
-signal souls_changed(value)
+var current_wave_index: int = 0
+var current_wave: Wave:
+	get(): return waves[current_wave_index]
+var current_spawn_index: int = 0
+var current_spawn: PackedScene:
+	get(): return current_wave.spawns[current_spawn_index]
 
 # dungeon qualities
 var souls: int = 10:
@@ -15,20 +27,11 @@ var souls: int = 10:
 			oldValue = oldValue - 1 if isReducing else oldValue + 1
 			souls_changed.emit(oldValue)
 
-var consumed_priests: int = 0
-var escaped_looters: int = 0
-
-var mystique: int = 0
-var defilement: int = 0
-
-var meeple_spawned_this_wave: int = 0
-var max_meeple_per_wave: int = 2
-
 func spawn_meeple():
 	for entrance in EntranceRoom.get_all(self):
-		entrance.spawn_meeple()
-		meeple_spawned_this_wave += 1
-	if meeple_spawned_this_wave >= max_meeple_per_wave:
+		entrance.spawn_meeple(current_spawn)
+		current_spawn_index += 1
+	if current_spawn_index >= current_wave.spawns.size():
 		wave_state.send_event("release_wave")
 	else:
 		wave_state.send_event("keep_spawning")
@@ -36,4 +39,5 @@ func spawn_meeple():
 func release_wave():
 	for entrance in EntranceRoom.get_all(self):
 		entrance.start_wave.call_deferred()
-	meeple_spawned_this_wave = 0
+	current_spawn_index = 0
+	current_wave_index += 1
