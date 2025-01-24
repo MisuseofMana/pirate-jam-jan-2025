@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://da2hpgboqe1pn"]
+[gd_scene load_steps=5 format=3 uid="uid://da2hpgboqe1pn"]
 
 [ext_resource type="Script" path="res://ui/meep_peeper.gd" id="1_5kohg"]
 [ext_resource type="Texture2D" uid="uid://b4bj6apqag6em" path="res://art/meeple/heart.png" id="1_g1a6q"]
+[ext_resource type="Texture2D" uid="uid://bhky2o83651kr" path="res://art/meeple/meeple_soul_still.png" id="3_7tmjx"]
+[ext_resource type="Texture2D" uid="uid://b6wskyhqk1dix" path="res://art/treasure/cup.png" id="4_gmsvw"]
 
 [node name="Meep Peeper" type="Node2D" node_paths=PackedStringArray("health_value_label", "soul_value_label", "treasure_value_label")]
 z_index = 4096
@@ -40,7 +42,7 @@ text = "1"
 [node name="Soul Icon" type="TextureRect" parent="Stats/HBoxContainer"]
 custom_minimum_size = Vector2(16, 0)
 layout_mode = 2
-texture = ExtResource("1_g1a6q")
+texture = ExtResource("3_7tmjx")
 stretch_mode = 5
 
 [node name="Soul Value" type="Label" parent="Stats/HBoxContainer"]
@@ -50,7 +52,7 @@ text = "1"
 [node name="Treasure Icon" type="TextureRect" parent="Stats/HBoxContainer"]
 custom_minimum_size = Vector2(16, 0)
 layout_mode = 2
-texture = ExtResource("1_g1a6q")
+texture = ExtResource("4_gmsvw")
 stretch_mode = 5
 
 [node name="Treasure Value" type="Label" parent="Stats/HBoxContainer"]
