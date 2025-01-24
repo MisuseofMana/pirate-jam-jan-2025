@@ -1,10 +1,13 @@
 class_name Room extends Area2D
 
-@onready var dungeon_controller: DungeonController = get_parent()
+@onready var dungeon_controller: DungeonRoomController = get_parent()
 @onready var dungeon_tile : DungeonTile = $DungeonTile
 @onready var nav_region = $NavigationRegion2D
 @onready var activate_room_sfx = $ActivateRoomSFX
 @onready var click_error_sfx = $ClickErrorSFX
+@onready var anims = $AnimationPlayer
+
+signal requested_neighbor_updates(neighbor_tiles : Array[Vector2i])
 
 const FOUR_EXITS = preload("res://components/rooms/nav_regions/four_exits.tres")
 const NO_EXITS = preload("res://components/rooms/nav_regions/no_exits.tres")
@@ -15,81 +18,97 @@ const TWO_OPPOSITE_EXITS = preload("res://components/rooms/nav_regions/two_oppos
 
 var atlas_register : Dictionary = {
 	"0000": {
+		"name": 'No Exits',
 		"dungeon_tile": preload("res://art/rooms/room_sprite0.png"),
 		"nav_mesh": NO_EXITS,
 		"nav_rotation": 0,
 	},
-	"1000": {
+	"0001": {
+		"name": 'Top Exit',
 		"dungeon_tile": preload("res://art/rooms/room_sprite1.png"),
 		"nav_mesh": ONE_EXIT,
 		"nav_rotation": 0,
 	},
-	"0100": {
+	"1000": {
+		"name": 'Right Exit',
 		"dungeon_tile": preload("res://art/rooms/room_sprite2.png"),
 		"nav_mesh": ONE_EXIT,
 		"nav_rotation": PI/2,
 	},
-	"0010": {
+	"0100": {
+		"name": 'Bottom Exit',
 		"dungeon_tile": preload("res://art/rooms/room_sprite3.png"),
 		"nav_mesh": ONE_EXIT,
 		"nav_rotation": PI,
 	},
-	"0001": {
+	"0010": {
+		"name": 'Left Exit',
 		"dungeon_tile": preload("res://art/rooms/room_sprite4.png"),
 		"nav_mesh": ONE_EXIT,
 		"nav_rotation": -PI/2,
 	},
-	"1010": {
+	"0101": {
+		"name": '2 Vertical Exits',
 		"dungeon_tile": preload("res://art/rooms/room_sprite5.png"),
 		"nav_mesh": TWO_OPPOSITE_EXITS,
 		"nav_rotation": 0,
 	},
-	"0101": {
+	"1010": {
+		"name": '2 Horizontal Exits',
 		"dungeon_tile": preload("res://art/rooms/room_sprite6.png"),
 		"nav_mesh": TWO_OPPOSITE_EXITS,
 		"nav_rotation": PI/2,
 	},
-	"1100": {
+	"1001": {
+		"name": 'NE Elbow Exits',
 		"dungeon_tile": preload("res://art/rooms/room_sprite7.png"),
 		"nav_mesh": TWO_NEIGHBOR_EXITS,
 		"nav_rotation": 0,
 	},
-	"0110": {
+	"1100": {
+		"name": 'ES Elbow Exits',
 		"dungeon_tile": preload("res://art/rooms/room_sprite8.png"),
 		"nav_mesh": TWO_NEIGHBOR_EXITS,
 		"nav_rotation": PI/2,
 	},
-	"0011": {
+	"0110": {
+		"name": 'SW Elbow Exits',
 		"dungeon_tile": preload("res://art/rooms/room_sprite9.png"),
 		"nav_mesh": TWO_NEIGHBOR_EXITS,
 		"nav_rotation": PI,
 	},
-	"1001": {
+	"0011": {
+		"name": 'WN Elbow Exits',
 		"dungeon_tile": preload("res://art/rooms/room_sprite10.png"),
 		"nav_mesh": TWO_NEIGHBOR_EXITS,
 		"nav_rotation": -PI/2,
 	},
-	"1101": {
+	"1011": {
+		"name": 'WNE T Exits',
 		"dungeon_tile": preload("res://art/rooms/room_sprite11.png"),
 		"nav_mesh": THREE_EXITS,
 		"nav_rotation": 0,
 	},
-	"1110": {
+	"1101": {
+		"name": 'NES T Exits',
 		"dungeon_tile": preload("res://art/rooms/room_sprite12.png"),
 		"nav_mesh": THREE_EXITS,
 		"nav_rotation": PI/2,
 	},
-	"0111": {
+	"1110": {
+		"name": 'WES T Exits',
 		"dungeon_tile": preload("res://art/rooms/room_sprite13.png"),
 		"nav_mesh": THREE_EXITS,
 		"nav_rotation": PI,
 	},
-	"1011": {
+	"0111": {
+		"name": 'SWN T Exits',
 		"dungeon_tile": preload("res://art/rooms/room_sprite14.png"),
 		"nav_mesh": THREE_EXITS,
 		"nav_rotation": -PI/2,
 	},
 	"1111": {
+		"name": 'All Exits',
 		"dungeon_tile": preload("res://art/rooms/room_sprite15.png"),
 		"nav_mesh": FOUR_EXITS,
 		"nav_rotation": 0,
@@ -97,18 +116,15 @@ var atlas_register : Dictionary = {
 }
 
 func _ready():
-	dungeon_controller.changed.connect(update_room_sprite)
-	update_room_sprite()
+	dungeon_tile.turn_off_shader()
+	anims.animation_finished.connect(dungeon_controller.handle_animations)
+	#requested_neighbor_updates.connect(dungeon_controller.order_connection_updates)
+	update_own_tile_connections()
 
-func update_room_sprite():
+func update_own_tile_connections():
 	var coords = get_coords()
 		
-	var possible_connections : Array[Vector2i] = [
-		dungeon_controller.get_neighbor_cell(coords, TileSet.CELL_NEIGHBOR_TOP_SIDE),
-		dungeon_controller.get_neighbor_cell(coords, TileSet.CELL_NEIGHBOR_RIGHT_SIDE),
-		dungeon_controller.get_neighbor_cell(coords, TileSet.CELL_NEIGHBOR_BOTTOM_SIDE),
-		dungeon_controller.get_neighbor_cell(coords, TileSet.CELL_NEIGHBOR_LEFT_SIDE)
-	]
+	var possible_connections : Array[Vector2i] = dungeon_controller.get_surrounding_cells(coords)
 	
 	var atlas_decode : String = ""
 	
@@ -122,7 +138,7 @@ func update_room_sprite():
 			if scene_source is TileSetScenesCollectionSource:
 				alt_id = dungeon_controller.get_cell_alternative_tile(neighbor)
 		
-		if alt_id == 9 or alt_id == -1:
+		if alt_id == 2 or alt_id == -1:
 			atlas_decode += '0'
 		else:
 			atlas_decode += '1'
@@ -131,7 +147,15 @@ func update_room_sprite():
 	nav_region.navigation_polygon = atlas_register[atlas_decode]['nav_mesh']
 	nav_region.rotate(atlas_register[atlas_decode]['nav_rotation'])
 
+func update_self_and_neighbor_connections():
+	var coords = get_coords()
+	update_own_tile_connections()
+	var all_neighbors : Array[Vector2i] = dungeon_controller.get_surrounding_cells(coords)
+	requested_neighbor_updates.emit(all_neighbors)
+
 func room_is_clickable() -> bool:
+	if dungeon_controller.room_movement_locked:
+		return false
 	if anyRoomIsActive() and not iAmSelectedRoom():
 		return false
 		

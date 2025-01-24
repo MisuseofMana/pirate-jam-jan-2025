@@ -1,7 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://bus7x3mlryq4a"]
+[gd_scene load_steps=5 format=3 uid="uid://bus7x3mlryq4a"]
 
 [ext_resource type="PackedScene" uid="uid://dqr12wo3gio00" path="res://components/rooms/room_basic_base.tscn" id="1_q8xs8"]
-[ext_resource type="PackedScene" uid="uid://csw3vkdw4erk5" path="res://components/treasure/treasure_base.tscn" id="2_wnn1o"]
 [ext_resource type="PackedScene" uid="uid://djdb3leiduao5" path="res://components/furniture/furniture.tscn" id="3_ulrs5"]
 
 [sub_resource type="Shader" id="Shader_ikhy6"]
@@ -137,21 +136,17 @@ shader_parameter/tolerance = 0.0
 [node name="DungeonTile" parent="." index="3"]
 material = SubResource("ShaderMaterial_bqady")
 
-[node name="Treasure" parent="." index="4" groups=["macguffin"] instance=ExtResource("2_wnn1o")]
-position = Vector2(17, 18)
-script = null
-
-[node name="Furniture" parent="." index="5" instance=ExtResource("3_ulrs5")]
+[node name="Furniture" parent="DungeonTile" index="0" instance=ExtResource("3_ulrs5")]
 position = Vector2(-18, -18)
 
-[node name="Furniture2" parent="." index="6" instance=ExtResource("3_ulrs5")]
+[node name="Furniture2" parent="DungeonTile" index="1" instance=ExtResource("3_ulrs5")]
 position = Vector2(-10, -18)
 
-[node name="Furniture3" parent="." index="7" instance=ExtResource("3_ulrs5")]
+[node name="Furniture3" parent="DungeonTile" index="2" instance=ExtResource("3_ulrs5")]
 position = Vector2(-18, -9)
 
-[node name="Furniture4" parent="." index="8" instance=ExtResource("3_ulrs5")]
+[node name="Furniture4" parent="DungeonTile" index="3" instance=ExtResource("3_ulrs5")]
 position = Vector2(18, 9)
 
-[node name="Furniture5" parent="." index="9" instance=ExtResource("3_ulrs5")]
+[node name="Furniture5" parent="DungeonTile" index="4" instance=ExtResource("3_ulrs5")]
 position = Vector2(-17, 19)

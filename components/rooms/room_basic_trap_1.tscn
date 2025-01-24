@@ -138,17 +138,17 @@ shader_parameter/tolerance = 0.0
 [node name="DungeonTile" parent="." index="3"]
 material = SubResource("ShaderMaterial_p3hoj")
 
-[node name="Trap" parent="." index="4" instance=ExtResource("2_qsu68")]
+[node name="Trap" parent="DungeonTile" index="0" instance=ExtResource("2_qsu68")]
 trap_cooldown = 5.0
 
-[node name="Treasure" parent="." index="5" instance=ExtResource("3_okumj")]
+[node name="Treasure" parent="DungeonTile" index="1" instance=ExtResource("3_okumj")]
 position = Vector2(11, 13)
 
-[node name="Treasure2" parent="." index="6" instance=ExtResource("3_okumj")]
+[node name="Treasure2" parent="DungeonTile" index="2" instance=ExtResource("3_okumj")]
 position = Vector2(-7, -15)
 
-[node name="Furniture" parent="." index="7" instance=ExtResource("4_qtg2l")]
+[node name="Furniture" parent="DungeonTile" index="3" instance=ExtResource("4_qtg2l")]
 position = Vector2(-11, 16)
 
-[node name="Furniture2" parent="." index="8" instance=ExtResource("4_qtg2l")]
+[node name="Furniture2" parent="DungeonTile" index="4" instance=ExtResource("4_qtg2l")]
 position = Vector2(18, -18)

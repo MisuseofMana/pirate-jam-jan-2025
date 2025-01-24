@@ -31,3 +31,8 @@ stretch_mode = 5
 [node name="Soul Value" type="Label" parent="HBoxContainer"]
 layout_mode = 2
 text = "1"
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 1.2
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

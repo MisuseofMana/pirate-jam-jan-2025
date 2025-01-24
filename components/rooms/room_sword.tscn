@@ -19,13 +19,12 @@ script = ExtResource("1_hxway")
 shape = SubResource("RectangleShape2D_ev8xa")
 
 [node name="DungeonTile" type="Sprite2D" parent="."]
-self_modulate = Color(1, 0.524426, 0.94469, 1)
 texture = ExtResource("2_4h37u")
 
-[node name="Sword" type="Sprite2D" parent="." groups=["macguffin", "sword"]]
+[node name="Sword" type="Sprite2D" parent="DungeonTile" groups=["macguffin", "sword"]]
 texture = ExtResource("3_388fr")
+
+[node name="Sword Peeper" parent="DungeonTile" instance=ExtResource("7_ilsft")]
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="." groups=["room"]]
 navigation_polygon = ExtResource("6_3ek3k")
-
-[node name="Sword Peeper" parent="." instance=ExtResource("7_ilsft")]

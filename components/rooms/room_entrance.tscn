@@ -20,7 +20,6 @@ spawnable_meeple = Array[PackedScene]([ExtResource("2_ghigw")])
 shape = SubResource("RectangleShape2D_r7kuv")
 
 [node name="DungeonTile" type="Sprite2D" parent="."]
-self_modulate = Color(0, 0.833287, 0.384975, 1)
 texture = ExtResource("3_rsle2")
 
 [node name="EntranceSprite" type="Sprite2D" parent="."]

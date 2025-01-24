@@ -18,10 +18,10 @@ shader_parameter/tolerance = 0.0
 [node name="Basic Room" instance=ExtResource("1_ac2b1")]
 
 [node name="DungeonTile" parent="." index="3"]
-self_modulate = Color(0.966787, 0.000782799, 0.966781, 1)
 material = SubResource("ShaderMaterial_uyu10")
 
-[node name="Sword" type="Sprite2D" parent="." index="4" groups=["macguffin", "sword"]]
+[node name="Sword" type="Sprite2D" parent="DungeonTile" index="0" groups=["macguffin", "sword"]]
 texture = ExtResource("2_qt2is")
 
-[node name="Sword Peeper" parent="." index="5" instance=ExtResource("4_7ss5y")]
+[node name="Sword Peeper" parent="DungeonTile" index="1" instance=ExtResource("4_7ss5y")]
+visible = false

@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://cr7ya361a2ep1"]
+[gd_scene load_steps=6 format=3 uid="uid://cwparulgglwjy"]
 
 [ext_resource type="PackedScene" uid="uid://dqr12wo3gio00" path="res://components/rooms/room_basic_base.tscn" id="1_52npl"]
 [ext_resource type="PackedScene" uid="uid://due6tipw8kq1h" path="res://components/trap/trap.tscn" id="2_x5d8t"]
@@ -137,16 +137,16 @@ shader_parameter/tolerance = 0.0
 [node name="DungeonTile" parent="." index="3"]
 material = SubResource("ShaderMaterial_ma1xb")
 
-[node name="Trap" parent="." index="4" instance=ExtResource("2_x5d8t")]
+[node name="Trap" parent="DungeonTile" index="0" instance=ExtResource("2_x5d8t")]
 position = Vector2(-12, -11)
 trap_cooldown = 5.0
 
-[node name="Trap2" parent="." index="5" instance=ExtResource("2_x5d8t")]
+[node name="Trap2" parent="DungeonTile" index="1" instance=ExtResource("2_x5d8t")]
 position = Vector2(12, 12)
 trap_cooldown = 5.0
 
-[node name="Treasure" parent="." index="6" groups=["macguffin"] instance=ExtResource("3_5nvqc")]
+[node name="Treasure" parent="DungeonTile" index="2" instance=ExtResource("3_5nvqc")]
 position = Vector2(-13, 15)
 
-[node name="Treasure2" parent="." index="7" groups=["macguffin"] instance=ExtResource("3_5nvqc")]
+[node name="Treasure2" parent="DungeonTile" index="3" instance=ExtResource("3_5nvqc")]
 position = Vector2(7, -9)

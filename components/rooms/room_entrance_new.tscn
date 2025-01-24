@@ -20,9 +20,8 @@ script = ExtResource("2_eyipw")
 spawnable_meeple = Array[PackedScene]([])
 
 [node name="DungeonTile" parent="." index="3"]
-self_modulate = Color(0.814186, 1, 0.333436, 1)
 material = SubResource("ShaderMaterial_nwwr8")
 
-[node name="EntranceSprite" type="Sprite2D" parent="." index="4"]
+[node name="EntranceSprite" type="Sprite2D" parent="DungeonTile" index="0"]
 self_modulate = Color(0.815686, 1, 0.333333, 1)
 texture = ExtResource("3_kirk4")

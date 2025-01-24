@@ -7,13 +7,12 @@ static func get_all(node_in_tree: Node) -> Array[EntranceRoom]:
 	for node in node_in_tree.get_tree().get_nodes_in_group("entrance"):
 		if node is EntranceRoom:
 			entrances.append(node)
-	print(entrances)
 	return entrances
 
 func _ready() -> void:
 	add_to_group("entrance")
-	dungeon_controller.changed.connect(update_room_sprite)
-	update_room_sprite()
+	anims.animation_finished.connect(dungeon_controller.handle_animations)
+	update_own_tile_connections()
 	
 func spawn_meeple(scene: PackedScene) -> void:
 	var meeple := scene.instantiate() as Meeple
