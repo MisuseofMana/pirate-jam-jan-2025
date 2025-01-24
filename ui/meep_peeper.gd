@@ -4,6 +4,7 @@ extends Node2D
 @export var health_value_label: Label
 @export var soul_value_label: Label
 @export var treasure_value_label: Label
+@export var name_label: Label
 
 var _hovered_meeple: Array[Meeple] = []
 
@@ -52,6 +53,7 @@ func _update_labels() -> void:
 		health_value_label.text = str(_meep.health)
 		soul_value_label.text = str(_meep.soul_value)
 		treasure_value_label.text = str(_meep.treasure_collected) + "/" + str(_meep.max_treasure)
+		name_label.text = _meep.meeple_name
 
 func _process(delta: float) -> void:
 	if _meep:

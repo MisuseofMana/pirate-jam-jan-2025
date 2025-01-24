@@ -234,6 +234,7 @@ color = Color(0.588235, 0, 0, 1)
 [node name="Meeple" type="Node2D" node_paths=PackedStringArray("nav_agent", "brain", "hover_hitbox") groups=["meeple"]]
 z_index = 1
 script = ExtResource("1_d3iq0")
+meeple_names = Array[String](["Mr. Morbles", "Glam Jim", "Peemps", "Gleeorp", "Dr. Bloop", "Extra Steve"])
 health = 1
 macguffin_strategy = SubResource("Resource_3ma6w")
 explore_room_strategy = SubResource("Resource_tnmlj")

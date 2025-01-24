@@ -9,6 +9,8 @@ const THOUGHT_HEART_HALF = preload("res://art/meeple/thought-heart-half.png")
 const THOUGHT_HEART_THREEQUARTER = preload("res://art/meeple/thought-heart-threequarter.png")
 const THOUGHT_HEART_FULL = preload("res://art/meeple/thought-heart-full.png")
 
+@export var meeple_names: Array[String] = []
+
 @export_group("Visuals")
 @export var meeple_skin: SpriteFrames = preload("res://components/meeple/meeple_looter_skin.tres")
 
@@ -46,6 +48,9 @@ const THOUGHT_HEART_FULL = preload("res://art/meeple/thought-heart-full.png")
 @onready var anims = $AnimationPlayer
 @onready var hurtbox = $TrapHitbox/CollisionShape2D
 @onready var meeple_sprite = $Meeple
+
+@onready var meeple_name: String = meeple_names.pick_random()
+
 @onready var current_room: Room = get_parent()
 @onready var overlapping_rooms: Array[Room] = [current_room]
 @onready var visited_rooms: Array[Node2D] = [current_room]
