@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Pirate-Jam-Jan-2025"
-run/main_scene="res://scenes/start_screen.tscn"
+run/main_scene="res://scenes/game.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 
 [autoload]
@@ -22,10 +22,10 @@ MeepPeeper="*res://ui/meep_peeper.tscn"
 
 [display]
 
-window/size/viewport_width=480
-window/size/viewport_height=480
-window/size/window_width_override=1440
-window/size/window_height_override=1440
+window/size/viewport_width=384
+window/size/viewport_height=384
+window/size/window_width_override=1152
+window/size/window_height_override=1152
 window/stretch/mode="viewport"
 window/stretch/scale_mode="integer"
 
