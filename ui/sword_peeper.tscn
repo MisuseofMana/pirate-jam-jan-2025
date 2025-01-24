@@ -1,0 +1,33 @@
+[gd_scene load_steps=3 format=3 uid="uid://cq13b5eh0vkp7"]
+
+[ext_resource type="Script" path="res://ui/sword_peeper.gd" id="1_qcyha"]
+[ext_resource type="Texture2D" uid="uid://bhky2o83651kr" path="res://art/meeple/meeple_soul_still.png" id="2_1boos"]
+
+[node name="Sword Peeper" type="Panel" node_paths=PackedStringArray("soul_value_label")]
+z_index = 1
+offset_left = -24.0
+offset_top = -41.0
+offset_right = 23.0
+offset_bottom = -19.0
+script = ExtResource("1_qcyha")
+soul_value_label = NodePath("HBoxContainer/Soul Value")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 6
+alignment = 1
+
+[node name="Soul Icon" type="TextureRect" parent="HBoxContainer"]
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+texture = ExtResource("2_1boos")
+stretch_mode = 5
+
+[node name="Soul Value" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+text = "1"

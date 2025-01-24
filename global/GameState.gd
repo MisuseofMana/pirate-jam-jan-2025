@@ -1,6 +1,6 @@
 extends Node
 
-signal souls_changed(value)
+signal souls_changed(value: int)
 
 # Wave frequency is managed in the state chart for now.
 
