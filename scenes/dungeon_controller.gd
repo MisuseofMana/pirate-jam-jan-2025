@@ -41,7 +41,10 @@ func relocate_room(from : Vector2i, to: Vector2i):
 			#get_tree().create_tween().tween_property(room, "scale", 0, 0.8)
 			#await get_tree().create_timer(0.8).timeout
 			room.queue_free()
-	
+			set_cell(from, 0, Vector2i(0, 0), 9)
+			connect_empty_room_signals()
+			erase_cell(to)
+			
 	var new_room_instance : Room = scene.instantiate()
 			
 	# Convert the tilemap position to world position
@@ -51,6 +54,6 @@ func relocate_room(from : Vector2i, to: Vector2i):
 	
 	# Add the scene instance to the scene tree (or to a specific parent if needed)
 	add_child(new_room_instance)
-
+	
 	#get_tree().create_tween().tween_property(new_room_instance, "scale", 1, 0.8)
 	#get_tree().create_tween().tween_property(new_room_instance, "rotation", 0, 0.8)
