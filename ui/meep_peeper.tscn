@@ -4,7 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://b4bj6apqag6em" path="res://art/meeple/heart.png" id="1_g1a6q"]
 
 [node name="Meep Peeper" type="Node2D" node_paths=PackedStringArray("health_value_label", "soul_value_label", "treasure_value_label")]
-z_index = 1
+z_index = 4096
+z_as_relative = false
 script = ExtResource("1_5kohg")
 health_value_label = NodePath("Stats/HBoxContainer/Health Value")
 soul_value_label = NodePath("Stats/HBoxContainer/Soul Value")

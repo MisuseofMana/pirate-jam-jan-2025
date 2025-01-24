@@ -8,6 +8,8 @@ extends Node2D
 var _hovered_meeple: Array[Meeple] = []
 
 var _meep: Meeple = null:
+	get():
+		return _meep if _meep and is_instance_valid(_meep) else null
 	set(value):
 		if value == _meep: return
 		if _meep:
@@ -24,13 +26,16 @@ var _meep: Meeple = null:
 func notify_meeple_hovered(meep: Meeple) -> void:
 	if not _hovered_meeple.has(meep):
 		_hovered_meeple.append(meep)
-		_meep = meep
+		_hovered_meeple_changed()
 
 func notify_meeple_unhovered(meeple: Meeple) -> void:
 	if _hovered_meeple.has(meeple):
 		_hovered_meeple.erase(meeple)
+		_hovered_meeple_changed()
 
-	if _hovered_meeple.size() > 0:
+func _hovered_meeple_changed():
+	_hovered_meeple = _hovered_meeple.filter(func(m: Meeple): return m and is_instance_valid(m))
+	if not _hovered_meeple.is_empty():
 		_meep = _hovered_meeple.back()
 	else:
 		_meep = null
@@ -43,10 +48,10 @@ func _on_meep_info_changed() -> void:
 	_update_labels()
 
 func _update_labels() -> void:
-	if not _meep: return
-	health_value_label.text = str(_meep.health)
-	soul_value_label.text = str(_meep.soul_value)
-	treasure_value_label.text = str(_meep.treasure_collected) + "/" + str(_meep.max_treasure)
+	if _meep:
+		health_value_label.text = str(_meep.health)
+		soul_value_label.text = str(_meep.soul_value)
+		treasure_value_label.text = str(_meep.treasure_collected) + "/" + str(_meep.max_treasure)
 
 func _process(delta: float) -> void:
 	if _meep:

@@ -189,6 +189,7 @@ func _on_animation_player_animation_finished(anim_name):
 		var soul: MeepleSoul = MEEPLE_SOUL.instantiate()
 		soul.soul_value = soul_value
 		soul.position = position
+		MeepPeeper.notify_meeple_unhovered(self)
 		get_parent().add_child(soul)
 		queue_free()
 
