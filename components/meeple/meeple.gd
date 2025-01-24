@@ -2,10 +2,12 @@ class_name Meeple extends Node2D
 
 signal info_changed
 
-@onready var thought: Sprite2D = $Thought
-@onready var anims = $AnimationPlayer
-@onready var hurtbox = $TrapHitbox/CollisionShape2D
-@onready var meeple_sprite = $Meeple
+const MEEPLE_SOUL = preload("res://components/soul/meeple_soul.tscn")
+const THOUGHT_HEART_EMPTY = preload("res://art/meeple/thought-heart-empty.png")
+const THOUGHT_HEART_QUARTER = preload("res://art/meeple/thought-heart-quarter.png")
+const THOUGHT_HEART_HALF = preload("res://art/meeple/thought-heart-half.png")
+const THOUGHT_HEART_THREEQUARTER = preload("res://art/meeple/thought-heart-threequarter.png")
+const THOUGHT_HEART_FULL = preload("res://art/meeple/thought-heart-full.png")
 
 @export_group("Visuals")
 @export var meeple_skin: SpriteFrames = preload("res://components/meeple/meeple_looter_skin.tres")
@@ -40,24 +42,17 @@ signal info_changed
 @export var brain: StateChart
 @export var hover_hitbox: Area2D
 
-var debug: bool = false
-
-const MEEPLE_SOUL = preload("res://components/soul/meeple_soul.tscn")
-
-const THOUGHT_HEART_EMPTY = preload("res://art/meeple/thought-heart-empty.png")
-const THOUGHT_HEART_QUARTER = preload("res://art/meeple/thought-heart-quarter.png")
-const THOUGHT_HEART_HALF = preload("res://art/meeple/thought-heart-half.png")
-const THOUGHT_HEART_THREEQUARTER = preload("res://art/meeple/thought-heart-threequarter.png")
-const THOUGHT_HEART_FULL = preload("res://art/meeple/thought-heart-full.png")
-
-var movement_delta: float
-
+@onready var thought: Sprite2D = $Thought
+@onready var anims = $AnimationPlayer
+@onready var hurtbox = $TrapHitbox/CollisionShape2D
+@onready var meeple_sprite = $Meeple
 @onready var current_room: Room = get_parent()
 @onready var overlapping_rooms: Array[Room] = [current_room]
 @onready var visited_rooms: Array[Node2D] = [current_room]
 
+var debug: bool = false
+var movement_delta: float
 var target_macguffin: Node2D = null
-
 var agent_map_is_empty_or_unsynced: bool:
 	get(): return NavigationServer2D.map_get_iteration_id(nav_agent.get_navigation_map()) == 0
 
