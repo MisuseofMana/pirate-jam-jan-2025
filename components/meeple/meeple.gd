@@ -1,6 +1,7 @@
 class_name Meeple extends Node2D
 
-#@export var stats : MeepleStats
+signal info_changed
+
 @onready var thought: Sprite2D = $Thought
 @onready var anims = $AnimationPlayer
 @onready var hurtbox = $TrapHitbox/CollisionShape2D
@@ -10,13 +11,25 @@ class_name Meeple extends Node2D
 @export var meeple_skin: SpriteFrames = preload("res://components/meeple/meeple_looter_skin.tres")
 
 @export_group("Stats")
-@export_range(1, 4) var health: int = 4
+@export_range(1, 4) var health: int = 4:
+	set(value):
+		if value == health: return
+		health = value
+		info_changed.emit()
 @export_range(0, 1, 0.1) var greed: float = 0.1
 @export_range(0, 1, 0.1) var piety: float = 0.1
 @export_range(1, 99) var soul_value: int = 1
 @export var movement_speed: float = 20.0
-@export var treasure_collected: int = 0
-@export var max_treasure: int = 3
+@export var treasure_collected: int = 0:
+	set(value):
+		if value == treasure_collected: return
+		treasure_collected = value
+		info_changed.emit()
+@export var max_treasure: int = 3:
+	set(value):
+		if value == max_treasure: return
+		max_treasure = value
+		info_changed.emit()
 
 @export_group("AI")
 @export var macguffin_strategy: MacguffinStrategy
@@ -25,6 +38,7 @@ class_name Meeple extends Node2D
 @export_group("Internal")
 @export var nav_agent: NavigationAgent2D
 @export var brain: StateChart
+@export var hover_hitbox: Area2D
 
 var debug: bool = false
 
@@ -56,11 +70,17 @@ static func get_all(node_in_tree: Node) -> Array[Meeple]:
 
 func _ready() -> void:
 	add_to_group("meeple")
+
 	nav_agent.velocity_computed.connect(_on_velocity_computed)
 	nav_agent.target_reached.connect(_on_target_reached)
-	thought.hide()
+
 	meeple_sprite.sprite_frames = meeple_skin
 	meeple_sprite.play("default")
+
+	thought.hide()
+
+	hover_hitbox.mouse_entered.connect(_on_hovered)
+	hover_hitbox.mouse_exited.connect(_on_unhovered)
 
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("toggle_debug_mode"):
@@ -88,6 +108,12 @@ func _on_room_hitbox_exited(area: Area2D) -> void:
 			current_room = null
 		else:
 			current_room = overlapping_rooms.back()
+
+func _on_hovered() -> void:
+	MeepPeeper.notify_meeple_hovered(self)
+
+func _on_unhovered() -> void:
+	MeepPeeper.notify_meeple_unhovered(self)
 			
 func _get_known_macguffins() -> Array[Node2D]:
 	var macguffins: Array[Node2D] = []

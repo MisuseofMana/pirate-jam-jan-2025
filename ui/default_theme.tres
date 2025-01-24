@@ -1,0 +1,11 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://dbv4tc0bvbxj1"]
+
+[ext_resource type="FontFile" uid="uid://cewmixb1gjd4n" path="res://ui/PirataOne-Regular.ttf" id="1_bbgcj"]
+[ext_resource type="StyleBox" uid="uid://bn2bpcwbw8733" path="res://ui/thought_bubble.tres" id="1_q0sc4"]
+
+[resource]
+Label/colors/font_color = Color(0, 0, 0, 1)
+Label/colors/font_outline_color = Color(1, 1, 1, 1)
+Label/font_sizes/font_size = 18
+Label/fonts/font = ExtResource("1_bbgcj")
+Panel/styles/panel = ExtResource("1_q0sc4")

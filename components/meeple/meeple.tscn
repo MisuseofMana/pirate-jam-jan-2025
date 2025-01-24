@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://d1cw4mndlss2u"]
+[gd_scene load_steps=36 format=3 uid="uid://d1cw4mndlss2u"]
 
 [ext_resource type="Script" path="res://components/meeple/meeple.gd" id="1_d3iq0"]
 [ext_resource type="Script" path="res://components/meeple/ai/macguffin/macguffin_consideration.gd" id="2_32q1j"]
@@ -62,6 +62,9 @@ radius = 8.0
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ck7fc"]
 radius = 5.0
 height = 16.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_c7wa1"]
+radius = 24.0
 
 [sub_resource type="Animation" id="Animation_uum1y"]
 length = 0.001
@@ -228,7 +231,7 @@ scale_min = 0.8
 scale_max = 1.2
 color = Color(0.588235, 0, 0, 1)
 
-[node name="Meeple" type="Node2D" node_paths=PackedStringArray("nav_agent", "brain") groups=["meeple"]]
+[node name="Meeple" type="Node2D" node_paths=PackedStringArray("nav_agent", "brain", "hover_hitbox") groups=["meeple"]]
 z_index = 1
 script = ExtResource("1_d3iq0")
 health = 1
@@ -236,11 +239,13 @@ macguffin_strategy = SubResource("Resource_3ma6w")
 explore_room_strategy = SubResource("Resource_tnmlj")
 nav_agent = NodePath("NavigationAgent2D")
 brain = NodePath("Brain")
+hover_hitbox = NodePath("Hover Hitbox")
 
 [node name="Room Hitbox" type="Area2D" parent="."]
 position = Vector2(1, -1)
 collision_layer = 8
 collision_mask = 4
+priority = 999
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Room Hitbox"]
 position = Vector2(-1, -6)
@@ -255,6 +260,17 @@ script = ExtResource("5_k20un")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TrapHitbox"]
 shape = SubResource("CapsuleShape2D_ck7fc")
+
+[node name="Hover Hitbox" type="Area2D" parent="."]
+collision_layer = 256
+collision_mask = 0
+collision_priority = 2.0
+monitoring = false
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hover Hitbox"]
+position = Vector2(0, -8)
+shape = SubResource("CircleShape2D_c7wa1")
 
 [node name="Thought" type="Sprite2D" parent="."]
 position = Vector2(-3, -22)
