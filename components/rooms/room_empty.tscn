@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://6smdcxogrgbi"]
+[gd_scene load_steps=11 format=3 uid="uid://g811byxkx0gq"]
 
 [ext_resource type="Script" path="res://components/rooms/empty_room.gd" id="1_yyp7x"]
 [ext_resource type="Script" path="res://components/rooms/empty_room_click_detection.gd" id="2_7nm8y"]

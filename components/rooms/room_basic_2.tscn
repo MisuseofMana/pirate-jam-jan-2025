@@ -137,7 +137,7 @@ shader_parameter/tolerance = 0.0
 [node name="DungeonTile" parent="." index="3"]
 material = SubResource("ShaderMaterial_bqady")
 
-[node name="Treasure" parent="." index="4" instance=ExtResource("2_wnn1o")]
+[node name="Treasure" parent="." index="4" groups=["macguffin"] instance=ExtResource("2_wnn1o")]
 position = Vector2(17, 18)
 script = null
 

@@ -34,6 +34,6 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Treasure" type="AnimatedSprite2D"]
+[node name="Treasure" type="AnimatedSprite2D" groups=["macguffin"]]
 sprite_frames = SubResource("SpriteFrames_txvkn")
 script = ExtResource("8_l0lx4")

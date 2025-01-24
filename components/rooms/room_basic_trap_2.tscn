@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://cwparulgglwjy"]
+[gd_scene load_steps=6 format=3 uid="uid://cr7ya361a2ep1"]
 
 [ext_resource type="PackedScene" uid="uid://dqr12wo3gio00" path="res://components/rooms/room_basic_base.tscn" id="1_52npl"]
 [ext_resource type="PackedScene" uid="uid://due6tipw8kq1h" path="res://components/trap/trap.tscn" id="2_x5d8t"]
@@ -145,8 +145,8 @@ trap_cooldown = 5.0
 position = Vector2(12, 12)
 trap_cooldown = 5.0
 
-[node name="Treasure" parent="." index="6" instance=ExtResource("3_5nvqc")]
+[node name="Treasure" parent="." index="6" groups=["macguffin"] instance=ExtResource("3_5nvqc")]
 position = Vector2(-13, 15)
 
-[node name="Treasure2" parent="." index="7" instance=ExtResource("3_5nvqc")]
+[node name="Treasure2" parent="." index="7" groups=["macguffin"] instance=ExtResource("3_5nvqc")]
 position = Vector2(7, -9)

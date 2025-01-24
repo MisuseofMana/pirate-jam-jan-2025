@@ -114,8 +114,6 @@ func update_room_sprite():
 	
 #		checks top, right, bottom, left
 	for neighbor in possible_connections:
-		var cell_id : int = dungeon_controller.get_cell_source_id(neighbor)
-		
 		var alt_id = -1
 		
 		var source_id = dungeon_controller.get_cell_source_id(neighbor)
@@ -159,6 +157,7 @@ func handle_room_click():
 		click_error_sfx.play()
 	else:
 		dungeon_controller.last_selected_dungeon_room = get_coords()
+		dungeon_tile.make_shader_purple()
 		activate_room_sfx.play()
 
 func show_outline_on_mouse_enter():

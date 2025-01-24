@@ -17,8 +17,8 @@ func make_shader_green():
 	get_material().set_shader_parameter("color", green);
 	
 func turn_on_shader():
-	get_material().set_shader_parameter("maxLineWidth", 1);
-	get_material().set_shader_parameter("minLineWidth", 0);
+	get_material().set_shader_parameter("maxLineWidth", 2);
+	get_material().set_shader_parameter("minLineWidth", 1);
 
 func turn_off_shader():
 	get_material().set_shader_parameter("maxLineWidth", 0);
