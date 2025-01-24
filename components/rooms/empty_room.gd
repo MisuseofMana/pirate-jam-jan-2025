@@ -14,7 +14,16 @@ func room_is_clickable() -> bool:
 func handle_room_click():
 	var coords : Vector2i = get_coords()
 	if dungeon_controller.last_selected_dungeon_room:
-		print('move old dungeon room to here')
+		print('move room')
+		#get the scene source
+		#var source_id = dungeon_controller.get_cell_source_id(dungeon_controller.last_selected_dungeon_room)
+		#if source_id > -1:
+			#var scene_source = dungeon_controller.tile_set.get_source(source_id)
+			#if scene_source is TileSetScenesCollectionSource:
+				#var alt_id = dungeon_controller.get_cell_alternative_tile(dungeon_controller.last_selected_dungeon_room)
+				#var scene = scene_source.get_scene_tile_scene(alt_id)
+				#
+				#dungeon_controller.set_scene_tile_scene(source_id, scene)
 	else:
 		click_error_sfx.play()
 
