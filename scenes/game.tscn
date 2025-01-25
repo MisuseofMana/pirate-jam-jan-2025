@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=4 uid="uid://co5m6we60dfvx"]
+[gd_scene load_steps=3 format=4 uid="uid://co5m6we60dfvx"]
 
 [ext_resource type="TileSet" uid="uid://mh1sco40wky5" path="res://components/tilesets/dungeon_decoration.tres" id="1_tlxu7"]
 [ext_resource type="TileSet" uid="uid://mrguig7k625p" path="res://tilesets/default_tileset.tres" id="2_yuojw"]
-[ext_resource type="Script" path="res://scenes/dungeon_controller.gd" id="3_g7v25"]
 
 [node name="Game" type="Node2D"]
 
@@ -11,9 +10,8 @@ tile_map_data = PackedByteArray("AADp/wIAAAAAAAAAAADq/woAAAAAAAAAAADq/w0AAAAAAAA
 tile_set = ExtResource("1_tlxu7")
 
 [node name="DungeonRooms" type="TileMapLayer" parent="."]
-tile_map_data = PackedByteArray("AAD+//3/AAAAAAAACQD///3/AAAAAAAACQAAAP3/AAAAAAAACQABAP3/AAAAAAAACQACAP3/AAAAAAAACQACAP7/AAAAAAAACQACAP//AAAAAAAACQACAAAAAAAAAAAACQACAAEAAAAAAAAACQD+/wEAAAAAAAAACQD+/wAAAAAAAAAACQD//wAAAAAAAAAACQD//wEAAAAAAAAACQAAAAEAAAAAAAAACQABAAEAAAAAAAAACQABAAAAAAAAAAAACQAAAP7/AAAAAAAACQAAAP//AAAAAAAAAQD///7/AAAAAAAACQD/////AAAAAAAABQAAAAAAAAAAAAAACQD+////AAAAAAAABgABAP//AAAAAAAACAD+//7/AAAAAAAACQABAP7/AAAAAAAACQA=")
+tile_map_data = PackedByteArray("AAD+//3/AAAAAAAAYwD///3/AAAAAAAAYwAAAP3/AAAAAAAAYwABAP3/AAAAAAAAYwACAP3/AAAAAAAAYwACAP7/AAAAAAAAYwACAP//AAAAAAAAYwACAAAAAAAAAAAAYwACAAEAAAAAAAAAYwD+/wEAAAAAAAAAYwD+/wAAAAAAAAAAYwD//wAAAAAAAAAAYwD//wEAAAAAAAAAYwAAAAEAAAAAAAAAYwABAAEAAAAAAAAAYwABAAAAAAAAAAAAYwAAAP7/AAAAAAAAYwAAAP//AAAAAAAAAQD///7/AAAAAAAAYwD/////AAAAAAAABQAAAAAAAAAAAAAAYwD+////AAAAAAAABgD+//7/AAAAAAAAYwABAP7/AAAAAAAAYwABAP//AAAAAAAACAA=")
 tile_set = ExtResource("2_yuojw")
-script = ExtResource("3_g7v25")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(32, -32)

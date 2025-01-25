@@ -1,7 +1,6 @@
 [gd_scene load_steps=18 format=3 uid="uid://dqr12wo3gio00"]
 
 [ext_resource type="Script" path="res://components/rooms/room.gd" id="1_fq4wr"]
-[ext_resource type="NavigationPolygon" uid="uid://c268iga7es54y" path="res://components/rooms/nav_regions/four_exits.tres" id="2_di25s"]
 [ext_resource type="Shader" path="res://components/rooms/room_outline.gdshader" id="3_psxd6"]
 [ext_resource type="Script" path="res://components/rooms/room_click_detection.gd" id="4_5ngwb"]
 [ext_resource type="Texture2D" uid="uid://cy2lv2myk6ixs" path="res://art/rooms/room_sprite0.png" id="5_h8uem"]
@@ -11,6 +10,12 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_brb8i"]
 size = Vector2(64, 64)
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_wroxa"]
+vertices = PackedVector2Array(6, -24, 24, -24, 24, -5, 32, -5, 32, 5, 24, 5, 24, 24, 6, 24, -24, -5, 6, 32, -6, 32, -6, 24, -24, 24, -24, 5, -32, 5, -32, -5, -24, -24, -6, -24, -6, -32, 6, -32)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2), PackedInt32Array(2, 3, 4, 5), PackedInt32Array(5, 6, 7, 8), PackedInt32Array(7, 9, 10, 11), PackedInt32Array(11, 12, 13), PackedInt32Array(13, 14, 15, 8), PackedInt32Array(8, 16, 17, 2, 5), PackedInt32Array(17, 18, 19, 0), PackedInt32Array(17, 0, 2), PackedInt32Array(8, 7, 11, 13)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-24, -24, -6, -24, -6, -32, 6, -32, 6, -24, 24, -24, 24, -5, 32, -5, 32, 5, 24, 5, 24, 24, 6, 24, 6, 32, -6, 32, -6, 24, -24, 24, -24, 5, -32, 5, -32, -5, -24, -5)])
+agent_radius = 0.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j8fb1"]
 size = Vector2(64, 64)
@@ -170,7 +175,7 @@ script = ExtResource("1_fq4wr")
 shape = SubResource("RectangleShape2D_brb8i")
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
-navigation_polygon = ExtResource("2_di25s")
+navigation_polygon = SubResource("NavigationPolygon_wroxa")
 
 [node name="RoomClickDetection" type="Area2D" parent="."]
 z_index = 1

@@ -38,6 +38,9 @@ const THOUGHT_HEART_FULL = preload("res://art/meeple/thought-heart-full.png")
 @export_group("AI")
 @export var macguffin_strategy: MacguffinStrategy
 @export var explore_room_strategy: RoomStrategy
+@export_range(0, 1, 0.01) var trap_awareness_chance: float
+@export_flags_2d_navigation var nav_flags_normal: int
+@export_flags_2d_navigation var nav_flags_avoid_traps: int
 
 @export_group("Internal")
 @export var nav_agent: NavigationAgent2D
@@ -212,8 +215,9 @@ func go_to_random_position_in_room():
 	if agent_map_is_empty_or_unsynced:
 		await NavigationServer2D.map_changed
 
+	var nav_layers := compute_nav_layers()
 	while true:
-		nav_agent.target_position = current_room.get_random_walkable_global_position()
+		set_target_position(current_room.get_random_walkable_global_position(nav_layers))
 		if nav_agent.is_target_reachable():
 			break
 
@@ -239,7 +243,7 @@ func decide_look_for_macguffin_action():
 		brain.send_event("next_room")
 
 func go_to_chosen_macguffin():
-	nav_agent.target_position = target_macguffin.global_position
+	set_target_position(target_macguffin.global_position)
 
 func take_or_ignore_chosen_macguffin():
 	if target_macguffin == null:
@@ -262,7 +266,11 @@ func go_to_next_room():
 		print("Chose Room " + next_room.name + ":")
 		for score in scores:
 			print(score._to_string())
-	nav_agent.target_position = next_room.global_position
+	set_target_position(next_room.get_random_walkable_global_position(compute_nav_layers()))
+
+func set_target_position(target_position: Vector2) -> void:
+	nav_agent.navigation_layers = compute_nav_layers()
+	nav_agent.target_position = target_position
 
 func go_to_entrance():
 	var entrance: Room = null
@@ -270,7 +278,10 @@ func go_to_entrance():
 		if room is EntranceRoom:
 			entrance = room
 			break
-	nav_agent.target_position = entrance.global_position
+	set_target_position(entrance.global_position)
 
 func exit_dungon() -> void:
 	queue_free()
+
+func compute_nav_layers() -> int:
+	return nav_flags_avoid_traps if randf() <= trap_awareness_chance else nav_flags_normal

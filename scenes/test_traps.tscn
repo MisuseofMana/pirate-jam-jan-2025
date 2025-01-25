@@ -2,22 +2,20 @@
 
 [ext_resource type="TileSet" uid="uid://mrguig7k625p" path="res://tilesets/default_tileset.tres" id="1_1qniv"]
 [ext_resource type="PackedScene" uid="uid://c7dl5xvrxk5u6" path="res://utilities/meeple_brain_debugger.tscn" id="1_xn256"]
-[ext_resource type="Script" path="res://scenes/connect_rooms.gd" id="3_akuxv"]
+[ext_resource type="Script" path="res://scenes/dungeon_room_controller.gd" id="3_mu5kr"]
 
 [node name="Basic Test" type="Node2D"]
 
 [node name="Meeple Brain Debugger" parent="." instance=ExtResource("1_xn256")]
-offset_left = -225.0
-offset_top = -226.0
-offset_right = 199.0
-offset_bottom = 316.0
+offset_left = -179.0
+offset_top = -176.0
+offset_right = 141.0
+offset_bottom = 248.0
 scale = Vector2(0.5, 0.5)
-
-[node name="DungeonTiles" type="TileMapLayer" parent="."]
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 tile_map_data = PackedByteArray("AAD+/wIAAAAAAAAABwD//wIAAAAAAAAABAAAAAIAAAAAAAAAAQABAAIAAAAAAAAABAACAAEAAAAAAAAACAD9/wIAAAAAAAAABQD+/wEAAAAAAAAAAQD//wEAAAAAAAAABQAAAAAAAAAAAAAABAAAAAEAAAAAAAAAAQABAAAAAAAAAAAAAQACAAAAAAAAAAAABwACAAIAAAAAAAAABwD9/wEAAAAAAAAABgA=")
 tile_set = ExtResource("1_1qniv")
-script = ExtResource("3_akuxv")
+script = ExtResource("3_mu5kr")
 
 [node name="Camera2D" type="Camera2D" parent="."]

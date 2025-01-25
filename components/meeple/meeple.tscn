@@ -33,9 +33,8 @@ considerations = []
 [sub_resource type="CircleShape2D" id="CircleShape2D_50mka"]
 radius = 8.0
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ck7fc"]
-radius = 5.0
-height = 16.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_mrlnf"]
+radius = 1.5
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_c7wa1"]
 radius = 24.0
@@ -210,14 +209,18 @@ z_index = 1
 script = ExtResource("1_d3iq0")
 meeple_names = Array[String](["Mr. Morbles", "Glam Jim", "Peemps", "Gleeorp", "Dr. Bloop", "Extra Steve", "Hanke", "Trucy", "Willyam", "Melmm", "Kiske", "Lenid", "Kremmin", "Roddie", "That Guy", "Keef Bleefer", "Ornery Jeeps", "Harty Chartie", "Slohee Johee"])
 health = 1
+movement_speed = 30.0
 macguffin_strategy = SubResource("Resource_3ma6w")
 explore_room_strategy = SubResource("Resource_tnmlj")
+trap_awareness_chance = 0.3
+nav_flags_normal = 3
+nav_flags_avoid_traps = 1
 nav_agent = NodePath("NavigationAgent2D")
 brain = NodePath("Brain")
 hover_hitbox = NodePath("Hover Hitbox")
 
 [node name="Room Hitbox" type="Area2D" parent="."]
-position = Vector2(1, -1)
+position = Vector2(1, 3)
 collision_layer = 8
 collision_mask = 4
 priority = 999
@@ -227,16 +230,16 @@ position = Vector2(-1, -6)
 shape = SubResource("CircleShape2D_50mka")
 
 [node name="TrapHitbox" type="Area2D" parent="."]
-position = Vector2(0, -5)
 rotation = 1.5708
 collision_layer = 2
 input_pickable = false
 script = ExtResource("5_k20un")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TrapHitbox"]
-shape = SubResource("CapsuleShape2D_ck7fc")
+shape = SubResource("CircleShape2D_mrlnf")
 
 [node name="Hover Hitbox" type="Area2D" parent="."]
+position = Vector2(0, 4)
 collision_layer = 256
 collision_mask = 0
 collision_priority = 2.0
@@ -248,17 +251,17 @@ position = Vector2(0, -8)
 shape = SubResource("CircleShape2D_c7wa1")
 
 [node name="Thought" type="Sprite2D" parent="."]
-position = Vector2(-3, -22)
+position = Vector2(-3, -18)
 texture = ExtResource("12_qeyom")
 
 [node name="Meeple" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, -8)
+position = Vector2(0, -4)
 sprite_frames = ExtResource("14_ofm7m")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
-path_desired_distance = 2.0
-target_desired_distance = 2.0
-path_max_distance = 20.0
+path_desired_distance = 4.0
+path_max_distance = 10.0
+navigation_layers = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

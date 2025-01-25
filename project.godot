@@ -63,11 +63,18 @@ toggle_debug_mode={
 [layer_names]
 
 2d_physics/layer_1="TrapDetection"
+2d_navigation/layer_1="room"
 2d_physics/layer_2="MeepleDetection"
+2d_navigation/layer_2="trap"
 2d_physics/layer_3="Room"
 2d_physics/layer_4="Meeple"
 2d_physics/layer_5="RoomClickDetection"
 2d_physics/layer_6="UI"
+
+[navigation]
+
+2d/default_edge_connection_margin=5.0
+2d/default_link_connection_radius=3.0
 
 [rendering]
 

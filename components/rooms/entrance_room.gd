@@ -18,7 +18,7 @@ func spawn_meeple(scene: PackedScene) -> void:
 	var meeple := scene.instantiate() as Meeple
 	assert(meeple, "Scene must have a Meeple root Node2D")
 	add_child(meeple)
-	meeple.position = get_random_walkable_local_position()
+	meeple.position = get_random_walkable_local_position(meeple.compute_nav_layers())
 
 func start_wave() -> void:
 	for meeple in get_meeples():
