@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://due6tipw8kq1h"]
+[gd_scene load_steps=11 format=3 uid="uid://due6tipw8kq1h"]
 
 [ext_resource type="Script" path="res://components/trap/trap.gd" id="1_6w5ax"]
 [ext_resource type="Texture2D" uid="uid://rnxkegj4u03d" path="res://art/traps/spike-trap.png" id="2_cgdbm"]
@@ -44,12 +44,6 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_h5i5q"]
 radius = 8.0
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_ctrju"]
-vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)])
-agent_radius = 0.0
-
 [node name="Trap" type="AnimatedSprite2D"]
 sprite_frames = SubResource("SpriteFrames_y77fx")
 animation = &"activate"
@@ -80,10 +74,6 @@ fill_mode = 5
 texture_under = ExtResource("4_3xxjc")
 texture_over = ExtResource("5_oeflf")
 texture_progress = ExtResource("6_qlc0b")
-
-[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
-navigation_polygon = SubResource("NavigationPolygon_ctrju")
-navigation_layers = 2
 
 [connection signal="timeout" from="Timer" to="." method="reset_trap"]
 [connection signal="area_entered" from="DamageArea" to="DamageArea" method="_on_area_entered"]

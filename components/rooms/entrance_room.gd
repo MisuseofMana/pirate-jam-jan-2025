@@ -11,13 +11,12 @@ static func get_all(node_in_tree: Node) -> Array[EntranceRoom]:
 
 func _ready() -> void:
 	add_to_group("entrance")
-	anims.animation_finished.connect(dungeon_controller.handle_animations)
-	call_deferred("update_own_tile_connections")
+	super._ready()
 	
 func spawn_meeple(scene: PackedScene) -> void:
 	var meeple := scene.instantiate() as Meeple
-	assert(meeple, "Scene must have a Meeple root Node2D")
-	add_child(meeple)
+	assert(meeple, "Scene must have a Meeple root node")
+	room_sprite.add_child(meeple)
 	meeple.position = get_random_walkable_local_position(meeple.compute_nav_layers())
 
 func start_wave() -> void:

@@ -1,9 +1,15 @@
-[gd_scene load_steps=8 format=3 uid="uid://cdhyk8epjuhb1"]
+[gd_scene load_steps=9 format=3 uid="uid://cdhyk8epjuhb1"]
 
 [ext_resource type="PackedScene" uid="uid://dqr12wo3gio00" path="res://components/rooms/room_basic_base.tscn" id="1_0y4fm"]
 [ext_resource type="PackedScene" uid="uid://due6tipw8kq1h" path="res://components/trap/trap.tscn" id="2_qsu68"]
 [ext_resource type="PackedScene" uid="uid://csw3vkdw4erk5" path="res://components/treasure/treasure_base.tscn" id="3_okumj"]
 [ext_resource type="PackedScene" uid="uid://djdb3leiduao5" path="res://components/furniture/furniture.tscn" id="4_qtg2l"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_xh8fp"]
+vertices = PackedVector2Array(11, 11, 11, -11, 24, 5, 24, 24, 6, 24, -11, 11, 6, -24, 24, -24, 24, -5, 32, -5, 32, 5, -11, -11, -6, -24, 6, 32, -6, 32, -6, 24, -24, 24, -24, 5, -24, -5, -32, 5, -32, -5, -24, -24, 6, -32, -6, -32)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(0, 3, 4, 5), PackedInt32Array(6, 7, 8, 1), PackedInt32Array(8, 9, 10, 2), PackedInt32Array(8, 2, 1), PackedInt32Array(6, 1, 11, 12), PackedInt32Array(4, 13, 14, 15), PackedInt32Array(5, 4, 15), PackedInt32Array(5, 15, 16, 17), PackedInt32Array(11, 5, 17, 18), PackedInt32Array(17, 19, 20, 18), PackedInt32Array(11, 18, 21, 12), PackedInt32Array(22, 6, 12, 23)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-24, -24, -6, -24, -6, -32, 6, -32, 6, -24, 11, -11, -11, -11, -11, 11, 11, 11, 11, -11, 6, -24, 24, -24, 24, -5, 32, -5, 32, 5, 24, 5, 24, 24, 6, 24, 6, 32, -6, 32, -6, 24, -24, 24, -24, 5, -32, 5, -32, -5, -24, -5)])
+agent_radius = 0.0
 
 [sub_resource type="Shader" id="Shader_qafvm"]
 resource_local_to_scene = true
@@ -133,15 +139,18 @@ shader_parameter/blockSize = 20.0
 shader_parameter/color = Color(0.828964, 0.405913, 1, 1)
 shader_parameter/tolerance = 0.0
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_xh8fp"]
-vertices = PackedVector2Array(11, 11, 11, -11, 24, 5, 24, 24, 6, 24, -11, 11, 6, -24, 24, -24, 24, -5, 32, -5, 32, 5, -11, -11, -6, -24, 6, 32, -6, 32, -6, 24, -24, 24, -24, 5, -24, -5, -32, 5, -32, -5, -24, -24, 6, -32, -6, -32)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(0, 3, 4, 5), PackedInt32Array(6, 7, 8, 1), PackedInt32Array(8, 9, 10, 2), PackedInt32Array(8, 2, 1), PackedInt32Array(6, 1, 11, 12), PackedInt32Array(4, 13, 14, 15), PackedInt32Array(5, 4, 15), PackedInt32Array(5, 15, 16, 17), PackedInt32Array(11, 5, 17, 18), PackedInt32Array(17, 19, 20, 18), PackedInt32Array(11, 18, 21, 12), PackedInt32Array(22, 6, 12, 23)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-24, -24, -6, -24, -6, -32, 6, -32, 6, -24, 11, -11, -11, -11, -11, 11, 11, 11, 11, -11, 6, -24, 24, -24, 24, -5, 32, -5, 32, 5, 24, 5, 24, 24, 6, 24, 6, 32, -6, 32, -6, 24, -24, 24, -24, 5, -32, 5, -32, -5, -24, -5)])
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_sjw1y"]
+vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)])
 agent_radius = 0.0
 
 [node name="Basic Room" instance=ExtResource("1_0y4fm")]
 
-[node name="DungeonTile" parent="." index="2"]
+[node name="NavigationRegion2D" parent="." index="1"]
+navigation_polygon = SubResource("NavigationPolygon_xh8fp")
+
+[node name="DungeonTile" parent="." index="3"]
 material = SubResource("ShaderMaterial_p3hoj")
 
 [node name="Trap" parent="DungeonTile" index="0" instance=ExtResource("2_qsu68")]
@@ -159,8 +168,9 @@ position = Vector2(-11, 16)
 [node name="Furniture2" parent="DungeonTile" index="4" instance=ExtResource("4_qtg2l")]
 position = Vector2(18, -18)
 
-[node name="ActivateRoomSFX" parent="." index="3"]
+[node name="ActivateRoomSFX" parent="." index="4"]
 pitch_scale = 0.5
 
-[node name="NavigationRegion2D" parent="." index="6"]
-navigation_polygon = SubResource("NavigationPolygon_xh8fp")
+[node name="NavigationRegion2D2" type="NavigationRegion2D" parent="." index="7"]
+navigation_polygon = SubResource("NavigationPolygon_sjw1y")
+navigation_layers = 2
