@@ -1,6 +1,10 @@
+@tool
 class_name DungeonRoomController extends TileMapLayer
 
-@export var camera_node = Camera2D
+@export var camera_node = Camera2D:
+	set(value):
+		camera_node = value
+		update_configuration_warnings()
 
 var room_coords: Dictionary = {}
 
@@ -23,6 +27,16 @@ var toPosition: Vector2
 
 var room_movement_locked : bool = false
 
+func _ready():
+#	squash action error loop in output
+	InputMap.load_from_project_settings()
+
+func _get_configuration_warnings():
+	if camera_node == null:
+		return ["A Camera2D Node must be assigned in the inspector exports."]
+	else:
+		return []
+		
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("trigger_sword_event"):
 		run_sword_event()
