@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://dywkg5qwj78u6"]
+
+[ext_resource type="PackedScene" uid="uid://d1cw4mndlss2u" path="res://components/meeple/meeple.tscn" id="1_ll6tc"]
+[ext_resource type="SpriteFrames" uid="uid://talknfeoyo7l" path="res://components/meeple/meeple_variants/meeple_sluggish_frames.tres" id="2_cjor0"]
+
+[node name="Meeple" instance=ExtResource("1_ll6tc")]
+meeple_skin = ExtResource("2_cjor0")

@@ -1,5 +1,7 @@
 class_name DungeonRoomController extends TileMapLayer
 
+@export var camera_node = Camera2D
+
 var room_coords: Dictionary = {}
 
 # will be a Vector2i or null
@@ -17,8 +19,16 @@ var tempSceneId : int
 var fromPosition : Vector2
 var toPosition : Vector2
 
+@export var camera_anim_speed : float = 0.2
+
 var room_movement_locked : bool = false
 
+func _process(_delta: float) -> void:
+	if Input.is_action_just_pressed("trigger_sword_event"):
+		run_sword_event()
+	if Input.is_action_just_pressed("reset_camera"):
+		reset_camera_to_origin()
+		
 func _enter_tree():
 	child_entered_tree.connect(_register_child)
 
@@ -36,6 +46,27 @@ func update_room_coords(from: Vector2i, to: Vector2i):
 
 func get_room_scene(coords: Vector2i) -> Node:
 	return room_coords.get(coords, null)
+	
+func get_sword_room_tile_position():
+	for child in get_children():
+		if child is SwordRoom:
+			return to_global(map_to_local(child.get_coords()))
+
+func run_sword_event():
+	get_tree().create_tween().tween_property(camera_node, "position", get_sword_room_tile_position(), camera_anim_speed)
+	get_tree().create_tween().tween_property(camera_node, "zoom", Vector2(2, 2), camera_anim_speed)
+	
+func reset_camera_to_origin():
+	get_tree().create_tween().tween_property(camera_node, "position", Vector2(0, 0), camera_anim_speed)
+	get_tree().create_tween().tween_property(camera_node, "zoom", Vector2(1, 1), camera_anim_speed)
+
+func attempt_to_take_the_sword():
+	pass
+	# compare sword soul value to meeples worth
+	# reduce sword souls by meeple worth
+	# if zero souls after contest show YOU ARE DEEMED WORTHY!
+	# if more than zero souls show YOU ARE UNWORTHY!
+	# explode meeple, deny soul from spawning
 
 func handle_new_clicked_room(oldCoords, newCoords):
 	if newCoords:

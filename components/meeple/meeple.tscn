@@ -1,7 +1,8 @@
-[gd_scene load_steps=36 format=3 uid="uid://d1cw4mndlss2u"]
+[gd_scene load_steps=40 format=3 uid="uid://d1cw4mndlss2u"]
 
 [ext_resource type="Script" path="res://components/meeple/meeple.gd" id="1_d3iq0"]
 [ext_resource type="Script" path="res://components/meeple/ai/macguffin/macguffin_consideration.gd" id="2_32q1j"]
+[ext_resource type="SpriteFrames" uid="uid://b1lfrnwpw5f1i" path="res://components/meeple/meeple_variants/meeple_greedy_frames.tres" id="2_xujee"]
 [ext_resource type="Script" path="res://components/meeple/ai/macguffin/considerations/favor_closest_macguffin.gd" id="3_uijck"]
 [ext_resource type="Script" path="res://components/meeple/ai/macguffin/considerations/favor_random_macguffin.gd" id="4_cg8a4"]
 [ext_resource type="Script" path="res://components/meeple/ai/macguffin/macguffin_strategy.gd" id="5_01ytg"]
@@ -18,7 +19,7 @@
 [ext_resource type="Script" path="res://components/meeple/ai/room/considerations/favor_treasure.gd" id="10_yg81l"]
 [ext_resource type="Script" path="res://components/meeple/ai/room/considerations/favor_unvisited_room.gd" id="11_xuy50"]
 [ext_resource type="Texture2D" uid="uid://cc0tgjvoa7jhp" path="res://art/meeple/thought-question.png" id="12_qeyom"]
-[ext_resource type="SpriteFrames" uid="uid://do3tj5pa4ek3u" path="res://components/meeple/meeple_looter_skin.tres" id="14_ofm7m"]
+[ext_resource type="Texture2D" uid="uid://i8gntnkx5ud6" path="res://art/meeple/cat.png" id="15_22stw"]
 
 [sub_resource type="Resource" id="Resource_rtrl7"]
 script = ExtResource("3_uijck")
@@ -64,6 +65,28 @@ radius = 1.5
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_c7wa1"]
 radius = 24.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ao1le"]
+atlas = ExtResource("15_22stw")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ciidu"]
+atlas = ExtResource("15_22stw")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4ebj6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ao1le")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ciidu")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="Animation" id="Animation_uum1y"]
 length = 0.001
@@ -234,6 +257,7 @@ color = Color(0.588235, 0, 0, 1)
 z_index = 1
 script = ExtResource("1_d3iq0")
 meeple_names = Array[String](["Mr. Morbles", "Glam Jim", "Peemps", "Gleeorp", "Dr. Bloop", "Extra Steve", "Hanke", "Trucy", "Willyam", "Melmm", "Kiske", "Lenid", "Kremmin", "Roddie", "That Guy", "Keef Bleefer", "Ornery Jeeps", "Harty Chartie", "Slohee Johee"])
+meeple_skin = ExtResource("2_xujee")
 health = 1
 movement_speed = 30.0
 macguffin_strategy = SubResource("Resource_3ma6w")
@@ -282,7 +306,7 @@ texture = ExtResource("12_qeyom")
 
 [node name="Meeple" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -4)
-sprite_frames = ExtResource("14_ofm7m")
+sprite_frames = SubResource("SpriteFrames_4ebj6")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 path_desired_distance = 4.0

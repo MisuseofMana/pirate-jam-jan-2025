@@ -5,7 +5,6 @@ class_name EmptyRoom extends Area2D
 @onready var click_error_sfx = $ClickErrorSFX
 
 signal room_moved_from_to(fromCoords : Vector2i, toCoords : Vector2i)
-signal requested_neighbors_update_connections(neighbor_tiles : Array[Vector2i])
 
 func _ready():
 	empty_room_sprite.hide()

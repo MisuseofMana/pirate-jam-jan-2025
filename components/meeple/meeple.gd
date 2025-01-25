@@ -11,8 +11,7 @@ const THOUGHT_HEART_FULL = preload("res://art/meeple/thought-heart-full.png")
 
 @export var meeple_names: Array[String] = []
 
-@export_group("Visuals")
-@export var meeple_skin: SpriteFrames = preload("res://components/meeple/meeple_looter_skin.tres")
+@export var meeple_skin: SpriteFrames
 
 @export_group("Stats")
 @export_range(1, 4) var health: int = 4:
@@ -246,12 +245,18 @@ func go_to_chosen_macguffin():
 	set_target_position(target_macguffin.global_position)
 
 func take_or_ignore_chosen_macguffin():
+	print('taking ', target_macguffin)
 	if target_macguffin == null:
 		return
 		
+	print(target_macguffin)
+	
 	if randf() < 0.8:
-		target_macguffin.queue_free()
-		treasure_collected += 1
+		if target_macguffin == get_tree().get_first_node_in_group("sword"):
+			print('attempting sword pull')
+		else:
+			target_macguffin.queue_free()
+			treasure_collected += 1
 	
 	target_macguffin = null
 		

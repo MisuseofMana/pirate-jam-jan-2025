@@ -6,8 +6,6 @@ class_name Room extends Area2D
 @onready var click_error_sfx = $ClickErrorSFX
 @onready var anims = $AnimationPlayer
 
-signal requested_neighbors_update_connections(neighbor_tiles: Array[Vector2i])
-
 var atlas_register: Dictionary = {
 	"0000": {
 		"name": 'No Exits',
