@@ -54,16 +54,21 @@ const THOUGHT_HEART_FULL = preload("res://art/meeple/thought-heart-full.png")
 
 @onready var meeple_name: String = meeple_names.pick_random()
 
-@onready var current_room: Room = get_parent()
-@onready var overlapping_rooms: Array[Room] = [current_room]
+@onready var current_room: Room = get_parent().get_parent():
+	set(value):
+		if value == current_room: return
+		current_room = value
+		if current_room:
+			current_room.add_meeple(self)
 @onready var visited_rooms: Array[Node2D] = [current_room]
 
 var debug: bool = false
 var movement_delta: float
+var target_room: Room = null
 var target_macguffin: Node2D = null
 var agent_map_is_empty_or_unsynced: bool:
 	get(): return NavigationServer2D.map_get_iteration_id(nav_agent.get_navigation_map()) == 0
-var is_dead: bool = false
+var should_move: bool = true
 
 static func get_all(node_in_tree: Node) -> Array[Meeple]:
 	var meeples: Array[Meeple] = []
@@ -90,28 +95,6 @@ func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("toggle_debug_mode"):
 		debug = not debug
 		nav_agent.debug_enabled = debug
-	
-func _on_room_hitbox_entered(area: Area2D) -> void:
-	if not area is Room:
-		return
-
-	if not visited_rooms.has(area):
-		visited_rooms.append(area)
-	
-	if not overlapping_rooms.has(area):
-		overlapping_rooms.append(area)
-		current_room = overlapping_rooms.back()
-
-func _on_room_hitbox_exited(area: Area2D) -> void:
-	if not area is Room:
-		return
-
-	if overlapping_rooms.has(area):
-		overlapping_rooms.erase(area)
-		if overlapping_rooms.is_empty():
-			current_room = null
-		else:
-			current_room = overlapping_rooms.back()
 
 func _on_hovered() -> void:
 	MeepPeeper.notify_meeple_hovered(self)
@@ -126,7 +109,7 @@ func _get_known_macguffins() -> Array[Node2D]:
 			macguffins.append(macguffin)
 	return macguffins
 
-func _get_other_known_rooms() -> Array[Room]:
+func _get_other_rooms() -> Array[Room]:
 	var rooms: Array[Room] = []
 	for room in get_tree().get_nodes_in_group("room"):
 		if room != current_room and room is Room:
@@ -134,7 +117,7 @@ func _get_other_known_rooms() -> Array[Room]:
 	return rooms
 	
 func _physics_process(delta: float) -> void:
-	if not is_dead:
+	if should_move:
 		_update_movement(delta)
 
 func _update_movement(delta: float) -> void:
@@ -194,7 +177,7 @@ func take_damage():
 func _die():
 	anims.play("die")
 	brain.send_event("died")
-	is_dead = true
+	should_move = false
 
 func _on_animation_player_animation_finished(anim_name):
 	if anim_name == "die":
@@ -207,6 +190,16 @@ func _on_animation_player_animation_finished(anim_name):
 
 func notify_wave_started() -> void:
 	brain.send_event("wave_started")
+
+func notify_room_move_start() -> void:
+	should_move = false
+	nav_agent.process_mode = Node.ProcessMode.PROCESS_MODE_DISABLED
+	brain.send_event("room_move_start")
+
+func notify_room_move_end() -> void:
+	should_move = true
+	nav_agent.process_mode = Node.ProcessMode.PROCESS_MODE_ALWAYS
+	brain.send_event("room_move_end")
 	
 # region State Charts Stuff
 func _on_target_reached() -> void:
@@ -219,6 +212,23 @@ func pick_room_action():
 		brain.send_event("look_for_macguffins")
 	else:
 		brain.send_event("next_room")
+
+func go_to_next_room():
+	var scores := explore_room_strategy.get_room_scores(self, _get_other_rooms())
+	if scores.is_empty():
+		push_warning("No rooms to explore")
+		return
+	
+	target_room = scores[0].object
+	if debug:
+		print("Chose Room " + target_room.name + ":")
+		for score in scores:
+			print(score._to_string())
+	set_target_position(target_room.get_random_walkable_global_position(compute_nav_layers()))
+
+func on_target_room_reached():
+	visited_rooms.append(target_room)
+	current_room = target_room
 
 func go_to_random_position_in_room():
 	if agent_map_is_empty_or_unsynced:
@@ -265,17 +275,6 @@ func take_or_ignore_chosen_macguffin():
 	target_macguffin = null
 		
 	brain.send_event("interacted_with_macguffin")
-
-func go_to_next_room():
-	var scores := explore_room_strategy.get_room_scores(self, _get_other_known_rooms())
-	assert(not scores.is_empty())
-	
-	var next_room: Room = scores[0].object
-	if debug:
-		print("Chose Room " + next_room.name + ":")
-		for score in scores:
-			print(score._to_string())
-	set_target_position(next_room.get_random_walkable_global_position(compute_nav_layers()))
 
 func set_target_position(target_position: Vector2) -> void:
 	nav_agent.navigation_layers = compute_nav_layers()

@@ -7,6 +7,8 @@ class_name Room extends Area2D
 @onready var anims = $AnimationPlayer
 
 signal requested_neighbors_update_connections(neighbor_tiles: Array[Vector2i])
+signal shrunk
+signal grew
 
 var atlas_register: Dictionary = {
 	"0000": {
@@ -77,7 +79,7 @@ var atlas_register: Dictionary = {
 
 func _ready():
 	room_sprite.turn_off_shader()
-	anims.animation_finished.connect(dungeon_controller.handle_animations)
+	anims.animation_finished.connect(_on_animation_finished)
 	call_deferred("update_own_tile_connections")
 
 func update_own_tile_connections():
@@ -203,3 +205,22 @@ func get_random_walkable_local_position(nav_layers: int = MathUtil.MAX_INT) -> V
 
 func get_random_walkable_global_position(nav_layers: int = MathUtil.MAX_INT) -> Vector2:
 	return global_position + get_random_walkable_local_position(nav_layers)
+
+func add_meeple(meeple: Meeple) -> void:
+	meeple.reparent(room_sprite)
+
+func shrink() -> void:
+	for meeple in get_meeples():
+		meeple.notify_room_move_start()
+	anims.play("shrink_room")
+
+func grow() -> void:
+	anims.play("grow_room")
+
+func _on_animation_finished(anim_name: String) -> void:
+	if anim_name == "shrink_room":
+		shrunk.emit()
+	elif anim_name == "grow_room":
+		grew.emit()
+		for meeple in get_meeples():
+			meeple.notify_room_move_end()
