@@ -6,5 +6,4 @@ static func get_current_camera_2d_rect(node_in_tree: Node) -> Rect2:
     var viewport_rect := node_in_tree.get_viewport().get_visible_rect()
     viewport_rect.position -= viewport_rect.size / 2.0
     var result := viewport_rect * camera_inverse
-    print(result)
     return result
