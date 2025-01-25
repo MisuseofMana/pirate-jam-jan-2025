@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://d1cw4mndlss2u"]
+[gd_scene load_steps=25 format=3 uid="uid://d1cw4mndlss2u"]
 
 [ext_resource type="Script" path="res://components/meeple/meeple.gd" id="1_d3iq0"]
 [ext_resource type="Script" path="res://components/meeple/ai/macguffin/macguffin_consideration.gd" id="2_32q1j"]
@@ -7,16 +7,10 @@
 [ext_resource type="Script" path="res://components/meeple/ai/macguffin/macguffin_strategy.gd" id="5_01ytg"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="5_dkyyg"]
 [ext_resource type="Script" path="res://components/meeple/trap_hitbox.gd" id="5_k20un"]
-[ext_resource type="Script" path="res://components/meeple/ai/room/room_consideration.gd" id="6_6mu71"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="6_hp8wo"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="7_jmllr"]
-[ext_resource type="Script" path="res://components/meeple/ai/room/considerations/favor_adjacent_room.gd" id="7_nryq3"]
-[ext_resource type="Script" path="res://components/meeple/ai/room/considerations/favor_unvisited_room.gd" id="8_4ij8x"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="8_ahky0"]
-[ext_resource type="Script" path="res://components/meeple/ai/room/considerations/consider_random_room.gd" id="9_wcewj"]
-[ext_resource type="Script" path="res://components/meeple/ai/room/considerations/avoid_entrance.gd" id="10_6oe14"]
 [ext_resource type="Script" path="res://components/meeple/ai/room/room_strategy.gd" id="10_vudfp"]
-[ext_resource type="Script" path="res://components/meeple/ai/room/considerations/favor_treasure.gd" id="11_gv2xq"]
 [ext_resource type="Texture2D" uid="uid://cc0tgjvoa7jhp" path="res://art/meeple/thought-question.png" id="12_qeyom"]
 [ext_resource type="SpriteFrames" uid="uid://do3tj5pa4ek3u" path="res://components/meeple/meeple_looter_skin.tres" id="14_ofm7m"]
 
@@ -32,29 +26,9 @@ influence = 0.25
 script = ExtResource("5_01ytg")
 considerations = Array[ExtResource("2_32q1j")]([SubResource("Resource_rtrl7"), SubResource("Resource_iepwt")])
 
-[sub_resource type="Resource" id="Resource_srrbs"]
-script = ExtResource("7_nryq3")
-influence = 1.0
-
-[sub_resource type="Resource" id="Resource_qv6mk"]
-script = ExtResource("8_4ij8x")
-influence = 0.85
-
-[sub_resource type="Resource" id="Resource_8rent"]
-script = ExtResource("9_wcewj")
-influence = 0.15
-
-[sub_resource type="Resource" id="Resource_mlbmy"]
-script = ExtResource("10_6oe14")
-influence = 0.9
-
-[sub_resource type="Resource" id="Resource_7sen1"]
-script = ExtResource("11_gv2xq")
-influence = 0.8
-
 [sub_resource type="Resource" id="Resource_tnmlj"]
 script = ExtResource("10_vudfp")
-considerations = Array[ExtResource("6_6mu71")]([SubResource("Resource_srrbs"), SubResource("Resource_qv6mk"), SubResource("Resource_8rent"), SubResource("Resource_mlbmy"), SubResource("Resource_7sen1")])
+considerations = []
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_50mka"]
 radius = 8.0
@@ -234,7 +208,7 @@ color = Color(0.588235, 0, 0, 1)
 [node name="Meeple" type="Node2D" node_paths=PackedStringArray("nav_agent", "brain", "hover_hitbox") groups=["meeple"]]
 z_index = 1
 script = ExtResource("1_d3iq0")
-meeple_names = Array[String](["Mr. Morbles", "Glam Jim", "Peemps", "Gleeorp", "Dr. Bloop", "Extra Steve", "Hanke", "Trucy", "Willyam"])
+meeple_names = Array[String](["Mr. Morbles", "Glam Jim", "Peemps", "Gleeorp", "Dr. Bloop", "Extra Steve", "Hanke", "Trucy", "Willyam", "Melmm", "Kiske", "Lenid", "Kremmin", "Roddie", "That Guy", "Keef Bleefer", "Ornery Jeeps", "Harty Chartie", "Slohee Johee"])
 health = 1
 macguffin_strategy = SubResource("Resource_3ma6w")
 explore_room_strategy = SubResource("Resource_tnmlj")
