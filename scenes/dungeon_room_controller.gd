@@ -5,6 +5,8 @@ class_name DungeonRoomController extends TileMapLayer
 	set(value):
 		camera_node = value
 		update_configuration_warnings()
+		
+const EVENT_DRAW_SWORD = preload("res://components/room_events/event_draw_sword.tscn")
 
 var room_coords: Dictionary = {}
 
@@ -54,8 +56,6 @@ func _register_child(child):
 	room_coords[coords] = child
 	if child is SwordRoom:
 		child.sword_interacted_with.connect(run_sword_event)
-		child.you_lost.connect(meep_beat_sword_event)
-		child.you_survived.connect(meep_failed_sword_event)
 	
 func update_room_coords(from: Vector2i, to: Vector2i):
 	room_coords[to] = fromNode
@@ -79,10 +79,14 @@ func zoom_in_on_sword():
 func run_sword_event(meep_attempting_event: Meeple, sword_room_node: SwordRoom):
 	zoom_in_on_sword()
 	GameState.souls -= meep_attempting_event.soul_value
+	var swordEventNode : EventDrawSword = EVENT_DRAW_SWORD.instantiate()
+	swordEventNode.position = get_sword_room_tile_position()
+	get_tree().root.add_child(swordEventNode)
+	
 	if GameState.souls <= 0:
-		sword_room_node.show_worthy()
+		swordEventNode.show_worthy()
 	else:
-		sword_room_node.show_not_worthy()
+		swordEventNode.show_not_worthy()
 	
 func reset_camera_to_origin():
 	get_tree().create_tween().tween_property(camera_node, "position", Vector2(0, 0), camera_anim_speed)
