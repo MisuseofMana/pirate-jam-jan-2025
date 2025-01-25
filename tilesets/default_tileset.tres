@@ -17,7 +17,6 @@ scenes/5/scene = ExtResource("5_usjtd")
 scenes/6/scene = ExtResource("6_mjgmi")
 scenes/7/scene = ExtResource("6_ypk2g")
 scenes/8/scene = ExtResource("6_21h7d")
-scenes/99/scene = ExtResource("7_1m1ni")
 
 [resource]
 tile_size = Vector2i(64, 64)

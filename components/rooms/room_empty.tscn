@@ -53,7 +53,7 @@ script = ExtResource("5_hagy7")
 stream = SubResource("AudioStreamRandomizer_mwdqv")
 pitch_scale = 0.6
 
-[connection signal="empty_room_tile_clicked" from="EmptyRoomClickDetection" to="." method="handle_room_click"]
+[connection signal="empty_room_tile_clicked" from="EmptyRoomClickDetection" to="." method="handle_empty_cell_click"]
 [connection signal="input_event" from="EmptyRoomClickDetection" to="EmptyRoomClickDetection" method="_on_input_event"]
 [connection signal="mouse_entered" from="EmptyRoomClickDetection" to="." method="show_outline_on_mouse_enter"]
 [connection signal="mouse_exited" from="EmptyRoomClickDetection" to="." method="hide_outline_on_hover_mouse_exit"]

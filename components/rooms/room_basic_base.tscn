@@ -1,7 +1,7 @@
 [gd_scene load_steps=18 format=3 uid="uid://dqr12wo3gio00"]
 
 [ext_resource type="Script" path="res://components/rooms/room.gd" id="1_fq4wr"]
-[ext_resource type="NavigationPolygon" uid="uid://dl6paxiymrj47" path="res://components/rooms/nav_regions/no_exits.tres" id="2_clvmn"]
+[ext_resource type="NavigationPolygon" uid="uid://c268iga7es54y" path="res://components/rooms/nav_regions/four_exits.tres" id="2_di25s"]
 [ext_resource type="Shader" path="res://components/rooms/room_outline.gdshader" id="3_psxd6"]
 [ext_resource type="Script" path="res://components/rooms/room_click_detection.gd" id="4_5ngwb"]
 [ext_resource type="Texture2D" uid="uid://cy2lv2myk6ixs" path="res://art/rooms/room_sprite0.png" id="5_h8uem"]
@@ -170,7 +170,7 @@ script = ExtResource("1_fq4wr")
 shape = SubResource("RectangleShape2D_brb8i")
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
-navigation_polygon = ExtResource("2_clvmn")
+navigation_polygon = ExtResource("2_di25s")
 
 [node name="RoomClickDetection" type="Area2D" parent="."]
 z_index = 1

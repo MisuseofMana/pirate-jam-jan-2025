@@ -1,4 +1,4 @@
-class_name DungeonTile extends Sprite2D
+class_name RoomSprite extends Sprite2D
 
 var red : Color = Color(0.827, 0, 0)
 var purple : Color = Color(0.827, 0.408, 1)

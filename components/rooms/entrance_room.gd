@@ -12,7 +12,7 @@ static func get_all(node_in_tree: Node) -> Array[EntranceRoom]:
 func _ready() -> void:
 	add_to_group("entrance")
 	anims.animation_finished.connect(dungeon_controller.handle_animations)
-	update_own_tile_connections()
+	call_deferred("update_own_tile_connections")
 	
 func spawn_meeple(scene: PackedScene) -> void:
 	var meeple := scene.instantiate() as Meeple

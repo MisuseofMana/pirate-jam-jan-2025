@@ -1,78 +1,90 @@
 class_name DungeonRoomController extends TileMapLayer
 
+var room_coords: Dictionary = {}
+
 # will be a Vector2i or null
-var last_selected_dungeon_room = null :
+var last_selected_dungeon_room = null:
 	set(newValue):
 		var oldValue = last_selected_dungeon_room
 		last_selected_dungeon_room = newValue
 		handle_new_clicked_room(oldValue, newValue)
-		
-var room_is_selected : bool = false
-var fromNode : Room
-var toNode : EmptyRoom
+
 var fromCoords : Vector2i
 var toCoords : Vector2i
+var fromNode : Room
+var toNode : EmptyRoom
 var tempSceneId : int
+var fromPosition : Vector2
+var toPosition : Vector2
 
 var room_movement_locked : bool = false
 
-func handle_new_clicked_room(oldCoords, newCoords):
-	if oldCoords is Vector2i:
-		for room in get_children():
-			if room is Room:
-				var roomCoords = room.get_coords()
-				var isOldRoom : bool = roomCoords == oldCoords
-				var isNewRoom : bool = roomCoords == newCoords
-				var dungeonTile : DungeonTile  = room.dungeon_tile
-				if isOldRoom:
-#					if isOldRoom, the room was already selected,
-#					clicking it again should make the shader green,
-#					to indicate it can be clicked again
-					dungeonTile.make_shader_green()
-				elif isNewRoom:
-					dungeonTile.make_shader_purple()
-					dungeonTile.turn_on_shader()
+func _enter_tree():
+	child_entered_tree.connect(_register_child)
 
-func get_room_node_from_coords(coords : Vector2i):
-	for room in get_children():
-		if room.get_coords() == coords:
-			return room
+func _register_child(child):
+	await child.ready
+	var coords = local_to_map(to_local(child.global_position))
+	child.set_meta("coords", coords)
+	room_coords[coords] = child
+	
+func update_room_coords(from: Vector2i, to: Vector2i):
+	room_coords[to] = fromNode
+	room_coords[from] = toNode
+	fromNode.set_meta("coords", to)
+	toNode.set_meta("coords", from)
+
+func get_room_scene(coords: Vector2i) -> Node:
+	return room_coords.get(coords, null)
+
+func handle_new_clicked_room(oldCoords, newCoords):
+	if newCoords:
+		print(newCoords)
+		var clickedTile : RoomSprite = get_room_scene(newCoords).room_sprite
+		#	same room was clicked and shader is already on
+		if oldCoords == newCoords:
+			clickedTile.make_shader_green()
+		if oldCoords != newCoords:
+			clickedTile.make_shader_purple()
+			clickedTile.turn_on_shader()
 
 func spawn_empty_room_at(coords : Vector2i):
 	set_cell(coords, 0, Vector2i(0, 0), 2)
 
 func relocate_room(from : Vector2i, to: Vector2i):
 	last_selected_dungeon_room = null
+	
 	fromCoords = from
 	toCoords = to
-	fromNode = get_room_node_from_coords(from)
-	toNode = get_room_node_from_coords(to)
 	
-	var packedScene = PackedScene.new()
-	fromNode.position = Vector2(0,0)
-	#fromNode.anims.autoplay = "grow_room"
-	fromNode.dungeon_tile.turn_off_shader()
-	packedScene.pack(fromNode)
+	fromNode = get_room_scene(from)
+	toNode = get_room_scene(to)
 	
-	var packedTile = await get_tile_as_packed_scene(packedScene)
+	fromPosition = map_to_local(from)
+	toPosition = map_to_local(to)
 	
-	set_cell(toCoords, 0, Vector2i(0,0), packedTile)
-	spawn_empty_room_at(fromCoords)
 	room_movement_locked = false
-	
-	#fromNode.anims.play('shrink_room')
-	#room_movement_locked = true
-
-func get_tile_as_packed_scene(sceneToSave : PackedScene):
-	var scene_source = tile_set.get_source(0)
-	if scene_source is TileSetScenesCollectionSource:
-		tempSceneId = scene_source.get_next_scene_tile_id()
-		return scene_source.create_scene_tile(sceneToSave, tempSceneId)
-		
-func clear_temp_scene_id():
-	var scene_source = tile_set.get_source(0)
-	if scene_source is TileSetScenesCollectionSource:
-		scene_source.remove_scene_tile(tempSceneId)
+	fromNode.anims.play('shrink_room')
+	room_movement_locked = true
 
 func handle_animations(anim_name : StringName):
-	pass
+	if anim_name == "shrink_room":
+		update_room_coords(fromCoords, toCoords)
+		fromNode.position = toPosition
+		toNode.position = fromPosition
+	
+		fromNode.update_own_tile_connections()
+		
+		var neighborsToNewCellCoords : Array[Vector2i]
+		neighborsToNewCellCoords.append_array(get_surrounding_cells(fromNode.get_coords()))
+		neighborsToNewCellCoords.append_array(get_surrounding_cells(toNode.get_coords()))
+		
+		for tilecoord in neighborsToNewCellCoords:
+			var roomOrEmptyNode = get_room_scene(tilecoord)
+			if roomOrEmptyNode is Room:
+				roomOrEmptyNode.update_own_tile_connections()
+			
+		fromNode.anims.play("grow_room")
+		
+	if anim_name == "grow_room":
+		room_movement_locked = false
