@@ -257,15 +257,13 @@ func go_to_chosen_macguffin():
 	set_target_position(target_macguffin.global_position)
 
 func take_or_ignore_chosen_macguffin():
-	print('taking ', target_macguffin)
 	if target_macguffin == null:
 		return
-		
-	print(target_macguffin)
 	
 	if randf() < 0.8:
 		if target_macguffin == get_tree().get_first_node_in_group("sword"):
-			print('attempting sword pull')
+			var swordRoomNode : SwordRoom = target_macguffin.owner
+			swordRoomNode.initate_sword_event(self)
 		else:
 			target_macguffin.queue_free()
 			treasure_collected += 1

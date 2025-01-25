@@ -39,7 +39,7 @@ func _get_configuration_warnings():
 		
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("trigger_sword_event"):
-		run_sword_event()
+		zoom_in_on_sword()
 	if Input.is_action_just_pressed("reset_camera"):
 		reset_camera_to_origin()
 		
@@ -51,6 +51,10 @@ func _register_child(child):
 	var coords = local_to_map(to_local(child.global_position))
 	child.set_meta("coords", coords)
 	room_coords[coords] = child
+	if child is SwordRoom:
+		child.sword_interacted_with.connect(run_sword_event)
+		child.you_lost.connect(meep_beat_sword_event)
+		child.you_survived.connect(meep_failed_sword_event)
 	
 func update_room_coords(from: Vector2i, to: Vector2i):
 	room_coords[to] = fromNode
@@ -66,21 +70,28 @@ func get_sword_room_tile_position():
 		if child is SwordRoom:
 			return to_global(map_to_local(child.get_coords()))
 
-func run_sword_event():
+func zoom_in_on_sword():	
 	get_tree().create_tween().tween_property(camera_node, "position", get_sword_room_tile_position(), camera_anim_speed)
 	get_tree().create_tween().tween_property(camera_node, "zoom", Vector2(2, 2), camera_anim_speed)
+	
+func run_sword_event(meep_attempting_event : Meeple, sword_room_node : SwordRoom):
+	zoom_in_on_sword()
+	GameState.souls -= meep_attempting_event.soul_value
+	if GameState.souls <= 0:
+		sword_room_node.show_worthy()
+	else:
+		sword_room_node.show_not_worthy()
 	
 func reset_camera_to_origin():
 	get_tree().create_tween().tween_property(camera_node, "position", Vector2(0, 0), camera_anim_speed)
 	get_tree().create_tween().tween_property(camera_node, "zoom", Vector2(1, 1), camera_anim_speed)
 
-func attempt_to_take_the_sword():
+func meep_failed_sword_event():
+	reset_camera_to_origin()
 	pass
-	# compare sword soul value to meeples worth
-	# reduce sword souls by meeple worth
-	# if zero souls after contest show YOU ARE DEEMED WORTHY!
-	# if more than zero souls show YOU ARE UNWORTHY!
-	# explode meeple, deny soul from spawning
+	
+func meep_beat_sword_event():
+	pass
 
 func handle_new_clicked_room(oldCoords, newCoords):
 	if newCoords:

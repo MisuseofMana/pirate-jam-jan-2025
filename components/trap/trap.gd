@@ -9,13 +9,13 @@ class_name Trap
 @onready var reset_icon: TextureProgressBar = $ResetClock
 
 func _ready():
-	timer.wait_time = trap_cooldown
 	reset_icon.hide()
 
 func trigger_trap():
 		play("activate")
-		timer.start()
+		timer.start(trap_cooldown)
 		reset_icon.show()
+		reset_icon.value = 100
 		get_tree().create_tween().tween_property(reset_icon, "value", 0, trap_cooldown)
 	
 func reset_trap():

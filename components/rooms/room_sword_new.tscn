@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://6jtjr8wj4snc"]
+[gd_scene load_steps=13 format=3 uid="uid://6jtjr8wj4snc"]
 
 [ext_resource type="PackedScene" uid="uid://dqr12wo3gio00" path="res://components/rooms/room_basic_base.tscn" id="1_ac2b1"]
 [ext_resource type="Shader" path="res://components/rooms/room_outline.gdshader" id="2_3jsik"]
 [ext_resource type="Script" path="res://components/rooms/sword_room.gd" id="2_8vhp0"]
 [ext_resource type="Texture2D" uid="uid://d4ha56lgt4c1o" path="res://art/rooms/tilemap_sword.png" id="2_qt2is"]
 [ext_resource type="PackedScene" uid="uid://cq13b5eh0vkp7" path="res://ui/sword_peeper.tscn" id="4_7ss5y"]
+[ext_resource type="Script" path="res://components/treasure/treasure_base.gd" id="5_g6l1q"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_uyu10"]
 resource_local_to_scene = true
@@ -15,6 +16,17 @@ shader_parameter/speed = 1.0
 shader_parameter/blockSize = 20.0
 shader_parameter/color = Color(0.828964, 0.405913, 1, 1)
 shader_parameter/tolerance = 0.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6w6ef"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_qt2is")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="Animation" id="Animation_lofyj"]
 length = 0.001
@@ -81,7 +93,7 @@ tracks/4/keys = {
 
 [sub_resource type="Animation" id="Animation_cs1n6"]
 resource_name = "jump_in"
-length = 0.9
+length = 2.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -89,7 +101,7 @@ tracks/0/path = NodePath(".:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.666667),
+"times": PackedFloat32Array(0, 0.2, 2.26667),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector2(-32, -32), Vector2(-32, -32), Vector2(-32, -32)]
@@ -101,7 +113,7 @@ tracks/1/path = NodePath(".:scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.666667, 0.9),
+"times": PackedFloat32Array(0, 0.2, 2.26667, 2.5),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [Vector2(1e-05, 1e-05), Vector2(1.5, 1.5), Vector2(1.5, 1.5), Vector2(1.8, 1.8)]
@@ -113,10 +125,10 @@ tracks/2/path = NodePath(".:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.266667, 0.333333, 0.4, 0.466667, 0.533333, 0.6, 0.666667, 0.733333, 0.8, 0.866667, 0.933333),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.2, 0.333333, 0.466667, 0.6, 0.733333, 0.866667, 1, 1.13333, 1.26667, 1.4, 1.53333, 1.66667, 1.8, 1.93333, 2.06667, 2.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [0.0, 0.0, 0.0174533, -0.0174533, 0.0174533, -0.0174533, 0.0174533, -0.0174533, 0.0, -0.0174533, 0.0, -0.0174533, 0.0]
+"values": [0.0, 0.0, 0.0174533, -0.0174533, 0.0174533, -0.0174533, 0.0174533, -0.0174533, 0.0, -0.0174533, 0.0, -0.0174533, 0.0, -0.0174533, 0.0, -0.0174533, 0.0]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -137,7 +149,7 @@ tracks/4/path = NodePath(".:modulate")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.666667, 0.9),
+"times": PackedFloat32Array(0, 2.26667, 2.5),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
@@ -173,7 +185,7 @@ tracks/6/keys = {
 
 [sub_resource type="Animation" id="Animation_82wn3"]
 resource_name = "worthy"
-length = 1.5
+length = 2.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -181,10 +193,10 @@ tracks/0/path = NodePath(".:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.666667, 0.933333, 1.2, 1.46667, 1.73333, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(-32, -32), Vector2(-32, -32), Vector2(-32, -34), Vector2(-32, -32), Vector2(-32, -34), Vector2(-32, -32), Vector2(-32, -34)]
+"values": [Vector2(-32, -32), Vector2(-32, -32), Vector2(-32, -34), Vector2(-32, -32), Vector2(-32, -34), Vector2(-32, -32), Vector2(-32, -34), Vector2(-32, -32), Vector2(-32, -34)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -193,7 +205,7 @@ tracks/1/path = NodePath(".:scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.2, 1.26667, 1.5),
+"times": PackedFloat32Array(0, 0.2, 2.26667, 2.5),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [Vector2(1e-05, 1e-05), Vector2(1.5, 1.5), Vector2(1.5, 1.5), Vector2(1.8, 1.8)]
@@ -229,7 +241,7 @@ tracks/4/path = NodePath(".:modulate")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 1.26667, 1.5),
+"times": PackedFloat32Array(0, 2.26667, 2.5),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
@@ -276,13 +288,15 @@ script = ExtResource("2_8vhp0")
 [node name="DungeonTile" parent="." index="3"]
 material = SubResource("ShaderMaterial_uyu10")
 
-[node name="Sword" type="Sprite2D" parent="DungeonTile" index="0" groups=["macguffin", "sword"]]
-texture = ExtResource("2_qt2is")
+[node name="Sword" type="AnimatedSprite2D" parent="DungeonTile" index="0" groups=["macguffin", "sword"]]
+sprite_frames = SubResource("SpriteFrames_6w6ef")
+script = ExtResource("5_g6l1q")
 
 [node name="Sword Peeper" parent="DungeonTile" index="1" instance=ExtResource("4_7ss5y")]
 visible = false
 
 [node name="Control" type="Control" parent="." index="7"]
+z_index = 99
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -290,9 +304,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -32.0
-offset_top = -34.0
+offset_top = -33.9998
 offset_right = 32.0
-offset_bottom = 30.0
+offset_bottom = 30.0002
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1e-05, 1e-05)
@@ -335,3 +349,5 @@ vertical_alignment = 1
 libraries = {
 "": SubResource("AnimationLibrary_v6x0i")
 }
+
+[connection signal="animation_finished" from="Control/TextAnimations" to="." method="_on_text_animations_animation_finished"]
