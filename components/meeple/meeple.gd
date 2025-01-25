@@ -63,6 +63,7 @@ var movement_delta: float
 var target_macguffin: Node2D = null
 var agent_map_is_empty_or_unsynced: bool:
 	get(): return NavigationServer2D.map_get_iteration_id(nav_agent.get_navigation_map()) == 0
+var is_dead: bool = false
 
 static func get_all(node_in_tree: Node) -> Array[Meeple]:
 	var meeples: Array[Meeple] = []
@@ -133,6 +134,10 @@ func _get_other_known_rooms() -> Array[Room]:
 	return rooms
 	
 func _physics_process(delta: float) -> void:
+	if not is_dead:
+		_update_movement(delta)
+
+func _update_movement(delta: float) -> void:
 	if agent_map_is_empty_or_unsynced:
 		return
 	if nav_agent.is_navigation_finished():
@@ -180,12 +185,16 @@ func take_damage():
 	thought.hide()
 	
 	if (health <= 0):
-		anims.play("die")
-#		early return if dead to prevent re-enabling hurtbox
+		_die()
 		return
 	
 	await get_tree().create_timer(0.8).timeout
 	hurtbox.disabled = false
+
+func _die():
+	anims.play("die")
+	brain.send_event("died")
+	is_dead = true
 
 func _on_animation_player_animation_finished(anim_name):
 	if anim_name == "die":

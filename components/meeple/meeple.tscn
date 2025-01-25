@@ -311,131 +311,140 @@ script = ExtResource("5_dkyyg")
 script = ExtResource("6_hp8wo")
 initial_state = NodePath("Waiting For Wave")
 
+[node name="Transition" type="Node" parent="Brain/Root"]
+script = ExtResource("8_ahky0")
+to = NodePath("../Dead")
+event = &"died"
+delay_in_seconds = "0.0"
+
 [node name="Waiting For Wave" type="Node" parent="Brain/Root"]
 script = ExtResource("7_jmllr")
 
 [node name="To Explore Dungeon" type="Node" parent="Brain/Root/Waiting For Wave"]
 script = ExtResource("8_ahky0")
-to = NodePath("../../Explore Dungon")
+to = NodePath("../../Exploring Dungon")
 event = &"wave_started"
 delay_in_seconds = "0.0"
 
-[node name="Explore Dungon" type="Node" parent="Brain/Root"]
+[node name="Exploring Dungon" type="Node" parent="Brain/Root"]
 script = ExtResource("6_hp8wo")
 initial_state = NodePath("Explore Current Room")
 
-[node name="Explore Current Room" type="Node" parent="Brain/Root/Explore Dungon"]
+[node name="Explore Current Room" type="Node" parent="Brain/Root/Exploring Dungon"]
 script = ExtResource("6_hp8wo")
 initial_state = NodePath("Pick Action")
 
-[node name="Pick Action" type="Node" parent="Brain/Root/Explore Dungon/Explore Current Room"]
+[node name="Pick Action" type="Node" parent="Brain/Root/Exploring Dungon/Explore Current Room"]
 script = ExtResource("7_jmllr")
 
-[node name="To Look for Macguffins" type="Node" parent="Brain/Root/Explore Dungon/Explore Current Room/Pick Action"]
+[node name="To Look for Macguffins" type="Node" parent="Brain/Root/Exploring Dungon/Explore Current Room/Pick Action"]
 script = ExtResource("8_ahky0")
 to = NodePath("../../Look for Macguffins")
 event = &"look_for_macguffins"
 delay_in_seconds = "0.0"
 
-[node name="To Next Room" type="Node" parent="Brain/Root/Explore Dungon/Explore Current Room/Pick Action"]
+[node name="To Next Room" type="Node" parent="Brain/Root/Exploring Dungon/Explore Current Room/Pick Action"]
 script = ExtResource("8_ahky0")
 to = NodePath("../../../Next Room")
 event = &"next_room"
 delay_in_seconds = "randf_range(1.0, 1.8)"
 
-[node name="To Leave Dungeon" type="Node" parent="Brain/Root/Explore Dungon/Explore Current Room/Pick Action"]
+[node name="To Leave Dungeon" type="Node" parent="Brain/Root/Exploring Dungon/Explore Current Room/Pick Action"]
 script = ExtResource("8_ahky0")
-to = NodePath("../../../../Leave Dungeon")
+to = NodePath("../../../../Leaving Dungeon")
 event = &"leave_dungeon"
 delay_in_seconds = "0.0"
 
-[node name="Look for Macguffins" type="Node" parent="Brain/Root/Explore Dungon/Explore Current Room"]
+[node name="Look for Macguffins" type="Node" parent="Brain/Root/Exploring Dungon/Explore Current Room"]
 script = ExtResource("6_hp8wo")
 initial_state = NodePath("Wander")
 
-[node name="Idle" type="Node" parent="Brain/Root/Explore Dungon/Explore Current Room/Look for Macguffins"]
+[node name="Idle" type="Node" parent="Brain/Root/Exploring Dungon/Explore Current Room/Look for Macguffins"]
 script = ExtResource("7_jmllr")
 
-[node name="To Decide Action" type="Node" parent="Brain/Root/Explore Dungon/Explore Current Room/Look for Macguffins/Idle"]
+[node name="To Decide Action" type="Node" parent="Brain/Root/Exploring Dungon/Explore Current Room/Look for Macguffins/Idle"]
 script = ExtResource("8_ahky0")
 to = NodePath("../../Decide Action")
 delay_in_seconds = "randf_range(1.0, 1.8)"
 
-[node name="Decide Action" type="Node" parent="Brain/Root/Explore Dungon/Explore Current Room/Look for Macguffins"]
+[node name="Decide Action" type="Node" parent="Brain/Root/Exploring Dungon/Explore Current Room/Look for Macguffins"]
 script = ExtResource("7_jmllr")
 
-[node name="To Interact with Macguffin" type="Node" parent="Brain/Root/Explore Dungon/Explore Current Room/Look for Macguffins/Decide Action"]
+[node name="To Interact with Macguffin" type="Node" parent="Brain/Root/Exploring Dungon/Explore Current Room/Look for Macguffins/Decide Action"]
 script = ExtResource("8_ahky0")
 to = NodePath("../../../Interact with Macguffin")
 event = &"targeted_macguffin"
 delay_in_seconds = "0.0"
 
-[node name="To Wander" type="Node" parent="Brain/Root/Explore Dungon/Explore Current Room/Look for Macguffins/Decide Action"]
+[node name="To Wander" type="Node" parent="Brain/Root/Exploring Dungon/Explore Current Room/Look for Macguffins/Decide Action"]
 script = ExtResource("8_ahky0")
 to = NodePath("../../Wander")
 event = &"look_for_macguffins"
 delay_in_seconds = "0.0"
 
-[node name="To Next Room" type="Node" parent="Brain/Root/Explore Dungon/Explore Current Room/Look for Macguffins/Decide Action"]
+[node name="To Next Room" type="Node" parent="Brain/Root/Exploring Dungon/Explore Current Room/Look for Macguffins/Decide Action"]
 script = ExtResource("8_ahky0")
 to = NodePath("../../../../Next Room")
 event = &"next_room"
 delay_in_seconds = "0.0"
 
-[node name="Wander" type="Node" parent="Brain/Root/Explore Dungon/Explore Current Room/Look for Macguffins"]
+[node name="Wander" type="Node" parent="Brain/Root/Exploring Dungon/Explore Current Room/Look for Macguffins"]
 script = ExtResource("7_jmllr")
 
-[node name="To Idle" type="Node" parent="Brain/Root/Explore Dungon/Explore Current Room/Look for Macguffins/Wander"]
+[node name="To Idle" type="Node" parent="Brain/Root/Exploring Dungon/Explore Current Room/Look for Macguffins/Wander"]
 script = ExtResource("8_ahky0")
 to = NodePath("../../Idle")
 event = &"target_reached"
 delay_in_seconds = "0.0"
 
-[node name="Interact with Macguffin" type="Node" parent="Brain/Root/Explore Dungon/Explore Current Room"]
+[node name="Interact with Macguffin" type="Node" parent="Brain/Root/Exploring Dungon/Explore Current Room"]
 script = ExtResource("6_hp8wo")
 initial_state = NodePath("Approach")
 
-[node name="Approach" type="Node" parent="Brain/Root/Explore Dungon/Explore Current Room/Interact with Macguffin"]
+[node name="Approach" type="Node" parent="Brain/Root/Exploring Dungon/Explore Current Room/Interact with Macguffin"]
 script = ExtResource("7_jmllr")
 
-[node name="To Take or Ignore" type="Node" parent="Brain/Root/Explore Dungon/Explore Current Room/Interact with Macguffin/Approach"]
+[node name="To Take or Ignore" type="Node" parent="Brain/Root/Exploring Dungon/Explore Current Room/Interact with Macguffin/Approach"]
 script = ExtResource("8_ahky0")
 to = NodePath("../../Take or Ignore")
 event = &"target_reached"
 delay_in_seconds = "randf_range(1.0, 1.8)"
 
-[node name="Take or Ignore" type="Node" parent="Brain/Root/Explore Dungon/Explore Current Room/Interact with Macguffin"]
+[node name="Take or Ignore" type="Node" parent="Brain/Root/Exploring Dungon/Explore Current Room/Interact with Macguffin"]
 script = ExtResource("7_jmllr")
 
-[node name="To Pick Action" type="Node" parent="Brain/Root/Explore Dungon/Explore Current Room/Interact with Macguffin/Take or Ignore"]
+[node name="To Pick Action" type="Node" parent="Brain/Root/Exploring Dungon/Explore Current Room/Interact with Macguffin/Take or Ignore"]
 script = ExtResource("8_ahky0")
 to = NodePath("../../../Pick Action")
 event = &"interacted_with_macguffin"
 delay_in_seconds = "0.0"
 
-[node name="Next Room" type="Node" parent="Brain/Root/Explore Dungon"]
+[node name="Next Room" type="Node" parent="Brain/Root/Exploring Dungon"]
 script = ExtResource("7_jmllr")
 
-[node name="To Explore Current Room" type="Node" parent="Brain/Root/Explore Dungon/Next Room"]
+[node name="To Explore Current Room" type="Node" parent="Brain/Root/Exploring Dungon/Next Room"]
 script = ExtResource("8_ahky0")
 to = NodePath("../../Explore Current Room")
 event = &"target_reached"
 delay_in_seconds = "0.0"
 
-[node name="Leave Dungeon" type="Node" parent="Brain/Root"]
+[node name="Leaving Dungeon" type="Node" parent="Brain/Root"]
 script = ExtResource("6_hp8wo")
 initial_state = NodePath("Go To Entrance")
 
-[node name="Go To Entrance" type="Node" parent="Brain/Root/Leave Dungeon"]
+[node name="Go To Entrance" type="Node" parent="Brain/Root/Leaving Dungeon"]
 script = ExtResource("7_jmllr")
 
-[node name="To Exit" type="Node" parent="Brain/Root/Leave Dungeon/Go To Entrance"]
+[node name="To Exit" type="Node" parent="Brain/Root/Leaving Dungeon/Go To Entrance"]
 script = ExtResource("8_ahky0")
 to = NodePath("../../Exit")
 event = &"target_reached"
 delay_in_seconds = "0.0"
 
-[node name="Exit" type="Node" parent="Brain/Root/Leave Dungeon"]
+[node name="Exit" type="Node" parent="Brain/Root/Leaving Dungeon"]
+script = ExtResource("7_jmllr")
+
+[node name="Dead" type="Node" parent="Brain/Root"]
 script = ExtResource("7_jmllr")
 
 [connection signal="area_entered" from="Room Hitbox" to="." method="_on_room_hitbox_entered"]
@@ -443,11 +452,11 @@ script = ExtResource("7_jmllr")
 [connection signal="area_entered" from="TrapHitbox" to="TrapHitbox" method="_on_area_entered"]
 [connection signal="stepped_on_trap" from="TrapHitbox" to="." method="take_damage"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
-[connection signal="state_entered" from="Brain/Root/Explore Dungon/Explore Current Room/Pick Action" to="." method="pick_room_action"]
-[connection signal="state_entered" from="Brain/Root/Explore Dungon/Explore Current Room/Look for Macguffins/Decide Action" to="." method="decide_look_for_macguffin_action"]
-[connection signal="state_entered" from="Brain/Root/Explore Dungon/Explore Current Room/Look for Macguffins/Wander" to="." method="go_to_random_position_in_room"]
-[connection signal="state_entered" from="Brain/Root/Explore Dungon/Explore Current Room/Interact with Macguffin/Approach" to="." method="go_to_chosen_macguffin"]
-[connection signal="state_entered" from="Brain/Root/Explore Dungon/Explore Current Room/Interact with Macguffin/Take or Ignore" to="." method="take_or_ignore_chosen_macguffin"]
-[connection signal="state_entered" from="Brain/Root/Explore Dungon/Next Room" to="." method="go_to_next_room"]
-[connection signal="state_entered" from="Brain/Root/Leave Dungeon/Go To Entrance" to="." method="go_to_entrance"]
-[connection signal="state_entered" from="Brain/Root/Leave Dungeon/Exit" to="." method="exit_dungon"]
+[connection signal="state_entered" from="Brain/Root/Exploring Dungon/Explore Current Room/Pick Action" to="." method="pick_room_action"]
+[connection signal="state_entered" from="Brain/Root/Exploring Dungon/Explore Current Room/Look for Macguffins/Decide Action" to="." method="decide_look_for_macguffin_action"]
+[connection signal="state_entered" from="Brain/Root/Exploring Dungon/Explore Current Room/Look for Macguffins/Wander" to="." method="go_to_random_position_in_room"]
+[connection signal="state_entered" from="Brain/Root/Exploring Dungon/Explore Current Room/Interact with Macguffin/Approach" to="." method="go_to_chosen_macguffin"]
+[connection signal="state_entered" from="Brain/Root/Exploring Dungon/Explore Current Room/Interact with Macguffin/Take or Ignore" to="." method="take_or_ignore_chosen_macguffin"]
+[connection signal="state_entered" from="Brain/Root/Exploring Dungon/Next Room" to="." method="go_to_next_room"]
+[connection signal="state_entered" from="Brain/Root/Leaving Dungeon/Go To Entrance" to="." method="go_to_entrance"]
+[connection signal="state_entered" from="Brain/Root/Leaving Dungeon/Exit" to="." method="exit_dungon"]
