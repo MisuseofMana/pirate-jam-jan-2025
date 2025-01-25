@@ -100,13 +100,6 @@ func _on_hovered() -> void:
 
 func _on_unhovered() -> void:
 	MeepPeeper.notify_meeple_unhovered(self)
-			
-func _get_known_macguffins() -> Array[Node2D]:
-	var macguffins: Array[Node2D] = []
-	for macguffin in get_tree().get_nodes_in_group("macguffin"):
-		if macguffin.get_parent() == current_room:
-			macguffins.append(macguffin)
-	return macguffins
 
 func _get_enterable_rooms() -> Array[Room]:
 	var rooms: Array[Room] = []
@@ -246,7 +239,7 @@ func decide_to_keep_exploring_current_room():
 		brain.send_event("next_room")
 
 func decide_look_for_macguffin_action():
-	var scores = macguffin_strategy.get_macguffin_scores(self, _get_known_macguffins())
+	var scores = macguffin_strategy.get_macguffin_scores(self, current_room.get_treasure())
 
 	if not scores.is_empty() and randf() < 0.9:
 		target_macguffin = scores[0].object

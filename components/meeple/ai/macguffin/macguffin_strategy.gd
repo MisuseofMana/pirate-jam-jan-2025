@@ -4,8 +4,8 @@ class_name MacguffinStrategy extends Resource
 
 @export var considerations: Array[MacguffinConsideration] = []
 
-func select_macguffin(meeple: Meeple, macguffins: Array[Node2D]) -> Node2D:
-	return ChoiceUtil.select(meeple, macguffins, considerations)
+func select_macguffin(meeple: Meeple, treasures: Array[Treasure]) -> Treasure:
+	return ChoiceUtil.select(meeple, treasures, considerations)
 
-func get_macguffin_scores(meeple: Meeple, macguffins: Array[Node2D]) -> Array[ChoiceUtil.Score]:
-	return ChoiceUtil.get_scores(meeple, macguffins, considerations)
+func get_macguffin_scores(meeple: Meeple, treasures: Array[Treasure]) -> Array[ChoiceUtil.Score]:
+	return ChoiceUtil.get_scores(meeple, treasures, considerations)

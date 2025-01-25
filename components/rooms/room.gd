@@ -169,10 +169,17 @@ func get_meeples() -> Array[Meeple]:
 
 func get_traps() -> Array[Trap]:
 	var traps: Array[Trap] = []
-	for child in get_children():
+	for child in room_sprite.get_children():
 		if child is Trap:
 			traps.append(child)
 	return traps
+
+func get_treasure() -> Array[Treasure]:
+	var treasure: Array[Treasure] = []
+	for child in room_sprite.get_children():
+		if child is Treasure:
+			treasure.append(child)
+	return treasure
 
 func get_nav_regions() -> Array[NavigationRegion2D]:
 	var regions: Array[NavigationRegion2D] = []
