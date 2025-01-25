@@ -109,10 +109,10 @@ func _get_known_macguffins() -> Array[Node2D]:
 			macguffins.append(macguffin)
 	return macguffins
 
-func _get_other_rooms() -> Array[Room]:
+func _get_enterable_rooms() -> Array[Room]:
 	var rooms: Array[Room] = []
 	for room in get_tree().get_nodes_in_group("room"):
-		if room != current_room and room is Room:
+		if room != current_room and room is Room and room.enterable:
 			rooms.append(room)
 	return rooms
 	
@@ -214,7 +214,7 @@ func pick_room_action():
 		brain.send_event("next_room")
 
 func go_to_next_room():
-	var scores := explore_room_strategy.get_room_scores(self, _get_other_rooms())
+	var scores := explore_room_strategy.get_room_scores(self, _get_enterable_rooms())
 	if scores.is_empty():
 		push_warning("No rooms to explore")
 		return
