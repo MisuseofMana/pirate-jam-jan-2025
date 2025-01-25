@@ -190,7 +190,7 @@ func notify_room_move_start() -> void:
 
 func notify_room_move_end() -> void:
 	should_move = true
-	nav_agent.process_mode = Node.ProcessMode.PROCESS_MODE_ALWAYS
+	nav_agent.process_mode = Node.ProcessMode.PROCESS_MODE_INHERIT
 	brain.send_event("room_move_end")
 	
 # region State Charts Stuff

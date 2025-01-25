@@ -23,20 +23,21 @@ var tempSceneId: int
 var fromPosition: Vector2
 var toPosition: Vector2
 
-@export var camera_anim_speed : float = 0.2
+@export var camera_anim_speed: float = 0.2
 
-var room_movement_locked : bool = false
-
-func _ready():
-#	squash action error loop in output
+var room_movement_locked: bool = false
+		
+func _ready() -> void:
 	InputMap.load_from_project_settings()
+	GameState.paused.connect(func(): process_mode = ProcessMode.PROCESS_MODE_DISABLED)
+	GameState.resumed.connect(func(): process_mode = ProcessMode.PROCESS_MODE_ALWAYS)
 
 func _get_configuration_warnings():
 	if camera_node == null:
 		return ["A Camera2D Node must be assigned in the inspector exports."]
 	else:
 		return []
-		
+
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("trigger_sword_event"):
 		zoom_in_on_sword()
@@ -70,11 +71,12 @@ func get_sword_room_tile_position():
 		if child is SwordRoom:
 			return to_global(map_to_local(child.get_coords()))
 
-func zoom_in_on_sword():	
+func zoom_in_on_sword():
 	get_tree().create_tween().tween_property(camera_node, "position", get_sword_room_tile_position(), camera_anim_speed)
 	get_tree().create_tween().tween_property(camera_node, "zoom", Vector2(2, 2), camera_anim_speed)
+	GameState.notify_meep_drawing_sword()
 	
-func run_sword_event(meep_attempting_event : Meeple, sword_room_node : SwordRoom):
+func run_sword_event(meep_attempting_event: Meeple, sword_room_node: SwordRoom):
 	zoom_in_on_sword()
 	GameState.souls -= meep_attempting_event.soul_value
 	if GameState.souls <= 0:
@@ -85,6 +87,7 @@ func run_sword_event(meep_attempting_event : Meeple, sword_room_node : SwordRoom
 func reset_camera_to_origin():
 	get_tree().create_tween().tween_property(camera_node, "position", Vector2(0, 0), camera_anim_speed)
 	get_tree().create_tween().tween_property(camera_node, "zoom", Vector2(1, 1), camera_anim_speed)
+	GameState.notify_meep_exploded()
 
 func meep_failed_sword_event():
 	reset_camera_to_origin()

@@ -1,13 +1,15 @@
 extends Node
 
 signal souls_changed(value: int)
+signal paused
+signal resumed
 
-# Wave frequency is managed in the state chart for now.
+# Wave frequency is managed in the states chart for now.
 
 @export var waves: Array[Wave] = []
 
 @export_group("References")
-@export var wave_state: StateChart
+@export var states: StateChart
 
 var current_wave_index: int = 0
 var current_wave: Wave:
@@ -27,17 +29,33 @@ var souls: int = 10:
 			oldValue = oldValue - 1 if isReducing else oldValue + 1
 			souls_changed.emit(oldValue)
 
+func _process(_delta: float) -> void:
+	if Input.is_action_just_pressed("reset_camera"):
+		resume()
+
 func spawn_meeple():
 	for entrance in EntranceRoom.get_all(self):
 		entrance.spawn_meeple(current_spawn)
 		current_spawn_index += 1
 	if current_spawn_index >= current_wave.spawns.size():
-		wave_state.send_event("release_wave")
+		states.send_event("release_wave")
 	else:
-		wave_state.send_event("keep_spawning")
+		states.send_event("keep_spawning")
 
 func release_wave():
 	for entrance in EntranceRoom.get_all(self):
 		entrance.start_wave.call_deferred()
 	current_spawn_index = 0
 	current_wave_index += 1
+
+func notify_meep_drawing_sword():
+	states.send_event("meep_drawing_sword")
+
+func notify_meep_exploded():
+	states.send_event("meep_exploded")
+
+func pause():
+	paused.emit()
+
+func resume():
+	resumed.emit()

@@ -21,60 +21,82 @@ spawns = Array[PackedScene]([ExtResource("3_glgtg"), ExtResource("3_glgtg")])
 script = ExtResource("2_vea6p")
 spawns = Array[PackedScene]([ExtResource("3_glgtg"), ExtResource("3_glgtg"), ExtResource("3_glgtg")])
 
-[node name="GameState" type="Node" node_paths=PackedStringArray("wave_state")]
+[node name="GameState" type="Node" node_paths=PackedStringArray("states")]
+process_mode = 3
 script = ExtResource("1_6ccbp")
 waves = Array[ExtResource("2_vea6p")]([SubResource("Resource_ede0e"), SubResource("Resource_wvbli"), SubResource("Resource_mha1p")])
-wave_state = NodePath("Waves")
+states = NodePath("States")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("2_temxw")
 autoplay = true
 
-[node name="Waves" type="Node" parent="."]
+[node name="States" type="Node" parent="."]
 script = ExtResource("2_7yvp7")
 initial_expression_properties = {
 "time_between_meeple": 3.0,
 "time_between_waves": 30.0
 }
 
-[node name="Root" type="Node" parent="Waves"]
+[node name="Root" type="Node" parent="States"]
+script = ExtResource("3_yhpqw")
+initial_state = NodePath("Wave Ongoing")
+
+[node name="Wave Ongoing" type="Node" parent="States/Root"]
 script = ExtResource("3_yhpqw")
 initial_state = NodePath("Wave Gathering")
 
-[node name="Wave Gathering" type="Node" parent="Waves/Root"]
+[node name="Wave Gathering" type="Node" parent="States/Root/Wave Ongoing"]
 script = ExtResource("3_yhpqw")
 initial_state = NodePath("Idle")
 
-[node name="Idle" type="Node" parent="Waves/Root/Wave Gathering"]
+[node name="Idle" type="Node" parent="States/Root/Wave Ongoing/Wave Gathering"]
 script = ExtResource("4_ur7yj")
 
-[node name="Spawn" type="Node" parent="Waves/Root/Wave Gathering/Idle"]
+[node name="Spawn" type="Node" parent="States/Root/Wave Ongoing/Wave Gathering/Idle"]
 script = ExtResource("5_mrhtl")
 to = NodePath("../../Spawning")
 delay_in_seconds = "time_between_meeple"
 
-[node name="Spawning" type="Node" parent="Waves/Root/Wave Gathering"]
+[node name="Spawning" type="Node" parent="States/Root/Wave Ongoing/Wave Gathering"]
 script = ExtResource("4_ur7yj")
 
-[node name="Keep Spawning" type="Node" parent="Waves/Root/Wave Gathering/Spawning"]
+[node name="Keep Spawning" type="Node" parent="States/Root/Wave Ongoing/Wave Gathering/Spawning"]
 script = ExtResource("5_mrhtl")
 to = NodePath("../../Idle")
 event = &"keep_spawning"
 delay_in_seconds = "0"
 
-[node name="Release" type="Node" parent="Waves/Root/Wave Gathering/Spawning"]
+[node name="Release Wave" type="Node" parent="States/Root/Wave Ongoing/Wave Gathering/Spawning"]
 script = ExtResource("5_mrhtl")
 to = NodePath("../../../Between Waves")
 event = &"release_wave"
 delay_in_seconds = "0.0"
 
-[node name="Between Waves" type="Node" parent="Waves/Root"]
+[node name="Between Waves" type="Node" parent="States/Root/Wave Ongoing"]
 script = ExtResource("4_ur7yj")
 
-[node name="To Wave Gathering" type="Node" parent="Waves/Root/Between Waves"]
+[node name="Start Wave" type="Node" parent="States/Root/Wave Ongoing/Between Waves"]
 script = ExtResource("5_mrhtl")
 to = NodePath("../../Wave Gathering")
 delay_in_seconds = "time_between_waves"
 
-[connection signal="state_entered" from="Waves/Root/Wave Gathering/Spawning" to="." method="spawn_meeple"]
-[connection signal="taken" from="Waves/Root/Wave Gathering/Spawning/Release" to="." method="release_wave"]
+[node name="Meep Drawing Sword" type="Node" parent="States/Root/Wave Ongoing"]
+script = ExtResource("5_mrhtl")
+to = NodePath("../../Meep Drawing Sword")
+event = &"meep_drawing_sword"
+delay_in_seconds = "0.0"
+
+[node name="Meep Drawing Sword" type="Node" parent="States/Root"]
+script = ExtResource("4_ur7yj")
+
+[node name="Meep Exploded" type="Node" parent="States/Root/Meep Drawing Sword"]
+script = ExtResource("5_mrhtl")
+to = NodePath("../../Wave Ongoing")
+event = &"meep_exploded"
+delay_in_seconds = "0.0"
+
+[connection signal="state_entered" from="States/Root/Wave Ongoing/Wave Gathering/Spawning" to="." method="spawn_meeple"]
+[connection signal="taken" from="States/Root/Wave Ongoing/Wave Gathering/Spawning/Release Wave" to="." method="release_wave"]
+[connection signal="state_entered" from="States/Root/Meep Drawing Sword" to="." method="pause"]
+[connection signal="taken" from="States/Root/Meep Drawing Sword/Meep Exploded" to="." method="resume"]
