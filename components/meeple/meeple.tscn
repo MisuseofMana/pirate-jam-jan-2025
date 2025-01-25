@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://d1cw4mndlss2u"]
+[gd_scene load_steps=36 format=3 uid="uid://d1cw4mndlss2u"]
 
 [ext_resource type="Script" path="res://components/meeple/meeple.gd" id="1_d3iq0"]
 [ext_resource type="Script" path="res://components/meeple/ai/macguffin/macguffin_consideration.gd" id="2_32q1j"]
@@ -7,10 +7,16 @@
 [ext_resource type="Script" path="res://components/meeple/ai/macguffin/macguffin_strategy.gd" id="5_01ytg"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="5_dkyyg"]
 [ext_resource type="Script" path="res://components/meeple/trap_hitbox.gd" id="5_k20un"]
+[ext_resource type="Script" path="res://components/meeple/ai/room/room_consideration.gd" id="6_6mu71"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="6_hp8wo"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="7_jmllr"]
+[ext_resource type="Script" path="res://components/meeple/ai/room/considerations/favor_adjacent_room.gd" id="7_l6kvi"]
+[ext_resource type="Script" path="res://components/meeple/ai/room/considerations/avoid_entrance.gd" id="8_8r5wk"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="8_ahky0"]
+[ext_resource type="Script" path="res://components/meeple/ai/room/considerations/consider_random_room.gd" id="9_sv0vl"]
 [ext_resource type="Script" path="res://components/meeple/ai/room/room_strategy.gd" id="10_vudfp"]
+[ext_resource type="Script" path="res://components/meeple/ai/room/considerations/favor_treasure.gd" id="10_yg81l"]
+[ext_resource type="Script" path="res://components/meeple/ai/room/considerations/favor_unvisited_room.gd" id="11_xuy50"]
 [ext_resource type="Texture2D" uid="uid://cc0tgjvoa7jhp" path="res://art/meeple/thought-question.png" id="12_qeyom"]
 [ext_resource type="SpriteFrames" uid="uid://do3tj5pa4ek3u" path="res://components/meeple/meeple_looter_skin.tres" id="14_ofm7m"]
 
@@ -26,9 +32,29 @@ influence = 0.25
 script = ExtResource("5_01ytg")
 considerations = Array[ExtResource("2_32q1j")]([SubResource("Resource_rtrl7"), SubResource("Resource_iepwt")])
 
+[sub_resource type="Resource" id="Resource_yxt6c"]
+script = ExtResource("7_l6kvi")
+influence = 1.0
+
+[sub_resource type="Resource" id="Resource_aqh7v"]
+script = ExtResource("8_8r5wk")
+influence = 0.9
+
+[sub_resource type="Resource" id="Resource_2fqgm"]
+script = ExtResource("10_yg81l")
+influence = 0.7
+
+[sub_resource type="Resource" id="Resource_vhade"]
+script = ExtResource("11_xuy50")
+influence = 0.8
+
+[sub_resource type="Resource" id="Resource_jb18k"]
+script = ExtResource("9_sv0vl")
+influence = 0.1
+
 [sub_resource type="Resource" id="Resource_tnmlj"]
 script = ExtResource("10_vudfp")
-considerations = []
+considerations = Array[ExtResource("6_6mu71")]([SubResource("Resource_yxt6c"), SubResource("Resource_aqh7v"), SubResource("Resource_2fqgm"), SubResource("Resource_vhade"), SubResource("Resource_jb18k")])
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_50mka"]
 radius = 8.0
