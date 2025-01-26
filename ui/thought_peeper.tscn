@@ -1,0 +1,239 @@
+[gd_scene load_steps=9 format=3 uid="uid://bt63mth06u2bn"]
+
+[ext_resource type="Script" path="res://ui/thought_peeper.gd" id="1_v6cn2"]
+[ext_resource type="Texture2D" uid="uid://bj0qlbvgwrosw" path="res://art/meeple/hurt.png" id="2_yy5eq"]
+[ext_resource type="Script" path="res://ui/thought_peeper_resources.gd" id="3_iam27"]
+[ext_resource type="Texture2D" uid="uid://b6wskyhqk1dix" path="res://art/treasure/cup.png" id="4_gcqvm"]
+
+[sub_resource type="Resource" id="Resource_4ohif"]
+script = ExtResource("3_iam27")
+treasure_texture = ExtResource("4_gcqvm")
+hurt_texture = ExtResource("2_yy5eq")
+
+[sub_resource type="Animation" id="Animation_uefg8"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(-40, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:self_modulate:r")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.125, 0, 0.125, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:self_modulate:g")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.125, 0, 0.125, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:self_modulate:b")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.125, 0, 0.125, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".:self_modulate:a")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.125, 0, 0.125, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/5/type = "bezier"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("CenterContainer/TextureRect:custom_minimum_size:x")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(16, -0.125, 0, 0.125, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/6/type = "bezier"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("CenterContainer/TextureRect:custom_minimum_size:y")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.125, 0, 0.125, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath(".:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_pv043"]
+resource_name = "show"
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(-35, -0.125, 0, 0.125, 0, -40, -0.125, 0, 0.1, 0, -40, -0.125, 0, 0.125, 0),
+"times": PackedFloat32Array(0, 0.233333, 1)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:self_modulate:r")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0),
+"points": PackedFloat32Array(1, -0.125, 0, 0.125, 0, 1, -0.125, 0, 0.125, 0, 1, -0.125, 0, 0.125, 0, 1, -0.125, 0, 0.125, 0),
+"times": PackedFloat32Array(0, 0.233333, 0.833333, 1)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:self_modulate:g")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0),
+"points": PackedFloat32Array(1, -0.125, 0, 0.125, 0, 1, -0.125, 0, 0.125, 0, 1, -0.125, 0, 0.125, 0, 1, -0.125, 0, 0.125, 0),
+"times": PackedFloat32Array(0, 0.233333, 0.833333, 1)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:self_modulate:b")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0),
+"points": PackedFloat32Array(1, -0.125, 0, 0.125, 0, 1, -0.125, 0, 0.125, 0, 1, -0.125, 0, 0.125, 0, 1, -0.125, 0, 0.125, 0),
+"times": PackedFloat32Array(0, 0.233333, 0.833333, 1)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".:self_modulate:a")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0),
+"points": PackedFloat32Array(0, -0.125, 0, 0.125, 0, 1, -0.125, 0, 0.125, 0, 1, -0.125, 0, 0.125, 0, 0, -0.125, 0, 0.125, 0),
+"times": PackedFloat32Array(0, 0.233333, 0.833333, 1)
+}
+tracks/5/type = "bezier"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("CenterContainer/TextureRect:custom_minimum_size:x")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"handle_modes": PackedInt32Array(0, 0, 2, 0, 0),
+"points": PackedFloat32Array(0, -0.125, 0, 0.125, 0, 28, -0.0333333, 0.0189247, 0.0333333, -0.739035, 16, -0.0352765, 0, 0.1, 0, 16, -0.033, 0, 0.1, 0, 0, -0.125, 0, 0.125, 0),
+"times": PackedFloat32Array(0, 0.166667, 0.233333, 0.833333, 1)
+}
+tracks/6/type = "bezier"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("CenterContainer/TextureRect:custom_minimum_size:y")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0, 0),
+"points": PackedFloat32Array(0, -0.125, 0, 0.125, 0, 0, -0.125, 0, 0.125, 0, 0, -0.125, 0, 0.125, 0, 0, -0.125, 0, 0.125, 0, 0, -0.125, 0, 0.125, 0),
+"times": PackedFloat32Array(0, 0.166667, 0.233333, 0.833333, 1)
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath(".:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_b7fld"]
+_data = {
+"RESET": SubResource("Animation_uefg8"),
+"show": SubResource("Animation_pv043")
+}
+
+[node name="Thought Peeper" type="Panel" node_paths=PackedStringArray("animations", "texture_rect")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -206.0
+offset_top = -212.0
+offset_right = -178.0
+offset_bottom = -192.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_v6cn2")
+resources = SubResource("Resource_4ohif")
+animations = NodePath("AnimationPlayer")
+texture_rect = NodePath("CenterContainer/TextureRect")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_b7fld")
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+texture = ExtResource("2_yy5eq")
+expand_mode = 5
+stretch_mode = 5

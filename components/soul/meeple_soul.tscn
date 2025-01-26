@@ -37,11 +37,13 @@ autoplay = "default"
 one_shot = true
 
 [node name="Chime" type="AudioStreamPlayer2D" parent="."]
+process_mode = 3
 stream = SubResource("AudioStreamRandomizer_3dykx")
 volume_db = -10.0
 pitch_scale = 0.5
 
 [node name="Summon" type="AudioStreamPlayer2D" parent="."]
+process_mode = 3
 stream = SubResource("AudioStreamRandomizer_q0qrp")
 pitch_scale = 0.5
 

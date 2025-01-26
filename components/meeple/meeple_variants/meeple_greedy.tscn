@@ -4,4 +4,6 @@
 [ext_resource type="SpriteFrames" uid="uid://b1lfrnwpw5f1i" path="res://components/meeple/meeple_variants/meeple_greedy_frames.tres" id="2_qkbak"]
 
 [node name="Meeple" instance=ExtResource("1_ckkla")]
-meeple_skin = ExtResource("2_qkbak")
+
+[node name="Meeple" parent="." index="5"]
+sprite_frames = ExtResource("2_qkbak")

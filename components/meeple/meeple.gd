@@ -45,8 +45,9 @@ const THOUGHT_HEART_FULL = preload("res://art/meeple/thought-heart-full.png")
 @export var nav_agent: NavigationAgent2D
 @export var brain: StateChart
 @export var hover_hitbox: Area2D
+@export var hurt_audio: AudioStreamPlayer2D
+@export var thought: ThoughtPeeper
 
-@onready var thought: Sprite2D = $Thought
 @onready var anims = $AnimationPlayer
 @onready var hurtbox = $TrapHitbox/CollisionShape2D
 @onready var meeple_sprite = $Meeple
@@ -84,8 +85,6 @@ func _ready() -> void:
 
 	meeple_sprite.sprite_frames = meeple_skin
 	meeple_sprite.play("default")
-
-	thought.hide()
 
 	hover_hitbox.mouse_entered.connect(_on_hovered)
 	hover_hitbox.mouse_exited.connect(_on_unhovered)
@@ -130,34 +129,10 @@ func _on_velocity_computed(safe_velocity: Vector2) -> void:
 	global_position = global_position.move_toward(global_position + safe_velocity, movement_delta)
 
 func take_damage():
-	thought.show()
-	
-	var thought_hearts_array: Array[CompressedTexture2D] = [
-		THOUGHT_HEART_EMPTY,
-		THOUGHT_HEART_QUARTER,
-		THOUGHT_HEART_HALF,
-		THOUGHT_HEART_THREEQUARTER,
-		THOUGHT_HEART_FULL,
-	]
-	var oldHealth: int = health
+	hurt_audio.play()
+	thought.appear(ThoughtPeeper.Topic.HURT)
+
 	health -= 1
-	
-	thought.texture = thought_hearts_array[oldHealth]
-	thought.show()
-	
-#	animate the damage indicator as a thought bubble
-#	flash between old health and new health two times
-	for i in 2:
-		await get_tree().create_timer(0.2).timeout
-		thought.texture = thought_hearts_array[health]
-		await get_tree().create_timer(0.2).timeout
-		thought.texture = thought_hearts_array[oldHealth]
-	
-#	set health thought icon to new health value
-	thought.texture = thought_hearts_array[health]
-	
-	await get_tree().create_timer(0.3).timeout
-	thought.hide()
 	
 	if (health <= 0):
 		_die()
@@ -262,7 +237,7 @@ func take_or_ignore_chosen_macguffin():
 	
 	if randf() < 0.8:
 		if target_macguffin == get_tree().get_first_node_in_group("sword"):
-			var swordRoomNode : SwordRoom = target_macguffin.owner
+			var swordRoomNode: SwordRoom = target_macguffin.owner
 			swordRoomNode.initate_sword_event(self)
 		else:
 			target_macguffin.queue_free()
