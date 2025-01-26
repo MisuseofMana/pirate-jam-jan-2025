@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://d1cw4mndlss2u"]
+[gd_scene load_steps=44 format=3 uid="uid://d1cw4mndlss2u"]
 
 [ext_resource type="Script" path="res://components/meeple/meeple.gd" id="1_d3iq0"]
 [ext_resource type="Script" path="res://components/meeple/ai/macguffin/macguffin_consideration.gd" id="2_32q1j"]
@@ -21,6 +21,7 @@
 [ext_resource type="AudioStream" uid="uid://c4ucc5tnfjuen" path="res://audio/meep_hurt_2.wav" id="14_et33u"]
 [ext_resource type="PackedScene" uid="uid://bt63mth06u2bn" path="res://ui/thought_peeper.tscn" id="14_jkslr"]
 [ext_resource type="Texture2D" uid="uid://i8gntnkx5ud6" path="res://art/meeple/cat.png" id="15_22stw"]
+[ext_resource type="AudioStream" uid="uid://ddnfkpv3l2q24" path="res://audio/meep_excited.wav" id="15_rv3bd"]
 
 [sub_resource type="Resource" id="Resource_rtrl7"]
 script = ExtResource("3_uijck")
@@ -64,6 +65,13 @@ random_pitch = 1.12
 random_volume_offset_db = 1.37
 streams_count = 1
 stream_0/stream = ExtResource("14_et33u")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_njc1o"]
+playback_mode = 1
+random_pitch = 1.12
+random_volume_offset_db = 1.37
+streams_count = 1
+stream_0/stream = ExtResource("15_rv3bd")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_50mka"]
 radius = 8.0
@@ -261,7 +269,7 @@ scale_min = 0.8
 scale_max = 1.2
 color = Color(0.588235, 0, 0, 1)
 
-[node name="Meeple" type="Node2D" node_paths=PackedStringArray("nav_agent", "brain", "hover_hitbox", "hurt_audio", "thought") groups=["meeple"]]
+[node name="Meeple" type="Node2D" node_paths=PackedStringArray("nav_agent", "brain", "hover_hitbox", "hurt_audio", "excited_audio", "thought") groups=["meeple"]]
 z_index = 1
 script = ExtResource("1_d3iq0")
 meeple_names = Array[String](["Mr. Morbles", "Glam Jim", "Peemps", "Gleeorp", "Dr. Bloop", "Extra Steve", "Hanke", "Trucy", "Willyam", "Melmm", "Kiske", "Lenid", "Kremmin", "Roddie", "That Guy", "Keef Bleefer", "Ornery Jeeps", "Harty Chartie", "Slohee Johee"])
@@ -276,12 +284,19 @@ nav_flags_avoid_traps = 1
 nav_agent = NodePath("NavigationAgent2D")
 brain = NodePath("Brain")
 hover_hitbox = NodePath("Hover Hitbox")
-hurt_audio = NodePath("AudioStreamPlayer2D")
+hurt_audio = NodePath("Hurt Sound")
+excited_audio = NodePath("Excited Sound")
 thought = NodePath("Thought Peeper")
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+[node name="Hurt Sound" type="AudioStreamPlayer2D" parent="."]
 process_mode = 3
 stream = SubResource("AudioStreamRandomizer_jq08d")
+volume_db = -6.616
+pitch_scale = 1.07
+
+[node name="Excited Sound" type="AudioStreamPlayer2D" parent="."]
+process_mode = 3
+stream = SubResource("AudioStreamRandomizer_njc1o")
 volume_db = -6.616
 pitch_scale = 1.07
 

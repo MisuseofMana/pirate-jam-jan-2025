@@ -46,6 +46,7 @@ const THOUGHT_HEART_FULL = preload("res://art/meeple/thought-heart-full.png")
 @export var brain: StateChart
 @export var hover_hitbox: Area2D
 @export var hurt_audio: AudioStreamPlayer2D
+@export var excited_audio: AudioStreamPlayer2D
 @export var thought: ThoughtPeeper
 
 @onready var anims = $AnimationPlayer
@@ -241,6 +242,7 @@ func take_or_ignore_chosen_macguffin():
 			swordRoomNode.initate_sword_event(self)
 		else:
 			thought.appear(ThoughtPeeper.Topic.TREASURE)
+			excited_audio.play()
 			target_macguffin.queue_free()
 			treasure_collected += 1
 	

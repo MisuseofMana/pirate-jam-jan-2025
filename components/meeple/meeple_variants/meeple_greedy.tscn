@@ -5,5 +5,5 @@
 
 [node name="Meeple" instance=ExtResource("1_ckkla")]
 
-[node name="Meeple" parent="." index="5"]
+[node name="Meeple" parent="." index="4"]
 sprite_frames = ExtResource("2_qkbak")
