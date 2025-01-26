@@ -1,90 +1,44 @@
-[gd_scene load_steps=57 format=3 uid="uid://d1cw4mndlss2u"]
+[gd_scene load_steps=34 format=3 uid="uid://d1cw4mndlss2u"]
 
 [ext_resource type="Script" path="res://components/meeple/meeple.gd" id="1_d3iq0"]
-[ext_resource type="Script" path="res://components/meeple/ai/macguffin/macguffin_consideration.gd" id="2_32q1j"]
 [ext_resource type="SpriteFrames" uid="uid://b1lfrnwpw5f1i" path="res://components/meeple/meeple_variants/meeple_greedy_frames.tres" id="2_xujee"]
-[ext_resource type="Script" path="res://components/meeple/ai/macguffin/considerations/favor_closest_macguffin.gd" id="3_uijck"]
-[ext_resource type="Script" path="res://components/meeple/ai/macguffin/considerations/favor_random_macguffin.gd" id="4_cg8a4"]
-[ext_resource type="Script" path="res://components/meeple/ai/macguffin/macguffin_strategy.gd" id="5_01ytg"]
+[ext_resource type="Script" path="res://components/meeple/ai/room_strategy.gd" id="4_0f6rl"]
+[ext_resource type="Script" path="res://components/meeple/ai/macguffin_strategy.gd" id="5_01ytg"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="5_dkyyg"]
 [ext_resource type="Script" path="res://components/meeple/trap_hitbox.gd" id="5_k20un"]
-[ext_resource type="Script" path="res://components/meeple/ai/room/room_consideration.gd" id="6_6mu71"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="6_hp8wo"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="7_jmllr"]
-[ext_resource type="Script" path="res://components/meeple/ai/room/considerations/favor_adjacent_room.gd" id="7_l6kvi"]
-[ext_resource type="Script" path="res://components/meeple/ai/room/considerations/avoid_entrance.gd" id="8_8r5wk"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="8_ahky0"]
-[ext_resource type="Script" path="res://components/meeple/ai/room/considerations/consider_random_room.gd" id="9_sv0vl"]
-[ext_resource type="Script" path="res://components/meeple/ai/room/room_strategy.gd" id="10_vudfp"]
-[ext_resource type="Script" path="res://components/meeple/ai/room/considerations/favor_treasure.gd" id="10_yg81l"]
-[ext_resource type="Script" path="res://components/meeple/ai/room/considerations/favor_unvisited_room.gd" id="11_xuy50"]
-[ext_resource type="Script" path="res://components/meeple/ai/room/considerations/avoid_danger.gd" id="13_7psb4"]
 [ext_resource type="AudioStream" uid="uid://c4ucc5tnfjuen" path="res://audio/meep_hurt_2.wav" id="14_et33u"]
-[ext_resource type="PackedScene" path="res://ui/thought_peeper.tscn" id="14_jkslr"]
-[ext_resource type="Script" path="res://components/meeple/ai/room_activity/room_activity_consideration.gd" id="14_nu3bm"]
-[ext_resource type="Script" path="res://components/meeple/ai/room_activity/room_activity_strategy.gd" id="14_u7wsa"]
-[ext_resource type="Script" path="res://components/meeple/ai/room_activity/considerations/favor_fill_pockets.gd" id="15_km26d"]
+[ext_resource type="PackedScene" uid="uid://bt63mth06u2bn" path="res://ui/thought_peeper.tscn" id="14_jkslr"]
+[ext_resource type="Script" path="res://components/meeple/ai/room_activity_strategy.gd" id="14_u7wsa"]
 [ext_resource type="AudioStream" uid="uid://ddnfkpv3l2q24" path="res://audio/meep_excited.wav" id="15_rv3bd"]
-[ext_resource type="Script" path="res://components/meeple/ai/room_activity/considerations/consider_random.gd" id="16_ob4eh"]
-[ext_resource type="Material" uid="uid://c13gisbx0lcud" path="res://components/meeple/die_particles.tres" id="21_lylsi"]
-[ext_resource type="Material" uid="uid://cmggws4u2ebjc" path="res://components/meeple/explode_particles.tres" id="22_f2fio"]
+[ext_resource type="Material" path="res://components/meeple/die_particles.tres" id="21_lylsi"]
+[ext_resource type="Material" path="res://components/meeple/explode_particles.tres" id="22_f2fio"]
 [ext_resource type="Script" path="res://ui/thought_peeper_resources.gd" id="23_5v4pn"]
 [ext_resource type="Texture2D" uid="uid://2rqj15oc2tmc" path="res://art/meeple/exit.png" id="24_ut6j2"]
 [ext_resource type="Texture2D" uid="uid://bj0qlbvgwrosw" path="res://art/meeple/hurt.png" id="25_0fjv0"]
 [ext_resource type="Texture2D" uid="uid://c8o0mpo2xifkm" path="res://art/meeple/thinking.png" id="26_utylb"]
 [ext_resource type="Texture2D" uid="uid://b6wskyhqk1dix" path="res://art/treasure/cup.png" id="27_s46va"]
 
-[sub_resource type="Resource" id="Resource_rtrl7"]
-script = ExtResource("3_uijck")
-influence = 1.0
-
-[sub_resource type="Resource" id="Resource_iepwt"]
-script = ExtResource("4_cg8a4")
-influence = 0.25
-
 [sub_resource type="Resource" id="Resource_3ma6w"]
 script = ExtResource("5_01ytg")
-considerations = Array[ExtResource("2_32q1j")]([SubResource("Resource_rtrl7"), SubResource("Resource_iepwt")])
+consideration_favor_closest = 1.0
+consideration_decide_randomly = 0.1
 
-[sub_resource type="Resource" id="Resource_yxt6c"]
-script = ExtResource("7_l6kvi")
-influence = 1.0
-
-[sub_resource type="Resource" id="Resource_aqh7v"]
-script = ExtResource("8_8r5wk")
-influence = 0.9
-
-[sub_resource type="Resource" id="Resource_2fqgm"]
-script = ExtResource("10_yg81l")
-influence = 0.7
-
-[sub_resource type="Resource" id="Resource_vhade"]
-script = ExtResource("11_xuy50")
-influence = 0.8
-
-[sub_resource type="Resource" id="Resource_44led"]
-script = ExtResource("13_7psb4")
-influence = 0.1
-
-[sub_resource type="Resource" id="Resource_jb18k"]
-script = ExtResource("9_sv0vl")
-influence = 0.1
-
-[sub_resource type="Resource" id="Resource_tnmlj"]
-script = ExtResource("10_vudfp")
-considerations = Array[ExtResource("6_6mu71")]([SubResource("Resource_yxt6c"), SubResource("Resource_aqh7v"), SubResource("Resource_2fqgm"), SubResource("Resource_vhade"), SubResource("Resource_44led"), SubResource("Resource_jb18k")])
-
-[sub_resource type="Resource" id="Resource_lp1ah"]
-script = ExtResource("15_km26d")
-influence = 1.0
-
-[sub_resource type="Resource" id="Resource_dgtis"]
-script = ExtResource("16_ob4eh")
-influence = 0.15
+[sub_resource type="Resource" id="Resource_xwrya"]
+script = ExtResource("4_0f6rl")
+consideration_avoid_danger = 0.1
+consideration_avoid_entrance = 0.9
+consideration_decide_randomly = 0.1
+consideration_favor_adjacent = 1.0
+consideration_favor_treasure_count = 0.7
+consideration_favor_unvisited = 0.8
 
 [sub_resource type="Resource" id="Resource_xhn3h"]
 script = ExtResource("14_u7wsa")
-considerations = Array[ExtResource("14_nu3bm")]([SubResource("Resource_lp1ah"), SubResource("Resource_dgtis")])
+consideration_fill_pockets = 1.0
+consideration_decide_randomly = 0.15
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_jq08d"]
 playback_mode = 1
@@ -334,7 +288,7 @@ meeple_skin = ExtResource("2_xujee")
 health = 1
 movement_speed = 30.0
 macguffin_strategy = SubResource("Resource_3ma6w")
-next_room_strategy = SubResource("Resource_tnmlj")
+next_room_strategy = SubResource("Resource_xwrya")
 room_activity_strategy = SubResource("Resource_xhn3h")
 trap_awareness_chance = 0.3
 nav_flags_normal = 3

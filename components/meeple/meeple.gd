@@ -198,11 +198,10 @@ func pick_room_action():
 		push_warning("No room activities to choose from")
 		return
 	
-	var target_activity := scores[0].object as RoomActivity
+	var target_activity := scores[0].choice as RoomActivity
 	if debug:
-		print("Chose Room Activity " + str(target_activity) + ":")
 		for score in scores:
-			print(score._to_string())
+			print(score)
 	
 	match target_activity:
 		RoomActivity.LOOK_FOR_TREASURE:
@@ -218,11 +217,10 @@ func go_to_next_room():
 		push_warning("No rooms to explore")
 		return
 	
-	target_room = scores[0].object
+	target_room = scores[0].choice
 	if debug:
-		print("Chose Room " + target_room.name + ":")
 		for score in scores:
-			print(score._to_string())
+			print(score)
 	set_target_position(target_room.get_random_walkable_global_position(compute_nav_layers()))
 
 func on_target_room_reached():
@@ -253,11 +251,10 @@ func decide_look_for_macguffin_action():
 	var scores = macguffin_strategy.get_scores(self, current_room.get_treasure())
 
 	if not scores.is_empty() and randf() < 0.9:
-		target_macguffin = scores[0].object
+		target_macguffin = scores[0].choice
 		if debug:
-			print("Chose Macguffin " + target_macguffin.name + ":")
 			for score in scores:
-				print(score._to_string())
+				print(score)
 		brain.send_event("targeted_macguffin")
 	elif randf() < 0.5:
 		brain.send_event("look_for_macguffins")
