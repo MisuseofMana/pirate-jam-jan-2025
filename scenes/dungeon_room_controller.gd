@@ -7,7 +7,6 @@ class_name DungeonRoomController extends TileMapLayer
 		update_configuration_warnings()
 		
 const EVENT_DRAW_SWORD = preload("res://components/room_events/event_draw_sword.tscn")
-const MEEPLE = preload("res://components/meeple/meeple.tscn")
 
 var room_coords: Dictionary = {}
 
@@ -46,8 +45,6 @@ func _process(_delta: float) -> void:
 		zoom_in_on_sword()
 	if Input.is_action_just_pressed("reset_camera"):
 		reset_camera_to_origin()
-	if Input.is_action_just_pressed("run_sword_event"):
-		run_sword_event(MEEPLE.instantiate())
 		
 func _enter_tree():
 	child_entered_tree.connect(_register_child)
@@ -87,7 +84,7 @@ func zoom_in_on_sword():
 func run_sword_event(meep_attempting_event: Meeple):
 	zoom_in_on_sword()
 	GameState.souls -= meep_attempting_event.soul_value
-	var swordEventNode : EventDrawSword = EVENT_DRAW_SWORD.instantiate()
+	var swordEventNode: EventDrawSword = EVENT_DRAW_SWORD.instantiate()
 	var eventWrapper = Node2D.new()
 	eventWrapper.position = get_sword_room_tile_position()
 	get_tree().root.add_child(eventWrapper)
