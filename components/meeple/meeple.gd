@@ -240,6 +240,7 @@ func take_or_ignore_chosen_macguffin():
 			var swordRoomNode: SwordRoom = target_macguffin.owner
 			swordRoomNode.initate_sword_event(self)
 		else:
+			thought.appear(ThoughtPeeper.Topic.TREASURE)
 			target_macguffin.queue_free()
 			treasure_collected += 1
 	
