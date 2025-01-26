@@ -9,3 +9,7 @@ static func assert_abstract():
 ## Return the result of this method to indicate that a code path should be unreachable.
 static func assert_unreachable():
 	assert(false, "This code path should be unreachable.")
+
+## Return the result of this method to indicate that an invalid enum value was passed.
+static func assert_invalid_enum_value(value):
+	assert(false, "Invalid enum value: " + str(value))

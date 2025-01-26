@@ -1,13 +1,20 @@
 class_name ThoughtPeeperResources extends Resource
 
-@export var treasure_texture: Texture2D
-@export var hurt_texture: Texture2D
+@export_group("Textures", "texture_")
+@export var texture_treasure: Texture2D
+@export var texture_hurt: Texture2D
+@export var texture_thinking: Texture2D
+@export var texture_exit: Texture2D
 
 func get_topic_texture(topic: ThoughtPeeper.Topic) -> Texture:
     match topic:
         ThoughtPeeper.Topic.HURT:
-            return hurt_texture
+            return texture_hurt
         ThoughtPeeper.Topic.TREASURE:
-            return treasure_texture
+            return texture_treasure
+        ThoughtPeeper.Topic.THINKING:
+            return texture_thinking
+        ThoughtPeeper.Topic.EXIT:
+            return texture_exit
         _:
-            return null
+            return ErrorUtil.assert_invalid_enum_value(topic)

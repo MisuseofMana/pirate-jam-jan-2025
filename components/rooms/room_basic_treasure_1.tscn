@@ -1,0 +1,76 @@
+[gd_scene load_steps=6 format=3 uid="uid://u8ydg4hulv4r"]
+
+[ext_resource type="PackedScene" uid="uid://dqr12wo3gio00" path="res://components/rooms/room_basic_base.tscn" id="1_8qgx7"]
+[ext_resource type="Shader" path="res://components/rooms/room_outline.gdshader" id="2_sl2uq"]
+[ext_resource type="PackedScene" uid="uid://csw3vkdw4erk5" path="res://components/treasure/treasure_base.tscn" id="3_inn8l"]
+[ext_resource type="PackedScene" uid="uid://djdb3leiduao5" path="res://components/furniture/furniture.tscn" id="4_1ws2a"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_286ue"]
+resource_local_to_scene = true
+shader = ExtResource("2_sl2uq")
+shader_parameter/maxLineWidth = 0.0
+shader_parameter/minLineWidth = 0.0
+shader_parameter/speed = 1.0
+shader_parameter/blockSize = 20.0
+shader_parameter/color = Color(0.828964, 0.405913, 1, 1)
+shader_parameter/tolerance = 0.0
+
+[node name="Treasure Room" instance=ExtResource("1_8qgx7")]
+
+[node name="DungeonTile" parent="." index="3"]
+material = SubResource("ShaderMaterial_286ue")
+
+[node name="Treasure" parent="DungeonTile" index="0" instance=ExtResource("3_inn8l")]
+position = Vector2(-20, -20)
+frame = 1
+
+[node name="Treasure2" parent="DungeonTile" index="1" instance=ExtResource("3_inn8l")]
+position = Vector2(-12, -20)
+frame = 4
+
+[node name="Treasure7" parent="DungeonTile" index="2" instance=ExtResource("3_inn8l")]
+position = Vector2(-4, -12)
+frame = 5
+
+[node name="Treasure8" parent="DungeonTile" index="3" instance=ExtResource("3_inn8l")]
+position = Vector2(4, -12)
+frame = 2
+
+[node name="Treasure11" parent="DungeonTile" index="4" instance=ExtResource("3_inn8l")]
+position = Vector2(20, -12)
+frame = 2
+
+[node name="Treasure9" parent="DungeonTile" index="5" instance=ExtResource("3_inn8l")]
+position = Vector2(-12, -12)
+frame = 2
+
+[node name="Treasure10" parent="DungeonTile" index="6" instance=ExtResource("3_inn8l")]
+position = Vector2(20, -20)
+frame = 2
+
+[node name="Treasure3" parent="DungeonTile" index="7" instance=ExtResource("3_inn8l")]
+position = Vector2(-4, -20)
+frame = 3
+
+[node name="Treasure4" parent="DungeonTile" index="8" instance=ExtResource("3_inn8l")]
+position = Vector2(-20, -12)
+frame = 3
+
+[node name="Treasure5" parent="DungeonTile" index="9" instance=ExtResource("3_inn8l")]
+position = Vector2(12, -20)
+frame = 3
+
+[node name="Treasure6" parent="DungeonTile" index="10" instance=ExtResource("3_inn8l")]
+position = Vector2(12, -20)
+frame = 3
+
+[node name="Furniture" parent="DungeonTile" index="11" instance=ExtResource("4_1ws2a")]
+position = Vector2(-20, 20)
+frame = 2
+
+[node name="Furniture2" parent="DungeonTile" index="12" instance=ExtResource("4_1ws2a")]
+position = Vector2(20, 20)
+frame = 1
+
+[node name="Furniture3" parent="DungeonTile" index="13" instance=ExtResource("4_1ws2a")]
+position = Vector2(-20, 12)

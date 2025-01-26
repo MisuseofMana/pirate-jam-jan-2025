@@ -215,6 +215,10 @@ func decide_to_keep_exploring_current_room():
 		brain.send_event("next_room")
 
 func decide_look_for_macguffin_action():
+	if treasure_collected >= max_treasure:
+		brain.send_event("leave_dungeon")
+		return
+
 	var scores = macguffin_strategy.get_macguffin_scores(self, current_room.get_treasure())
 
 	if not scores.is_empty() and randf() < 0.9:
@@ -241,7 +245,6 @@ func take_or_ignore_chosen_macguffin():
 			var swordRoomNode: SwordRoom = target_macguffin.owner
 			swordRoomNode.initate_sword_event(self)
 		else:
-			thought.appear(ThoughtPeeper.Topic.TREASURE)
 			excited_audio.play()
 			target_macguffin.queue_free()
 			treasure_collected += 1
@@ -264,6 +267,16 @@ func go_to_entrance():
 
 func exit_dungon() -> void:
 	queue_free()
+	MeepPeeper.notify_meeple_unhovered(self)
 
 func compute_nav_layers() -> int:
 	return nav_flags_avoid_traps if randf() <= trap_awareness_chance else nav_flags_normal
+
+func show_thought_treasure() -> void:
+	thought.appear(ThoughtPeeper.Topic.TREASURE)
+
+func show_thought_thinking() -> void:
+	thought.appear(ThoughtPeeper.Topic.THINKING)
+
+func show_thought_exit() -> void:
+	thought.appear(ThoughtPeeper.Topic.EXIT)

@@ -39,7 +39,9 @@ func notify_meeple_unhovered(meeple: Meeple) -> void:
 		_hovered_meeple_changed()
 
 func _hovered_meeple_changed():
-	_hovered_meeple = _hovered_meeple.filter(func(m: Meeple): return m and is_instance_valid(m))
+	var new_hovered_meeple: Array[Meeple] = []
+	new_hovered_meeple.assign(_hovered_meeple.filter(func(m: Meeple): return m and is_instance_valid(m)))
+	_hovered_meeple = new_hovered_meeple
 	if not _hovered_meeple.is_empty():
 		_meep = _hovered_meeple.back()
 	else:

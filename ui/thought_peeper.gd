@@ -7,6 +7,8 @@ class_name ThoughtPeeper extends Panel
 enum Topic {
 	HURT,
 	TREASURE,
+	THINKING,
+	EXIT
 }
 
 func _ready() -> void:
