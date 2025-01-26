@@ -30,3 +30,15 @@ func _description() -> String:
 
 func _update_description() -> void:
 	resource_name = description()
+
+## Scoring utility. As the input increases, the score increases at a diminishing rate. The midpoint is the input value at which the score is 0.5.
+static func score_diminishing_returns(input: float, midpoint: float = 2.0) -> float:
+	return 1.0 - pow(2, input / -midpoint)
+
+## Scoring utility. As the input increases, the score decreases at a diminishing rate. The midpoint is the input value at which the score is 0.5.
+static func score_diminishing_loss(input: float, midpoint: float = 2.0) -> float:
+	return 1.0 - score_diminishing_returns(input, midpoint)
+
+## Scoring utility. Returns 1.0 if the input is true, otherwise 0.0.
+static func score_if_true(input: bool) -> float:
+	return 1.0 if input else 0.0

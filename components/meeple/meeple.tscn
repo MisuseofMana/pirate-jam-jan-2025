@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://d1cw4mndlss2u"]
+[gd_scene load_steps=59 format=3 uid="uid://d1cw4mndlss2u"]
 
 [ext_resource type="Script" path="res://components/meeple/meeple.gd" id="1_d3iq0"]
 [ext_resource type="Script" path="res://components/meeple/ai/macguffin/macguffin_consideration.gd" id="2_32q1j"]
@@ -18,6 +18,7 @@
 [ext_resource type="Script" path="res://components/meeple/ai/room/room_strategy.gd" id="10_vudfp"]
 [ext_resource type="Script" path="res://components/meeple/ai/room/considerations/favor_treasure.gd" id="10_yg81l"]
 [ext_resource type="Script" path="res://components/meeple/ai/room/considerations/favor_unvisited_room.gd" id="11_xuy50"]
+[ext_resource type="Script" path="res://components/meeple/ai/room/considerations/avoid_danger.gd" id="13_7psb4"]
 [ext_resource type="AudioStream" uid="uid://c4ucc5tnfjuen" path="res://audio/meep_hurt_2.wav" id="14_et33u"]
 [ext_resource type="PackedScene" uid="uid://bt63mth06u2bn" path="res://ui/thought_peeper.tscn" id="14_jkslr"]
 [ext_resource type="Script" path="res://components/meeple/ai/room_activity/room_activity_consideration.gd" id="14_nu3bm"]
@@ -60,13 +61,17 @@ influence = 0.7
 script = ExtResource("11_xuy50")
 influence = 0.8
 
+[sub_resource type="Resource" id="Resource_44led"]
+script = ExtResource("13_7psb4")
+influence = 0.1
+
 [sub_resource type="Resource" id="Resource_jb18k"]
 script = ExtResource("9_sv0vl")
 influence = 0.1
 
 [sub_resource type="Resource" id="Resource_tnmlj"]
 script = ExtResource("10_vudfp")
-considerations = Array[ExtResource("6_6mu71")]([SubResource("Resource_yxt6c"), SubResource("Resource_aqh7v"), SubResource("Resource_2fqgm"), SubResource("Resource_vhade"), SubResource("Resource_jb18k")])
+considerations = Array[ExtResource("6_6mu71")]([SubResource("Resource_yxt6c"), SubResource("Resource_aqh7v"), SubResource("Resource_2fqgm"), SubResource("Resource_vhade"), SubResource("Resource_44led"), SubResource("Resource_jb18k")])
 
 [sub_resource type="Resource" id="Resource_lp1ah"]
 script = ExtResource("15_km26d")
@@ -561,8 +566,8 @@ resources = SubResource("Resource_3g382")
 [connection signal="area_entered" from="Room Hitbox/TrapHitbox" to="Room Hitbox/TrapHitbox" method="_on_area_entered"]
 [connection signal="stepped_on_trap" from="Room Hitbox/TrapHitbox" to="." method="take_damage"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
-[connection signal="state_entered" from="Brain/Root/Exploring Dungon/Exploring Current Room/Picking Activity" to="." method="show_thought_thinking"]
 [connection signal="state_entered" from="Brain/Root/Exploring Dungon/Exploring Current Room/Picking Activity" to="." method="pick_room_action"]
+[connection signal="state_entered" from="Brain/Root/Exploring Dungon/Exploring Current Room/Picking Activity" to="." method="show_thought_thinking"]
 [connection signal="taken" from="Brain/Root/Exploring Dungon/Exploring Current Room/Picking Activity/Look for Macguffins" to="." method="show_thought_treasure"]
 [connection signal="state_entered" from="Brain/Root/Exploring Dungon/Exploring Current Room/Looking for Macguffins/Decide Action" to="." method="decide_look_for_macguffin_action"]
 [connection signal="state_entered" from="Brain/Root/Exploring Dungon/Exploring Current Room/Looking for Macguffins/Wander" to="." method="go_to_random_position_in_room"]

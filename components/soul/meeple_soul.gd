@@ -1,18 +1,18 @@
 extends Node2D
 class_name MeepleSoul
 
-@onready var soul_sprite : AnimatedSprite2D = $SoulSprite
-@onready var thought : Sprite2D = $Thought
+@onready var soul_sprite: AnimatedSprite2D = $SoulSprite
+@onready var thought: Sprite2D = $Thought
 @onready var timer = $Timer
 
 # set wait time of this timer to determine how long a soul survives in the dungeon
 @onready var lifetime_timer = $LifetimeTimer
-@export var soul_lifetime : int = 15
+@export var soul_lifetime: int = 15
 
 @onready var chime = $Chime
 @onready var summon = $Summon
 
-@export_range(1, 99) var soul_value : int = 1
+@export_range(1, 99) var soul_value: int = 1
 @export var movement_speed: float = 40.0
 
 @export var nav_agent: NavigationAgent2D
@@ -60,7 +60,9 @@ func _on_velocity_computed(safe_velocity: Vector2) -> void:
 	global_position = global_position.move_toward(global_position + safe_velocity, movement_delta)
 
 func go_to_sword():
-	nav_agent.target_position = get_tree().get_first_node_in_group("sword").global_position
+	var sword := get_tree().get_first_node_in_group("sword") as Treasure
+	if sword:
+		nav_agent.target_position = sword.global_position
 	
 func _on_timer_timeout():
 	thought.hide()
@@ -68,4 +70,3 @@ func _on_timer_timeout():
 	
 func _soul_lifetime_ran_out():
 	soul_sprite.play("disentigrate")
-	
