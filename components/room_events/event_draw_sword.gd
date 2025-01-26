@@ -10,9 +10,6 @@ func show_worthy():
 
 func _on_text_animations_animation_finished(anim_name):
 	if anim_name == "worthy":
-		
-		get_parent().queue_free()
+		SceneSwitcher.switch_scene("res://scenes/lose_screen.tscn")
 	if anim_name == "unworthy":
-		GameState.notify_meep_exploded()
 		get_parent().queue_free()
-		

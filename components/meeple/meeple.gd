@@ -159,6 +159,11 @@ func _die():
 	brain.send_event("died")
 	should_move = false
 
+func explode():
+	anims.play("explode")
+	brain.send_event("died")
+	should_move = false
+	
 func _on_animation_player_animation_finished(anim_name):
 	if anim_name == "die":
 		var soul: MeepleSoul = MEEPLE_SOUL.instantiate()
@@ -166,6 +171,8 @@ func _on_animation_player_animation_finished(anim_name):
 		soul.position = position
 		MeepPeeper.notify_meeple_unhovered(self)
 		get_parent().add_child(soul)
+		queue_free()
+	if anim_name == 'explode':
 		queue_free()
 
 func notify_wave_started() -> void:

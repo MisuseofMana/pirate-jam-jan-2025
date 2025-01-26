@@ -51,8 +51,21 @@ func release_wave():
 func notify_meep_drawing_sword():
 	states.send_event("meep_drawing_sword")
 
-func notify_meep_exploded():
+func notify_meep_exploded(meep: Meeple):
+	meep.explode()
 	states.send_event("meep_exploded")
+	
+func notify_you_win():
+	states.send_event("you_win")
+
+func lose_game():
+#	show lose screen
+	pass
+	
+func win_game():
+#	show win screen
+
+	pass
 
 func pause():
 	paused.emit()

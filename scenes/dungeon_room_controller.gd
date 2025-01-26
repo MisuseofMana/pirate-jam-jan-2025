@@ -96,6 +96,7 @@ func run_sword_event(meep_attempting_event: Meeple):
 	
 	if GameState.souls <= 0:
 		swordEventNode.show_worthy()
+		GameState.notify_meep_exploded(meep_attempting_event)
 	else:
 		swordEventNode.show_not_worthy()
 	

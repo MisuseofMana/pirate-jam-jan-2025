@@ -1,9 +1,33 @@
-[gd_resource type="Theme" load_steps=3 format=3 uid="uid://dbv4tc0bvbxj1"]
+[gd_resource type="Theme" load_steps=5 format=3 uid="uid://dbv4tc0bvbxj1"]
 
 [ext_resource type="FontFile" uid="uid://cewmixb1gjd4n" path="res://ui/PirataOne-Regular.ttf" id="1_bbgcj"]
 [ext_resource type="StyleBox" uid="uid://bn2bpcwbw8733" path="res://ui/thought_bubble.tres" id="1_q0sc4"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8ce4d"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(0.917647, 0.941176, 0.847059, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_837x5"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(0.867927, 0.903282, 0.75679, 1)
+
 [resource]
+Button/colors/font_color = Color(0, 0, 0, 1)
+Button/colors/font_focus_color = Color(0, 0, 0, 1)
+Button/colors/font_hover_color = Color(0, 0, 0, 1)
+Button/colors/font_pressed_color = Color(0, 0, 0, 1)
+Button/fonts/font = ExtResource("1_bbgcj")
+Button/styles/focus = SubResource("StyleBoxFlat_8ce4d")
+Button/styles/hover = SubResource("StyleBoxFlat_837x5")
+Button/styles/hover_pressed = SubResource("StyleBoxFlat_837x5")
+Button/styles/normal = SubResource("StyleBoxFlat_8ce4d")
+Button/styles/pressed = SubResource("StyleBoxFlat_837x5")
 Label/colors/font_color = Color(0, 0, 0, 1)
 Label/colors/font_outline_color = Color(1, 1, 1, 1)
 Label/font_sizes/font_size = 18
