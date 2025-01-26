@@ -9,8 +9,13 @@ const THOUGHT_HEART_HALF = preload("res://art/meeple/thought-heart-half.png")
 const THOUGHT_HEART_THREEQUARTER = preload("res://art/meeple/thought-heart-threequarter.png")
 const THOUGHT_HEART_FULL = preload("res://art/meeple/thought-heart-full.png")
 
-@export var meeple_names: Array[String] = []
+enum RoomActivity {
+	LOOK_FOR_TREASURE,
+	LEAVE_ROOM,
+	WANDER,
+}
 
+@export var meeple_names: Array[String] = []
 @export var meeple_skin: SpriteFrames
 
 @export_group("Stats")
@@ -36,7 +41,8 @@ const THOUGHT_HEART_FULL = preload("res://art/meeple/thought-heart-full.png")
 
 @export_group("AI")
 @export var macguffin_strategy: MacguffinStrategy
-@export var explore_room_strategy: RoomStrategy
+@export var next_room_strategy: RoomStrategy
+@export var room_activity_strategy: RoomActivityStrategy
 @export_range(0, 1, 0.01) var trap_awareness_chance: float
 @export_flags_2d_navigation var nav_flags_normal: int
 @export_flags_2d_navigation var nav_flags_avoid_traps: int
@@ -70,6 +76,12 @@ var target_macguffin: Node2D = null
 var agent_map_is_empty_or_unsynced: bool:
 	get(): return NavigationServer2D.map_get_iteration_id(nav_agent.get_navigation_map()) == 0
 var should_move: bool = true
+
+static func get_all_activities() -> Array[RoomActivity]:
+	var activities: Array[Meeple.RoomActivity] = []
+	for activity in Meeple.RoomActivity.keys():
+		activities.append(Meeple.RoomActivity[activity])
+	return activities
 
 static func get_all(node_in_tree: Node) -> Array[Meeple]:
 	var meeples: Array[Meeple] = []
@@ -174,15 +186,27 @@ func _on_target_reached() -> void:
 	brain.send_event.call_deferred("target_reached")
 
 func pick_room_action():
-	if treasure_collected >= max_treasure:
-		brain.send_event("leave_dungeon")
-	if randf() < 0.8:
-		brain.send_event("look_for_macguffins")
-	else:
-		brain.send_event("next_room")
+	var scores := room_activity_strategy.get_scores(self)
+	if scores.is_empty():
+		push_warning("No room activities to choose from")
+		return
+	
+	var target_activity := scores[0].object as RoomActivity
+	if debug:
+		print("Chose Room Activity " + str(target_activity) + ":")
+		for score in scores:
+			print(score._to_string())
+	
+	match target_activity:
+		RoomActivity.LOOK_FOR_TREASURE:
+			brain.send_event("look_for_macguffins")
+		RoomActivity.LEAVE_ROOM:
+			brain.send_event("next_room")
+		RoomActivity.WANDER:
+			brain.send_event("wander")
 
 func go_to_next_room():
-	var scores := explore_room_strategy.get_room_scores(self, _get_enterable_rooms())
+	var scores := next_room_strategy.get_scores(self, _get_enterable_rooms())
 	if scores.is_empty():
 		push_warning("No rooms to explore")
 		return
@@ -219,7 +243,7 @@ func decide_look_for_macguffin_action():
 		brain.send_event("leave_dungeon")
 		return
 
-	var scores = macguffin_strategy.get_macguffin_scores(self, current_room.get_treasure())
+	var scores = macguffin_strategy.get_scores(self, current_room.get_treasure())
 
 	if not scores.is_empty() and randf() < 0.9:
 		target_macguffin = scores[0].object
