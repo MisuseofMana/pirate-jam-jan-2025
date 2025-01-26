@@ -368,14 +368,13 @@ priority = 999
 position = Vector2(-1, -6)
 shape = SubResource("CircleShape2D_50mka")
 
-[node name="TrapHitbox" type="Area2D" parent="Room Hitbox"]
-position = Vector2(-1, -3)
+[node name="TrapHitbox" type="Area2D" parent="."]
 rotation = 1.5708
 collision_layer = 2
 input_pickable = false
 script = ExtResource("5_k20un")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Room Hitbox/TrapHitbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TrapHitbox"]
 shape = SubResource("CircleShape2D_mrlnf")
 
 [node name="Hover Hitbox" type="Area2D" parent="."]
@@ -595,8 +594,8 @@ resources = SubResource("Resource_3g382")
 
 [connection signal="area_entered" from="Room Hitbox" to="." method="_on_room_hitbox_entered"]
 [connection signal="area_exited" from="Room Hitbox" to="." method="_on_room_hitbox_exited"]
-[connection signal="area_entered" from="Room Hitbox/TrapHitbox" to="Room Hitbox/TrapHitbox" method="_on_area_entered"]
-[connection signal="stepped_on_trap" from="Room Hitbox/TrapHitbox" to="." method="take_damage"]
+[connection signal="area_entered" from="TrapHitbox" to="TrapHitbox" method="_on_area_entered"]
+[connection signal="stepped_on_trap" from="TrapHitbox" to="." method="take_damage"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="state_entered" from="Brain/Root/Exploring Dungon/Exploring Current Room/Picking Activity" to="." method="show_thought_thinking"]
 [connection signal="state_entered" from="Brain/Root/Exploring Dungon/Exploring Current Room/Picking Activity" to="." method="pick_room_action"]

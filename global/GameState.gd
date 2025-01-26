@@ -64,7 +64,6 @@ func lose_game():
 	
 func win_game():
 #	show win screen
-
 	pass
 
 func pause():
