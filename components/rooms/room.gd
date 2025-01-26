@@ -120,6 +120,8 @@ func iAmSelectedRoom() -> bool:
 	return dungeon_controller.last_selected_dungeon_room == get_coords()
 
 func handle_room_click():
+	if dungeon_controller.room_movement_locked:
+		click_error_sfx.play()
 	if iAmSelectedRoom():
 		dungeon_controller.last_selected_dungeon_room = null
 	elif not iAmSelectedRoom() and anyRoomIsActive():
@@ -228,6 +230,7 @@ func grow() -> void:
 
 func _on_animation_finished(anim_name: String) -> void:
 	if anim_name == "shrink_room":
+		room_sprite.turn_off_shader()
 		shrunk.emit()
 	elif anim_name == "grow_room":
 		enterable = true

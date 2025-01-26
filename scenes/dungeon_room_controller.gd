@@ -7,6 +7,7 @@ class_name DungeonRoomController extends TileMapLayer
 		update_configuration_warnings()
 		
 const EVENT_DRAW_SWORD = preload("res://components/room_events/event_draw_sword.tscn")
+const MEEPLE = preload("res://components/meeple/meeple.tscn")
 
 var room_coords: Dictionary = {}
 
@@ -41,10 +42,12 @@ func _get_configuration_warnings():
 		return []
 
 func _process(_delta: float) -> void:
-	if Input.is_action_just_pressed("trigger_sword_event"):
+	if Input.is_action_just_pressed("camera_to_sword"):
 		zoom_in_on_sword()
 	if Input.is_action_just_pressed("reset_camera"):
 		reset_camera_to_origin()
+	if Input.is_action_just_pressed("run_sword_event"):
+		run_sword_event(MEEPLE.instantiate())
 		
 func _enter_tree():
 	child_entered_tree.connect(_register_child)
@@ -70,18 +73,26 @@ func get_sword_room_tile_position():
 	for child in get_children():
 		if child is SwordRoom:
 			return to_global(map_to_local(child.get_coords()))
+			
+func get_sword_room_tile_coords():
+	for child in get_children():
+		if child is SwordRoom:
+			return child.get_coords()
 
 func zoom_in_on_sword():
 	get_tree().create_tween().tween_property(camera_node, "position", get_sword_room_tile_position(), camera_anim_speed)
 	get_tree().create_tween().tween_property(camera_node, "zoom", Vector2(2, 2), camera_anim_speed)
 	GameState.notify_meep_drawing_sword()
 	
-func run_sword_event(meep_attempting_event: Meeple, sword_room_node: SwordRoom):
+func run_sword_event(meep_attempting_event: Meeple):
 	zoom_in_on_sword()
 	GameState.souls -= meep_attempting_event.soul_value
 	var swordEventNode : EventDrawSword = EVENT_DRAW_SWORD.instantiate()
-	swordEventNode.position = get_sword_room_tile_position()
-	get_tree().root.add_child(swordEventNode)
+	var eventWrapper = Node2D.new()
+	eventWrapper.position = get_sword_room_tile_position()
+	get_tree().root.add_child(eventWrapper)
+	eventWrapper.add_child(swordEventNode)
+	swordEventNode.show_not_worthy()
 	
 	if GameState.souls <= 0:
 		swordEventNode.show_worthy()
@@ -91,18 +102,9 @@ func run_sword_event(meep_attempting_event: Meeple, sword_room_node: SwordRoom):
 func reset_camera_to_origin():
 	get_tree().create_tween().tween_property(camera_node, "position", Vector2(0, 0), camera_anim_speed)
 	get_tree().create_tween().tween_property(camera_node, "zoom", Vector2(1, 1), camera_anim_speed)
-	GameState.notify_meep_exploded()
-
-func meep_failed_sword_event():
-	reset_camera_to_origin()
-	pass
-	
-func meep_beat_sword_event():
-	pass
 
 func handle_new_clicked_room(oldCoords, newCoords):
 	if newCoords:
-		print(newCoords)
 		var clickedTile: RoomSprite = get_room_scene(newCoords).room_sprite
 		#	same room was clicked and shader is already on
 		if oldCoords == newCoords:
@@ -145,9 +147,10 @@ func relocate_room(from: Vector2i, to: Vector2i):
 		var roomOrEmptyNode = get_room_scene(tilecoord)
 		if roomOrEmptyNode is Room:
 			roomOrEmptyNode.update_own_tile_connections()
-
 		
 	fromNode.grow()
 	await fromNode.grew
+	
+	get_tree().call_group("soul", "go_to_sword")
 	
 	room_movement_locked = false

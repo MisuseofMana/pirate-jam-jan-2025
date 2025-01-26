@@ -16,7 +16,7 @@ random_pitch = 1.2
 streams_count = 1
 stream_0/stream = ExtResource("5_niejs")
 
-[node name="MeepleSoul" type="Node2D" node_paths=PackedStringArray("nav_agent")]
+[node name="MeepleSoul" type="Node2D" node_paths=PackedStringArray("nav_agent") groups=["soul"]]
 z_index = 1
 script = ExtResource("1_2kqqy")
 nav_agent = NodePath("NavigationAgent2D")
@@ -47,5 +47,8 @@ process_mode = 3
 stream = SubResource("AudioStreamRandomizer_q0qrp")
 pitch_scale = 0.5
 
+[node name="LifetimeTimer" type="Timer" parent="."]
+
 [connection signal="animation_finished" from="SoulSprite" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="LifetimeTimer" to="." method="_soul_lifetime_ran_out"]

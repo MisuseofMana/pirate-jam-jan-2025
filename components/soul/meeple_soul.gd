@@ -4,6 +4,11 @@ class_name MeepleSoul
 @onready var soul_sprite : AnimatedSprite2D = $SoulSprite
 @onready var thought : Sprite2D = $Thought
 @onready var timer = $Timer
+
+# set wait time of this timer to determine how long a soul survives in the dungeon
+@onready var lifetime_timer = $LifetimeTimer
+@export var soul_lifetime : int = 15
+
 @onready var chime = $Chime
 @onready var summon = $Summon
 
@@ -18,6 +23,7 @@ var agent_map_is_empty_or_unsynced: bool:
 	get(): return NavigationServer2D.map_get_iteration_id(nav_agent.get_navigation_map()) == 0
 
 func _ready():
+	lifetime_timer.start(soul_lifetime)
 	summon.play()
 	thought.hide()
 	nav_agent.velocity_computed.connect(_on_velocity_computed)
@@ -59,3 +65,7 @@ func go_to_sword():
 func _on_timer_timeout():
 	thought.hide()
 	soul_sprite.play("disentigrate")
+	
+func _soul_lifetime_ran_out():
+	soul_sprite.play("disentigrate")
+	

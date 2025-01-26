@@ -67,7 +67,7 @@ tracks/4/keys = {
 
 [sub_resource type="Animation" id="Animation_cs1n6"]
 resource_name = "jump_in"
-length = 2.5
+length = 1.9
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -75,7 +75,7 @@ tracks/0/path = NodePath(".:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 2.26667),
+"times": PackedFloat32Array(0, 0.2, 1.66667),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector2(-32, -32), Vector2(-32, -32), Vector2(-32, -32)]
@@ -87,7 +87,7 @@ tracks/1/path = NodePath(".:scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.2, 2.26667, 2.5),
+"times": PackedFloat32Array(0, 0.2, 1.66667, 1.9),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [Vector2(1e-05, 1e-05), Vector2(1.5, 1.5), Vector2(1.5, 1.5), Vector2(1.8, 1.8)]
@@ -99,10 +99,10 @@ tracks/2/path = NodePath(".:rotation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.333333, 0.466667, 0.6, 0.733333, 0.866667, 1, 1.13333, 1.26667, 1.4, 1.53333, 1.66667, 1.8, 1.93333, 2.06667, 2.2),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.2, 0.333333, 0.466667, 0.6, 0.733333, 0.866667, 1, 1.13333, 1.26667, 1.4, 1.53333, 1.66667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [0.0, 0.0, 0.0174533, -0.0174533, 0.0174533, -0.0174533, 0.0174533, -0.0174533, 0.0, -0.0174533, 0.0, -0.0174533, 0.0, -0.0174533, 0.0, -0.0174533, 0.0]
+"values": [0.0, 0.0, 0.0174533, -0.0174533, 0.0174533, -0.0174533, 0.0174533, -0.0174533, 0.0, -0.0174533, 0.0, -0.0174533, 0.0]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -123,7 +123,7 @@ tracks/4/path = NodePath(".:modulate")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 2.26667, 2.5),
+"times": PackedFloat32Array(0, 1.66667, 1.9),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
@@ -276,6 +276,7 @@ script = ExtResource("1_e6hsf")
 metadata/_edit_group_ = true
 
 [node name="WorthyLabel" type="Label" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -291,7 +292,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="UnworthyLabel" type="Label" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -311,3 +311,5 @@ vertical_alignment = 1
 libraries = {
 "": SubResource("AnimationLibrary_v6x0i")
 }
+
+[connection signal="animation_finished" from="TextAnimations" to="." method="_on_text_animations_animation_finished"]
