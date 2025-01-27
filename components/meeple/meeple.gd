@@ -158,6 +158,7 @@ func _die():
 func explode():
 	anims.play("explode")
 	brain.send_event("died")
+	GameState.notify_meep_exploded(self)
 	should_move = false
 	
 func _on_animation_player_animation_finished(anim_name):
@@ -169,6 +170,7 @@ func _on_animation_player_animation_finished(anim_name):
 		get_parent().add_child(soul)
 		queue_free()
 	if anim_name == 'explode':
+		GameState.resume()
 		queue_free()
 
 func notify_wave_started() -> void:

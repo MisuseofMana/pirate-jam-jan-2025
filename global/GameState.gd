@@ -59,7 +59,6 @@ func notify_meep_drawing_sword():
 	states.send_event("meep_drawing_sword")
 
 func notify_meep_exploded(meep: Meeple):
-	meep.explode()
 	states.send_event("meep_exploded")
 	
 func notify_you_win():

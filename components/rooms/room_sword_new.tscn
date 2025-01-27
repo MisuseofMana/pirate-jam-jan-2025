@@ -40,3 +40,5 @@ script = ExtResource("5_g6l1q")
 
 [node name="Sword Peeper" parent="DungeonTile" index="1" instance=ExtResource("4_7ss5y")]
 visible = false
+offset_top = -60.0
+offset_bottom = -38.0

@@ -83,19 +83,19 @@ func zoom_in_on_sword():
 	
 func run_sword_event(meep_attempting_event: Meeple):
 	zoom_in_on_sword()
-	GameState.souls -= meep_attempting_event.soul_value
+	GameState.notify_meep_drawing_sword()
 	var swordEventNode: EventDrawSword = EVENT_DRAW_SWORD.instantiate()
 	var eventWrapper = Node2D.new()
 	eventWrapper.position = get_sword_room_tile_position()
 	get_tree().root.add_child(eventWrapper)
 	eventWrapper.add_child(swordEventNode)
-	swordEventNode.show_not_worthy()
+	
+	GameState.souls -= meep_attempting_event.soul_value
 	
 	if GameState.souls <= 0:
 		swordEventNode.show_worthy()
-		GameState.notify_meep_exploded(meep_attempting_event)
 	else:
-		swordEventNode.show_not_worthy()
+		swordEventNode.show_not_worthy(meep_attempting_event, self)
 	
 func reset_camera_to_origin():
 	get_tree().create_tween().tween_property(camera_node, "position", Vector2(0, 0), camera_anim_speed)
