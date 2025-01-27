@@ -24,15 +24,8 @@ enum RoomActivity {
 		if value == health: return
 		health = value
 		info_changed.emit()
-@export_range(0, 1, 0.1) var greed: float = 0.1
-@export_range(0, 1, 0.1) var piety: float = 0.1
 @export_range(1, 99) var soul_value: int = 1
 @export var movement_speed: float = 20.0
-@export var treasure_collected: int = 0:
-	set(value):
-		if value == treasure_collected: return
-		treasure_collected = value
-		info_changed.emit()
 @export var max_treasure: int = 3:
 	set(value):
 		if value == max_treasure: return
@@ -60,7 +53,6 @@ enum RoomActivity {
 @onready var meeple_sprite = $Meeple
 
 @onready var meeple_name: String = meeple_names.pick_random()
-
 @onready var current_room: Room = get_parent().get_parent():
 	set(value):
 		if value == current_room: return
@@ -70,6 +62,12 @@ enum RoomActivity {
 @onready var visited_rooms: Array[Node2D] = [current_room]
 
 var debug: bool = false
+var treasure_collected: int = 0:
+	set(value):
+		if value == treasure_collected: return
+		treasure_collected = value
+		info_changed.emit()
+
 var movement_delta: float
 var target_room: Room = null
 var target_macguffin: Node2D = null
