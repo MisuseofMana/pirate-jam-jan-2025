@@ -4,28 +4,30 @@ class_name RoomStrategy extends Strategy
 @export_group("Considerations", "consideration_")
 @export_range(0.0, 1.0, 0.01) var consideration_avoid_danger: float
 @export_range(0.0, 1.0, 0.01) var consideration_avoid_entrance: float
+@export_range(0.0, 1.0, 0.01) var consideration_avoid_crowds: float
 @export_range(0.0, 1.0, 0.01) var consideration_decide_randomly: float
 @export_range(0.0, 1.0, 0.01) var consideration_favor_adjacent: float
 @export_range(0.0, 1.0, 0.01) var consideration_favor_treasure_count: float
 @export_range(0.0, 1.0, 0.01) var consideration_favor_unvisited: float
 
 func select(meeple: Meeple, rooms: Array[Room]) -> Room:
-	return get_scores(meeple, rooms)[0].choice
+	return get_result(meeple, rooms).choice
 	
-func get_scores(meeple: Meeple, rooms: Array[Room]) -> Array[Score]:
+func get_result(meeple: Meeple, rooms: Array[Room]) -> ScoreResult:
 	var scores: Array[Score] = []
 	for room in rooms:
 		scores.append(
 			Score.new(room, [
 				ConsiderationScore.new("Avoid Danger", _score_avoid_danger(meeple, room), consideration_avoid_danger),
-				ConsiderationScore.new("Avoid Entrance", _score_avoid_entrance(meeple, room), consideration_avoid_entrance),
-				ConsiderationScore.new("Decide Randomly", _score_randomly(meeple, room), consideration_decide_randomly),
+				ConsiderationScore.new("Avoid Entrance", _score_avoid_entrance(room), consideration_avoid_entrance),
+				ConsiderationScore.new("Avoid Crowds", _score_avoid_crowds(room), consideration_avoid_crowds),
+				ConsiderationScore.new("Decide Randomly", _score_randomly(), consideration_decide_randomly),
 				ConsiderationScore.new("Favor Adjacent", _score_favor_adjacent(meeple, room), consideration_favor_adjacent),
 				ConsiderationScore.new("Favor Treasure Count", _score_favor_treasure_count(meeple, room), consideration_favor_treasure_count),
 				ConsiderationScore.new("Favor Unvisited", _score_favor_unvisited(meeple, room), consideration_favor_unvisited),
 			])
 		)
-	return scores
+	return ScoreResult.new(scores)
 
 # region Considerations
 
@@ -33,8 +35,11 @@ func _score_avoid_danger(meeple: Meeple, room: Room) -> float:
 	var danger := maxf(0, room.get_danger_count() - meeple.health)
 	return score_diminishing_loss(danger, 2.0)
 
-func _score_avoid_entrance(_meeple: Meeple, room: Room) -> float:
-	return score_if_true(room is EntranceRoom)
+func _score_avoid_entrance(room: Room) -> float:
+	return score_if_true(room is not EntranceRoom)
+
+func _score_avoid_crowds(room: Room) -> float:
+	return score_diminishing_loss(room.get_meeple_count(), 4.0)
 
 func _score_favor_adjacent(meeple: Meeple, room: Room) -> float:
 	return score_if_true(meeple.current_room.is_adjacent_to(room))
@@ -46,5 +51,5 @@ func _score_favor_treasure_count(meeple: Meeple, room: Room) -> float:
 func _score_favor_unvisited(meeple: Meeple, room: Room) -> float:
 	return score_if_true(meeple.visited_rooms.has(room))
 
-func _score_randomly(_meeple: Meeple, _room: Room) -> float:
+func _score_randomly() -> float:
 	return randf()

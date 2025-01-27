@@ -76,7 +76,7 @@ var atlas_register: Dictionary = {
 	},
 }
 
-var enterable = true
+var enterable := true
 
 func _ready():
 	room_sprite.turn_off_shader()
@@ -168,6 +168,9 @@ func get_meeples() -> Array[Meeple]:
 		if meeple.current_room == self:
 			meeples.append(meeple)
 	return meeples
+
+func get_meeple_count() -> int:
+	return get_meeples().size()
 
 func get_traps() -> Array[Trap]:
 	var traps: Array[Trap] = []

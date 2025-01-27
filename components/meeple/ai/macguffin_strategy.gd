@@ -6,9 +6,9 @@ class_name MacguffinStrategy extends Strategy
 @export_range(0.0, 1.0, 0.01) var consideration_decide_randomly: float
 
 func select(meeple: Meeple, treasures: Array[Treasure]) -> Treasure:
-	return get_scores(meeple, treasures)[0].choice
+	return get_result(meeple, treasures).choice
 	
-func get_scores(meeple: Meeple, treasures: Array[Treasure]) -> Array[Score]:
+func get_result(meeple: Meeple, treasures: Array[Treasure]) -> ScoreResult:
 	var scores: Array[Score] = []
 	for treasure in treasures:
 		scores.append(
@@ -17,7 +17,7 @@ func get_scores(meeple: Meeple, treasures: Array[Treasure]) -> Array[Score]:
 				ConsiderationScore.new("Decide Randomly", _score_randomly(meeple, treasure), consideration_decide_randomly),
 			])
 		)
-	return scores
+	return ScoreResult.new(scores)
 
 # region Considerations
 

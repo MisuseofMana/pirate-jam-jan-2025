@@ -8,7 +8,8 @@
 script = ExtResource("2_jaov8")
 consideration_avoid_danger = 0.6
 consideration_avoid_entrance = 1.0
-consideration_decide_randomly = 0.25
+consideration_avoid_crowds = 1.0
+consideration_decide_randomly = 0.15
 consideration_favor_adjacent = 0.9
 consideration_favor_treasure_count = 0.0
 consideration_favor_unvisited = 1.0

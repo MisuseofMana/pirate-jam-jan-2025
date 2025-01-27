@@ -6,18 +6,18 @@ class_name RoomActivityStrategy extends Strategy
 @export_range(0.0, 1.0, 0.01) var consideration_decide_randomly: float
 
 func select(meeple: Meeple) -> Meeple.RoomActivity:
-	return get_scores(meeple)[0].choice
+	return get_result(meeple).choice
 	
-func get_scores(meeple: Meeple) -> Array[Score]:
+func get_result(meeple: Meeple) -> ScoreResult:
 	var scores: Array[Score] = []
 	for activity in Meeple.get_all_activities():
 		scores.append(
 			Score.new(activity, [
 				ConsiderationScore.new("Fill Pockets", _score_fill_pockets(meeple, activity), consideration_fill_pockets),
-				ConsiderationScore.new("Decide Randomly", _score_randomly(meeple, activity), consideration_decide_randomly),
+				ConsiderationScore.new("Decide Randomly", _score_randomly(), consideration_decide_randomly),
 			])
 		)
-	return scores
+	return ScoreResult.new(scores)
 
 # region Considerations
 
@@ -28,5 +28,5 @@ func _score_fill_pockets(meeple: Meeple, activity: Meeple.RoomActivity) -> float
 				
 		_: return 0.0
 
-func _score_randomly(_meeple: Meeple, _activity: Meeple.RoomActivity) -> float:
+func _score_randomly() -> float:
 	return randf()

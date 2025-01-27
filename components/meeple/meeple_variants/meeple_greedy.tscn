@@ -8,8 +8,9 @@
 script = ExtResource("2_p84yi")
 consideration_avoid_danger = 0.0
 consideration_avoid_entrance = 1.0
-consideration_decide_randomly = 0.25
-consideration_favor_adjacent = 0.8
+consideration_avoid_crowds = 0.8
+consideration_decide_randomly = 0.15
+consideration_favor_adjacent = 1.0
 consideration_favor_treasure_count = 1.0
 consideration_favor_unvisited = 0.8
 

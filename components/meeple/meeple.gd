@@ -11,8 +11,7 @@ const THOUGHT_HEART_FULL = preload("res://art/meeple/thought-heart-full.png")
 
 enum RoomActivity {
 	LOOK_FOR_TREASURE,
-	LEAVE_ROOM,
-	WANDER,
+	NEXT_ROOM,
 }
 
 @export var meeple_names: Array[String] = []
@@ -190,35 +189,33 @@ func notify_room_move_end() -> void:
 func _on_target_reached() -> void:
 	brain.send_event.call_deferred("target_reached")
 
-func pick_room_action():
-	var scores := room_activity_strategy.get_scores(self)
-	if scores.is_empty():
+func pick_pick_room_activity():
+	var result := room_activity_strategy.get_result(self)
+	if result.is_empty():
 		push_warning("No room activities to choose from")
 		return
 	
-	var target_activity := scores[0].choice as RoomActivity
+	var target_activity := result.choice as RoomActivity
 	if debug:
-		for score in scores:
-			print(score)
+		print(result)
 	
 	match target_activity:
 		RoomActivity.LOOK_FOR_TREASURE:
 			brain.send_event("look_for_macguffins")
-		RoomActivity.LEAVE_ROOM:
+		RoomActivity.NEXT_ROOM:
 			brain.send_event("next_room")
-		RoomActivity.WANDER:
-			brain.send_event("wander")
-
+		_:
+			assert(false, "Unhandled RoomActivity: " + str(target_activity))
+	
 func go_to_next_room():
-	var scores := next_room_strategy.get_scores(self, _get_enterable_rooms())
-	if scores.is_empty():
+	var result := next_room_strategy.get_result(self, _get_enterable_rooms())
+	if result.is_empty():
 		push_warning("No rooms to explore")
 		return
 	
-	target_room = scores[0].choice
+	target_room = result.choice
 	if debug:
-		for score in scores:
-			print(score)
+		print(result)
 	set_target_position(target_room.get_random_walkable_global_position(compute_nav_layers()))
 
 func on_target_room_reached():
@@ -246,16 +243,15 @@ func decide_look_for_macguffin_action():
 		brain.send_event("leave_dungeon")
 		return
 
-	var scores = macguffin_strategy.get_scores(self, current_room.get_treasure())
+	var result := macguffin_strategy.get_result(self, current_room.get_treasure())
 
-	if not scores.is_empty() and randf() < 0.9:
-		target_macguffin = scores[0].choice
+	if not result.is_empty() and randf() < 0.9:
+		target_macguffin = result.choice
 		if debug:
-			for score in scores:
-				print(score)
+			print(result)
 		brain.send_event("targeted_macguffin")
 	elif randf() < 0.5:
-		brain.send_event("look_for_macguffins")
+		brain.send_event("wander")
 	else:
 		brain.send_event("next_room")
 
