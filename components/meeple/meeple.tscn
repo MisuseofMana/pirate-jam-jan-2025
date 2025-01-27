@@ -284,7 +284,6 @@ texture_exit = ExtResource("24_ut6j2")
 z_index = 1
 script = ExtResource("1_d3iq0")
 meeple_names = Array[String](["Mr. Morbles", "Glam Jim", "Peemps", "Gleeorp", "Dr. Bloop", "Extra Steve", "Hanke", "Trucy", "Willyam", "Melmm", "Kiske", "Lenid", "Kremmin", "Roddie", "That Guy", "Keef Bleefer", "Ornery Jeeps", "Harty Chartie", "Slohee Johee"])
-meeple_skin = ExtResource("2_xujee")
 health = 1
 movement_speed = 30.0
 macguffin_strategy = SubResource("Resource_3ma6w")

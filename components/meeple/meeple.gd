@@ -16,7 +16,6 @@ enum RoomActivity {
 }
 
 @export var meeple_names: Array[String] = []
-@export var meeple_skin: SpriteFrames
 
 @export_group("Stats")
 @export_range(1, 4) var health: int = 4:
@@ -94,7 +93,6 @@ func _ready() -> void:
 	nav_agent.velocity_computed.connect(_on_velocity_computed)
 	nav_agent.target_reached.connect(_on_target_reached)
 
-	meeple_sprite.sprite_frames = meeple_skin
 	meeple_sprite.play("default")
 
 	hover_hitbox.mouse_entered.connect(_on_hovered)

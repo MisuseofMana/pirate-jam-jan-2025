@@ -5,3 +5,6 @@
 
 [node name="Meeple" instance=ExtResource("1_ll6tc")]
 meeple_skin = ExtResource("2_cjor0")
+
+[node name="Meeple" parent="." index="5"]
+sprite_frames = ExtResource("2_cjor0")

@@ -1,9 +1,5 @@
-[gd_scene load_steps=3 format=3 uid="uid://demfo8u0ru6hk"]
+[gd_scene load_steps=2 format=3 uid="uid://demfo8u0ru6hk"]
 
 [ext_resource type="PackedScene" uid="uid://d1cw4mndlss2u" path="res://components/meeple/meeple.tscn" id="1_ckkla"]
-[ext_resource type="SpriteFrames" uid="uid://b1lfrnwpw5f1i" path="res://components/meeple/meeple_variants/meeple_greedy_frames.tres" id="2_qkbak"]
 
 [node name="Meeple" instance=ExtResource("1_ckkla")]
-
-[node name="Meeple" parent="." index="4"]
-sprite_frames = ExtResource("2_qkbak")
