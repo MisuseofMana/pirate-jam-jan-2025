@@ -9,9 +9,12 @@ static func score_diminishing_loss(input: float, midpoint: float = 2.0) -> float
 	return 1.0 - score_diminishing_returns(input, midpoint)
 
 ## Scoring utility. Returns 1.0 if the input is true, otherwise 0.0.
-static func score_if_true(input: bool) -> float:
+static func score_if(input: bool) -> float:
 	return 1.0 if input else 0.0
 
+func _score_randomly() -> float:
+	return randf()
+	
 class ScoreResult:
 	var scores: Array[Score]
 	var choice

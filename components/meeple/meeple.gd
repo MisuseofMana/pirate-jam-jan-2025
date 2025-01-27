@@ -10,7 +10,8 @@ const THOUGHT_HEART_THREEQUARTER = preload("res://art/meeple/thought-heart-three
 const THOUGHT_HEART_FULL = preload("res://art/meeple/thought-heart-full.png")
 
 enum RoomActivity {
-	LOOK_FOR_TREASURE,
+	TAKE_TREASURE,
+	LOAF_AROUND,
 	NEXT_ROOM,
 }
 
@@ -184,26 +185,45 @@ func notify_room_move_end() -> void:
 	should_move = true
 	nav_agent.process_mode = Node.ProcessMode.PROCESS_MODE_INHERIT
 	brain.send_event("room_move_end")
+
+func set_target_position(target_position: Vector2) -> void:
+	nav_agent.navigation_layers = compute_nav_layers()
+	nav_agent.target_position = target_position
 	
 # region State Charts Stuff
 func _on_target_reached() -> void:
 	brain.send_event.call_deferred("target_reached")
 
-func pick_pick_room_activity():
-	var result := room_activity_strategy.get_result(self)
-	if result.is_empty():
-		push_warning("No room activities to choose from")
+func pick_room_activity():
+	if treasure_collected >= max_treasure:
+		brain.send_event("leave_dungeon")
 		return
+
+	var result := room_activity_strategy.get_result(self)
 	
-	var target_activity := result.choice as RoomActivity
 	if debug:
 		print(result)
 	
+	var target_activity := result.choice as RoomActivity
 	match target_activity:
-		RoomActivity.LOOK_FOR_TREASURE:
-			brain.send_event("look_for_macguffins")
+		RoomActivity.TAKE_TREASURE:
+			var all_treasure := current_room.get_treasure()
+			if all_treasure.is_empty():
+				brain.send_event("next_room")
+				return
+			var treasure_result := macguffin_strategy.get_result(self, all_treasure)
+			if not treasure_result.is_empty():
+				target_macguffin = treasure_result.choice
+				brain.send_event("take_treasure")
+				if debug:
+					print(treasure_result)
+
 		RoomActivity.NEXT_ROOM:
 			brain.send_event("next_room")
+
+		RoomActivity.LOAF_AROUND:
+			brain.send_event("loaf_around")
+
 		_:
 			assert(false, "Unhandled RoomActivity: " + str(target_activity))
 	
@@ -222,7 +242,7 @@ func on_target_room_reached():
 	visited_rooms.append(target_room)
 	current_room = target_room
 
-func go_to_random_position_in_room():
+func loaf():
 	if agent_map_is_empty_or_unsynced:
 		await NavigationServer2D.map_changed
 
@@ -231,53 +251,25 @@ func go_to_random_position_in_room():
 		set_target_position(current_room.get_random_walkable_global_position(nav_layers))
 		if nav_agent.is_target_reachable():
 			break
-
-func decide_to_keep_exploring_current_room():
-	if randf() < 0.5:
-		brain.send_event("look_for_macguffins")
-	else:
-		brain.send_event("next_room")
-
-func decide_look_for_macguffin_action():
-	if treasure_collected >= max_treasure:
-		brain.send_event("leave_dungeon")
-		return
-
-	var result := macguffin_strategy.get_result(self, current_room.get_treasure())
-
-	if not result.is_empty() and randf() < 0.9:
-		target_macguffin = result.choice
-		if debug:
-			print(result)
-		brain.send_event("targeted_macguffin")
-	elif randf() < 0.5:
-		brain.send_event("wander")
-	else:
-		brain.send_event("next_room")
-
+	
 func go_to_chosen_macguffin():
 	set_target_position(target_macguffin.global_position)
 
-func take_or_ignore_chosen_macguffin():
+func take_chosen_macguffin():
+	# TODO: meep will freeze if the treasure is taken before they can take it.
 	if target_macguffin == null:
 		return
 	
-	if randf() < 0.8:
-		if target_macguffin == get_tree().get_first_node_in_group("sword"):
-			var swordRoomNode: SwordRoom = target_macguffin.owner
-			swordRoomNode.initate_sword_event(self)
-		else:
-			excited_audio.play()
-			target_macguffin.queue_free()
-			treasure_collected += 1
+	if target_macguffin == get_tree().get_first_node_in_group("sword"):
+		var swordRoomNode: SwordRoom = target_macguffin.owner
+		swordRoomNode.initate_sword_event(self)
+	else:
+		target_macguffin.queue_free()
+		treasure_collected += 1
 	
 	target_macguffin = null
 		
-	brain.send_event("interacted_with_macguffin")
-
-func set_target_position(target_position: Vector2) -> void:
-	nav_agent.navigation_layers = compute_nav_layers()
-	nav_agent.target_position = target_position
+	brain.send_event("took_treasure")
 
 func go_to_entrance():
 	var entrance: Room = null
@@ -295,6 +287,7 @@ func compute_nav_layers() -> int:
 	return nav_flags_avoid_traps if randf() <= trap_awareness_chance else nav_flags_normal
 
 func show_thought_treasure() -> void:
+	excited_audio.play()
 	thought.appear(ThoughtPeeper.Topic.TREASURE)
 
 func show_thought_thinking() -> void:

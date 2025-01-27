@@ -14,7 +14,7 @@ func get_result(meeple: Meeple, treasures: Array[Treasure]) -> ScoreResult:
 		scores.append(
 			Score.new(treasure, [
 				ConsiderationScore.new("Favor Closest", _score_favor_closest(meeple, treasure), consideration_favor_closest),
-				ConsiderationScore.new("Decide Randomly", _score_randomly(meeple, treasure), consideration_decide_randomly),
+				ConsiderationScore.new("Decide Randomly", _score_randomly(), consideration_decide_randomly),
 			])
 		)
 	return ScoreResult.new(scores)
@@ -25,6 +25,3 @@ func _score_favor_closest(meeple: Meeple, treasure: Treasure) -> float:
 	var raw_distance := meeple.global_position.distance_to(treasure.global_position)
 	var score := remap(raw_distance, 20, 300.0, 1.0, 0.0)
 	return score
-
-func _score_randomly(_meeple: Meeple, _treasure: Treasure) -> float:
-	return randf()

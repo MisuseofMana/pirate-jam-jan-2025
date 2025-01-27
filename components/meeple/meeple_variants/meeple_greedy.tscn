@@ -7,16 +7,16 @@
 [sub_resource type="Resource" id="Resource_5ovh6"]
 script = ExtResource("2_p84yi")
 consideration_avoid_danger = 0.0
-consideration_avoid_entrance = 1.0
 consideration_avoid_crowds = 0.8
-consideration_decide_randomly = 0.15
 consideration_favor_adjacent = 1.0
 consideration_favor_treasure_count = 1.0
 consideration_favor_unvisited = 0.8
+consideration_decide_randomly = 0.15
 
 [sub_resource type="Resource" id="Resource_yef4l"]
 script = ExtResource("3_kvrjy")
 consideration_fill_pockets = 1.0
+consideration_avoid_loafing = 0.0
 consideration_decide_randomly = 0.0
 
 [node name="Meeple" instance=ExtResource("1_ckkla")]

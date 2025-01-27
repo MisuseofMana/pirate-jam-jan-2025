@@ -7,17 +7,17 @@
 [sub_resource type="Resource" id="Resource_v1cl5"]
 script = ExtResource("2_jaov8")
 consideration_avoid_danger = 0.6
-consideration_avoid_entrance = 1.0
 consideration_avoid_crowds = 1.0
-consideration_decide_randomly = 0.15
 consideration_favor_adjacent = 0.9
 consideration_favor_treasure_count = 0.0
 consideration_favor_unvisited = 1.0
+consideration_decide_randomly = 0.15
 
 [sub_resource type="Resource" id="Resource_xi6cl"]
 script = ExtResource("3_vo2ka")
-consideration_fill_pockets = 1.0
-consideration_decide_randomly = 0.15
+consideration_fill_pockets = 0.0
+consideration_avoid_loafing = 0.9
+consideration_decide_randomly = 0.2
 
 [node name="Meeple" instance=ExtResource("1_pweoa")]
 meeple_names = Array[String](["Mrs. Go", "Sitese", "Lar Crof", "Indee", "Slip Dog", "Grawk", "Droglet", "Briblesby", "Snorrt", "Stoneboi", "Swingk", "Dr. Bom Bag", "Sneepit", "Blaush", "Slingbag"])

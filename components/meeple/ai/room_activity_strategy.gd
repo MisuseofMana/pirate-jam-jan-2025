@@ -3,6 +3,7 @@ class_name RoomActivityStrategy extends Strategy
 
 @export_group("Considerations", "consideration_")
 @export_range(0.0, 1.0, 0.01) var consideration_fill_pockets: float
+@export_range(0.0, 1.0, 0.01) var consideration_avoid_loafing: float
 @export_range(0.0, 1.0, 0.01) var consideration_decide_randomly: float
 
 func select(meeple: Meeple) -> Meeple.RoomActivity:
@@ -14,6 +15,7 @@ func get_result(meeple: Meeple) -> ScoreResult:
 		scores.append(
 			Score.new(activity, [
 				ConsiderationScore.new("Fill Pockets", _score_fill_pockets(meeple, activity), consideration_fill_pockets),
+				ConsiderationScore.new("Avoid Loafing", _score_avoid_loafing_around(activity), consideration_avoid_loafing),
 				ConsiderationScore.new("Decide Randomly", _score_randomly(), consideration_decide_randomly),
 			])
 		)
@@ -22,11 +24,11 @@ func get_result(meeple: Meeple) -> ScoreResult:
 # region Considerations
 
 func _score_fill_pockets(meeple: Meeple, activity: Meeple.RoomActivity) -> float:
-	match activity:
-		Meeple.RoomActivity.LOOK_FOR_TREASURE:
-			return score_if_true(meeple.current_room.get_treasure_count() > 0 and meeple.treasure_collected < meeple.max_treasure)
-				
-		_: return 0.0
+	return score_if(
+		meeple.current_room.get_treasure_count() > 0 \
+		and meeple.treasure_collected < meeple.max_treasure \
+		and activity == Meeple.RoomActivity.TAKE_TREASURE
+	)
 
-func _score_randomly() -> float:
-	return randf()
+func _score_avoid_loafing_around(activity: Meeple.RoomActivity) -> float:
+	return score_if(activity != Meeple.RoomActivity.LOAF_AROUND)
