@@ -158,7 +158,7 @@ func _die():
 func explode():
 	anims.play("explode")
 	brain.send_event("died")
-	GameState.notify_meep_exploded(self)
+	GameState.notify_meep_exploded()
 	should_move = false
 	
 func _on_animation_player_animation_finished(anim_name):

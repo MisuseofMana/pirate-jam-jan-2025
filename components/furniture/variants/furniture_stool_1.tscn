@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cil8u4lya7vho"]
+
+[ext_resource type="PackedScene" uid="uid://djdb3leiduao5" path="res://components/furniture/furniture_base.tscn" id="1_7dbug"]
+
+[node name="Stool1" instance=ExtResource("1_7dbug")]
+region_rect = Rect2(32, 0, 8, 8)

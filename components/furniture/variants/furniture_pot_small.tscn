@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b5u0ftuvwj1mh"]
+
+[ext_resource type="PackedScene" uid="uid://djdb3leiduao5" path="res://components/furniture/furniture_base.tscn" id="1_in0j3"]
+
+[node name="PotSmall" instance=ExtResource("1_in0j3")]
+region_rect = Rect2(16, 16, 8, 8)

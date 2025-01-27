@@ -1,7 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://bus7x3mlryq4a"]
+[gd_scene load_steps=10 format=3 uid="uid://bus7x3mlryq4a"]
 
 [ext_resource type="PackedScene" uid="uid://dqr12wo3gio00" path="res://components/rooms/room_basic_base.tscn" id="1_q8xs8"]
-[ext_resource type="PackedScene" uid="uid://djdb3leiduao5" path="res://components/furniture/furniture.tscn" id="3_ulrs5"]
+[ext_resource type="PackedScene" uid="uid://ccwe28e7lfnvw" path="res://components/furniture/variants/furniture_bookshelf.tscn" id="2_lpkem"]
+[ext_resource type="PackedScene" uid="uid://cfda3thgjer7u" path="res://components/furniture/variants/furniture_pot_med.tscn" id="3_c7cnl"]
+[ext_resource type="PackedScene" uid="uid://b04ry4njklykh" path="res://components/furniture/variants/furniture_stool_2.tscn" id="4_i10yt"]
+[ext_resource type="PackedScene" uid="uid://dbqrhyg4soxy1" path="res://components/furniture/variants/furniture_table.tscn" id="5_ptcnv"]
+[ext_resource type="PackedScene" uid="uid://dujxtx44eg8fc" path="res://components/furniture/variants/furniture_totem.tscn" id="6_75taj"]
+[ext_resource type="PackedScene" uid="uid://csw3vkdw4erk5" path="res://components/treasure/treasure_base.tscn" id="7_m3qm7"]
 
 [sub_resource type="Shader" id="Shader_ikhy6"]
 resource_local_to_scene = true
@@ -136,17 +141,23 @@ shader_parameter/tolerance = 0.0
 [node name="DungeonTile" parent="." index="3"]
 material = SubResource("ShaderMaterial_bqady")
 
-[node name="Furniture" parent="DungeonTile" index="0" instance=ExtResource("3_ulrs5")]
-position = Vector2(-18, -18)
+[node name="Bookshelf" parent="DungeonTile" index="0" instance=ExtResource("2_lpkem")]
+position = Vector2(-16, -23)
 
-[node name="Furniture2" parent="DungeonTile" index="1" instance=ExtResource("3_ulrs5")]
-position = Vector2(-10, -18)
+[node name="PotMedium" parent="DungeonTile" index="1" instance=ExtResource("3_c7cnl")]
+position = Vector2(-5, -19)
 
-[node name="Furniture3" parent="DungeonTile" index="2" instance=ExtResource("3_ulrs5")]
-position = Vector2(-18, -9)
+[node name="Stool" parent="DungeonTile" index="2" instance=ExtResource("4_i10yt")]
+position = Vector2(-17, -12)
 
-[node name="Furniture4" parent="DungeonTile" index="3" instance=ExtResource("3_ulrs5")]
-position = Vector2(18, 9)
+[node name="Table" parent="DungeonTile" index="3" instance=ExtResource("5_ptcnv")]
+position = Vector2(9, 19)
 
-[node name="Furniture5" parent="DungeonTile" index="4" instance=ExtResource("3_ulrs5")]
-position = Vector2(-17, 19)
+[node name="Totem" parent="DungeonTile" index="4" instance=ExtResource("6_75taj")]
+position = Vector2(17, 15)
+
+[node name="Treasure" parent="DungeonTile" index="5" instance=ExtResource("7_m3qm7")]
+position = Vector2(17, -18)
+
+[node name="Treasure2" parent="DungeonTile" index="6" instance=ExtResource("7_m3qm7")]
+position = Vector2(8, 13)

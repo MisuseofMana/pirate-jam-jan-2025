@@ -1,8 +1,12 @@
-[gd_scene load_steps=9 format=3 uid="uid://cwparulgglwjy"]
+[gd_scene load_steps=13 format=3 uid="uid://cwparulgglwjy"]
 
 [ext_resource type="PackedScene" uid="uid://dqr12wo3gio00" path="res://components/rooms/room_basic_base.tscn" id="1_52npl"]
 [ext_resource type="PackedScene" uid="uid://due6tipw8kq1h" path="res://components/trap/trap.tscn" id="2_x5d8t"]
 [ext_resource type="PackedScene" uid="uid://csw3vkdw4erk5" path="res://components/treasure/treasure_base.tscn" id="3_5nvqc"]
+[ext_resource type="PackedScene" uid="uid://does6a0xrn8cm" path="res://components/furniture/variants/furniture_guillotine.tscn" id="4_2am8h"]
+[ext_resource type="PackedScene" uid="uid://c10q78r3ajbkw" path="res://components/furniture/variants/furniture_bin.tscn" id="5_8fi5b"]
+[ext_resource type="PackedScene" uid="uid://bgvjuaa40786n" path="res://components/furniture/variants/furniture_bed_vertical.tscn" id="6_h2bxe"]
+[ext_resource type="PackedScene" uid="uid://b5u0ftuvwj1mh" path="res://components/furniture/variants/furniture_pot_small.tscn" id="7_gljxb"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_fih2y"]
 vertices = PackedVector2Array(6, -24, 24, -24, 24, -5, 21, 0, 3, 0, -1, -4, -1, -22, 32, -5, 32, 5, 24, 5, -6, -24, -6, -32, 6, -32)
@@ -167,10 +171,22 @@ position = Vector2(12, 12)
 trap_cooldown = 5.0
 
 [node name="Treasure" parent="DungeonTile" index="2" instance=ExtResource("3_5nvqc")]
-position = Vector2(-13, 15)
+position = Vector2(-4, 4)
 
 [node name="Treasure2" parent="DungeonTile" index="3" instance=ExtResource("3_5nvqc")]
-position = Vector2(7, -9)
+position = Vector2(4, -4)
+
+[node name="Guillotine" parent="DungeonTile" index="4" instance=ExtResource("4_2am8h")]
+position = Vector2(17, -14)
+
+[node name="Bin" parent="DungeonTile" index="5" instance=ExtResource("5_8fi5b")]
+position = Vector2(8, -19)
+
+[node name="BedVertical" parent="DungeonTile" index="6" instance=ExtResource("6_h2bxe")]
+position = Vector2(-17, 17)
+
+[node name="PotSmall" parent="DungeonTile" index="7" instance=ExtResource("7_gljxb")]
+position = Vector2(-11, 19)
 
 [node name="NavigationRegion2D2" type="NavigationRegion2D" parent="." index="7"]
 rotation = 3.14159

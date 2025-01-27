@@ -26,8 +26,10 @@ var current_spawn: PackedScene:
 	get(): return current_wave.spawns[current_spawn_index]
 
 # dungeon qualities
-var souls: int = 10:
+var souls: int = 3:
 	set(value):
+		if (value >= 999):
+			you_win()
 		var oldValue = souls
 		souls = value
 #		reducing if oldValue is greater than new value
@@ -39,6 +41,12 @@ var souls: int = 10:
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("reset_camera"):
 		resume()
+
+func start_game():
+	souls = 3
+#	could generate a new random dungeon here or buld a variety out as scenes to pull from
+	SceneSwitcher.switch_scene("res://scenes/game.tscn")
+	resume()
 
 func spawn_meeple():
 	for entrance in EntranceRoom.get_all(self):
@@ -58,19 +66,11 @@ func release_wave():
 func notify_meep_drawing_sword():
 	states.send_event("meep_drawing_sword")
 
-func notify_meep_exploded(meep: Meeple):
+func notify_meep_exploded():
 	states.send_event("meep_exploded")
-	
-func notify_you_win():
-	states.send_event("you_win")
 
-func lose_game():
-#	show lose screen
-	pass
-	
-func win_game():
-#	show win screen
-	pass
+func you_win():
+	SceneSwitcher.switch_scene("res://scenes/win_screen.tscn")
 
 func pause():
 	paused.emit()

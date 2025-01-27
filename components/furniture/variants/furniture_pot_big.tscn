@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c8wlit763n85e"]
+
+[ext_resource type="PackedScene" uid="uid://djdb3leiduao5" path="res://components/furniture/furniture_base.tscn" id="1_fmvqo"]
+
+[node name="PotBig" instance=ExtResource("1_fmvqo")]
+region_rect = Rect2(0, 16, 8, 8)

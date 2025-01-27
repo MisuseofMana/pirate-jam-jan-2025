@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://djdb3leiduao5"]
+
+[ext_resource type="Texture2D" uid="uid://ccu4hx0pq3etj" path="res://art/rooms/dungeon_furniture.png" id="1_1fpcy"]
+[ext_resource type="Script" path="res://components/furniture/furniture.gd" id="2_vv6hu"]
+
+[node name="Furniture" type="Sprite2D" groups=["furniture"]]
+texture = ExtResource("1_1fpcy")
+region_enabled = true
+region_rect = Rect2(0, 0, 64, 64)
+script = ExtResource("2_vv6hu")

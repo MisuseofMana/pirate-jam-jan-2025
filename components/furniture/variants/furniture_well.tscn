@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c8t23q4khcwjr"]
+
+[ext_resource type="PackedScene" uid="uid://djdb3leiduao5" path="res://components/furniture/furniture_base.tscn" id="1_hv1no"]
+
+[node name="Well" instance=ExtResource("1_hv1no")]
+region_rect = Rect2(0, 24, 16, 16)

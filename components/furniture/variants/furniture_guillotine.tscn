@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://does6a0xrn8cm"]
+
+[ext_resource type="PackedScene" uid="uid://djdb3leiduao5" path="res://components/furniture/furniture_base.tscn" id="1_6y50b"]
+
+[node name="Guillotine" instance=ExtResource("1_6y50b")]
+region_rect = Rect2(24, 24, 8, 16)

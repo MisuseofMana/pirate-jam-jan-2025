@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="2_7yvp7"]
 [ext_resource type="AudioStream" uid="uid://btlkfdy3vbvtu" path="res://audio/ambient_choir_taiko.mp3" id="2_temxw"]
 [ext_resource type="Script" path="res://global/Wave.gd" id="2_vea6p"]
-[ext_resource type="PackedScene" uid="uid://p7f4xuk65ikt" path="res://components/meeple/meeple_variants/meeple_normie.tscn" id="3_m0m8c"]
+[ext_resource type="PackedScene" uid="uid://hwnoth8qepay" path="res://components/meeple/meeple_variants/meeple_normie.tscn" id="3_m0m8c"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="3_yhpqw"]
 [ext_resource type="PackedScene" uid="uid://dywkg5qwj78u6" path="res://components/meeple/meeple_variants/meeple_sluggish.tscn" id="4_70xg7"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="4_ur7yj"]

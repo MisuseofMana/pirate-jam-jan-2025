@@ -8,4 +8,4 @@ func _ready():
 	sword_name.text = sword_names.pick_random()
 
 func _on_button_pressed():
-	SceneSwitcher.switch_scene("res://scenes/game.tscn")
+	GameState.start_game()
