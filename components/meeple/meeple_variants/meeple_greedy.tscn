@@ -1,5 +1,31 @@
-[gd_scene load_steps=2 format=3 uid="uid://demfo8u0ru6hk"]
+[gd_scene load_steps=6 format=3 uid="uid://demfo8u0ru6hk"]
 
 [ext_resource type="PackedScene" uid="uid://d1cw4mndlss2u" path="res://components/meeple/meeple.tscn" id="1_ckkla"]
+[ext_resource type="Script" path="res://components/meeple/ai/room_strategy.gd" id="2_p84yi"]
+[ext_resource type="Script" path="res://components/meeple/ai/room_activity_strategy.gd" id="3_kvrjy"]
+
+[sub_resource type="Resource" id="Resource_5ovh6"]
+script = ExtResource("2_p84yi")
+consideration_avoid_danger = 0.0
+consideration_avoid_entrance = 1.0
+consideration_decide_randomly = 0.25
+consideration_favor_adjacent = 0.8
+consideration_favor_treasure_count = 1.0
+consideration_favor_unvisited = 0.8
+
+[sub_resource type="Resource" id="Resource_yef4l"]
+script = ExtResource("3_kvrjy")
+consideration_fill_pockets = 1.0
+consideration_decide_randomly = 0.0
 
 [node name="Meeple" instance=ExtResource("1_ckkla")]
+meeple_names = Array[String](["Nabbit", "Shineboi", "Chainz", "Greedster", "Coinz", "Mr. Bigbag", "Stealla", "Relique", "Hoss", "Brasbin", "Conk", "Shakeit", "Torvis", "Monei", "Glabbo", "Stealins Sr.", "Fillup", "Greedy Pmp", "Tarq"])
+health = 4
+soul_value = 5
+movement_speed = 80.0
+max_treasure = 10
+next_room_strategy = SubResource("Resource_5ovh6")
+room_activity_strategy = SubResource("Resource_yef4l")
+
+[node name="Meeple" parent="." index="5"]
+modulate = Color(1, 0.827451, 0.219608, 1)

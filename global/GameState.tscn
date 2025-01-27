@@ -1,15 +1,16 @@
-[gd_scene load_steps=14 format=3 uid="uid://bmifa8hlavga4"]
+[gd_scene load_steps=18 format=3 uid="uid://bmifa8hlavga4"]
 
 [ext_resource type="Script" path="res://global/GameState.gd" id="1_6ccbp"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="2_7yvp7"]
 [ext_resource type="AudioStream" uid="uid://btlkfdy3vbvtu" path="res://audio/ambient_choir_taiko.mp3" id="2_temxw"]
 [ext_resource type="Script" path="res://global/Wave.gd" id="2_vea6p"]
-[ext_resource type="PackedScene" uid="uid://d1cw4mndlss2u" path="res://components/meeple/meeple.tscn" id="3_glgtg"]
 [ext_resource type="PackedScene" uid="uid://hwnoth8qepay" path="res://components/meeple/meeple_variants/meeple_normie.tscn" id="3_m0m8c"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="3_yhpqw"]
+[ext_resource type="PackedScene" uid="uid://dywkg5qwj78u6" path="res://components/meeple/meeple_variants/meeple_sluggish.tscn" id="4_70xg7"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="4_ur7yj"]
 [ext_resource type="PackedScene" uid="uid://b8lqmcxs37mgc" path="res://components/meeple/meeple_variants/meeple_explora.tscn" id="5_kmgkn"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="5_mrhtl"]
+[ext_resource type="PackedScene" uid="uid://demfo8u0ru6hk" path="res://components/meeple/meeple_variants/meeple_greedy.tscn" id="6_q1rlw"]
 
 [sub_resource type="Resource" id="Resource_ede0e"]
 script = ExtResource("2_vea6p")
@@ -19,14 +20,26 @@ spawns = Array[PackedScene]([ExtResource("3_m0m8c")])
 script = ExtResource("2_vea6p")
 spawns = Array[PackedScene]([ExtResource("3_m0m8c"), ExtResource("3_m0m8c")])
 
-[sub_resource type="Resource" id="Resource_mha1p"]
+[sub_resource type="Resource" id="Resource_wise8"]
 script = ExtResource("2_vea6p")
-spawns = Array[PackedScene]([ExtResource("3_glgtg"), ExtResource("5_kmgkn")])
+spawns = Array[PackedScene]([ExtResource("3_m0m8c"), ExtResource("4_70xg7")])
+
+[sub_resource type="Resource" id="Resource_o58ku"]
+script = ExtResource("2_vea6p")
+spawns = Array[PackedScene]([ExtResource("3_m0m8c"), ExtResource("5_kmgkn")])
+
+[sub_resource type="Resource" id="Resource_2pr38"]
+script = ExtResource("2_vea6p")
+spawns = Array[PackedScene]([ExtResource("3_m0m8c"), ExtResource("3_m0m8c"), ExtResource("6_q1rlw")])
+
+[sub_resource type="Resource" id="Resource_uc04v"]
+script = ExtResource("2_vea6p")
+spawns = Array[PackedScene]([ExtResource("3_m0m8c"), ExtResource("5_kmgkn"), ExtResource("6_q1rlw")])
 
 [node name="GameState" type="Node" node_paths=PackedStringArray("states")]
 process_mode = 3
 script = ExtResource("1_6ccbp")
-waves = Array[ExtResource("2_vea6p")]([SubResource("Resource_ede0e"), SubResource("Resource_wvbli"), SubResource("Resource_mha1p")])
+waves = Array[ExtResource("2_vea6p")]([SubResource("Resource_ede0e"), SubResource("Resource_wvbli"), SubResource("Resource_wise8"), SubResource("Resource_o58ku"), SubResource("Resource_2pr38"), SubResource("Resource_uc04v")])
 states = NodePath("States")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
@@ -36,8 +49,8 @@ autoplay = true
 [node name="States" type="Node" parent="."]
 script = ExtResource("2_7yvp7")
 initial_expression_properties = {
-"time_between_meeple": 3.0,
-"time_between_waves": 30.0
+"time_between_meeple": 1.0,
+"time_between_waves": 10.0
 }
 
 [node name="Root" type="Node" parent="States"]

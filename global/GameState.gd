@@ -11,7 +11,14 @@ signal resumed
 @export_group("References")
 @export var states: StateChart
 
-var current_wave_index: int = 0
+var current_wave_index: int = 0:
+	set(value):
+		if value < 0 or value >= waves.size():
+			current_wave_index = 0
+		elif value >= waves.size():
+			current_wave_index = waves.size() - 1
+		else:
+			current_wave_index = value
 var current_wave: Wave:
 	get(): return waves[current_wave_index]
 var current_spawn_index: int = 0

@@ -1,10 +1,34 @@
-[gd_scene load_steps=3 format=3 uid="uid://dywkg5qwj78u6"]
+[gd_scene load_steps=7 format=3 uid="uid://dywkg5qwj78u6"]
 
 [ext_resource type="PackedScene" uid="uid://d1cw4mndlss2u" path="res://components/meeple/meeple.tscn" id="1_ll6tc"]
 [ext_resource type="SpriteFrames" uid="uid://talknfeoyo7l" path="res://components/meeple/meeple_variants/meeple_sluggish_frames.tres" id="2_cjor0"]
+[ext_resource type="Script" path="res://components/meeple/ai/room_strategy.gd" id="2_vhu4o"]
+[ext_resource type="Script" path="res://components/meeple/ai/room_activity_strategy.gd" id="3_4lufx"]
+
+[sub_resource type="Resource" id="Resource_6faeb"]
+script = ExtResource("2_vhu4o")
+consideration_avoid_danger = 0.0
+consideration_avoid_entrance = 0.7
+consideration_decide_randomly = 0.25
+consideration_favor_adjacent = 1.0
+consideration_favor_treasure_count = 0.2
+consideration_favor_unvisited = 0.25
+
+[sub_resource type="Resource" id="Resource_hjgqx"]
+script = ExtResource("3_4lufx")
+consideration_fill_pockets = 0.5
+consideration_decide_randomly = 0.75
 
 [node name="Meeple" instance=ExtResource("1_ll6tc")]
-meeple_skin = ExtResource("2_cjor0")
+meeple_names = Array[String](["Loaf", "Bigman", "Gallop", "Big Hot Mannie", "Flong", "One-and-a-Halfling", "Fillo", "Has-its-day", "Down Dog", "Gollog", "Fisth", "Baolang", "Dorito", "Haskins", "Rolque", "Tammald", "Shimbo", "Oskr", "Mathol"])
+health = 4
+soul_value = 5
+movement_speed = 12.0
+max_treasure = 5
+next_room_strategy = SubResource("Resource_6faeb")
+room_activity_strategy = SubResource("Resource_hjgqx")
+trap_awareness_chance = 0.1
 
 [node name="Meeple" parent="." index="5"]
+modulate = Color(1, 0.452311, 0.237069, 1)
 sprite_frames = ExtResource("2_cjor0")
