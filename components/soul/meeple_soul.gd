@@ -13,7 +13,7 @@ class_name MeepleSoul
 @onready var summon = $Summon
 
 @export_range(1, 99) var soul_value: int = 1
-@export var movement_speed: float = 40.0
+@export var movement_speed: float = 60.0
 
 @export var nav_agent: NavigationAgent2D
 
@@ -52,9 +52,14 @@ func _physics_process(delta: float) -> void:
 
 func _on_target_reached() -> void:
 	GameState.souls += soul_value
+	
 	timer.start()
 	chime.play()
 	thought.show()
+
+func show_soul_value_going_to_parchment():
+#	want to show a punchy number that jumps to the parchment at the top when a soul tithes
+	pass
 	
 func _on_velocity_computed(safe_velocity: Vector2) -> void:
 	global_position = global_position.move_toward(global_position + safe_velocity, movement_delta)

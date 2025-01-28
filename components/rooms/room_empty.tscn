@@ -1,10 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://6smdcxogrgbi"]
+[gd_scene load_steps=15 format=3 uid="uid://6smdcxogrgbi"]
 
 [ext_resource type="Script" path="res://components/rooms/empty_room.gd" id="1_yyp7x"]
 [ext_resource type="Script" path="res://components/rooms/empty_room_click_detection.gd" id="2_7nm8y"]
-[ext_resource type="Shader" path="res://components/rooms/room_outline.gdshader" id="3_vm48k"]
-[ext_resource type="Texture2D" uid="uid://cdkugpkfpedei" path="res://art/rooms/room_sprite_empty.png" id="4_u3rdq"]
-[ext_resource type="Script" path="res://components/rooms/empty_dungeon_tile.gd" id="5_hagy7"]
+[ext_resource type="Texture2D" uid="uid://duufpboivfmjs" path="res://art/rooms/room_placement_swirl.png" id="3_rqwj2"]
+[ext_resource type="Texture2D" uid="uid://y52e20b30u3t" path="res://art/rooms/swirl_particle.png" id="5_0l56e"]
 [ext_resource type="AudioStream" uid="uid://bccrmglda8e3y" path="res://audio/sfx/PLUCKING_WATER_DROPS/sfxZ12.wav" id="6_3oco4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nnb8q"]
@@ -13,19 +12,64 @@ size = Vector2(64, 64)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x4war"]
 size = Vector2(64, 64)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_fh8ae"]
-resource_local_to_scene = true
-shader = ExtResource("3_vm48k")
-shader_parameter/maxLineWidth = 0.0
-shader_parameter/minLineWidth = 0.0
-shader_parameter/speed = 3.0
-shader_parameter/blockSize = 20.0
-shader_parameter/color = Color(0.827451, 0, 0, 1)
-shader_parameter/tolerance = 0.0
-
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_mwdqv"]
 streams_count = 1
 stream_0/stream = ExtResource("6_3oco4")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0rpwf"]
+atlas = ExtResource("3_rqwj2")
+region = Rect2(0, 0, 26, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0m8nt"]
+atlas = ExtResource("3_rqwj2")
+region = Rect2(26, 0, 26, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wy65o"]
+atlas = ExtResource("3_rqwj2")
+region = Rect2(52, 0, 26, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kwqix"]
+atlas = ExtResource("3_rqwj2")
+region = Rect2(78, 0, 26, 26)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_e0bjh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0rpwf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0m8nt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wy65o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kwqix")
+}],
+"loop": true,
+"name": &"default",
+"speed": 8.0
+}]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_pmwlw"]
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 10.0
+emission_ring_inner_radius = 0.0
+direction = Vector3(-1, 0, 0)
+initial_velocity_min = -3.0
+initial_velocity_max = 10.0
+orbit_velocity_min = 9.49949e-08
+orbit_velocity_max = 0.2
+gravity = Vector3(0, 0, 0)
+scale_min = 0.2
+scale_max = 0.3
+color = Color(1, 0, 1, 1)
+hue_variation_min = -0.1
+hue_variation_max = 0.1
 
 [node name="RoomBlankTile" type="Area2D"]
 script = ExtResource("1_yyp7x")
@@ -44,14 +88,23 @@ script = ExtResource("2_7nm8y")
 shape = SubResource("RectangleShape2D_x4war")
 debug_color = Color(0.993806, 0, 0.237356, 0.164706)
 
-[node name="EmptyDungeonTile" type="Sprite2D" parent="."]
-material = SubResource("ShaderMaterial_fh8ae")
-texture = ExtResource("4_u3rdq")
-script = ExtResource("5_hagy7")
-
 [node name="ClickErrorSFX" type="AudioStreamPlayer2D" parent="."]
 stream = SubResource("AudioStreamRandomizer_mwdqv")
 pitch_scale = 0.6
+
+[node name="SwirlingEmptyIndicator" type="AnimatedSprite2D" parent="."]
+visible = false
+sprite_frames = SubResource("SpriteFrames_e0bjh")
+autoplay = "default"
+frame = 2
+frame_progress = 0.9698
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="SwirlingEmptyIndicator"]
+emitting = false
+amount = 12
+process_material = SubResource("ParticleProcessMaterial_pmwlw")
+texture = ExtResource("5_0l56e")
+randomness = 1.0
 
 [connection signal="empty_room_tile_clicked" from="EmptyRoomClickDetection" to="." method="handle_empty_cell_click"]
 [connection signal="input_event" from="EmptyRoomClickDetection" to="EmptyRoomClickDetection" method="_on_input_event"]

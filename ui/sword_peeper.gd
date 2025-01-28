@@ -3,8 +3,7 @@ class_name SwordPeeper extends Control
 @export_group("References")
 @export var soul_value_label: Label
 @onready var timer = $Timer
-@onready var label = $MarginContainer/VBoxContainer/Label
-@onready var animation_player = $AnimationPlayer
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 func _ready():
 	GameState.souls_changed.connect(_on_souls_changed)
@@ -15,8 +14,6 @@ func _on_souls_changed(souls: int):
 	
 func _update(souls: int):
 	soul_value_label.text = str(GameState.souls) + ' / ' + str(99)
-	timer.start()
 
 func _on_timer_timeout():
 	animation_player.play("collapse")
-	label.hide()

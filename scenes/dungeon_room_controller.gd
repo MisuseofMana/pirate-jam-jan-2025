@@ -110,6 +110,17 @@ func handle_new_clicked_room(oldCoords, newCoords):
 		if oldCoords != newCoords:
 			clickedTile.make_shader_purple()
 			clickedTile.turn_on_shader()
+			activate_empty_rooms()			
+
+func activate_empty_rooms():
+	for room_node in get_children():
+		if room_node is EmptyRoom:
+			room_node.show_spiral_indicator()
+		
+func disable_empty_rooms():
+	for room_node in get_children():
+		if room_node is EmptyRoom:
+			room_node.hide_spiral_indicator()
 
 func spawn_empty_room_at(coords: Vector2i):
 	set_cell(coords, 0, Vector2i(0, 0), 2)
@@ -127,6 +138,7 @@ func relocate_room(from: Vector2i, to: Vector2i):
 	toPosition = map_to_local(to)
 	
 	fromNode.shrink()
+	disable_empty_rooms()
 	room_movement_locked = true
 	await fromNode.shrunk
 

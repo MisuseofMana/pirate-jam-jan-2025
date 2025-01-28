@@ -21,14 +21,14 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("..:anchors_preset")
+tracks/1/path = NodePath("../VBoxContainer/Label:self_modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [-1]
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -43,7 +43,7 @@ tracks/2/keys = {
 "values": [Vector2(86.5, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_4tcf4"]
+[sub_resource type="Animation" id="Animation_4gggv"]
 resource_name = "collapse"
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -52,22 +52,22 @@ tracks/0/path = NodePath("..:size")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(0.5, 2),
+"times": PackedFloat32Array(0, 0.2, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(211, 57), Vector2(89, 25)]
+"values": [Vector2(170, 59), Vector2(170, 59), Vector2(90, 59)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("..:anchors_preset")
+tracks/1/path = NodePath("../VBoxContainer/Label:self_modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [-1]
+"times": PackedFloat32Array(0, 0.266667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -76,21 +76,21 @@ tracks/2/path = NodePath("..:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.2, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(86.5, 0), Vector2(148, 0)]
+"values": [Vector2(107, 0), Vector2(107, 0), Vector2(147, -25)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_24032"]
 _data = {
 "RESET": SubResource("Animation_3i3om"),
-"collapse": SubResource("Animation_4tcf4")
+"collapse": SubResource("Animation_4gggv")
 }
 
 [node name="NinePatchRect" type="NinePatchRect" node_paths=PackedStringArray("soul_value_label")]
-self_modulate = Color(0.822591, 0.74011, 0.869407, 1)
-anchors_preset = -1
+self_modulate = Color(0.569995, 0.433506, 0.643248, 1)
+anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -105.5
@@ -103,43 +103,41 @@ patch_margin_right = 5
 patch_margin_bottom = 20
 axis_stretch_horizontal = 2
 script = ExtResource("1_qcyha")
-soul_value_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer/Soul Value")
+soul_value_label = NodePath("VBoxContainer/HBoxContainer/Soul Value")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -80.0
-offset_right = 80.0
-offset_bottom = 54.0
+offset_left = -32.0
+offset_right = 32.0
+offset_bottom = 25.0
 grow_horizontal = 2
-theme_override_constants/margin_top = 3
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
-layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="VBoxContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 text = "Aquire 99 souls to win."
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 6
 alignment = 1
 
-[node name="Soul Icon" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Soul Icon" type="TextureRect" parent="VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(16, 0)
 layout_mode = 2
 texture = ExtResource("2_1boos")
 stretch_mode = 5
 
-[node name="Soul Value" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="Soul Value" type="Label" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
 text = "99 / 99"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -150,3 +148,7 @@ libraries = {
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 5.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
