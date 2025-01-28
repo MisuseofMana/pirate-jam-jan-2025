@@ -126,7 +126,6 @@ func relocate_room(from: Vector2i, to: Vector2i):
 	fromPosition = map_to_local(from)
 	toPosition = map_to_local(to)
 	
-	room_movement_locked = false
 	fromNode.shrink()
 	room_movement_locked = true
 	await fromNode.shrunk
@@ -148,7 +147,6 @@ func relocate_room(from: Vector2i, to: Vector2i):
 		
 	fromNode.grow()
 	await fromNode.grew
+	room_movement_locked = false
 	
 	get_tree().call_group("soul", "go_to_sword")
-	
-	room_movement_locked = false

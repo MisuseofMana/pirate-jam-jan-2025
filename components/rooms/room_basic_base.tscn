@@ -165,11 +165,13 @@ _data = {
 "shrink_room": SubResource("Animation_t4mo4")
 }
 
-[node name="Basic Room" type="Area2D" groups=["room"]]
+[node name="Basic Room" type="Area2D" node_paths=PackedStringArray("collision_shape", "click_collision_shape") groups=["room"]]
 collision_layer = 4
 collision_mask = 0
 monitoring = false
 script = ExtResource("1_fq4wr")
+collision_shape = NodePath("CollisionShape2D")
+click_collision_shape = NodePath("RoomClickDetection/CollisionShape2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_brb8i")

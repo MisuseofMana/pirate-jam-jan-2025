@@ -43,13 +43,14 @@ enum RoomActivity {
 @export var nav_agent: NavigationAgent2D
 @export var brain: StateChart
 @export var hover_hitbox: Area2D
+@export var room_hitbox: Area2D
+@export var trap_hitbox: Area2D
 @export var hurt_audio: AudioStreamPlayer2D
 @export var excited_audio: AudioStreamPlayer2D
 @export var thought: ThoughtPeeper
 
-@onready var anims = $AnimationPlayer
-@onready var hurtbox = $TrapHitbox/CollisionShape2D
-@onready var meeple_sprite = $Meeple
+@onready var anims := $AnimationPlayer
+@onready var meeple_sprite := $Meeple
 
 @onready var meeple_name: String = meeple_names.pick_random()
 @onready var current_room: Room = get_parent().get_parent():
@@ -57,8 +58,9 @@ enum RoomActivity {
 		if value == current_room: return
 		current_room = value
 		if current_room:
-			current_room.add_meeple(self)
+			current_room.add_meeple.call_deferred(self)
 @onready var visited_rooms: Array[Node2D] = [current_room]
+@onready var overlapping_rooms: Array[Room] = [current_room]
 
 var debug: bool = false
 var treasure_collected: int = 0:
@@ -97,6 +99,9 @@ func _ready() -> void:
 
 	hover_hitbox.mouse_entered.connect(_on_hovered)
 	hover_hitbox.mouse_exited.connect(_on_unhovered)
+	
+	room_hitbox.area_entered.connect(_on_room_hitbox_entered)
+	room_hitbox.area_exited.connect(_on_room_hitbox_exited)
 
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("toggle_debug_mode"):
@@ -108,6 +113,24 @@ func _on_hovered() -> void:
 
 func _on_unhovered() -> void:
 	MeepPeeper.notify_meeple_unhovered(self)
+
+func _on_room_hitbox_entered(area: Area2D) -> void:
+	print(area)
+	var room := area as Room
+	if room and not visited_rooms.has(room):
+		overlapping_rooms.append(room)
+		_on_overlapping_rooms_changed()
+
+func _on_room_hitbox_exited(area: Area2D) -> void:
+	var room := area as Room
+	if room and overlapping_rooms.has(room):
+		overlapping_rooms.erase(room)
+		_on_overlapping_rooms_changed()
+
+func _on_overlapping_rooms_changed() -> void:
+	if overlapping_rooms.is_empty():
+		return
+	current_room = overlapping_rooms[-1]
 
 func _get_enterable_rooms() -> Array[Room]:
 	var rooms: Array[Room] = []
@@ -148,7 +171,6 @@ func take_damage():
 		return
 	
 	await get_tree().create_timer(0.8).timeout
-	hurtbox.disabled = false
 
 func _die():
 	anims.play("die")
@@ -179,11 +201,17 @@ func notify_wave_started() -> void:
 func notify_room_move_start() -> void:
 	should_move = false
 	nav_agent.process_mode = Node.ProcessMode.PROCESS_MODE_DISABLED
+	room_hitbox.process_mode = Node.ProcessMode.PROCESS_MODE_DISABLED
+	trap_hitbox.process_mode = Node.ProcessMode.PROCESS_MODE_DISABLED
 	brain.send_event("room_move_start")
 
 func notify_room_move_end() -> void:
 	should_move = true
 	nav_agent.process_mode = Node.ProcessMode.PROCESS_MODE_INHERIT
+	room_hitbox.process_mode = Node.ProcessMode.PROCESS_MODE_INHERIT
+	trap_hitbox.process_mode = Node.ProcessMode.PROCESS_MODE_INHERIT
+	scale = Vector2.ONE
+	rotation = 0
 	brain.send_event("room_move_end")
 
 func set_target_position(target_position: Vector2) -> void:
@@ -237,10 +265,6 @@ func go_to_next_room():
 	if debug:
 		print(result)
 	set_target_position(target_room.get_random_walkable_global_position(compute_nav_layers()))
-
-func on_target_room_reached():
-	visited_rooms.append(target_room)
-	current_room = target_room
 
 func loaf():
 	if agent_map_is_empty_or_unsynced:

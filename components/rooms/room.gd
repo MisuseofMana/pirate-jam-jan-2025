@@ -2,9 +2,12 @@ class_name Room extends Area2D
 
 @onready var dungeon_controller: DungeonRoomController = get_parent()
 @onready var room_sprite: RoomSprite = $DungeonTile
-@onready var activate_room_sfx = $ActivateRoomSFX
-@onready var click_error_sfx = $ClickErrorSFX
-@onready var anims = $AnimationPlayer
+@onready var activate_room_sfx := $ActivateRoomSFX
+@onready var click_error_sfx := $ClickErrorSFX
+@onready var anims := $AnimationPlayer
+
+@export var collision_shape: CollisionShape2D
+@export var click_collision_shape: CollisionShape2D
 
 signal shrunk
 signal grew
@@ -223,20 +226,30 @@ func add_meeple(meeple: Meeple) -> void:
 	meeple.reparent(room_sprite)
 
 func shrink() -> void:
+	collision_shape.disabled = true
+	click_collision_shape.disabled = true
 	for meeple in get_meeples():
 		meeple.notify_room_move_start()
 	enterable = false
 	anims.play("shrink_room")
 
+func _on_shrunk() -> void:
+	room_sprite.turn_off_shader()
+	shrunk.emit()
+
 func grow() -> void:
 	anims.play("grow_room")
 
+func _on_grew() -> void:
+	collision_shape.disabled = false
+	click_collision_shape.disabled = false
+	enterable = true
+	grew.emit()
+	for meeple in get_meeples():
+		meeple.notify_room_move_end()
+
 func _on_animation_finished(anim_name: String) -> void:
 	if anim_name == "shrink_room":
-		room_sprite.turn_off_shader()
-		shrunk.emit()
+		_on_shrunk()
 	elif anim_name == "grow_room":
-		enterable = true
-		grew.emit()
-		for meeple in get_meeples():
-			meeple.notify_room_move_end()
+		_on_grew()

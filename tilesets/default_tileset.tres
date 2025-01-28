@@ -1,7 +1,7 @@
 [gd_resource type="TileSet" load_steps=10 format=3 uid="uid://mrguig7k625p"]
 
 [ext_resource type="PackedScene" uid="uid://cdhyk8epjuhb1" path="res://components/rooms/room_basic_trap_1.tscn" id="1_qmr5m"]
-[ext_resource type="PackedScene" uid="uid://b01cauvc5kndf" path="res://components/rooms/room_basic_treasure_1.tscn" id="3_5bk0s"]
+[ext_resource type="PackedScene" uid="uid://u8ydg4hulv4r" path="res://components/rooms/room_basic_treasure_1.tscn" id="3_5bk0s"]
 [ext_resource type="PackedScene" uid="uid://ca1edcsqoch32" path="res://components/rooms/room_basic_1.tscn" id="4_yi200"]
 [ext_resource type="PackedScene" uid="uid://bus7x3mlryq4a" path="res://components/rooms/room_basic_2.tscn" id="5_usjtd"]
 [ext_resource type="PackedScene" uid="uid://6jtjr8wj4snc" path="res://components/rooms/room_sword_new.tscn" id="6_21h7d"]
