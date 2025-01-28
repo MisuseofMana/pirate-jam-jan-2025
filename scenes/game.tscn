@@ -33,4 +33,3 @@ size_flags_vertical = 0
 
 [node name="Sword Peeper" parent="Control" instance=ExtResource("4_and2c")]
 layout_mode = 1
-anchors_preset = -1

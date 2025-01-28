@@ -73,13 +73,8 @@ func _update_position(delta: float) -> void:
 		-viewport_margin - dodger_rect.size.x / 2.0,
 		-viewport_margin - dodger_rect.position.y + dodger_rect.size.y,
 		-viewport_margin - dodger_rect.size.x / 2.0,
-		-viewport_margin - dodger_rect.position.y - dodger_rect.size.y
+		-viewport_margin + dodger_rect.position.y - dodger_rect.size.y
 	)
 	var target_pos := _meep.global_position.clamp(allowed_rect.position, allowed_rect.end)
-
-	# print(
-	# 	"raw_pos: ", _meep.global_position,
-	# 	"target_pos: ", target_pos
-	# )
 
 	global_position = MathUtil.decay_to_vec2(global_position, target_pos, 10.0, delta)
