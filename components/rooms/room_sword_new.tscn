@@ -1,10 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://6jtjr8wj4snc"]
+[gd_scene load_steps=8 format=3 uid="uid://6jtjr8wj4snc"]
 
 [ext_resource type="PackedScene" uid="uid://dqr12wo3gio00" path="res://components/rooms/room_basic_base.tscn" id="1_ac2b1"]
 [ext_resource type="Shader" path="res://components/rooms/room_outline.gdshader" id="2_3jsik"]
 [ext_resource type="Script" path="res://components/rooms/sword_room.gd" id="2_8vhp0"]
 [ext_resource type="Texture2D" uid="uid://d4ha56lgt4c1o" path="res://art/rooms/tilemap_sword.png" id="2_qt2is"]
-[ext_resource type="PackedScene" uid="uid://cq13b5eh0vkp7" path="res://ui/sword_peeper.tscn" id="4_7ss5y"]
 [ext_resource type="Script" path="res://components/treasure/treasure_base.gd" id="5_g6l1q"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_uyu10"]
@@ -37,9 +36,3 @@ material = SubResource("ShaderMaterial_uyu10")
 [node name="Sword" type="AnimatedSprite2D" parent="DungeonTile" index="0" groups=["macguffin", "sword"]]
 sprite_frames = SubResource("SpriteFrames_6w6ef")
 script = ExtResource("5_g6l1q")
-
-[node name="Sword Peeper" parent="DungeonTile" index="1" instance=ExtResource("4_7ss5y")]
-offset_left = -23.0
-offset_top = -57.0
-offset_right = 24.0
-offset_bottom = -35.0

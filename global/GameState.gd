@@ -28,7 +28,7 @@ var current_spawn: PackedScene:
 # dungeon qualities
 var souls: int = 3:
 	set(value):
-		if (value >= 999):
+		if (value >= 99):
 			you_win()
 		var oldValue = souls
 		souls = value

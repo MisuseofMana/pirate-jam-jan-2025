@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=4 uid="uid://co5m6we60dfvx"]
+[gd_scene load_steps=5 format=4 uid="uid://co5m6we60dfvx"]
 
 [ext_resource type="TileSet" uid="uid://mh1sco40wky5" path="res://components/tilesets/dungeon_decoration.tres" id="1_tlxu7"]
 [ext_resource type="TileSet" uid="uid://mrguig7k625p" path="res://tilesets/default_tileset.tres" id="2_yuojw"]
 [ext_resource type="Script" path="res://scenes/dungeon_room_controller.gd" id="3_jp735"]
+[ext_resource type="PackedScene" uid="uid://cq13b5eh0vkp7" path="res://ui/sword_peeper.tscn" id="4_and2c"]
 
 [node name="Game" type="Node2D"]
 
@@ -11,9 +12,25 @@ tile_map_data = PackedByteArray("AADp/wIAAAAAAAAAAADq/woAAAAAAAAAAADq/w0AAAAAAAA
 tile_set = ExtResource("1_tlxu7")
 
 [node name="DungeonRooms" type="TileMapLayer" parent="." node_paths=PackedStringArray("camera_node")]
-tile_map_data = PackedByteArray("AAD+//3/AAAAAAAAAgD///3/AAAAAAAAAgAAAP3/AAAAAAAAAgABAP3/AAAAAAAAAgACAP3/AAAAAAAACAACAP7/AAAAAAAAAQACAP//AAAAAAAABwACAAAAAAAAAAAAAgACAAEAAAAAAAAAAgD+/wEAAAAAAAAABAD//wEAAAAAAAAABwAAAAEAAAAAAAAAAgABAAEAAAAAAAAAAgAAAP7/AAAAAAAAAwD///7/AAAAAAAAAgD+//7/AAAAAAAAAgABAP7/AAAAAAAAAgD+////AAAAAAAAAgD/////AAAAAAAABQAAAP//AAAAAAAAAQABAP//AAAAAAAABAD9/wAAAAAAAAAAAgD9////AAAAAAAAAgD9//7/AAAAAAAAAgD9//3/AAAAAAAAAgACAAIAAAAAAAAAAgABAAIAAAAAAAAAAgAAAAIAAAAAAAAAAgD//wIAAAAAAAAAAgD+/wIAAAAAAAAAAQD9/wIAAAAAAAAABgD9/wEAAAAAAAAAAgABAAAAAAAAAAAAAgD+/wAAAAAAAAAABAD//wAAAAAAAAAABAAAAAAAAAAAAAAABAA=")
+tile_map_data = PackedByteArray("AAD+////AAAAAAAABQD+//7/AAAAAAAAAgD///7/AAAAAAAAAQAAAP7/AAAAAAAAAgABAP7/AAAAAAAACAABAAEAAAAAAAAAAgD/////AAAAAAAAAwD//wAAAAAAAAAABwD//wEAAAAAAAAABQAAAP//AAAAAAAAAQABAAAAAAAAAAAABAABAP//AAAAAAAAAQD+/wAAAAAAAAAAAgAAAAEAAAAAAAAABAAAAAAAAAAAAAAAAgD+/wEAAAAAAAAABgA=")
 tile_set = ExtResource("2_yuojw")
 script = ExtResource("3_jp735")
 camera_node = NodePath("../Camera2D")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -192.0
+offset_top = -192.0
+offset_right = 192.0
+offset_bottom = 192.0
+grow_horizontal = 2
+size_flags_vertical = 0
+
+[node name="Sword Peeper" parent="Control" instance=ExtResource("4_and2c")]
+layout_mode = 1
+anchors_preset = -1

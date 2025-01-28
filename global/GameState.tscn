@@ -49,8 +49,8 @@ autoplay = true
 [node name="States" type="Node" parent="."]
 script = ExtResource("2_7yvp7")
 initial_expression_properties = {
-"time_between_meeple": 1.0,
-"time_between_waves": 10.0
+"time_between_meeple": 3.0,
+"time_between_waves": 30.0
 }
 
 [node name="Root" type="Node" parent="States"]
