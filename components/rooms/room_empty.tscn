@@ -57,7 +57,7 @@ particle_flag_disable_z = true
 emission_shape = 6
 emission_ring_axis = Vector3(0, 0, 1)
 emission_ring_height = 1.0
-emission_ring_radius = 10.0
+emission_ring_radius = 20.0
 emission_ring_inner_radius = 0.0
 direction = Vector3(-1, 0, 0)
 initial_velocity_min = -3.0
@@ -66,8 +66,7 @@ orbit_velocity_min = 9.49949e-08
 orbit_velocity_max = 0.2
 gravity = Vector3(0, 0, 0)
 scale_min = 0.2
-scale_max = 0.3
-color = Color(1, 0, 1, 1)
+scale_max = 0.5
 hue_variation_min = -0.1
 hue_variation_max = 0.1
 
@@ -94,6 +93,7 @@ pitch_scale = 0.6
 
 [node name="SwirlingEmptyIndicator" type="AnimatedSprite2D" parent="."]
 visible = false
+modulate = Color(0.928428, 0.000716763, 0.930748, 1)
 sprite_frames = SubResource("SpriteFrames_e0bjh")
 autoplay = "default"
 frame = 2

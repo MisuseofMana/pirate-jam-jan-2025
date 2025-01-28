@@ -1,29 +1,27 @@
-[gd_scene load_steps=7 format=3 uid="uid://dyxxlm6eg6wru"]
+[gd_scene load_steps=6 format=3 uid="uid://b5d5j5jutd54a"]
 
+[ext_resource type="PackedScene" uid="uid://dqr12wo3gio00" path="res://components/rooms/room_basic_base.tscn" id="1_0lbx3"]
 [ext_resource type="Script" path="res://components/rooms/entrance_room.gd" id="1_67rxf"]
-[ext_resource type="PackedScene" uid="uid://d1cw4mndlss2u" path="res://components/meeple/meeple.tscn" id="2_ghigw"]
-[ext_resource type="Texture2D" uid="uid://cy2lv2myk6ixs" path="res://art/rooms/room_sprite0.png" id="3_rsle2"]
+[ext_resource type="Shader" path="res://components/rooms/room_outline.gdshader" id="3_vdacs"]
 [ext_resource type="Texture2D" uid="uid://b4sqf4yhiedef" path="res://art/rooms/entrance.png" id="4_xc40b"]
-[ext_resource type="NavigationPolygon" uid="uid://dl6paxiymrj47" path="res://components/rooms/nav_regions/no_exits.tres" id="5_uxfk6"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_r7kuv"]
-size = Vector2(64, 64)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nwwr8"]
+resource_local_to_scene = true
+shader = ExtResource("3_vdacs")
+shader_parameter/maxLineWidth = 0.0
+shader_parameter/minLineWidth = 0.0
+shader_parameter/speed = 1.0
+shader_parameter/blockSize = 20.0
+shader_parameter/color = Color(0.828964, 0.405913, 1, 1)
+shader_parameter/tolerance = 0.0
 
-[node name="Entrance" type="Area2D" groups=["entrance", "room"]]
-collision_layer = 4
-collision_mask = 0
-monitoring = false
+[node name="Basic Room" instance=ExtResource("1_0lbx3")]
 script = ExtResource("1_67rxf")
-spawnable_meeple = Array[PackedScene]([ExtResource("2_ghigw")])
+spawnable_meeple = Array[PackedScene]([])
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_r7kuv")
+[node name="DungeonTile" parent="." index="3"]
+material = SubResource("ShaderMaterial_nwwr8")
 
-[node name="DungeonTile" type="Sprite2D" parent="."]
-texture = ExtResource("3_rsle2")
-
-[node name="EntranceSprite" type="Sprite2D" parent="."]
+[node name="EntranceSprite" type="Sprite2D" parent="DungeonTile" index="0"]
+self_modulate = Color(0.815686, 1, 0.333333, 1)
 texture = ExtResource("4_xc40b")
-
-[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
-navigation_polygon = ExtResource("5_uxfk6")

@@ -158,7 +158,7 @@ func is_adjacent_to(other: Room) -> bool:
 func get_treasure_count() -> int:
 	var count: int = 0
 	for child in get_children():
-		if child is Treasure:
+		if child is Treasure and child.has_node('TreasureIcon') or child.is_in_group("sword"):
 			count += 1
 	return count
 
@@ -185,7 +185,7 @@ func get_traps() -> Array[Trap]:
 func get_treasure() -> Array[Treasure]:
 	var treasure: Array[Treasure] = []
 	for child in room_sprite.get_children():
-		if child is Treasure:
+		if child is Treasure and child.has_node('TreasureIcon') or child.is_in_group('sword'):
 			treasure.append(child)
 	return treasure
 

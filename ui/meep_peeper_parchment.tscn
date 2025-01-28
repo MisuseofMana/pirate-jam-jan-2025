@@ -1,0 +1,255 @@
+[gd_scene load_steps=22 format=3 uid="uid://k73y8amoh5s5"]
+
+[ext_resource type="Texture2D" uid="uid://ct46ge3k7pdrh" path="res://art/ui/parchment-ninepatch-bottom.png" id="1_diq7h"]
+[ext_resource type="Script" path="res://ui/meep_peeper_parchment.gd" id="1_mkmvk"]
+[ext_resource type="Theme" uid="uid://cijf68vbxecgj" path="res://ui/parchment_ui.tres" id="2_uj2ws"]
+[ext_resource type="Texture2D" uid="uid://bhky2o83651kr" path="res://art/meeple/meeple_soul_still.png" id="3_mmu3v"]
+[ext_resource type="Texture2D" uid="uid://dsasck5aq0gxc" path="res://ui/meep-portrait-cat.png" id="3_psdw1"]
+[ext_resource type="Texture2D" uid="uid://dnwu5ffjxy7b0" path="res://ui/meep_arrow_left_normal.png" id="3_xyayu"]
+[ext_resource type="Texture2D" uid="uid://b65j4dvec4tyr" path="res://ui/meep_arrow_left_pressed.png" id="4_c0jil"]
+[ext_resource type="Texture2D" uid="uid://bkg6su18gkky1" path="res://ui/meep_arrow_left_hover.png" id="5_2scwm"]
+[ext_resource type="Texture2D" uid="uid://b4bj6apqag6em" path="res://art/meeple/heart.png" id="8_v1yeq"]
+[ext_resource type="Texture2D" uid="uid://b6wskyhqk1dix" path="res://art/treasure/cup.png" id="10_p70x7"]
+[ext_resource type="Texture2D" uid="uid://d2sja4xxk5ruu" path="res://ui/meep_arrow_right_normal.png" id="11_gn8wo"]
+[ext_resource type="Texture2D" uid="uid://5gh2mjq2a8t0" path="res://ui/meep_arrow_right_pressed.png" id="12_v2m1a"]
+[ext_resource type="Texture2D" uid="uid://clopwmuvkcngr" path="res://ui/meep_arrow_right_hover.png" id="13_kjh0o"]
+
+[sub_resource type="InputEventKey" id="InputEventKey_vrj62"]
+device = -1
+keycode = 65
+unicode = 97
+
+[sub_resource type="Shortcut" id="Shortcut_0sbw4"]
+events = [SubResource("InputEventKey_vrj62")]
+
+[sub_resource type="InputEventKey" id="InputEventKey_kamw0"]
+device = -1
+keycode = 68
+unicode = 100
+
+[sub_resource type="Shortcut" id="Shortcut_2p3uc"]
+events = [SubResource("InputEventKey_kamw0")]
+
+[sub_resource type="Animation" id="Animation_o4hql"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("UIContainer/Parchment/MarginContainer:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_b60wl"]
+resource_name = "parchment_change"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("UIContainer/Parchment/MarginContainer:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(0.5, 2),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_gnfib"]
+resource_name = "fade_in"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("UIContainer/Parchment/MarginContainer:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(2, 0.5),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_s8r5h"]
+_data = {
+"RESET": SubResource("Animation_o4hql"),
+"fade_in": SubResource("Animation_gnfib"),
+"fade_out": SubResource("Animation_b60wl")
+}
+
+[node name="ParchmentMeepPeeper" type="Control" node_paths=PackedStringArray("health_value_label", "soul_value_label", "treasure_value_label", "name_label", "animation_player", "meep_readout", "hint")]
+custom_minimum_size = Vector2(384, 384)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_uj2ws")
+script = ExtResource("1_mkmvk")
+health_value_label = NodePath("UIContainer/Parchment/MarginContainer/MeepReadout/VBoxContainer/HBoxBottomRow/HBoxHealth/HealthLabel")
+soul_value_label = NodePath("UIContainer/Parchment/MarginContainer/MeepReadout/VBoxContainer/HBoxBottomRow/HBoxSoul/SoulLabel")
+treasure_value_label = NodePath("UIContainer/Parchment/MarginContainer/MeepReadout/VBoxContainer/HBoxBottomRow/HBoxTreasure/Treasure Value")
+name_label = NodePath("UIContainer/Parchment/MarginContainer/MeepReadout/VBoxContainer/HBoxTopRow/MeepName/MeepName")
+animation_player = NodePath("AnimationPlayer")
+meep_readout = NodePath("UIContainer/Parchment/MarginContainer/MeepReadout")
+hint = NodePath("UIContainer/Parchment/MarginContainer/No Meep Selected")
+
+[node name="UIContainer" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(300, 64)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -5.0
+offset_top = -20.0
+offset_right = 5.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="PrevMeepButton" type="TextureButton" parent="UIContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+shortcut = SubResource("Shortcut_0sbw4")
+texture_normal = ExtResource("3_xyayu")
+texture_pressed = ExtResource("4_c0jil")
+texture_hover = ExtResource("5_2scwm")
+
+[node name="Parchment" type="NinePatchRect" parent="UIContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("1_diq7h")
+patch_margin_left = 5
+patch_margin_right = 5
+patch_margin_bottom = 20
+axis_stretch_horizontal = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="UIContainer/Parchment"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 18
+theme_override_constants/margin_top = 3
+theme_override_constants/margin_right = 18
+theme_override_constants/margin_bottom = 3
+
+[node name="No Meep Selected" type="Label" parent="UIContainer/Parchment/MarginContainer"]
+layout_mode = 2
+theme_override_constants/line_spacing = -3
+text = "Use arrow buttons or [A] / [D]
+to select a Meep."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MeepReadout" type="HBoxContainer" parent="UIContainer/Parchment/MarginContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 12
+
+[node name="MeepPortrait" type="TextureRect" parent="UIContainer/Parchment/MarginContainer/MeepReadout"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = ExtResource("3_psdw1")
+stretch_mode = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UIContainer/Parchment/MarginContainer/MeepReadout"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 0
+
+[node name="HBoxTopRow" type="HBoxContainer" parent="UIContainer/Parchment/MarginContainer/MeepReadout/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme_override_constants/separation = 12
+
+[node name="MeepName" type="HBoxContainer" parent="UIContainer/Parchment/MarginContainer/MeepReadout/VBoxContainer/HBoxTopRow"]
+layout_mode = 2
+theme_override_constants/separation = 6
+alignment = 1
+
+[node name="MeepName" type="Label" parent="UIContainer/Parchment/MarginContainer/MeepReadout/VBoxContainer/HBoxTopRow/MeepName"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "Slow Joe"
+
+[node name="HBoxBottomRow" type="HBoxContainer" parent="UIContainer/Parchment/MarginContainer/MeepReadout/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="HBoxHealth" type="HBoxContainer" parent="UIContainer/Parchment/MarginContainer/MeepReadout/VBoxContainer/HBoxBottomRow"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="HeartIcon" type="TextureRect" parent="UIContainer/Parchment/MarginContainer/MeepReadout/VBoxContainer/HBoxBottomRow/HBoxHealth"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("8_v1yeq")
+
+[node name="HealthLabel" type="Label" parent="UIContainer/Parchment/MarginContainer/MeepReadout/VBoxContainer/HBoxBottomRow/HBoxHealth"]
+layout_mode = 2
+text = "1"
+
+[node name="HBoxSoul" type="HBoxContainer" parent="UIContainer/Parchment/MarginContainer/MeepReadout/VBoxContainer/HBoxBottomRow"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="SoulIcon" type="TextureRect" parent="UIContainer/Parchment/MarginContainer/MeepReadout/VBoxContainer/HBoxBottomRow/HBoxSoul"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("3_mmu3v")
+
+[node name="SoulLabel" type="Label" parent="UIContainer/Parchment/MarginContainer/MeepReadout/VBoxContainer/HBoxBottomRow/HBoxSoul"]
+layout_mode = 2
+text = "1"
+
+[node name="HBoxTreasure" type="HBoxContainer" parent="UIContainer/Parchment/MarginContainer/MeepReadout/VBoxContainer/HBoxBottomRow"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Treasure Icon" type="TextureRect" parent="UIContainer/Parchment/MarginContainer/MeepReadout/VBoxContainer/HBoxBottomRow/HBoxTreasure"]
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+texture = ExtResource("10_p70x7")
+stretch_mode = 5
+
+[node name="Treasure Value" type="Label" parent="UIContainer/Parchment/MarginContainer/MeepReadout/VBoxContainer/HBoxBottomRow/HBoxTreasure"]
+layout_mode = 2
+text = "6 / 6"
+
+[node name="NextMeepButton" type="TextureButton" parent="UIContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+shortcut = SubResource("Shortcut_2p3uc")
+texture_normal = ExtResource("11_gn8wo")
+texture_pressed = ExtResource("12_v2m1a")
+texture_hover = ExtResource("13_kjh0o")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_s8r5h")
+}
+
+[connection signal="pressed" from="UIContainer/PrevMeepButton" to="." method="_on_prev_meep_button_pressed"]
+[connection signal="pressed" from="UIContainer/NextMeepButton" to="." method="_on_next_meep_button_pressed"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

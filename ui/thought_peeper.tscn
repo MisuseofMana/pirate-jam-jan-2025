@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://csk4kw4vmemc3"]
+[gd_scene load_steps=8 format=3 uid="uid://sqsh5kosvquu"]
 
 [ext_resource type="Script" path="res://ui/thought_peeper.gd" id="1_v6cn2"]
 [ext_resource type="Texture2D" uid="uid://bj0qlbvgwrosw" path="res://art/meeple/hurt.png" id="2_yy5eq"]

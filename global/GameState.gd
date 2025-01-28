@@ -26,7 +26,7 @@ var current_spawn: PackedScene:
 	get(): return current_wave.spawns[current_spawn_index]
 
 # dungeon qualities
-var souls: int = 3:
+var souls: int = 1:
 	set(value):
 		if (value >= 99):
 			you_win()
@@ -43,11 +43,13 @@ func _process(_delta: float) -> void:
 		resume()
 
 func start_game():
-	souls = 3
+	souls = 1
+	current_wave_index = 0
+	current_spawn_index = 0
 #	could generate a new random dungeon here or buld a variety out as scenes to pull from
 	SceneSwitcher.switch_scene("res://scenes/game.tscn")
 	resume()
-
+	
 func spawn_meeple():
 	for entrance in EntranceRoom.get_all(self):
 		entrance.spawn_meeple(current_spawn)

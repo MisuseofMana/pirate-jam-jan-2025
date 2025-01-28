@@ -157,7 +157,4 @@ position = Vector2(9, 19)
 position = Vector2(17, 15)
 
 [node name="Treasure" parent="DungeonTile" index="5" instance=ExtResource("7_m3qm7")]
-position = Vector2(17, -18)
-
-[node name="Treasure2" parent="DungeonTile" index="6" instance=ExtResource("7_m3qm7")]
-position = Vector2(8, 13)
+position = Vector2(-8, -11)

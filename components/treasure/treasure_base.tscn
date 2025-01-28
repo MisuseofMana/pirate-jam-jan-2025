@@ -1,12 +1,16 @@
-[gd_scene load_steps=9 format=3 uid="uid://csw3vkdw4erk5"]
+[gd_scene load_steps=14 format=3 uid="uid://csw3vkdw4erk5"]
 
+[ext_resource type="Script" path="res://components/treasure/treasure_controller.gd" id="1_65q10"]
 [ext_resource type="Texture2D" uid="uid://bfrp3s8pissd5" path="res://art/treasure/bar.png" id="1_ftwxw"]
 [ext_resource type="Texture2D" uid="uid://bxantbde2odb2" path="res://art/treasure/coins.png" id="2_q26mb"]
 [ext_resource type="Texture2D" uid="uid://b6wskyhqk1dix" path="res://art/treasure/cup.png" id="3_jkd35"]
 [ext_resource type="Texture2D" uid="uid://b0f4nw4ucp06e" path="res://art/treasure/egg.png" id="4_djgnp"]
 [ext_resource type="Texture2D" uid="uid://rci7r80u1ara" path="res://art/treasure/necklace.png" id="5_vao7p"]
 [ext_resource type="Texture2D" uid="uid://neb6eemxwkt0" path="res://art/treasure/sigil.png" id="6_fs51m"]
+[ext_resource type="Texture2D" uid="uid://cf6g4v88nhpyq" path="res://art/traps/timer-under.png" id="8_368l8"]
 [ext_resource type="Script" path="res://components/treasure/treasure_base.gd" id="8_l0lx4"]
+[ext_resource type="Texture2D" uid="uid://c0k746ay2j1sr" path="res://art/traps/timer-over.png" id="9_5ssju"]
+[ext_resource type="Texture2D" uid="uid://dhsbk6xeaxx6o" path="res://art/traps/timer-progress.png" id="10_fhqyu"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_txvkn"]
 animations = [{
@@ -34,6 +38,50 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Treasure" type="AnimatedSprite2D" groups=["macguffin"]]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ad405"]
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 2.0
+emission_ring_inner_radius = 0.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.8
+scale_max = 1.2
+color = Color(1, 0.831373, 0, 1)
+hue_variation_min = -2.23517e-08
+hue_variation_max = 0.1
+
+[node name="Treasure" type="Node2D"]
+script = ExtResource("1_65q10")
+
+[node name="TreasureIcon" type="AnimatedSprite2D" parent="." groups=["macguffin"]]
 sprite_frames = SubResource("SpriteFrames_txvkn")
 script = ExtResource("8_l0lx4")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[node name="ResetClock" type="TextureProgressBar" parent="."]
+visible = false
+offset_left = -4.0
+offset_top = -12.0
+offset_right = 12.0
+offset_bottom = 4.0
+scale = Vector2(0.5, 0.5)
+fill_mode = 5
+texture_under = ExtResource("8_368l8")
+texture_over = ExtResource("9_5ssju")
+texture_progress = ExtResource("10_fhqyu")
+tint_under = Color(1, 0.869672, 0.283795, 1)
+tint_over = Color(1, 0.870588, 0.282353, 1)
+tint_progress = Color(1, 0.870588, 0.282353, 1)
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+emitting = false
+process_material = SubResource("ParticleProcessMaterial_ad405")
+
+[connection signal="tree_entered" from="TreasureIcon" to="." method="_on_treasure_tree_entered"]
+[connection signal="tree_exited" from="TreasureIcon" to="." method="_on_treasure_tree_exited"]
+[connection signal="timeout" from="Timer" to="." method="treasure_restock"]

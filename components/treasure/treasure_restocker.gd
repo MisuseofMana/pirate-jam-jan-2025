@@ -1,0 +1,1 @@
+class_name TreasureController extends Node2D

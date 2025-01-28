@@ -16,6 +16,7 @@ class_name MeepleSoul
 @export var movement_speed: float = 60.0
 
 @export var nav_agent: NavigationAgent2D
+@onready var increment_label = $IncrementLabel
 
 var movement_delta: float
 
@@ -51,27 +52,35 @@ func _physics_process(delta: float) -> void:
 		_on_velocity_computed(new_velocity)
 
 func _on_target_reached() -> void:
+	await animate_soul_value_to_parchment()
 	GameState.souls += soul_value
-	
 	timer.start()
 	chime.play()
 	thought.show()
 
-func show_soul_value_going_to_parchment():
-#	want to show a punchy number that jumps to the parchment at the top when a soul tithes
-	pass
+func animate_soul_value_to_parchment():
+	increment_label.modulate = Color(0,0,0,0)
+	increment_label.text = '+' + str(soul_value)
+	increment_label.show()
+	get_tree().create_tween().tween_property(increment_label, "modulate", Color(1,1,1,1), 0.3)
+	get_tree().create_tween().tween_property(increment_label, "position", Vector2(-20, -40), 1)
+	await get_tree().create_timer(1).timeout
+	get_tree().create_tween().tween_property(increment_label, "global_position", Vector2(0, -180), 0.5)
+	await get_tree().create_timer(0.5).timeout
+	get_tree().create_tween().tween_property(increment_label, "modulate", Color(0,0,0,0), 0.3)
 	
 func _on_velocity_computed(safe_velocity: Vector2) -> void:
 	global_position = global_position.move_toward(global_position + safe_velocity, movement_delta)
 
 func go_to_sword():
-	var sword := get_tree().get_first_node_in_group("sword") as Treasure
+	var sword := get_tree().get_first_node_in_group("sword")
 	if sword:
 		nav_agent.target_position = sword.global_position
 	
 func _on_timer_timeout():
 	thought.hide()
 	soul_sprite.play("disentigrate")
+	increment_label.hide()
 	
 func _soul_lifetime_ran_out():
 	soul_sprite.play("disentigrate")

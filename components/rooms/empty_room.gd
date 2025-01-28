@@ -7,6 +7,9 @@ class_name EmptyRoom extends Area2D
 
 signal room_moved_from_to(fromCoords : Vector2i, toCoords : Vector2i)
 
+const SWIRL_PARTICLE_GREEN = preload("res://art/rooms/swirl_particle_green.png")
+const SWIRL_PARTICLE_PURPLE = preload("res://art/rooms/swirl_particle_purple.png")
+
 var empty_rooms_active = false
 
 func _ready():
@@ -22,17 +25,22 @@ func handle_empty_cell_click():
 		
 func show_spiral_indicator():
 	empty_rooms_active = true
+	swirl_sprite.modulate = Color(0.928, 0.001, 0.931)
 	swirl_sprite.show()
+	gpu_particles_2d.emitting = false
 	
 func hide_spiral_indicator():
 	empty_rooms_active = false
 	swirl_sprite.hide()
+	gpu_particles_2d.emitting = false
 
 func show_outline_on_mouse_enter():
 	if empty_rooms_active:
+		swirl_sprite.modulate = Color(0, 0.999, 0)
 		gpu_particles_2d.emitting = true
 
 func hide_outline_on_hover_mouse_exit():
+	swirl_sprite.modulate = Color(0.928, 0.001, 0.931)
 	gpu_particles_2d.emitting = false
 	
 func get_coords() -> Vector2i:

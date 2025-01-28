@@ -55,7 +55,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.2, 1),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(170, 59), Vector2(170, 59), Vector2(90, 59)]
+"values": [Vector2(211, 57), Vector2(211, 57), Vector2(90, 59)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -79,7 +79,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.2, 1),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(107, 0), Vector2(107, 0), Vector2(147, -25)]
+"values": [Vector2(86.5, 0), Vector2(86.5, 0), Vector2(147, -25)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_24032"]
@@ -88,8 +88,21 @@ _data = {
 "collapse": SubResource("Animation_4gggv")
 }
 
-[node name="NinePatchRect" type="NinePatchRect" node_paths=PackedStringArray("soul_value_label")]
-self_modulate = Color(0.569995, 0.433506, 0.643248, 1)
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -192.0
+offset_right = 192.0
+offset_bottom = 384.0
+grow_horizontal = 2
+size_flags_vertical = 0
+mouse_filter = 2
+script = ExtResource("1_qcyha")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -102,10 +115,8 @@ patch_margin_left = 5
 patch_margin_right = 5
 patch_margin_bottom = 20
 axis_stretch_horizontal = 2
-script = ExtResource("1_qcyha")
-soul_value_label = NodePath("VBoxContainer/HBoxContainer/Soul Value")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="NinePatchRect"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -117,38 +128,38 @@ grow_horizontal = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="Label" type="Label" parent="VBoxContainer"]
+[node name="Label" type="Label" parent="NinePatchRect/VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 text = "Aquire 99 souls to win."
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="NinePatchRect/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 6
 alignment = 1
 
-[node name="Soul Icon" type="TextureRect" parent="VBoxContainer/HBoxContainer"]
+[node name="Soul Icon" type="TextureRect" parent="NinePatchRect/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(16, 0)
 layout_mode = 2
 texture = ExtResource("2_1boos")
 stretch_mode = 5
 
-[node name="Soul Value" type="Label" parent="VBoxContainer/HBoxContainer"]
+[node name="Soul Value" type="Label" parent="NinePatchRect/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 text = "99 / 99"
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="NinePatchRect"]
 root_node = NodePath("../Timer")
 libraries = {
 "": SubResource("AnimationLibrary_24032")
 }
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Timer" type="Timer" parent="NinePatchRect"]
 wait_time = 5.0
 one_shot = true
 autostart = true
 
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="NinePatchRect/Timer" to="NinePatchRect" method="_on_timer_timeout"]

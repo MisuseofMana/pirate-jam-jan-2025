@@ -1,6 +1,7 @@
 class_name Meeple extends Node2D
 
 signal info_changed
+signal meep_died()
 
 const MEEPLE_SOUL = preload("res://components/soul/meeple_soul.tscn")
 const THOUGHT_HEART_EMPTY = preload("res://art/meeple/thought-heart-empty.png")
@@ -48,6 +49,7 @@ enum RoomActivity {
 @export var hurt_audio: AudioStreamPlayer2D
 @export var excited_audio: AudioStreamPlayer2D
 @export var thought: ThoughtPeeper
+@export var selected_particles: GPUParticles2D
 
 @onready var anims := $AnimationPlayer
 @onready var meeple_sprite := $Meeple
@@ -61,6 +63,7 @@ enum RoomActivity {
 			current_room.add_meeple.call_deferred(self)
 @onready var visited_rooms: Array[Node2D] = [current_room]
 @onready var overlapping_rooms: Array[Room] = [current_room]
+@onready var decrement_label = $DecrementLabel
 
 var debug: bool = false
 var treasure_collected: int = 0:
@@ -75,6 +78,15 @@ var target_macguffin: Node2D = null
 var agent_map_is_empty_or_unsynced: bool:
 	get(): return NavigationServer2D.map_get_iteration_id(nav_agent.get_navigation_map()) == 0
 var should_move: bool = true
+
+var is_active_meep : bool = false:
+	set(value):
+		is_active_meep = value
+		if is_active_meep == true:
+			selected_particles.emitting = true
+		else:
+			selected_particles.emitting = false
+
 
 static func get_all_activities() -> Array[RoomActivity]:
 	var activities: Array[Meeple.RoomActivity] = []
@@ -115,7 +127,8 @@ func _on_unhovered() -> void:
 	MeepPeeper.notify_meeple_unhovered(self)
 
 func _on_room_hitbox_entered(area: Area2D) -> void:
-	print(area)
+	if debug:
+		print(area)
 	var room := area as Room
 	if room and not visited_rooms.has(room):
 		overlapping_rooms.append(room)
@@ -173,11 +186,14 @@ func take_damage():
 	await get_tree().create_timer(0.8).timeout
 
 func _die():
+	meep_died.emit()
 	anims.play("die")
+	is_active_meep = false
 	brain.send_event("died")
 	should_move = false
 
 func explode():
+	meep_died.emit()
 	anims.play("explode")
 	brain.send_event("died")
 	GameState.notify_meep_exploded()
@@ -188,12 +204,27 @@ func _on_animation_player_animation_finished(anim_name):
 		var soul: MeepleSoul = MEEPLE_SOUL.instantiate()
 		soul.soul_value = soul_value
 		soul.position = position
+		soul.soul_value = soul_value
 		MeepPeeper.notify_meeple_unhovered(self)
 		get_parent().add_child(soul)
 		queue_free()
 	if anim_name == 'explode':
 		GameState.resume()
-		queue_free()
+		await animate_soul_decrement_to_parchment()
+		GameState.souls -= soul_value
+
+func animate_soul_decrement_to_parchment():
+	decrement_label.modulate = Color(0,0,0,0)
+	decrement_label.text = str(-soul_value)
+	decrement_label.show()
+	get_tree().create_tween().tween_property(decrement_label, "modulate", Color(1,1,1,1), 0.3)
+	get_tree().create_tween().tween_property(decrement_label, "position", Vector2(-20, -50), 1)
+	await get_tree().create_timer(1).timeout
+	get_tree().create_tween().tween_property(decrement_label, "global_position", Vector2(0, -180), 0.5)
+	await get_tree().create_timer(0.5).timeout
+	get_tree().create_tween().tween_property(decrement_label, "modulate", Color(0,0,0,0), 0.3)
+	await get_tree().create_timer(0.3).timeout
+	queue_free()
 
 func notify_wave_started() -> void:
 	brain.send_event("wave_started")
@@ -280,17 +311,18 @@ func go_to_chosen_macguffin():
 	set_target_position(target_macguffin.global_position)
 
 func take_chosen_macguffin():
-	# TODO: meep will freeze if the treasure is taken before they can take it.
 	if target_macguffin == null:
 		return
 	
 	if target_macguffin == get_tree().get_first_node_in_group("sword"):
 		var swordRoomNode: SwordRoom = target_macguffin.owner
 		swordRoomNode.initate_sword_event(self)
-	else:
-		target_macguffin.queue_free()
-		treasure_collected += 1
-	
+	elif target_macguffin is Treasure:
+		if target_macguffin.has_node('TreasureIcon'):
+			print('taking treasure')
+			target_macguffin.treasure_icon.queue_free()
+			treasure_collected += 1
+
 	target_macguffin = null
 		
 	brain.send_event("took_treasure")

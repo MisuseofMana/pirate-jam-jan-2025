@@ -90,9 +90,9 @@ func run_sword_event(meep_attempting_event: Meeple):
 	get_tree().root.add_child(eventWrapper)
 	eventWrapper.add_child(swordEventNode)
 	
-	GameState.souls -= meep_attempting_event.soul_value
+	var newSoulValue = GameState.souls - meep_attempting_event.soul_value
 	
-	if GameState.souls <= 0:
+	if newSoulValue <= 0:
 		swordEventNode.show_worthy()
 	else:
 		swordEventNode.show_not_worthy(meep_attempting_event, self)

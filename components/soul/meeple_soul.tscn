@@ -34,6 +34,7 @@ autoplay = "default"
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 
 [node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
 one_shot = true
 
 [node name="Chime" type="AudioStreamPlayer2D" parent="."]
@@ -48,6 +49,17 @@ stream = SubResource("AudioStreamRandomizer_q0qrp")
 pitch_scale = 0.5
 
 [node name="LifetimeTimer" type="Timer" parent="."]
+
+[node name="IncrementLabel" type="Label" parent="."]
+visible = false
+offset_left = -20.0
+offset_top = -36.0
+offset_right = 20.0
+offset_bottom = -11.0
+theme_override_colors/font_color = Color(0, 1, 0, 1)
+text = "+1"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="animation_finished" from="SoulSprite" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

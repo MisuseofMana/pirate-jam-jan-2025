@@ -1,9 +1,9 @@
 class_name SwordPeeper extends Control
 
 @export_group("References")
-@export var soul_value_label: Label
-@onready var timer = $Timer
-@onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var soul_value_label = $"NinePatchRect/VBoxContainer/HBoxContainer/Soul Value"
+@onready var timer = $NinePatchRect/Timer
+@onready var animation_player = $NinePatchRect/AnimationPlayer
 
 func _ready():
 	GameState.souls_changed.connect(_on_souls_changed)
