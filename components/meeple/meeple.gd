@@ -186,14 +186,12 @@ func take_damage():
 	await get_tree().create_timer(0.8).timeout
 
 func _die():
-	meep_died.emit()
 	anims.play("die")
 	is_active_meep = false
 	brain.send_event("died")
 	should_move = false
 
 func explode():
-	meep_died.emit()
 	anims.play("explode")
 	brain.send_event("died")
 	GameState.notify_meep_exploded()
@@ -338,6 +336,9 @@ func go_to_entrance():
 func exit_dungon() -> void:
 	queue_free()
 	MeepPeeper.notify_meeple_unhovered(self)
+
+func _meep_died():
+	meep_died.emit()
 
 func compute_nav_layers() -> int:
 	return nav_flags_avoid_traps if randf() <= trap_awareness_chance else nav_flags_normal
