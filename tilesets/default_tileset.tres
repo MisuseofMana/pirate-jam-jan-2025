@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://cdhyk8epjuhb1" path="res://components/rooms/room_basic_trap_1.tscn" id="1_qmr5m"]
 [ext_resource type="PackedScene" uid="uid://6jtjr8wj4snc" path="res://components/rooms/room_sword.tscn" id="2_r2bw7"]
-[ext_resource type="PackedScene" path="res://components/rooms/room_basic_treasure_1.tscn" id="3_5bk0s"]
+[ext_resource type="PackedScene" uid="uid://nrnnne1737hb" path="res://components/rooms/room_basic_treasure_1.tscn" id="3_5bk0s"]
 [ext_resource type="PackedScene" uid="uid://ca1edcsqoch32" path="res://components/rooms/room_basic_1.tscn" id="4_yi200"]
 [ext_resource type="PackedScene" uid="uid://bus7x3mlryq4a" path="res://components/rooms/room_basic_2.tscn" id="5_usjtd"]
 [ext_resource type="PackedScene" uid="uid://cwparulgglwjy" path="res://components/rooms/room_basic_trap_2.tscn" id="6_ypk2g"]
