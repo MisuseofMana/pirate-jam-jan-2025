@@ -53,21 +53,21 @@ func _physics_process(delta: float) -> void:
 
 func _on_target_reached() -> void:
 	await animate_soul_value_to_parchment()
-	GameState.souls += soul_value
+	GameState.notify_soul_collected(self)
 	timer.start()
 	chime.play()
 	thought.show()
 
 func animate_soul_value_to_parchment():
-	increment_label.modulate = Color(0,0,0,0)
+	increment_label.modulate = Color(0, 0, 0, 0)
 	increment_label.text = '+' + str(soul_value)
 	increment_label.show()
-	get_tree().create_tween().tween_property(increment_label, "modulate", Color(1,1,1,1), 0.3)
+	get_tree().create_tween().tween_property(increment_label, "modulate", Color(1, 1, 1, 1), 0.3)
 	get_tree().create_tween().tween_property(increment_label, "position", Vector2(-20, -40), 1)
 	await get_tree().create_timer(1).timeout
 	get_tree().create_tween().tween_property(increment_label, "global_position", Vector2(0, -180), 0.5)
 	await get_tree().create_timer(0.5).timeout
-	get_tree().create_tween().tween_property(increment_label, "modulate", Color(0,0,0,0), 0.3)
+	get_tree().create_tween().tween_property(increment_label, "modulate", Color(0, 0, 0, 0), 0.3)
 	
 func _on_velocity_computed(safe_velocity: Vector2) -> void:
 	global_position = global_position.move_toward(global_position + safe_velocity, movement_delta)

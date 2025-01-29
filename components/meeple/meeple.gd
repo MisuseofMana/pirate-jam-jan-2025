@@ -24,13 +24,16 @@ enum RoomActivity {
 		if value == health: return
 		health = value
 		info_changed.emit()
-@export_range(1, 99) var soul_value: int = 1
 @export var movement_speed: float = 20.0
 @export var max_treasure: int = 3:
 	set(value):
 		if value == max_treasure: return
 		max_treasure = value
 		info_changed.emit()
+		
+@export_group("Visual Modifiers")
+@export var portrait : Texture
+@export var tint : Color = Color(1,1,1,1)
 
 @export_group("AI")
 @export var macguffin_strategy: MacguffinStrategy
@@ -71,6 +74,7 @@ var treasure_collected: int = 0:
 		if value == treasure_collected: return
 		treasure_collected = value
 		info_changed.emit()
+var soul_value: int = 1
 
 var movement_delta: float
 var target_room: Room = null
@@ -79,7 +83,7 @@ var agent_map_is_empty_or_unsynced: bool:
 	get(): return NavigationServer2D.map_get_iteration_id(nav_agent.get_navigation_map()) == 0
 var should_move: bool = true
 
-var is_active_meep : bool = false:
+var is_active_meep: bool = false:
 	set(value):
 		is_active_meep = value
 		if is_active_meep == true:
@@ -103,14 +107,13 @@ static func get_all(node_in_tree: Node) -> Array[Meeple]:
 
 func _ready() -> void:
 	add_to_group("meeple")
+	add_meep_to_list()
 
+	meeple_sprite.modulate = tint
 	nav_agent.velocity_computed.connect(_on_velocity_computed)
 	nav_agent.target_reached.connect(_on_target_reached)
 
 	meeple_sprite.play("default")
-
-	hover_hitbox.mouse_entered.connect(_on_hovered)
-	hover_hitbox.mouse_exited.connect(_on_unhovered)
 	
 	room_hitbox.area_entered.connect(_on_room_hitbox_entered)
 	room_hitbox.area_exited.connect(_on_room_hitbox_exited)
@@ -120,11 +123,15 @@ func _process(_delta: float) -> void:
 		debug = not debug
 		nav_agent.debug_enabled = debug
 
-func _on_hovered() -> void:
-	MeepPeeper.notify_meeple_hovered(self)
+func add_meep_to_list() -> void:
+	var new_meep_list = GameState.meeple_list
+	new_meep_list.append(self)
+	GameState.meeple_list = new_meep_list
 
-func _on_unhovered() -> void:
-	MeepPeeper.notify_meeple_unhovered(self)
+func erase_meep_from_list() -> void:
+	var new_meep_list = GameState.meeple_list
+	new_meep_list.erase(self)
+	GameState.meeple_list = new_meep_list
 
 func _on_room_hitbox_entered(area: Area2D) -> void:
 	if debug:
@@ -194,7 +201,7 @@ func _die():
 func explode():
 	anims.play("explode")
 	brain.send_event("died")
-	GameState.notify_meep_exploded()
+	GameState.notify_meep_will_explode()
 	should_move = false
 	
 func _on_animation_player_animation_finished(anim_name):
@@ -202,30 +209,25 @@ func _on_animation_player_animation_finished(anim_name):
 		var soul: MeepleSoul = MEEPLE_SOUL.instantiate()
 		soul.soul_value = soul_value
 		soul.position = position
-		soul.soul_value = soul_value
 		MeepPeeper.notify_meeple_unhovered(self)
 		get_parent().add_child(soul)
 		queue_free()
 	if anim_name == 'explode':
-		GameState.resume()
 		await animate_soul_decrement_to_parchment()
-		GameState.souls -= soul_value
+		GameState.notify_meep_exploded(self)
 
 func animate_soul_decrement_to_parchment():
-	decrement_label.modulate = Color(0,0,0,0)
+	decrement_label.modulate = Color(0, 0, 0, 0)
 	decrement_label.text = str(-soul_value)
 	decrement_label.show()
-	get_tree().create_tween().tween_property(decrement_label, "modulate", Color(1,1,1,1), 0.3)
+	get_tree().create_tween().tween_property(decrement_label, "modulate", Color(1, 1, 1, 1), 0.3)
 	get_tree().create_tween().tween_property(decrement_label, "position", Vector2(-20, -50), 1)
 	await get_tree().create_timer(1).timeout
 	get_tree().create_tween().tween_property(decrement_label, "global_position", Vector2(0, -180), 0.5)
 	await get_tree().create_timer(0.5).timeout
-	get_tree().create_tween().tween_property(decrement_label, "modulate", Color(0,0,0,0), 0.3)
+	get_tree().create_tween().tween_property(decrement_label, "modulate", Color(0, 0, 0, 0), 0.3)
 	await get_tree().create_timer(0.3).timeout
 	queue_free()
-
-func notify_wave_started() -> void:
-	brain.send_event("wave_started")
 
 func notify_room_move_start() -> void:
 	should_move = false
@@ -338,6 +340,7 @@ func exit_dungon() -> void:
 	MeepPeeper.notify_meeple_unhovered(self)
 
 func _meep_died():
+	erase_meep_from_list()
 	meep_died.emit()
 
 func compute_nav_layers() -> int:

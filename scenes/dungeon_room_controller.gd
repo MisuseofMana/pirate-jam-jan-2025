@@ -107,6 +107,8 @@ func handle_new_clicked_room(oldCoords, newCoords):
 		#	same room was clicked and shader is already on
 		if oldCoords == newCoords:
 			clickedTile.make_shader_green()
+			print('hide empty rooms')
+			disable_empty_rooms()
 		if oldCoords != newCoords:
 			clickedTile.make_shader_purple()
 			clickedTile.turn_on_shader()

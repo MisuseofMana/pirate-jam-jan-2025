@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://b8lqmcxs37mgc"]
+[gd_scene load_steps=6 format=3 uid="uid://btuogvnelb872"]
 
 [ext_resource type="PackedScene" uid="uid://d1cw4mndlss2u" path="res://components/meeple/meeple.tscn" id="1_pweoa"]
 [ext_resource type="Script" path="res://components/meeple/ai/room_strategy.gd" id="2_jaov8"]
@@ -25,6 +25,7 @@ health = 2
 soul_value = 3
 movement_speed = 50.0
 max_treasure = 1
+tint = Color(0.388235, 0.501961, 1, 1)
 next_room_strategy = SubResource("Resource_v1cl5")
 room_activity_strategy = SubResource("Resource_xi6cl")
 trap_awareness_chance = 0.5

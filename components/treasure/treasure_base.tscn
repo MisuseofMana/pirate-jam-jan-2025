@@ -84,4 +84,5 @@ process_material = SubResource("ParticleProcessMaterial_ad405")
 
 [connection signal="tree_entered" from="TreasureIcon" to="." method="_on_treasure_tree_entered"]
 [connection signal="tree_exited" from="TreasureIcon" to="." method="_on_treasure_tree_exited"]
+[connection signal="tree_exiting" from="TreasureIcon" to="." method="_on_treasure_icon_tree_exiting"]
 [connection signal="timeout" from="Timer" to="." method="treasure_restock"]

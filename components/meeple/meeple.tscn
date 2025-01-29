@@ -1,6 +1,7 @@
-[gd_scene load_steps=35 format=3 uid="uid://d1cw4mndlss2u"]
+[gd_scene load_steps=36 format=3 uid="uid://d1cw4mndlss2u"]
 
 [ext_resource type="Script" path="res://components/meeple/meeple.gd" id="1_d3iq0"]
+[ext_resource type="Texture2D" uid="uid://dsasck5aq0gxc" path="res://ui/meep-portrait-cat.png" id="2_xbttl"]
 [ext_resource type="SpriteFrames" uid="uid://b1lfrnwpw5f1i" path="res://components/meeple/meeple_variants/meeple_greedy_frames.tres" id="2_xujee"]
 [ext_resource type="Script" path="res://components/meeple/ai/room_strategy.gd" id="4_0f6rl"]
 [ext_resource type="Script" path="res://components/meeple/ai/macguffin_strategy.gd" id="5_01ytg"]
@@ -13,8 +14,8 @@
 [ext_resource type="PackedScene" uid="uid://sqsh5kosvquu" path="res://ui/thought_peeper.tscn" id="14_jkslr"]
 [ext_resource type="Script" path="res://components/meeple/ai/room_activity_strategy.gd" id="14_u7wsa"]
 [ext_resource type="AudioStream" uid="uid://ddnfkpv3l2q24" path="res://audio/meep_excited.wav" id="15_rv3bd"]
-[ext_resource type="Material" uid="uid://c13gisbx0lcud" path="res://components/meeple/die_particles.tres" id="21_lylsi"]
-[ext_resource type="Material" uid="uid://cmggws4u2ebjc" path="res://components/meeple/explode_particles.tres" id="22_f2fio"]
+[ext_resource type="Material" path="res://components/meeple/die_particles.tres" id="21_lylsi"]
+[ext_resource type="Material" path="res://components/meeple/explode_particles.tres" id="22_f2fio"]
 [ext_resource type="Script" path="res://ui/thought_peeper_resources.gd" id="23_5v4pn"]
 [ext_resource type="Texture2D" uid="uid://2rqj15oc2tmc" path="res://art/meeple/exit.png" id="24_ut6j2"]
 [ext_resource type="Texture2D" uid="uid://bj0qlbvgwrosw" path="res://art/meeple/hurt.png" id="25_0fjv0"]
@@ -40,6 +41,21 @@ script = ExtResource("14_u7wsa")
 consideration_fill_pockets = 1.0
 consideration_avoid_loafing = 0.5
 consideration_decide_randomly = 0.12
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_5a1qt"]
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 12.0
+emission_ring_inner_radius = 10.0
+orbit_velocity_min = 9.49949e-08
+orbit_velocity_max = 9.49949e-08
+gravity = Vector3(0, 0, 0)
+scale_max = 2.3
+color = Color(1, 0, 1, 1)
+hue_variation_min = -0.1
+hue_variation_max = 0.1
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_jq08d"]
 playback_mode = 1
@@ -281,28 +297,14 @@ texture_hurt = ExtResource("25_0fjv0")
 texture_thinking = ExtResource("26_utylb")
 texture_exit = ExtResource("24_ut6j2")
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_5a1qt"]
-particle_flag_disable_z = true
-emission_shape = 6
-emission_ring_axis = Vector3(0, 0, 1)
-emission_ring_height = 1.0
-emission_ring_radius = 14.0
-emission_ring_inner_radius = 12.0
-orbit_velocity_min = 9.49949e-08
-orbit_velocity_max = 9.49949e-08
-gravity = Vector3(0, 0, 0)
-scale_min = 0.8
-scale_max = 1.2
-color = Color(1, 0, 1, 1)
-hue_variation_min = -0.1
-hue_variation_max = 0.1
-
 [node name="Meeple" type="Node2D" node_paths=PackedStringArray("nav_agent", "brain", "hover_hitbox", "room_hitbox", "trap_hitbox", "hurt_audio", "excited_audio", "thought", "selected_particles") groups=["meeple"]]
 z_index = 1
 script = ExtResource("1_d3iq0")
 meeple_names = Array[String](["Mr. Morbles", "Glam Jim", "Peemps", "Gleeorp", "Dr. Bloop", "Extra Steve", "Hanke", "Trucy", "Willyam", "Melmm", "Kiske", "Lenid", "Kremmin", "Roddie", "That Guy", "Keef Bleefer", "Ornery Jeeps", "Harty Chartie", "Slohee Johee"])
 health = 1
 movement_speed = 30.0
+max_treasure = null
+portrait = ExtResource("2_xbttl")
 macguffin_strategy = SubResource("Resource_3ma6w")
 next_room_strategy = SubResource("Resource_xwrya")
 room_activity_strategy = SubResource("Resource_xhn3h")
@@ -318,6 +320,13 @@ hurt_audio = NodePath("Hurt Sound")
 excited_audio = NodePath("Excited Sound")
 thought = NodePath("Thought Peeper")
 selected_particles = NodePath("MeepSelectedParticles")
+
+[node name="MeepSelectedParticles" type="GPUParticles2D" parent="."]
+position = Vector2(0, -4)
+emitting = false
+amount = 50
+process_material = SubResource("ParticleProcessMaterial_5a1qt")
+local_coords = true
 
 [node name="Hurt Sound" type="AudioStreamPlayer2D" parent="."]
 process_mode = 3
@@ -351,6 +360,7 @@ script = ExtResource("5_k20un")
 shape = SubResource("CircleShape2D_mrlnf")
 
 [node name="Hover Hitbox" type="Area2D" parent="."]
+visible = false
 position = Vector2(0, 4)
 collision_layer = 256
 collision_mask = 0
@@ -359,6 +369,7 @@ monitoring = false
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hover Hitbox"]
+visible = false
 position = Vector2(0, -8)
 shape = SubResource("CircleShape2D_c7wa1")
 
@@ -399,7 +410,7 @@ script = ExtResource("5_dkyyg")
 
 [node name="Root" type="Node" parent="Brain"]
 script = ExtResource("6_hp8wo")
-initial_state = NodePath("Waiting For Wave")
+initial_state = NodePath("Exploring Dungon")
 
 [node name="Await Tile Move" type="Node" parent="Brain/Root"]
 script = ExtResource("8_ahky0")
@@ -411,15 +422,6 @@ delay_in_seconds = "0.0"
 script = ExtResource("8_ahky0")
 to = NodePath("../Dead")
 event = &"died"
-delay_in_seconds = "0.0"
-
-[node name="Waiting For Wave" type="Node" parent="Brain/Root"]
-script = ExtResource("7_jmllr")
-
-[node name="To Explore Dungeon" type="Node" parent="Brain/Root/Waiting For Wave"]
-script = ExtResource("8_ahky0")
-to = NodePath("../../Exploring Dungon")
-event = &"wave_started"
 delay_in_seconds = "0.0"
 
 [node name="Exploring Dungon" type="Node" parent="Brain/Root"]
@@ -543,13 +545,6 @@ theme_override_colors/font_color = Color(1, 0, 0, 1)
 text = "-1"
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="MeepSelectedParticles" type="GPUParticles2D" parent="."]
-position = Vector2(0, -5)
-emitting = false
-amount = 50
-process_material = SubResource("ParticleProcessMaterial_5a1qt")
-local_coords = true
 
 [connection signal="area_entered" from="TrapHitbox" to="TrapHitbox" method="_on_area_entered"]
 [connection signal="stepped_on_trap" from="TrapHitbox" to="." method="take_damage"]
