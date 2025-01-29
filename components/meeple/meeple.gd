@@ -30,6 +30,10 @@ enum RoomActivity {
 		if value == max_treasure: return
 		max_treasure = value
 		info_changed.emit()
+		
+@export_group("Visual Modifiers")
+@export var portrait : Texture
+@export var tint : Color = Color(1,1,1,1)
 
 @export_group("AI")
 @export var macguffin_strategy: MacguffinStrategy
@@ -103,14 +107,14 @@ static func get_all(node_in_tree: Node) -> Array[Meeple]:
 
 func _ready() -> void:
 	add_to_group("meeple")
+	
+	add_meep_to_list()
 
+	meeple_sprite.modulate = tint
 	nav_agent.velocity_computed.connect(_on_velocity_computed)
 	nav_agent.target_reached.connect(_on_target_reached)
 
 	meeple_sprite.play("default")
-
-	hover_hitbox.mouse_entered.connect(_on_hovered)
-	hover_hitbox.mouse_exited.connect(_on_unhovered)
 	
 	room_hitbox.area_entered.connect(_on_room_hitbox_entered)
 	room_hitbox.area_exited.connect(_on_room_hitbox_exited)
@@ -120,11 +124,15 @@ func _process(_delta: float) -> void:
 		debug = not debug
 		nav_agent.debug_enabled = debug
 
-func _on_hovered() -> void:
-	MeepPeeper.notify_meeple_hovered(self)
+func add_meep_to_list() -> void:
+	var new_meep_list = GameState.meeple_list
+	new_meep_list.append(self)
+	GameState.meeple_list = new_meep_list
 
-func _on_unhovered() -> void:
-	MeepPeeper.notify_meeple_unhovered(self)
+func erase_meep_from_list() -> void:
+	var new_meep_list = GameState.meeple_list
+	new_meep_list.erase(self)
+	GameState.meeple_list = new_meep_list
 
 func _on_room_hitbox_entered(area: Area2D) -> void:
 	if debug:
@@ -186,6 +194,7 @@ func take_damage():
 	await get_tree().create_timer(0.8).timeout
 
 func _die():
+	erase_meep_from_list()
 	meep_died.emit()
 	anims.play("die")
 	is_active_meep = false
@@ -193,6 +202,7 @@ func _die():
 	should_move = false
 
 func explode():
+	erase_meep_from_list()
 	meep_died.emit()
 	anims.play("explode")
 	brain.send_event("died")

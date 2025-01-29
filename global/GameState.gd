@@ -3,6 +3,9 @@ extends Node
 signal souls_changed
 signal paused
 signal resumed
+signal meeple_can_be_selected
+signal meeple_available_to_peep
+signal no_meep_to_peep
 
 @export var souls_win_threshold: int = 99
 @export var starting_souls: int = 10
@@ -30,6 +33,34 @@ var souls: int:
 	set(value):
 		if souls == value:
 			return
+		if value < 0 or value >= waves.size():
+			current_wave_index = 0
+		elif value >= waves.size():
+			current_wave_index = waves.size() - 1
+		else:
+			current_wave_index = value
+var current_wave: Wave:
+	get(): return waves[current_wave_index]
+var current_spawn_index: int = 0
+var current_spawn: PackedScene:
+	get(): return current_wave.spawns[current_spawn_index]
+
+var meeple_list : Array[Meeple] = []:
+	set(value):
+		meeple_list = value
+		if meeple_list.size() == 1:
+			meeple_available_to_peep.emit()
+		if meeple_list.size() > 1:
+			meeple_can_be_selected.emit()
+		if meeple_list.is_empty():
+			no_meep_to_peep.emit()
+
+# dungeon qualities
+var souls: int = 1:
+	set(value):
+		if (value >= 99):
+			you_win()
+		var oldValue = souls
 		souls = value
 		_on_souls_changed()
 

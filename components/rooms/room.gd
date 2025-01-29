@@ -126,7 +126,9 @@ func handle_room_click():
 	if dungeon_controller.room_movement_locked:
 		click_error_sfx.play()
 	if iAmSelectedRoom():
+		dungeon_controller.disable_empty_rooms()
 		dungeon_controller.last_selected_dungeon_room = null
+		room_sprite.make_shader_green()
 	elif not iAmSelectedRoom() and anyRoomIsActive():
 		click_error_sfx.play()
 	else:
@@ -139,11 +141,10 @@ func show_outline_on_mouse_enter():
 		room_sprite.make_shader_green()
 		room_sprite.turn_on_shader()
 	else:
-		room_sprite.make_shader_red()
-		room_sprite.turn_on_shader()
+		room_sprite.turn_off_shader()
 
 func hide_outline_on_hover_mouse_exit():
-	if dungeon_controller.last_selected_dungeon_room == get_coords():
+	if iAmSelectedRoom():
 		room_sprite.make_shader_purple()
 		return
 	

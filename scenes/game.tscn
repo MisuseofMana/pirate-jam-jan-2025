@@ -2,7 +2,7 @@
 
 [ext_resource type="TileSet" uid="uid://mh1sco40wky5" path="res://components/tilesets/dungeon_decoration.tres" id="1_tlxu7"]
 [ext_resource type="TileSet" uid="uid://mrguig7k625p" path="res://tilesets/default_tileset.tres" id="2_yuojw"]
-[ext_resource type="PackedScene" uid="uid://k73y8amoh5s5" path="res://ui/meep_peeper_parchment.tscn" id="3_ehr4m"]
+[ext_resource type="PackedScene" uid="uid://bvfffjyyavo8u" path="res://ui/meep_peeper_parchment.tscn" id="3_ehr4m"]
 [ext_resource type="Script" path="res://scenes/dungeon_room_controller.gd" id="3_jp735"]
 [ext_resource type="PackedScene" uid="uid://cq13b5eh0vkp7" path="res://ui/sword_peeper.tscn" id="4_and2c"]
 
@@ -21,8 +21,8 @@ mouse_filter = 1
 dungeon_tiles = NodePath("../DungeonRooms")
 
 [node name="DungeonRooms" type="TileMapLayer" parent="." node_paths=PackedStringArray("camera_node")]
-position = Vector2(32, 32)
-tile_map_data = PackedByteArray("AAD+//7/AAAAAAAAAgAAAP7/AAAAAAAAAgD//wAAAAAAAAAAAgD+/wAAAAAAAAAAAgD///7/AAAAAAAAAgAAAAAAAAAAAAAAAgD9//7/AAAAAAAAAgD9/wAAAAAAAAAAAgABAAAAAAAAAAAAAgABAP7/AAAAAAAAAgD+////AAAAAAAABgD/////AAAAAAAACAA=")
+position = Vector2(32, 18)
+tile_map_data = PackedByteArray("AAD+//7/AAAAAAAABAD//wAAAAAAAAAABAD+/wAAAAAAAAAABAD///7/AAAAAAAABAAAAAAAAAAAAAAABAD9////AAAAAAAABAABAP//AAAAAAAABAD/////AAAAAAAAAgD+////AAAAAAAABAAAAP//AAAAAAAABAAAAP7/AAAAAAAABAD9//7/AAAAAAAACQABAAAAAAAAAAAACwD9/wAAAAAAAAAAAgABAP7/AAAAAAAAAgA=")
 tile_set = ExtResource("2_yuojw")
 script = ExtResource("3_jp735")
 camera_node = NodePath("../Camera2D")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://b01cauvc5kndf"]
+[gd_scene load_steps=5 format=3 uid="uid://nrnnne1737hb"]
 
 [ext_resource type="PackedScene" uid="uid://dqr12wo3gio00" path="res://components/rooms/room_basic_base.tscn" id="1_8qgx7"]
 [ext_resource type="Shader" path="res://components/rooms/room_outline.gdshader" id="2_sl2uq"]
