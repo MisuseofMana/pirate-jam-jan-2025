@@ -24,7 +24,6 @@ enum RoomActivity {
 		if value == health: return
 		health = value
 		info_changed.emit()
-@export_range(1, 99) var soul_value: int = 1
 @export var movement_speed: float = 20.0
 @export var max_treasure: int = 3:
 	set(value):
@@ -71,6 +70,7 @@ var treasure_collected: int = 0:
 		if value == treasure_collected: return
 		treasure_collected = value
 		info_changed.emit()
+var soul_value: int = 1
 
 var movement_delta: float
 var target_room: Room = null
@@ -79,7 +79,7 @@ var agent_map_is_empty_or_unsynced: bool:
 	get(): return NavigationServer2D.map_get_iteration_id(nav_agent.get_navigation_map()) == 0
 var should_move: bool = true
 
-var is_active_meep : bool = false:
+var is_active_meep: bool = false:
 	set(value):
 		is_active_meep = value
 		if is_active_meep == true:
@@ -196,7 +196,7 @@ func explode():
 	meep_died.emit()
 	anims.play("explode")
 	brain.send_event("died")
-	GameState.notify_meep_exploded()
+	GameState.notify_meep_will_explode()
 	should_move = false
 	
 func _on_animation_player_animation_finished(anim_name):
@@ -204,30 +204,25 @@ func _on_animation_player_animation_finished(anim_name):
 		var soul: MeepleSoul = MEEPLE_SOUL.instantiate()
 		soul.soul_value = soul_value
 		soul.position = position
-		soul.soul_value = soul_value
 		MeepPeeper.notify_meeple_unhovered(self)
 		get_parent().add_child(soul)
 		queue_free()
 	if anim_name == 'explode':
-		GameState.resume()
 		await animate_soul_decrement_to_parchment()
-		GameState.souls -= soul_value
+		GameState.notify_meep_exploded(self)
 
 func animate_soul_decrement_to_parchment():
-	decrement_label.modulate = Color(0,0,0,0)
+	decrement_label.modulate = Color(0, 0, 0, 0)
 	decrement_label.text = str(-soul_value)
 	decrement_label.show()
-	get_tree().create_tween().tween_property(decrement_label, "modulate", Color(1,1,1,1), 0.3)
+	get_tree().create_tween().tween_property(decrement_label, "modulate", Color(1, 1, 1, 1), 0.3)
 	get_tree().create_tween().tween_property(decrement_label, "position", Vector2(-20, -50), 1)
 	await get_tree().create_timer(1).timeout
 	get_tree().create_tween().tween_property(decrement_label, "global_position", Vector2(0, -180), 0.5)
 	await get_tree().create_timer(0.5).timeout
-	get_tree().create_tween().tween_property(decrement_label, "modulate", Color(0,0,0,0), 0.3)
+	get_tree().create_tween().tween_property(decrement_label, "modulate", Color(0, 0, 0, 0), 0.3)
 	await get_tree().create_timer(0.3).timeout
 	queue_free()
-
-func notify_wave_started() -> void:
-	brain.send_event("wave_started")
 
 func notify_room_move_start() -> void:
 	should_move = false

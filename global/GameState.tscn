@@ -1,9 +1,8 @@
-[gd_scene load_steps=18 format=3 uid="uid://bmifa8hlavga4"]
+[gd_scene load_steps=13 format=3 uid="uid://bmifa8hlavga4"]
 
 [ext_resource type="Script" path="res://global/GameState.gd" id="1_6ccbp"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="2_7yvp7"]
 [ext_resource type="AudioStream" uid="uid://btlkfdy3vbvtu" path="res://audio/ambient_choir_taiko.mp3" id="2_temxw"]
-[ext_resource type="Script" path="res://global/Wave.gd" id="2_vea6p"]
 [ext_resource type="PackedScene" uid="uid://hwnoth8qepay" path="res://components/meeple/meeple_variants/meeple_normie.tscn" id="3_m0m8c"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="3_yhpqw"]
 [ext_resource type="PackedScene" uid="uid://dywkg5qwj78u6" path="res://components/meeple/meeple_variants/meeple_sluggish.tscn" id="4_70xg7"]
@@ -11,108 +10,115 @@
 [ext_resource type="PackedScene" uid="uid://b8lqmcxs37mgc" path="res://components/meeple/meeple_variants/meeple_explora.tscn" id="5_kmgkn"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="5_mrhtl"]
 [ext_resource type="PackedScene" uid="uid://demfo8u0ru6hk" path="res://components/meeple/meeple_variants/meeple_greedy.tscn" id="6_q1rlw"]
-
-[sub_resource type="Resource" id="Resource_ede0e"]
-script = ExtResource("2_vea6p")
-spawns = Array[PackedScene]([ExtResource("3_m0m8c")])
-
-[sub_resource type="Resource" id="Resource_wvbli"]
-script = ExtResource("2_vea6p")
-spawns = Array[PackedScene]([ExtResource("3_m0m8c"), ExtResource("3_m0m8c")])
-
-[sub_resource type="Resource" id="Resource_wise8"]
-script = ExtResource("2_vea6p")
-spawns = Array[PackedScene]([ExtResource("3_m0m8c"), ExtResource("4_70xg7")])
-
-[sub_resource type="Resource" id="Resource_o58ku"]
-script = ExtResource("2_vea6p")
-spawns = Array[PackedScene]([ExtResource("3_m0m8c"), ExtResource("5_kmgkn")])
-
-[sub_resource type="Resource" id="Resource_2pr38"]
-script = ExtResource("2_vea6p")
-spawns = Array[PackedScene]([ExtResource("3_m0m8c"), ExtResource("3_m0m8c"), ExtResource("6_q1rlw")])
-
-[sub_resource type="Resource" id="Resource_uc04v"]
-script = ExtResource("2_vea6p")
-spawns = Array[PackedScene]([ExtResource("3_m0m8c"), ExtResource("5_kmgkn"), ExtResource("6_q1rlw")])
+[ext_resource type="PackedScene" uid="uid://bcwkugn6v3oy7" path="res://addons/godot_state_charts/utilities/state_chart_debugger.tscn" id="11_q7lqb"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/history_state.gd" id="11_sxerc"]
 
 [node name="GameState" type="Node" node_paths=PackedStringArray("states")]
 process_mode = 3
 script = ExtResource("1_6ccbp")
-waves = Array[ExtResource("2_vea6p")]([SubResource("Resource_ede0e"), SubResource("Resource_wvbli"), SubResource("Resource_wise8"), SubResource("Resource_o58ku"), SubResource("Resource_2pr38"), SubResource("Resource_uc04v")])
-states = NodePath("States")
+wave_1_meeps = Array[PackedScene]([ExtResource("3_m0m8c")])
+wave_2_meeps = Array[PackedScene]([ExtResource("3_m0m8c"), ExtResource("3_m0m8c"), ExtResource("3_m0m8c"), ExtResource("3_m0m8c"), ExtResource("3_m0m8c"), ExtResource("5_kmgkn"), ExtResource("4_70xg7"), ExtResource("6_q1rlw")])
+wave_2_threshold = 30
+wave_3_meeps = Array[PackedScene]([ExtResource("5_kmgkn"), ExtResource("6_q1rlw"), ExtResource("4_70xg7")])
+wave_3_threshold = 60
+states = NodePath("Dungeon States")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("2_temxw")
 volume_db = -10.0
 autoplay = true
 
-[node name="States" type="Node" parent="."]
+[node name="Dungeon States" type="Node" parent="."]
 script = ExtResource("2_7yvp7")
-initial_expression_properties = {
-"time_between_meeple": 4.0,
-"time_between_waves": 15.0
-}
 
-[node name="Root" type="Node" parent="States"]
+[node name="Root" type="Node" parent="Dungeon States"]
 script = ExtResource("3_yhpqw")
-initial_state = NodePath("Wave Ongoing")
+initial_state = NodePath("On Non-Game Screen")
 
-[node name="Wave Ongoing" type="Node" parent="States/Root"]
-script = ExtResource("3_yhpqw")
-initial_state = NodePath("Wave Gathering")
-
-[node name="Wave Gathering" type="Node" parent="States/Root/Wave Ongoing"]
-script = ExtResource("3_yhpqw")
-initial_state = NodePath("Idle")
-
-[node name="Idle" type="Node" parent="States/Root/Wave Ongoing/Wave Gathering"]
+[node name="On Non-Game Screen" type="Node" parent="Dungeon States/Root"]
 script = ExtResource("4_ur7yj")
 
-[node name="Spawn" type="Node" parent="States/Root/Wave Ongoing/Wave Gathering/Idle"]
+[node name="Go to On Game Screen when game started" type="Node" parent="Dungeon States/Root/On Non-Game Screen"]
 script = ExtResource("5_mrhtl")
-to = NodePath("../../Spawning")
-delay_in_seconds = "time_between_meeple"
-
-[node name="Spawning" type="Node" parent="States/Root/Wave Ongoing/Wave Gathering"]
-script = ExtResource("4_ur7yj")
-
-[node name="Keep Spawning" type="Node" parent="States/Root/Wave Ongoing/Wave Gathering/Spawning"]
-script = ExtResource("5_mrhtl")
-to = NodePath("../../Idle")
-event = &"keep_spawning"
-delay_in_seconds = "0"
-
-[node name="Release Wave" type="Node" parent="States/Root/Wave Ongoing/Wave Gathering/Spawning"]
-script = ExtResource("5_mrhtl")
-to = NodePath("../../../Between Waves")
-event = &"release_wave"
+to = NodePath("../../On Game Screen")
+event = &"game_started"
 delay_in_seconds = "0.0"
 
-[node name="Between Waves" type="Node" parent="States/Root/Wave Ongoing"]
+[node name="On Game Screen" type="Node" parent="Dungeon States/Root"]
+script = ExtResource("3_yhpqw")
+initial_state = NodePath("Initial Delay")
+
+[node name="Initial Delay" type="Node" parent="Dungeon States/Root/On Game Screen"]
 script = ExtResource("4_ur7yj")
 
-[node name="Start Wave" type="Node" parent="States/Root/Wave Ongoing/Between Waves"]
+[node name="Start spawning after delay" type="Node" parent="Dungeon States/Root/On Game Screen/Initial Delay"]
 script = ExtResource("5_mrhtl")
-to = NodePath("../../Wave Gathering")
-delay_in_seconds = "time_between_waves"
+to = NodePath("../../Spawning")
+delay_in_seconds = "3.0"
 
-[node name="Meep Drawing Sword" type="Node" parent="States/Root/Wave Ongoing"]
+[node name="Spawning" type="Node" parent="Dungeon States/Root/On Game Screen"]
+script = ExtResource("3_yhpqw")
+initial_state = NodePath("Spawn")
+
+[node name="Meep draws sword" type="Node" parent="Dungeon States/Root/On Game Screen/Spawning"]
 script = ExtResource("5_mrhtl")
 to = NodePath("../../Meep Drawing Sword")
 event = &"meep_drawing_sword"
 delay_in_seconds = "0.0"
 
-[node name="Meep Drawing Sword" type="Node" parent="States/Root"]
+[node name="Resume" type="Node" parent="Dungeon States/Root/On Game Screen/Spawning"]
+script = ExtResource("11_sxerc")
+default_state = NodePath("../Delay")
+
+[node name="Spawn" type="Node" parent="Dungeon States/Root/On Game Screen/Spawning"]
 script = ExtResource("4_ur7yj")
 
-[node name="Meep Exploded" type="Node" parent="States/Root/Meep Drawing Sword"]
+[node name="Delay after spawning" type="Node" parent="Dungeon States/Root/On Game Screen/Spawning/Spawn"]
 script = ExtResource("5_mrhtl")
-to = NodePath("../../Wave Ongoing")
-event = &"meep_exploded"
+to = NodePath("../../Delay")
 delay_in_seconds = "0.0"
 
-[connection signal="state_entered" from="States/Root/Wave Ongoing/Wave Gathering/Spawning" to="." method="spawn_meeple"]
-[connection signal="taken" from="States/Root/Wave Ongoing/Wave Gathering/Spawning/Release Wave" to="." method="release_wave"]
-[connection signal="state_entered" from="States/Root/Meep Drawing Sword" to="." method="pause"]
-[connection signal="taken" from="States/Root/Meep Drawing Sword/Meep Exploded" to="." method="resume"]
+[node name="Delay" type="Node" parent="Dungeon States/Root/On Game Screen/Spawning"]
+script = ExtResource("4_ur7yj")
+
+[node name="Spawn after random delay" type="Node" parent="Dungeon States/Root/On Game Screen/Spawning/Delay"]
+script = ExtResource("5_mrhtl")
+to = NodePath("../../Spawn")
+delay_in_seconds = "randf_range(10.0, 15.0)"
+
+[node name="Meep Drawing Sword" type="Node" parent="Dungeon States/Root/On Game Screen"]
+script = ExtResource("4_ur7yj")
+
+[node name="Resume spawning when meep will explode" type="Node" parent="Dungeon States/Root/On Game Screen/Meep Drawing Sword"]
+script = ExtResource("5_mrhtl")
+to = NodePath("../../Spawning/Resume")
+event = &"meep_will_explode"
+delay_in_seconds = "0.0"
+
+[node name="Go to Non-Game Screen when game lost" type="Node" parent="Dungeon States/Root/On Game Screen"]
+script = ExtResource("5_mrhtl")
+to = NodePath("../../On Non-Game Screen")
+event = &"game_lost"
+delay_in_seconds = "0.0"
+
+[node name="Go to Non-Game Screen when game won" type="Node" parent="Dungeon States/Root/On Game Screen"]
+script = ExtResource("5_mrhtl")
+to = NodePath("../../On Non-Game Screen")
+event = &"game_won"
+delay_in_seconds = "0.0"
+
+[node name="StateChartDebugger" parent="." instance=ExtResource("11_q7lqb")]
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_right = 386.0
+offset_bottom = 342.0
+grow_horizontal = 1
+grow_vertical = 1
+scale = Vector2(0.5, 0.5)
+initial_node_to_watch = NodePath("../Dungeon States")
+
+[connection signal="taken" from="Dungeon States/Root/On Game Screen/Initial Delay/Start spawning after delay" to="." method="_on_start_spawning_after_3_seconds_taken"]
+[connection signal="state_entered" from="Dungeon States/Root/On Game Screen/Spawning/Spawn" to="." method="_spawn_meeple"]
+[connection signal="state_entered" from="Dungeon States/Root/On Game Screen/Meep Drawing Sword" to="." method="_pause"]
+[connection signal="state_exited" from="Dungeon States/Root/On Game Screen/Meep Drawing Sword" to="." method="_resume"]

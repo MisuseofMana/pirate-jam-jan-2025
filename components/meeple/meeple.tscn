@@ -303,6 +303,7 @@ script = ExtResource("1_d3iq0")
 meeple_names = Array[String](["Mr. Morbles", "Glam Jim", "Peemps", "Gleeorp", "Dr. Bloop", "Extra Steve", "Hanke", "Trucy", "Willyam", "Melmm", "Kiske", "Lenid", "Kremmin", "Roddie", "That Guy", "Keef Bleefer", "Ornery Jeeps", "Harty Chartie", "Slohee Johee"])
 health = 1
 movement_speed = 30.0
+max_treasure = null
 macguffin_strategy = SubResource("Resource_3ma6w")
 next_room_strategy = SubResource("Resource_xwrya")
 room_activity_strategy = SubResource("Resource_xhn3h")
@@ -399,7 +400,7 @@ script = ExtResource("5_dkyyg")
 
 [node name="Root" type="Node" parent="Brain"]
 script = ExtResource("6_hp8wo")
-initial_state = NodePath("Waiting For Wave")
+initial_state = NodePath("Exploring Dungon")
 
 [node name="Await Tile Move" type="Node" parent="Brain/Root"]
 script = ExtResource("8_ahky0")
@@ -411,15 +412,6 @@ delay_in_seconds = "0.0"
 script = ExtResource("8_ahky0")
 to = NodePath("../Dead")
 event = &"died"
-delay_in_seconds = "0.0"
-
-[node name="Waiting For Wave" type="Node" parent="Brain/Root"]
-script = ExtResource("7_jmllr")
-
-[node name="To Explore Dungeon" type="Node" parent="Brain/Root/Waiting For Wave"]
-script = ExtResource("8_ahky0")
-to = NodePath("../../Exploring Dungon")
-event = &"wave_started"
 delay_in_seconds = "0.0"
 
 [node name="Exploring Dungon" type="Node" parent="Brain/Root"]
@@ -554,8 +546,8 @@ local_coords = true
 [connection signal="area_entered" from="TrapHitbox" to="TrapHitbox" method="_on_area_entered"]
 [connection signal="stepped_on_trap" from="TrapHitbox" to="." method="take_damage"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
-[connection signal="state_entered" from="Brain/Root/Exploring Dungon/Exploring Current Room/Picking Activity" to="." method="show_thought_thinking"]
 [connection signal="state_entered" from="Brain/Root/Exploring Dungon/Exploring Current Room/Picking Activity" to="." method="pick_room_activity"]
+[connection signal="state_entered" from="Brain/Root/Exploring Dungon/Exploring Current Room/Picking Activity" to="." method="show_thought_thinking"]
 [connection signal="taken" from="Brain/Root/Exploring Dungon/Exploring Current Room/Picking Activity/Take Treasure" to="." method="show_thought_treasure"]
 [connection signal="state_entered" from="Brain/Root/Exploring Dungon/Exploring Current Room/Taking Treasure/Approaching" to="." method="go_to_chosen_macguffin"]
 [connection signal="state_entered" from="Brain/Root/Exploring Dungon/Exploring Current Room/Taking Treasure/Taking" to="." method="take_chosen_macguffin"]

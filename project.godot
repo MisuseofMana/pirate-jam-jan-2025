@@ -16,7 +16,6 @@ config/features=PackedStringArray("4.3", "Forward Plus")
 
 [autoload]
 
-SceneSwitcher="*res://SceneSwitcher.gd"
 GameState="*res://global/GameState.tscn"
 MeepPeeper="*res://ui/meep_peeper.tscn"
 

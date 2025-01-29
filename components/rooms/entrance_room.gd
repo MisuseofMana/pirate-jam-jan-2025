@@ -13,8 +13,9 @@ func _ready() -> void:
 	add_to_group("entrance")
 	super._ready()
 	
-func spawn_meeple(scene: PackedScene) -> void:
+func spawn_meeple(scene: PackedScene, soul_value: int) -> void:
 	var meeple := scene.instantiate() as Meeple
+	meeple.soul_value = soul_value
 	assert(meeple, "Scene must have a Meeple root node")
 	room_sprite.add_child(meeple)
 	meeple.position = get_random_walkable_local_position(meeple.compute_nav_layers())
