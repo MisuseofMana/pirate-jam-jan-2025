@@ -1,0 +1,71 @@
+[gd_scene load_steps=12 format=3 uid="uid://rofuo2xy4sja"]
+
+[ext_resource type="PackedScene" uid="uid://due6tipw8kq1h" path="res://components/trap/trap_base.tscn" id="1_bsgvm"]
+[ext_resource type="Texture2D" uid="uid://by4vqen18u5hu" path="res://art/traps/fire_trap.png" id="2_rgchq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gaudu"]
+atlas = ExtResource("2_rgchq")
+region = Rect2(0, 0, 14, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xybtf"]
+atlas = ExtResource("2_rgchq")
+region = Rect2(14, 0, 14, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i7111"]
+atlas = ExtResource("2_rgchq")
+region = Rect2(28, 0, 14, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7bhxo"]
+atlas = ExtResource("2_rgchq")
+region = Rect2(42, 0, 14, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fb8jq"]
+atlas = ExtResource("2_rgchq")
+region = Rect2(56, 0, 14, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7irmf"]
+atlas = ExtResource("2_rgchq")
+region = Rect2(70, 0, 14, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4sk05"]
+atlas = ExtResource("2_rgchq")
+region = Rect2(84, 0, 14, 15)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nkcwu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gaudu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xybtf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i7111")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7bhxo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fb8jq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7irmf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4sk05")
+}],
+"loop": false,
+"name": &"activate",
+"speed": 12.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wd443"]
+radius = 8.06226
+
+[node name="Trap" instance=ExtResource("1_bsgvm")]
+sprite_frames = SubResource("SpriteFrames_nkcwu")
+frame = 6
+
+[node name="CollisionShape2D" parent="DamageArea" index="0"]
+shape = SubResource("CircleShape2D_wd443")

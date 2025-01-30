@@ -1,8 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://bvfffjyyavo8u"]
+[gd_scene load_steps=12 format=3 uid="uid://k73y8amoh5s5"]
 
 [ext_resource type="Texture2D" uid="uid://ct46ge3k7pdrh" path="res://art/ui/parchment-ninepatch-bottom.png" id="1_diq7h"]
 [ext_resource type="Script" path="res://ui/meep_peeper_parchment.gd" id="1_mkmvk"]
-[ext_resource type="Theme" path="res://ui/parchment_ui.tres" id="2_uj2ws"]
+[ext_resource type="Theme" uid="uid://cijf68vbxecgj" path="res://ui/parchment_ui.tres" id="2_uj2ws"]
 [ext_resource type="Texture2D" uid="uid://bhky2o83651kr" path="res://art/meeple/meeple_soul_still.png" id="3_mmu3v"]
 [ext_resource type="Texture2D" uid="uid://dsasck5aq0gxc" path="res://ui/meep-portrait-cat.png" id="3_psdw1"]
 [ext_resource type="Texture2D" uid="uid://b4bj6apqag6em" path="res://art/meeple/heart.png" id="8_v1yeq"]
@@ -131,7 +131,7 @@ no_meep_message = NodePath("UIContainer/Parchment/MarginContainer/No Meep Select
 space_hint = NodePath("UIContainer/Parchment/MarginContainer/VBoxContainer/SpaceHint")
 
 [node name="UIContainer" type="HBoxContainer" parent="."]
-custom_minimum_size = Vector2(220, 75)
+custom_minimum_size = Vector2(220, 70)
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -139,7 +139,7 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -110.0
-offset_top = -86.0
+offset_top = -76.0
 offset_right = 110.0
 grow_horizontal = 2
 grow_vertical = 0
@@ -158,12 +158,14 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = -1.0
+offset_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 18
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 18
-theme_override_constants/margin_bottom = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
 
 [node name="No Meep Selected" type="Label" parent="UIContainer/Parchment/MarginContainer"]
 layout_mode = 2
@@ -177,11 +179,14 @@ vertical_alignment = 1
 [node name="VBoxContainer" type="VBoxContainer" parent="UIContainer/Parchment/MarginContainer"]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = -3
 
 [node name="MeepReadout" type="HBoxContainer" parent="UIContainer/Parchment/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
-size_flags_vertical = 0
+size_flags_vertical = 4
 theme_override_constants/separation = 12
 
 [node name="MeepPortrait" type="TextureRect" parent="UIContainer/Parchment/MarginContainer/VBoxContainer/MeepReadout"]
@@ -264,7 +269,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 theme_override_colors/font_color = Color(0.0674665, 0.056316, 0.0690611, 1)
-theme_override_font_sizes/font_size = 15
+theme_override_font_sizes/font_size = 12
 text = "press [space] to change meep"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

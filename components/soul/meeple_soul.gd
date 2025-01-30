@@ -16,7 +16,8 @@ class_name MeepleSoul
 @export var movement_speed: float = 60.0
 
 @export var nav_agent: NavigationAgent2D
-@onready var increment_label = $IncrementLabel
+
+const INCREMENT_LABEL = preload("res://ui/increment_label.tscn")
 
 var movement_delta: float
 
@@ -52,35 +53,30 @@ func _physics_process(delta: float) -> void:
 		_on_velocity_computed(new_velocity)
 
 func _on_target_reached() -> void:
-	await animate_soul_value_to_parchment()
-	GameState.notify_soul_collected(self)
+	animate_soul_value_to_parchment()
 	timer.start()
 	chime.play()
 	thought.show()
 
 func animate_soul_value_to_parchment():
-	increment_label.modulate = Color(0, 0, 0, 0)
-	increment_label.text = '+' + str(soul_value)
-	increment_label.show()
-	get_tree().create_tween().tween_property(increment_label, "modulate", Color(1, 1, 1, 1), 0.3)
-	get_tree().create_tween().tween_property(increment_label, "position", Vector2(-20, -40), 1)
-	await get_tree().create_timer(1).timeout
-	get_tree().create_tween().tween_property(increment_label, "global_position", Vector2(0, -180), 0.5)
-	await get_tree().create_timer(0.5).timeout
-	get_tree().create_tween().tween_property(increment_label, "modulate", Color(0, 0, 0, 0), 0.3)
+	var increment_node = INCREMENT_LABEL.instantiate()
+	increment_node.position = global_position + Vector2(-6, -50)
+	increment_node.text = '+' + str(soul_value)
+	increment_node.soul_value = soul_value
+	get_tree().root.add_child(increment_node)
 	
 func _on_velocity_computed(safe_velocity: Vector2) -> void:
 	global_position = global_position.move_toward(global_position + safe_velocity, movement_delta)
 
 func go_to_sword():
 	var sword := get_tree().get_first_node_in_group("sword")
+	print(sword  )
 	if sword:
 		nav_agent.target_position = sword.global_position
 	
 func _on_timer_timeout():
 	thought.hide()
 	soul_sprite.play("disentigrate")
-	increment_label.hide()
 	
 func _soul_lifetime_ran_out():
 	soul_sprite.play("disentigrate")

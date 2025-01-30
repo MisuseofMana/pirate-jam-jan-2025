@@ -14,8 +14,8 @@
 [ext_resource type="PackedScene" uid="uid://sqsh5kosvquu" path="res://ui/thought_peeper.tscn" id="14_jkslr"]
 [ext_resource type="Script" path="res://components/meeple/ai/room_activity_strategy.gd" id="14_u7wsa"]
 [ext_resource type="AudioStream" uid="uid://ddnfkpv3l2q24" path="res://audio/meep_excited.wav" id="15_rv3bd"]
-[ext_resource type="Material" path="res://components/meeple/die_particles.tres" id="21_lylsi"]
-[ext_resource type="Material" path="res://components/meeple/explode_particles.tres" id="22_f2fio"]
+[ext_resource type="Material" uid="uid://c13gisbx0lcud" path="res://components/meeple/die_particles.tres" id="21_lylsi"]
+[ext_resource type="Material" uid="uid://cmggws4u2ebjc" path="res://components/meeple/explode_particles.tres" id="22_f2fio"]
 [ext_resource type="Script" path="res://ui/thought_peeper_resources.gd" id="23_5v4pn"]
 [ext_resource type="Texture2D" uid="uid://2rqj15oc2tmc" path="res://art/meeple/exit.png" id="24_ut6j2"]
 [ext_resource type="Texture2D" uid="uid://bj0qlbvgwrosw" path="res://art/meeple/hurt.png" id="25_0fjv0"]
@@ -303,7 +303,6 @@ script = ExtResource("1_d3iq0")
 meeple_names = Array[String](["Mr. Morbles", "Glam Jim", "Peemps", "Gleeorp", "Dr. Bloop", "Extra Steve", "Hanke", "Trucy", "Willyam", "Melmm", "Kiske", "Lenid", "Kremmin", "Roddie", "That Guy", "Keef Bleefer", "Ornery Jeeps", "Harty Chartie", "Slohee Johee"])
 health = 1
 movement_speed = 30.0
-max_treasure = null
 portrait = ExtResource("2_xbttl")
 macguffin_strategy = SubResource("Resource_3ma6w")
 next_room_strategy = SubResource("Resource_xwrya")
@@ -535,17 +534,7 @@ offset_bottom = -20.0
 scale = Vector2(0.8, 0.8)
 resources = SubResource("Resource_3g382")
 
-[node name="DecrementLabel" type="Label" parent="."]
-visible = false
-offset_left = -20.0
-offset_top = -36.0
-offset_right = 20.0
-offset_bottom = -11.0
-theme_override_colors/font_color = Color(1, 0, 0, 1)
-text = "-1"
-horizontal_alignment = 1
-vertical_alignment = 1
-
+[connection signal="tree_exiting" from="." to="." method="_on_tree_exiting"]
 [connection signal="area_entered" from="TrapHitbox" to="TrapHitbox" method="_on_area_entered"]
 [connection signal="stepped_on_trap" from="TrapHitbox" to="." method="take_damage"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

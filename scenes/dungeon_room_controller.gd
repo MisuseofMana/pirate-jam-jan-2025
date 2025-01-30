@@ -15,7 +15,8 @@ var last_selected_dungeon_room = null:
 	set(newValue):
 		var oldValue = last_selected_dungeon_room
 		last_selected_dungeon_room = newValue
-		handle_new_clicked_room(oldValue, newValue)
+		if newValue is Vector2i:
+			handle_new_clicked_room(oldValue, newValue)
 
 var fromCoords: Vector2i
 var toCoords: Vector2i
@@ -30,6 +31,7 @@ var toPosition: Vector2
 var room_movement_locked: bool = false
 		
 func _ready() -> void:
+	GameState.dungeon_controller = self
 	InputMap.load_from_project_settings()
 	GameState.paused.connect(func(): process_mode = ProcessMode.PROCESS_MODE_DISABLED)
 	GameState.resumed.connect(func(): process_mode = ProcessMode.PROCESS_MODE_ALWAYS)
@@ -89,30 +91,28 @@ func run_sword_event(meep_attempting_event: Meeple):
 	eventWrapper.position = get_sword_room_tile_position()
 	get_tree().root.add_child(eventWrapper)
 	eventWrapper.add_child(swordEventNode)
-	
-	var newSoulValue = GameState.souls - meep_attempting_event.soul_value
-	
-	if newSoulValue <= 0:
-		swordEventNode.show_worthy()
-	else:
-		swordEventNode.show_not_worthy(meep_attempting_event, self)
-	
+
 func reset_camera_to_origin():
 	get_tree().create_tween().tween_property(camera_node, "position", Vector2(0, 0), camera_anim_speed)
 	get_tree().create_tween().tween_property(camera_node, "zoom", Vector2(1, 1), camera_anim_speed)
 
 func handle_new_clicked_room(oldCoords, newCoords):
-	if newCoords:
+	# check that new coords are Vector2i
+	if newCoords is Vector2i:
 		var clickedTile: RoomSprite = get_room_scene(newCoords).room_sprite
-		#	same room was clicked and shader is already on
-		if oldCoords == newCoords:
-			clickedTile.make_shader_green()
-			print('hide empty rooms')
-			disable_empty_rooms()
-		if oldCoords != newCoords:
-			clickedTile.make_shader_purple()
-			clickedTile.turn_on_shader()
-			activate_empty_rooms()			
+		set_room_to_active_state(clickedTile)
+	else:
+		var oldTile: RoomSprite = get_room_scene(oldCoords).room_sprite
+		set_room_to_available_state(oldTile)
+
+func set_room_to_active_state(room: RoomSprite):
+	room.make_shader_purple()
+	room.turn_on_shader()
+	activate_empty_rooms()
+	
+func set_room_to_available_state(room: RoomSprite):
+	room.make_shader_green()
+	disable_empty_rooms()
 
 func activate_empty_rooms():
 	for room_node in get_children():

@@ -12,6 +12,12 @@ static func get_all(node_in_tree: Node) -> Array[EntranceRoom]:
 func _ready() -> void:
 	add_to_group("entrance")
 	super._ready()
+
+func handle_room_click():
+	click_error_sfx.play()
+	
+func room_is_clickable():
+	return false
 	
 func spawn_meeple(scene: PackedScene, soul_value: int) -> void:
 	var meeple := scene.instantiate() as Meeple

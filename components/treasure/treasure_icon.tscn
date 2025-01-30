@@ -1,0 +1,39 @@
+[gd_scene load_steps=9 format=3 uid="uid://cyuph5ogtkffm"]
+
+[ext_resource type="Texture2D" uid="uid://bfrp3s8pissd5" path="res://art/treasure/bar.png" id="1_qa5yq"]
+[ext_resource type="Texture2D" uid="uid://bxantbde2odb2" path="res://art/treasure/coins.png" id="2_k4hfj"]
+[ext_resource type="Texture2D" uid="uid://b6wskyhqk1dix" path="res://art/treasure/cup.png" id="3_g1p7l"]
+[ext_resource type="Texture2D" uid="uid://b0f4nw4ucp06e" path="res://art/treasure/egg.png" id="4_gk8sj"]
+[ext_resource type="Texture2D" uid="uid://rci7r80u1ara" path="res://art/treasure/necklace.png" id="5_jic1b"]
+[ext_resource type="Texture2D" uid="uid://neb6eemxwkt0" path="res://art/treasure/sigil.png" id="6_womym"]
+[ext_resource type="Script" path="res://components/treasure/treasure_icon.gd" id="7_ony8m"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_txvkn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_qa5yq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_k4hfj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_g1p7l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_gk8sj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_jic1b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_womym")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="TreasureIcon" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_txvkn")
+script = ExtResource("7_ony8m")

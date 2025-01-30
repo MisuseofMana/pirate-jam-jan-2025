@@ -5,10 +5,10 @@ signal paused
 signal resumed
 signal meeple_can_be_selected
 signal meeple_available_to_peep
-signal no_meep_to_peep
+signal select_new_available_meep
 
 @export var souls_win_threshold: int = 99
-@export var starting_souls: int = 10
+@export var starting_souls: int = 1
 
 # See state chart for wave frequency
 
@@ -29,6 +29,8 @@ signal no_meep_to_peep
 @export_group("References")
 @export var states: StateChart
 
+const EVENT_YOU_WIN = preload("res://components/room_events/event_you_win.tscn")
+
 var souls: int:
 	set(value):
 		if souls == value:
@@ -43,9 +45,9 @@ var meeple_list : Array[Meeple] = []:
 			meeple_available_to_peep.emit()
 		if meeple_list.size() > 1:
 			meeple_can_be_selected.emit()
-		if meeple_list.is_empty():
-			no_meep_to_peep.emit()
 
+var sword_room_node : SwordRoom
+var dungeon_controller : DungeonRoomController
 #region Public Methods
 
 func start_game():
@@ -59,15 +61,21 @@ func notify_meep_drawing_sword():
 func notify_meep_will_explode():
 	states.send_event("meep_will_explode")
 
+func notify_peeper_select_new_meep():
+	select_new_available_meep.emit()
+
 func notify_meep_drew_sword():
 	_lose_game()
 
-func notify_meep_exploded(meep: Meeple) -> void:
-	souls -= meep.soul_value
+func notify_souls_increased(soul_count : int):
+	souls += soul_count
+	
+func notify_souls_decreased(soul_count : int):
+	souls -= soul_count
 
-func notify_soul_collected(soul: MeepleSoul) -> void:
-	souls += soul.soul_value
-
+func notify_won_game():
+	_win_game()
+	
 # region Private Methods
 
 func _spawn_meeple():
@@ -111,7 +119,12 @@ func _deferred_switch_scene(scene_path):
 	get_tree().current_scene = scene
 
 func _on_souls_changed():
-	if souls >= souls_win_threshold:
-		_win_game()
-
+	if souls >= 99:
+		dungeon_controller.zoom_in_on_sword()
+		var youWinEvent: EventYouWin = EVENT_YOU_WIN.instantiate()
+		var eventWrapper = Node2D.new()
+		eventWrapper.position = dungeon_controller.get_sword_room_tile_position()
+		get_tree().root.add_child(eventWrapper)
+		eventWrapper.add_child(youWinEvent)
+		  
 	souls_changed.emit(souls)

@@ -1,14 +1,13 @@
-[gd_scene load_steps=10 format=3 uid="uid://bus7x3mlryq4a"]
+[gd_scene load_steps=9 format=3 uid="uid://ca1edcsqoch32"]
 
-[ext_resource type="PackedScene" uid="uid://dqr12wo3gio00" path="res://components/rooms/room_basic_base.tscn" id="1_q8xs8"]
-[ext_resource type="PackedScene" uid="uid://ccwe28e7lfnvw" path="res://components/furniture/variants/furniture_bookshelf.tscn" id="2_lpkem"]
-[ext_resource type="PackedScene" uid="uid://cfda3thgjer7u" path="res://components/furniture/variants/furniture_pot_med.tscn" id="3_c7cnl"]
-[ext_resource type="PackedScene" uid="uid://b04ry4njklykh" path="res://components/furniture/variants/furniture_stool_2.tscn" id="4_i10yt"]
-[ext_resource type="PackedScene" uid="uid://dbqrhyg4soxy1" path="res://components/furniture/variants/furniture_table.tscn" id="5_ptcnv"]
-[ext_resource type="PackedScene" uid="uid://dujxtx44eg8fc" path="res://components/furniture/variants/furniture_totem.tscn" id="6_75taj"]
-[ext_resource type="PackedScene" uid="uid://csw3vkdw4erk5" path="res://components/treasure/treasure_base.tscn" id="7_m3qm7"]
+[ext_resource type="PackedScene" uid="uid://dqr12wo3gio00" path="res://components/rooms/room_basic_base.tscn" id="1_g4f4w"]
+[ext_resource type="PackedScene" uid="uid://bphy3mwgumwu5" path="res://components/furniture/variants/furniture_bed_horizontal.tscn" id="2_rry1v"]
+[ext_resource type="PackedScene" uid="uid://blgckhsbsnnck" path="res://components/furniture/variants/furniture_barrel.tscn" id="3_5v23g"]
+[ext_resource type="PackedScene" uid="uid://cil8u4lya7vho" path="res://components/furniture/variants/furniture_stool_1.tscn" id="4_0vs2e"]
+[ext_resource type="PackedScene" uid="uid://c8wlit763n85e" path="res://components/furniture/variants/furniture_pot_big.tscn" id="5_8y4gg"]
+[ext_resource type="PackedScene" uid="uid://b5u0ftuvwj1mh" path="res://components/furniture/variants/furniture_pot_small.tscn" id="6_17xyo"]
 
-[sub_resource type="Shader" id="Shader_ikhy6"]
+[sub_resource type="Shader" id="Shader_xp315"]
 resource_local_to_scene = true
 code = "shader_type canvas_item;
 
@@ -126,9 +125,9 @@ void fragment() {
 }
 "
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_bqady"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qjjkt"]
 resource_local_to_scene = true
-shader = SubResource("Shader_ikhy6")
+shader = SubResource("Shader_xp315")
 shader_parameter/maxLineWidth = 0.0
 shader_parameter/minLineWidth = 0.0
 shader_parameter/speed = 1.0
@@ -136,25 +135,22 @@ shader_parameter/blockSize = 20.0
 shader_parameter/color = Color(0.828964, 0.405913, 1, 1)
 shader_parameter/tolerance = 0.0
 
-[node name="Basic Room" instance=ExtResource("1_q8xs8")]
+[node name="Basic Room" instance=ExtResource("1_g4f4w")]
 
 [node name="DungeonTile" parent="." index="3"]
-material = SubResource("ShaderMaterial_bqady")
+material = SubResource("ShaderMaterial_qjjkt")
 
-[node name="Bookshelf" parent="DungeonTile" index="0" instance=ExtResource("2_lpkem")]
-position = Vector2(-16, -23)
+[node name="BedHorizontal" parent="DungeonTile" index="0" instance=ExtResource("2_rry1v")]
+position = Vector2(15, -18)
 
-[node name="PotMedium" parent="DungeonTile" index="1" instance=ExtResource("3_c7cnl")]
-position = Vector2(-5, -19)
+[node name="Barrel" parent="DungeonTile" index="1" instance=ExtResource("3_5v23g")]
+position = Vector2(-19, -18)
 
-[node name="Stool" parent="DungeonTile" index="2" instance=ExtResource("4_i10yt")]
-position = Vector2(-17, -12)
+[node name="Stool1" parent="DungeonTile" index="2" instance=ExtResource("4_0vs2e")]
+position = Vector2(-12, -15)
 
-[node name="Table" parent="DungeonTile" index="3" instance=ExtResource("5_ptcnv")]
-position = Vector2(9, 19)
+[node name="PotBig" parent="DungeonTile" index="3" instance=ExtResource("5_8y4gg")]
+position = Vector2(-18, 19)
 
-[node name="Totem" parent="DungeonTile" index="4" instance=ExtResource("6_75taj")]
-position = Vector2(17, 15)
-
-[node name="Treasure" parent="DungeonTile" index="5" instance=ExtResource("7_m3qm7")]
-position = Vector2(-8, -11)
+[node name="PotSmall" parent="DungeonTile" index="4" instance=ExtResource("6_17xyo")]
+position = Vector2(-12, 19)

@@ -66,7 +66,8 @@ enum RoomActivity {
 			current_room.add_meeple.call_deferred(self)
 @onready var visited_rooms: Array[Node2D] = [current_room]
 @onready var overlapping_rooms: Array[Room] = [current_room]
-@onready var decrement_label = $DecrementLabel
+
+const DECREMENT_LABEL = preload("res://ui/decrement_label.tscn")
 
 var debug: bool = false
 var treasure_collected: int = 0:
@@ -90,7 +91,6 @@ var is_active_meep: bool = false:
 			selected_particles.emitting = true
 		else:
 			selected_particles.emitting = false
-
 
 static func get_all_activities() -> Array[RoomActivity]:
 	var activities: Array[Meeple.RoomActivity] = []
@@ -209,24 +209,18 @@ func _on_animation_player_animation_finished(anim_name):
 		var soul: MeepleSoul = MEEPLE_SOUL.instantiate()
 		soul.soul_value = soul_value
 		soul.position = position
-		MeepPeeper.notify_meeple_unhovered(self)
+		GameState.notify_peeper_select_new_meep()
 		get_parent().add_child(soul)
 		queue_free()
 	if anim_name == 'explode':
-		await animate_soul_decrement_to_parchment()
-		GameState.notify_meep_exploded(self)
+		animate_soul_decrement_to_parchment()
 
 func animate_soul_decrement_to_parchment():
-	decrement_label.modulate = Color(0, 0, 0, 0)
-	decrement_label.text = str(-soul_value)
-	decrement_label.show()
-	get_tree().create_tween().tween_property(decrement_label, "modulate", Color(1, 1, 1, 1), 0.3)
-	get_tree().create_tween().tween_property(decrement_label, "position", Vector2(-20, -50), 1)
-	await get_tree().create_timer(1).timeout
-	get_tree().create_tween().tween_property(decrement_label, "global_position", Vector2(0, -180), 0.5)
-	await get_tree().create_timer(0.5).timeout
-	get_tree().create_tween().tween_property(decrement_label, "modulate", Color(0, 0, 0, 0), 0.3)
-	await get_tree().create_timer(0.3).timeout
+	var decrement_node = DECREMENT_LABEL.instantiate()
+	decrement_node.position = position + Vector2(-6, -50)
+	decrement_node.text = str(-soul_value)
+	decrement_node.soul_value = soul_value
+	get_tree().root.add_child(decrement_node)
 	queue_free()
 
 func notify_room_move_start() -> void:
@@ -318,10 +312,8 @@ func take_chosen_macguffin():
 		var swordRoomNode: SwordRoom = target_macguffin.owner
 		swordRoomNode.initate_sword_event(self)
 	elif target_macguffin is Treasure:
-		if target_macguffin.has_node('TreasureIcon'):
-			print('taking treasure')
-			target_macguffin.treasure_icon.queue_free()
-			treasure_collected += 1
+		target_macguffin.remove_treasure_from_group()
+		treasure_collected += 1
 
 	target_macguffin = null
 		
@@ -336,12 +328,13 @@ func go_to_entrance():
 	set_target_position(entrance.global_position)
 
 func exit_dungon() -> void:
+	erase_meep_from_list()
 	queue_free()
-	MeepPeeper.notify_meeple_unhovered(self)
+	GameState.notify_peeper_select_new_meep()
 
 func _meep_died():
-	erase_meep_from_list()
 	meep_died.emit()
+	erase_meep_from_list()
 
 func compute_nav_layers() -> int:
 	return nav_flags_avoid_traps if randf() <= trap_awareness_chance else nav_flags_normal

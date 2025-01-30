@@ -1,0 +1,46 @@
+[gd_scene load_steps=7 format=3 uid="uid://dssoq3g3uxcvi"]
+
+[ext_resource type="PackedScene" uid="uid://dqr12wo3gio00" path="res://components/rooms/room_basic_base.tscn" id="1_mnkjy"]
+[ext_resource type="Shader" path="res://components/rooms/room_outline.gdshader" id="2_u3rrm"]
+[ext_resource type="PackedScene" uid="uid://rofuo2xy4sja" path="res://components/trap/variations/fire_trap.tscn" id="3_nvtui"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_u1866"]
+vertices = PackedVector2Array(10, 10, 10, -10, 24, 8, 24, 24, 8, 24, -10, 10, 8, -24, 24, -24, 24, -8, 32, -8, 32, 8, -10, -10, -8, -24, 8, 32, -8, 32, -8, 24, -24, 24, -24, 8, -24, -8, -32, 8, -32, -8, -24, -24, 8, -32, -8, -32)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(0, 3, 4, 5), PackedInt32Array(6, 7, 8, 1), PackedInt32Array(8, 9, 10, 2), PackedInt32Array(8, 2, 1), PackedInt32Array(6, 1, 11, 12), PackedInt32Array(4, 13, 14, 15), PackedInt32Array(5, 4, 15), PackedInt32Array(5, 15, 16, 17), PackedInt32Array(11, 5, 17, 18), PackedInt32Array(17, 19, 20, 18), PackedInt32Array(11, 18, 21, 12), PackedInt32Array(22, 6, 12, 23)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(8, -32, 8, -24, 10, -10, -10, -10, -10, 10, 10, 10, 10, -10, 8, -24, 24, -24, 24, -8, 32, -8, 32, 8, 24, 8, 24, 24, 8, 24, 8, 32, -8, 32, -8, 24, -24, 24, -24, 8, -32, 8, -32, -8, -24, -8, -24, -24, -8, -24, -8, -32)])
+agent_radius = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gcnws"]
+resource_local_to_scene = true
+shader = ExtResource("2_u3rrm")
+shader_parameter/maxLineWidth = 0.0
+shader_parameter/minLineWidth = 0.0
+shader_parameter/speed = 1.0
+shader_parameter/blockSize = 20.0
+shader_parameter/color = Color(0.828964, 0.405913, 1, 1)
+shader_parameter/tolerance = 0.0
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_f6m8c"]
+vertices = PackedVector2Array(3.67188, 3.67188, -3.67188, 3.67188, -3.67188, -3.67188, 3.67188, -3.67188)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-3.67213, -3.67213, 3.67213, -3.67213, 3.67213, 3.67213, -3.67213, 3.67213)])
+agent_radius = 0.0
+
+[node name="Basic Room" instance=ExtResource("1_mnkjy")]
+
+[node name="NavigationRegion2D" parent="." index="1"]
+navigation_polygon = SubResource("NavigationPolygon_u1866")
+
+[node name="DungeonTile" parent="." index="3"]
+material = SubResource("ShaderMaterial_gcnws")
+
+[node name="Trap2" parent="DungeonTile" index="0" instance=ExtResource("3_nvtui")]
+position = Vector2(-2.38419e-07, 0)
+frame_progress = 0.0
+trap_cooldown = 1.0
+
+[node name="NavigationRegion2D2" type="NavigationRegion2D" parent="." index="7"]
+position = Vector2(-2.38419e-07, 0)
+scale = Vector2(2.17857, 2.17857)
+navigation_polygon = SubResource("NavigationPolygon_f6m8c")
+navigation_layers = 2

@@ -14,6 +14,9 @@ class_name MeepPeeperParchment extends Control
 @export_group("References")
 @export var dungeon_tiles : DungeonRoomController
 
+var no_alpha : Color = Color(1, 1, 1, 0)
+var full_alpha : Color = Color(1, 1, 1, 1)
+
 var _meep: Meeple = null:
 	get():
 		return _meep if _meep and is_instance_valid(_meep) else null
@@ -34,7 +37,7 @@ var _meep: Meeple = null:
 
 func _ready():
 	GameState.meeple_available_to_peep.connect(auto_select_meep)
-	GameState.no_meep_to_peep.connect(show_no_meep_message)
+	GameState.select_new_available_meep.connect(select_new_meep)
 	
 func _on_meep_info_changed() -> void:
 	_update_labels()
@@ -49,30 +52,38 @@ func _update_labels() -> void:
 		meep_portrait.modulate = _meep.tint
 	
 func auto_select_meep():
-	_meep = GameState.meeple_list[0]
-	animation_player.play("fade_in_peeper")
+	select_new_meep()
 
-func show_no_meep_message():
-	animation_player.play("fade_out_peeper")
+func select_new_meep():
+	if GameState.meeple_list.size() > 0:
+		_meep = GameState.meeple_list.front()
+		if meep_readout.modulate == no_alpha:
+			animation_player.play("fade_in_peeper")
+	else:
+		_meep = null
+		if meep_readout.modulate == full_alpha:
+			animation_player.play("fade_out_peeper")
 
 func _remove_selected_meep():
 	_meep = null
-	animation_player.play("fade_out_peeper")
-
+	if meep_readout.modulate == full_alpha:
+		animation_player.play("fade_out_peeper")
+	
 func get_new_target_meep():
 	if GameState.meeple_list.size() == 0:
 		_meep = null
-	elif GameState.meeple_list.size() >= 2:
+	elif GameState.meeple_list.size() > 1:
 		var displayed_meep_index = GameState.meeple_list.find(_meep)
 		if displayed_meep_index == -1:
-			_meep = GameState.meeple_list[0]
+			if GameState.meeple_list.front():
+				_meep = GameState.meeple_list.front()
 		else:
 			var next_meep_index = displayed_meep_index + 1
 			var meep_list_max_index = GameState.meeple_list.size() - 1
-			if next_meep_index <= meep_list_max_index:
+			if next_meep_index > meep_list_max_index:
+				next_meep_index = 0
+			if is_instance_valid(GameState.meeple_list[next_meep_index]):
 				_meep = GameState.meeple_list[next_meep_index]
-			else:
-				_meep = GameState.meeple_list.front()
 
 func _process(_delta):
 	if Input.is_action_just_pressed("swap_meep"):

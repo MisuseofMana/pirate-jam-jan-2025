@@ -11,6 +11,8 @@ class_name Room extends Area2D
 
 signal shrunk
 signal grew
+signal room_selected
+signal room_deselected
 
 var atlas_register: Dictionary = {
 	"0000": {
@@ -125,16 +127,19 @@ func iAmSelectedRoom() -> bool:
 func handle_room_click():
 	if dungeon_controller.room_movement_locked:
 		click_error_sfx.play()
+		return
 	if iAmSelectedRoom():
 		dungeon_controller.disable_empty_rooms()
 		dungeon_controller.last_selected_dungeon_room = null
 		room_sprite.make_shader_green()
+		room_deselected.emit()
 	elif not iAmSelectedRoom() and anyRoomIsActive():
 		click_error_sfx.play()
 	else:
 		dungeon_controller.last_selected_dungeon_room = get_coords()
 		room_sprite.make_shader_purple()
 		activate_room_sfx.play()
+		room_selected.emit()
 
 func show_outline_on_mouse_enter():
 	if room_is_clickable():
@@ -159,7 +164,7 @@ func is_adjacent_to(other: Room) -> bool:
 func get_treasure_count() -> int:
 	var count: int = 0
 	for child in get_children():
-		if child is Treasure and child.has_node('TreasureIcon') or child.is_in_group("sword"):
+		if child.is_in_group("macguffin"):
 			count += 1
 	return count
 
@@ -183,10 +188,10 @@ func get_traps() -> Array[Trap]:
 			traps.append(child)
 	return traps
 
-func get_treasure() -> Array[Treasure]:
-	var treasure: Array[Treasure] = []
+func get_treasure() -> Array[Node2D]:
+	var treasure: Array[Node2D] = []
 	for child in room_sprite.get_children():
-		if child is Treasure and child.has_node('TreasureIcon') or child.is_in_group('sword'):
+		if child.is_in_group("macguffin"):
 			treasure.append(child)
 	return treasure
 

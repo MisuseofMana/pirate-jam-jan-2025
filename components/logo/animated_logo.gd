@@ -1,10 +1,10 @@
 extends Node2D
 
-signal logo_animation_finished()
 signal rack_focus()
-
-func _on_animation_animation_finished(_anim_name):
-	logo_animation_finished.emit()
+signal fade_to_black
 		
 func start_rack_focus():
 	rack_focus.emit()
+	
+func fade_in_panel():
+	fade_to_black.emit()

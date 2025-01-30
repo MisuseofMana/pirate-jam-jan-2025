@@ -1,10 +1,10 @@
 [gd_scene load_steps=8 format=3 uid="uid://6jtjr8wj4snc"]
 
 [ext_resource type="PackedScene" uid="uid://dqr12wo3gio00" path="res://components/rooms/room_basic_base.tscn" id="1_eainf"]
-[ext_resource type="Script" path="res://components/rooms/sword_room.gd" id="2_kep4c"]
+[ext_resource type="Script" path="res://components/rooms/event_rooms/sword_room.gd" id="2_kep4c"]
 [ext_resource type="Texture2D" uid="uid://d4ha56lgt4c1o" path="res://art/rooms/tilemap_sword.png" id="3_388fr"]
 [ext_resource type="Shader" path="res://components/rooms/room_outline.gdshader" id="3_uoncc"]
-[ext_resource type="Script" path="res://components/treasure/treasure_base.gd" id="5_cpc4v"]
+[ext_resource type="Script" path="res://components/rooms/event_rooms/sword.gd" id="5_mapc4"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_uyu10"]
 resource_local_to_scene = true
@@ -35,4 +35,4 @@ material = SubResource("ShaderMaterial_uyu10")
 
 [node name="Sword" type="AnimatedSprite2D" parent="DungeonTile" index="0" groups=["macguffin", "sword"]]
 sprite_frames = SubResource("SpriteFrames_6w6ef")
-script = ExtResource("5_cpc4v")
+script = ExtResource("5_mapc4")

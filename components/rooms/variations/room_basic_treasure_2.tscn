@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://dl4jddnxdvvs5"]
+
+[ext_resource type="PackedScene" uid="uid://dqr12wo3gio00" path="res://components/rooms/room_basic_base.tscn" id="1_jx16y"]
+[ext_resource type="Shader" path="res://components/rooms/room_outline.gdshader" id="2_sjhft"]
+[ext_resource type="PackedScene" uid="uid://csw3vkdw4erk5" path="res://components/treasure/treasure_base.tscn" id="3_pyh4n"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7bvkd"]
+resource_local_to_scene = true
+shader = ExtResource("2_sjhft")
+shader_parameter/maxLineWidth = 0.0
+shader_parameter/minLineWidth = 0.0
+shader_parameter/speed = 1.0
+shader_parameter/blockSize = 20.0
+shader_parameter/color = Color(0.828964, 0.405913, 1, 1)
+shader_parameter/tolerance = 0.0
+
+[node name="Basic Room" instance=ExtResource("1_jx16y")]
+
+[node name="DungeonTile" parent="." index="3"]
+material = SubResource("ShaderMaterial_7bvkd")
+
+[node name="Treasure2" parent="DungeonTile" index="0" instance=ExtResource("3_pyh4n")]
+position = Vector2(-7, 19)
+
+[node name="Treasure" parent="DungeonTile" index="1" instance=ExtResource("3_pyh4n")]
+position = Vector2(16, -18)
+
+[node name="Treasure3" parent="DungeonTile" index="2" instance=ExtResource("3_pyh4n")]
+position = Vector2(-17, 17)

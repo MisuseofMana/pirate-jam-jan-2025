@@ -1,24 +1,36 @@
-[gd_resource type="TileSet" load_steps=10 format=3 uid="uid://mrguig7k625p"]
+[gd_resource type="TileSet" load_steps=16 format=3 uid="uid://mrguig7k625p"]
 
-[ext_resource type="PackedScene" uid="uid://cdhyk8epjuhb1" path="res://components/rooms/room_basic_trap_1.tscn" id="1_qmr5m"]
-[ext_resource type="PackedScene" uid="uid://6jtjr8wj4snc" path="res://components/rooms/room_sword.tscn" id="2_r2bw7"]
-[ext_resource type="PackedScene" uid="uid://nrnnne1737hb" path="res://components/rooms/room_basic_treasure_1.tscn" id="3_5bk0s"]
-[ext_resource type="PackedScene" uid="uid://ca1edcsqoch32" path="res://components/rooms/room_basic_1.tscn" id="4_yi200"]
-[ext_resource type="PackedScene" uid="uid://bus7x3mlryq4a" path="res://components/rooms/room_basic_2.tscn" id="5_usjtd"]
-[ext_resource type="PackedScene" uid="uid://cwparulgglwjy" path="res://components/rooms/room_basic_trap_2.tscn" id="6_ypk2g"]
-[ext_resource type="PackedScene" uid="uid://6smdcxogrgbi" path="res://components/rooms/room_empty.tscn" id="7_1m1ni"]
-[ext_resource type="PackedScene" uid="uid://b5d5j5jutd54a" path="res://components/rooms/room_entrance.tscn" id="8_dt7jh"]
+[ext_resource type="PackedScene" uid="uid://cdhyk8epjuhb1" path="res://components/rooms/variations/room_basic_trap_1.tscn" id="1_3uqb4"]
+[ext_resource type="PackedScene" uid="uid://bvcglq7r5ks1r" path="res://components/rooms/variations/room_basic_3.tscn" id="2_t20fu"]
+[ext_resource type="PackedScene" uid="uid://6smdcxogrgbi" path="res://components/rooms/variations/room_empty.tscn" id="3_dfynw"]
+[ext_resource type="PackedScene" uid="uid://6jtjr8wj4snc" path="res://components/rooms/event_rooms/room_sword.tscn" id="3_p7g6u"]
+[ext_resource type="PackedScene" uid="uid://b01cauvc5kndf" path="res://components/rooms/variations/room_basic_treasure_1.tscn" id="4_3es4n"]
+[ext_resource type="PackedScene" uid="uid://cvdehtbumolqb" path="res://components/rooms/variations/basic_room_4.tscn" id="4_n6m6m"]
+[ext_resource type="PackedScene" uid="uid://ca1edcsqoch32" path="res://components/rooms/variations/room_basic_1.tscn" id="5_oarm3"]
+[ext_resource type="PackedScene" uid="uid://dl4jddnxdvvs5" path="res://components/rooms/variations/room_basic_treasure_2.tscn" id="5_ol4ag"]
+[ext_resource type="PackedScene" uid="uid://dssoq3g3uxcvi" path="res://components/rooms/variations/kill_room.tscn" id="6_5tgit"]
+[ext_resource type="PackedScene" uid="uid://bus7x3mlryq4a" path="res://components/rooms/variations/room_basic_2.tscn" id="6_64ci0"]
+[ext_resource type="PackedScene" uid="uid://bqjk1hvcmyif7" path="res://components/rooms/variations/room_gas_trap.tscn" id="7_nxplw"]
+[ext_resource type="PackedScene" uid="uid://cwparulgglwjy" path="res://components/rooms/variations/room_basic_trap_2.tscn" id="8_7xrqu"]
+[ext_resource type="PackedScene" uid="uid://uah5t5j5h8we" path="res://components/rooms/variations/room_trap_fire.tscn" id="9_qg01d"]
+[ext_resource type="PackedScene" uid="uid://b5d5j5jutd54a" path="res://components/rooms/event_rooms/room_entrance.tscn" id="10_2wk8o"]
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_5pp3v"]
 resource_name = "Rooms"
-scenes/1/scene = ExtResource("1_qmr5m")
-scenes/2/scene = ExtResource("7_1m1ni")
-scenes/3/scene = ExtResource("3_5bk0s")
-scenes/4/scene = ExtResource("4_yi200")
-scenes/5/scene = ExtResource("5_usjtd")
-scenes/7/scene = ExtResource("6_ypk2g")
-scenes/9/scene = ExtResource("8_dt7jh")
-scenes/11/scene = ExtResource("2_r2bw7")
+scenes/1/scene = ExtResource("1_3uqb4")
+scenes/2/scene = ExtResource("3_dfynw")
+scenes/3/scene = ExtResource("4_3es4n")
+scenes/4/scene = ExtResource("5_oarm3")
+scenes/5/scene = ExtResource("6_64ci0")
+scenes/6/scene = ExtResource("7_nxplw")
+scenes/7/scene = ExtResource("8_7xrqu")
+scenes/8/scene = ExtResource("9_qg01d")
+scenes/9/scene = ExtResource("10_2wk8o")
+scenes/10/scene = ExtResource("2_t20fu")
+scenes/11/scene = ExtResource("3_p7g6u")
+scenes/12/scene = ExtResource("4_n6m6m")
+scenes/13/scene = ExtResource("5_ol4ag")
+scenes/14/scene = ExtResource("6_5tgit")
 
 [resource]
 tile_size = Vector2i(64, 64)

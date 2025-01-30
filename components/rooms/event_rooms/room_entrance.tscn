@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://b5d5j5jutd54a"]
 
 [ext_resource type="PackedScene" uid="uid://dqr12wo3gio00" path="res://components/rooms/room_basic_base.tscn" id="1_0lbx3"]
-[ext_resource type="Script" path="res://components/rooms/entrance_room.gd" id="1_67rxf"]
+[ext_resource type="Script" path="res://components/rooms/event_rooms/entrance_room.gd" id="1_67rxf"]
 [ext_resource type="Shader" path="res://components/rooms/room_outline.gdshader" id="3_vdacs"]
 [ext_resource type="Texture2D" uid="uid://b4sqf4yhiedef" path="res://art/rooms/entrance.png" id="4_xc40b"]
 

@@ -12,11 +12,11 @@ func _ready():
 	reset_icon.hide()
 
 func trigger_trap():
-		play("activate")
-		timer.start(trap_cooldown)
-		reset_icon.show()
-		reset_icon.value = 100
-		get_tree().create_tween().tween_property(reset_icon, "value", 0, trap_cooldown)
+	play("activate")
+	timer.start(trap_cooldown)
+	reset_icon.show()
+	reset_icon.value = 100
+	get_tree().create_tween().tween_property(reset_icon, "value", 0, trap_cooldown)
 	
 func reset_trap():
 	frame = 0

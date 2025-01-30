@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://nrnnne1737hb"]
+[gd_scene load_steps=5 format=3 uid="uid://b01cauvc5kndf"]
 
 [ext_resource type="PackedScene" uid="uid://dqr12wo3gio00" path="res://components/rooms/room_basic_base.tscn" id="1_8qgx7"]
 [ext_resource type="Shader" path="res://components/rooms/room_outline.gdshader" id="2_sl2uq"]
@@ -19,17 +19,14 @@ shader_parameter/tolerance = 0.0
 [node name="DungeonTile" parent="." index="3"]
 material = SubResource("ShaderMaterial_286ue")
 
-[node name="Treasure" parent="DungeonTile" index="0" instance=ExtResource("3_inn8l")]
-position = Vector2(-3, 7)
+[node name="Treasure2" parent="DungeonTile" index="0" instance=ExtResource("3_inn8l")]
+position = Vector2(10, 8)
 
-[node name="Treasure2" parent="DungeonTile" index="1" instance=ExtResource("3_inn8l")]
-position = Vector2(14, 14)
+[node name="Treasure7" parent="DungeonTile" index="1" instance=ExtResource("3_inn8l")]
+position = Vector2(2, -1)
 
-[node name="Treasure7" parent="DungeonTile" index="2" instance=ExtResource("3_inn8l")]
-position = Vector2(5, -5)
+[node name="Treasure8" parent="DungeonTile" index="2" instance=ExtResource("3_inn8l")]
+position = Vector2(-5, 8)
 
-[node name="Treasure8" parent="DungeonTile" index="3" instance=ExtResource("3_inn8l")]
-position = Vector2(-11, -9)
-
-[node name="Treasure11" parent="DungeonTile" index="4" instance=ExtResource("3_inn8l")]
-position = Vector2(-14, 16)
+[node name="Treasure11" parent="DungeonTile" index="3" instance=ExtResource("3_inn8l")]
+position = Vector2(-9, -8)

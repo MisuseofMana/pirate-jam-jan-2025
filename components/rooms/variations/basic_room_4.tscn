@@ -1,0 +1,42 @@
+[gd_scene load_steps=6 format=3 uid="uid://cvdehtbumolqb"]
+
+[ext_resource type="PackedScene" uid="uid://dqr12wo3gio00" path="res://components/rooms/room_basic_base.tscn" id="1_fjosi"]
+[ext_resource type="Shader" path="res://components/rooms/room_outline.gdshader" id="2_fphj1"]
+[ext_resource type="PackedScene" uid="uid://blgckhsbsnnck" path="res://components/furniture/variants/furniture_barrel.tscn" id="3_n5yiu"]
+[ext_resource type="PackedScene" uid="uid://bgvjuaa40786n" path="res://components/furniture/variants/furniture_bed_vertical.tscn" id="4_hw3ld"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_r3t2g"]
+resource_local_to_scene = true
+shader = ExtResource("2_fphj1")
+shader_parameter/maxLineWidth = 0.0
+shader_parameter/minLineWidth = 0.0
+shader_parameter/speed = 1.0
+shader_parameter/blockSize = 20.0
+shader_parameter/color = Color(0.828964, 0.405913, 1, 1)
+shader_parameter/tolerance = 0.0
+
+[node name="Basic Room" instance=ExtResource("1_fjosi")]
+
+[node name="DungeonTile" parent="." index="3"]
+material = SubResource("ShaderMaterial_r3t2g")
+
+[node name="Barrel" parent="DungeonTile" index="0" instance=ExtResource("3_n5yiu")]
+position = Vector2(-13, 9)
+
+[node name="Barrel2" parent="DungeonTile" index="1" instance=ExtResource("3_n5yiu")]
+position = Vector2(-18, 17)
+
+[node name="Barrel3" parent="DungeonTile" index="2" instance=ExtResource("3_n5yiu")]
+position = Vector2(17, 18)
+
+[node name="Barrel4" parent="DungeonTile" index="3" instance=ExtResource("3_n5yiu")]
+position = Vector2(19, 9)
+
+[node name="Barrel5" parent="DungeonTile" index="4" instance=ExtResource("3_n5yiu")]
+position = Vector2(10, 11)
+
+[node name="Barrel6" parent="DungeonTile" index="5" instance=ExtResource("3_n5yiu")]
+position = Vector2(-11, 19)
+
+[node name="BedVertical" parent="DungeonTile" index="6" instance=ExtResource("4_hw3ld")]
+position = Vector2(17, -14)

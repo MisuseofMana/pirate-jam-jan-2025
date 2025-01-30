@@ -1,20 +1,19 @@
-[gd_scene load_steps=13 format=3 uid="uid://cwparulgglwjy"]
+[gd_scene load_steps=11 format=3 uid="uid://cdhyk8epjuhb1"]
 
-[ext_resource type="PackedScene" uid="uid://dqr12wo3gio00" path="res://components/rooms/room_basic_base.tscn" id="1_52npl"]
-[ext_resource type="PackedScene" uid="uid://due6tipw8kq1h" path="res://components/trap/trap.tscn" id="2_x5d8t"]
-[ext_resource type="PackedScene" uid="uid://csw3vkdw4erk5" path="res://components/treasure/treasure_base.tscn" id="3_5nvqc"]
-[ext_resource type="PackedScene" uid="uid://does6a0xrn8cm" path="res://components/furniture/variants/furniture_guillotine.tscn" id="4_2am8h"]
-[ext_resource type="PackedScene" uid="uid://c10q78r3ajbkw" path="res://components/furniture/variants/furniture_bin.tscn" id="5_8fi5b"]
-[ext_resource type="PackedScene" uid="uid://bgvjuaa40786n" path="res://components/furniture/variants/furniture_bed_vertical.tscn" id="6_h2bxe"]
-[ext_resource type="PackedScene" uid="uid://b5u0ftuvwj1mh" path="res://components/furniture/variants/furniture_pot_small.tscn" id="7_gljxb"]
+[ext_resource type="PackedScene" uid="uid://dqr12wo3gio00" path="res://components/rooms/room_basic_base.tscn" id="1_cm8jb"]
+[ext_resource type="PackedScene" uid="uid://due6tipw8kq1h" path="res://components/trap/trap_base.tscn" id="2_lovlv"]
+[ext_resource type="PackedScene" uid="uid://b04ry4njklykh" path="res://components/furniture/variants/furniture_stool_2.tscn" id="3_tqxq1"]
+[ext_resource type="PackedScene" uid="uid://c8wlit763n85e" path="res://components/furniture/variants/furniture_pot_big.tscn" id="4_qbhjh"]
+[ext_resource type="PackedScene" uid="uid://c7yxbouysevt4" path="res://components/furniture/variants/furniture_chair.tscn" id="5_tewlb"]
+[ext_resource type="PackedScene" uid="uid://c10q78r3ajbkw" path="res://components/furniture/variants/furniture_bin.tscn" id="6_ltotk"]
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_fih2y"]
-vertices = PackedVector2Array(6, -24, 24, -24, 24, -5, 21, 0, 3, 0, -1, -4, -1, -22, 32, -5, 32, 5, 24, 5, -6, -24, -6, -32, 6, -32)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5, 6), PackedInt32Array(2, 7, 8, 9, 3), PackedInt32Array(6, 10, 11, 12, 0)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-6, -24, -6, -32, 6, -32, 6, -24, 24, -24, 24, -5, 32, -5, 32, 5, 24, 5, 21, 9.32931e-05, 3, 1.33276e-05, -0.999982, -4, -1, -22)])
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_xh8fp"]
+vertices = PackedVector2Array(10, 10, 10, -10, 24, 8, 24, 24, 8, 24, -10, 10, 8, -24, 24, -24, 24, -8, 32, -8, 32, 8, -10, -10, -8, -24, 8, 32, -8, 32, -8, 24, -24, 24, -24, 8, -24, -8, -32, 8, -32, -8, -24, -24, 8, -32, -8, -32)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(0, 3, 4, 5), PackedInt32Array(6, 7, 8, 1), PackedInt32Array(8, 9, 10, 2), PackedInt32Array(8, 2, 1), PackedInt32Array(6, 1, 11, 12), PackedInt32Array(4, 13, 14, 15), PackedInt32Array(5, 4, 15), PackedInt32Array(5, 15, 16, 17), PackedInt32Array(11, 5, 17, 18), PackedInt32Array(17, 19, 20, 18), PackedInt32Array(11, 18, 21, 12), PackedInt32Array(22, 6, 12, 23)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-24, -24, -8, -24, -8, -32, 8, -32, 8, -24, 24, -24, 24, -8, 32, -8, 32, 8, 24, 8, 24, 24, 8, 24, 8, 32, -8, 32, -8, 24, -24, 24, -24, 8, -32, 8, -32, -8, -24, -8), PackedVector2Array(10, -10, -10, -10, -10, 10, 10, 10)])
 agent_radius = 0.0
 
-[sub_resource type="Shader" id="Shader_oaxii"]
+[sub_resource type="Shader" id="Shader_qafvm"]
 resource_local_to_scene = true
 code = "shader_type canvas_item;
 
@@ -132,9 +131,9 @@ void fragment() {
 }
 "
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ma1xb"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_p3hoj"]
 resource_local_to_scene = true
-shader = SubResource("Shader_oaxii")
+shader = SubResource("Shader_qafvm")
 shader_parameter/maxLineWidth = 0.0
 shader_parameter/minLineWidth = 0.0
 shader_parameter/speed = 1.0
@@ -142,58 +141,38 @@ shader_parameter/blockSize = 20.0
 shader_parameter/color = Color(0.828964, 0.405913, 1, 1)
 shader_parameter/tolerance = 0.0
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_f5o47"]
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_sjw1y"]
 vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)])
 agent_radius = 0.0
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_qg3t3"]
-vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)])
-agent_radius = 0.0
-
-[node name="Basic Room" instance=ExtResource("1_52npl")]
+[node name="Basic Room" instance=ExtResource("1_cm8jb")]
 
 [node name="NavigationRegion2D" parent="." index="1"]
-navigation_polygon = SubResource("NavigationPolygon_fih2y")
+navigation_polygon = SubResource("NavigationPolygon_xh8fp")
 
 [node name="DungeonTile" parent="." index="3"]
-material = SubResource("ShaderMaterial_ma1xb")
+material = SubResource("ShaderMaterial_p3hoj")
 
-[node name="Trap" parent="DungeonTile" index="0" instance=ExtResource("2_x5d8t")]
-position = Vector2(-12, -11)
+[node name="Trap" parent="DungeonTile" index="0" instance=ExtResource("2_lovlv")]
 trap_cooldown = 5.0
 
-[node name="Trap2" parent="DungeonTile" index="1" instance=ExtResource("2_x5d8t")]
-position = Vector2(12, 12)
-trap_cooldown = 5.0
+[node name="Stool" parent="DungeonTile" index="1" instance=ExtResource("3_tqxq1")]
+position = Vector2(-18, 19)
 
-[node name="Treasure2" parent="DungeonTile" index="2" instance=ExtResource("3_5nvqc")]
+[node name="PotBig" parent="DungeonTile" index="2" instance=ExtResource("4_qbhjh")]
+position = Vector2(18, -18)
 
-[node name="Guillotine" parent="DungeonTile" index="3" instance=ExtResource("4_2am8h")]
-position = Vector2(17, -14)
+[node name="Chair" parent="DungeonTile" index="3" instance=ExtResource("5_tewlb")]
+position = Vector2(-11, -17)
 
-[node name="Bin" parent="DungeonTile" index="4" instance=ExtResource("5_8fi5b")]
-position = Vector2(8, -19)
+[node name="Bin" parent="DungeonTile" index="4" instance=ExtResource("6_ltotk")]
+position = Vector2(-18, -23)
 
-[node name="BedVertical" parent="DungeonTile" index="5" instance=ExtResource("6_h2bxe")]
-position = Vector2(-17, 17)
-
-[node name="PotSmall" parent="DungeonTile" index="6" instance=ExtResource("7_gljxb")]
-position = Vector2(-11, 19)
+[node name="ActivateRoomSFX" parent="." index="4"]
+pitch_scale = 0.5
 
 [node name="NavigationRegion2D2" type="NavigationRegion2D" parent="." index="7"]
-rotation = 3.14159
-navigation_polygon = SubResource("NavigationPolygon_fih2y")
-
-[node name="TrapRegion" type="NavigationRegion2D" parent="." index="8"]
-position = Vector2(-12, -11)
-navigation_polygon = SubResource("NavigationPolygon_f5o47")
-navigation_layers = 2
-
-[node name="Trap2Region" type="NavigationRegion2D" parent="." index="9"]
-position = Vector2(12, 12)
-navigation_polygon = SubResource("NavigationPolygon_qg3t3")
+navigation_polygon = SubResource("NavigationPolygon_sjw1y")
 navigation_layers = 2

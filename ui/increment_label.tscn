@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://c5cch5lbtxnwt"]
+
+[ext_resource type="Script" path="res://ui/increment_label.gd" id="1_o50ia"]
+
+[node name="IncrementLabel" type="Label"]
+modulate = Color(1, 1, 1, 0)
+offset_left = -6.0
+offset_top = -25.0
+offset_right = 6.0
+theme_override_colors/font_color = Color(0, 1, 0, 1)
+text = "+1"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("1_o50ia")
