@@ -35,7 +35,3 @@ trap_awareness_chance = 0.1
 [node name="Meeple" parent="." index="5"]
 modulate = Color(1, 0.452311, 0.237069, 1)
 sprite_frames = ExtResource("2_cjor0")
-
-[node name="Thought Peeper" parent="." index="11"]
-offset_top = -40.0
-offset_bottom = -20.0

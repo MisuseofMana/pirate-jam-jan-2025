@@ -31,7 +31,3 @@ trap_awareness_chance = 0.5
 
 [node name="Meeple" parent="." index="5"]
 modulate = Color(0.388221, 0.500373, 1, 1)
-
-[node name="Thought Peeper" parent="." index="11"]
-offset_top = -40.0
-offset_bottom = -20.0

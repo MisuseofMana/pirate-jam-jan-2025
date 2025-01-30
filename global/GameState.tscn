@@ -16,7 +16,7 @@
 [node name="GameState" type="Node" node_paths=PackedStringArray("states")]
 process_mode = 3
 script = ExtResource("1_6ccbp")
-wave_1_meeps = Array[PackedScene]([ExtResource("6_q1rlw")])
+wave_1_meeps = Array[PackedScene]([ExtResource("3_m0m8c")])
 wave_2_meeps = Array[PackedScene]([ExtResource("3_m0m8c"), ExtResource("3_m0m8c"), ExtResource("3_m0m8c"), ExtResource("3_m0m8c"), ExtResource("3_m0m8c"), ExtResource("5_kmgkn"), ExtResource("4_70xg7"), ExtResource("6_q1rlw")])
 wave_2_threshold = 30
 wave_3_meeps = Array[PackedScene]([ExtResource("5_kmgkn"), ExtResource("6_q1rlw"), ExtResource("4_70xg7")])

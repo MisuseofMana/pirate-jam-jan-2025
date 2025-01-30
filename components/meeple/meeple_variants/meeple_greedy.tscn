@@ -30,7 +30,3 @@ room_activity_strategy = SubResource("Resource_yef4l")
 
 [node name="Meeple" parent="." index="5"]
 modulate = Color(1, 0.827451, 0.219608, 1)
-
-[node name="Thought Peeper" parent="." index="11"]
-offset_top = -40.0
-offset_bottom = -20.0
