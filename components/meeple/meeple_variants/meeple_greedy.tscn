@@ -9,7 +9,7 @@ script = ExtResource("2_p84yi")
 consideration_avoid_danger = 0.0
 consideration_avoid_crowds = 0.8
 consideration_favor_adjacent = 1.0
-consideration_favor_treasure_count = 1.0
+consideration_favor_treasure_count = 0.9
 consideration_favor_unvisited = 0.8
 consideration_decide_randomly = 0.15
 
@@ -22,9 +22,9 @@ consideration_decide_randomly = 0.0
 [node name="Meeple" instance=ExtResource("1_ckkla")]
 meeple_names = Array[String](["Nabbit", "Shineboi", "Chainz", "Greedster", "Coinz", "Mr. Bigbag", "Stealla", "Relique", "Hoss", "Brasbin", "Conk", "Shakeit", "Torvis", "Monei", "Glabbo", "Stealins Sr.", "Fillup", "Greedy Pmp", "Tarq"])
 health = 4
-soul_value = 5
 movement_speed = 80.0
 max_treasure = 10
+tint = Color(1, 0.827451, 0.219608, 1)
 next_room_strategy = SubResource("Resource_5ovh6")
 room_activity_strategy = SubResource("Resource_yef4l")
 
