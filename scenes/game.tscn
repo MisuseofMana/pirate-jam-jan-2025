@@ -2,7 +2,7 @@
 
 [ext_resource type="TileSet" uid="uid://mh1sco40wky5" path="res://components/tilesets/dungeon_decoration.tres" id="1_tlxu7"]
 [ext_resource type="TileSet" uid="uid://mrguig7k625p" path="res://tilesets/default_tileset.tres" id="2_yuojw"]
-[ext_resource type="PackedScene" uid="uid://bvfffjyyavo8u" path="res://ui/meep_peeper_parchment.tscn" id="3_ehr4m"]
+[ext_resource type="PackedScene" uid="uid://k73y8amoh5s5" path="res://ui/meep_peeper_parchment.tscn" id="3_ehr4m"]
 [ext_resource type="Script" path="res://scenes/dungeon_room_controller.gd" id="3_jp735"]
 [ext_resource type="PackedScene" uid="uid://cq13b5eh0vkp7" path="res://ui/sword_peeper.tscn" id="4_and2c"]
 

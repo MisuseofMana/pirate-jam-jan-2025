@@ -24,7 +24,6 @@ consideration_decide_randomly = 0.1
 [node name="Meeple" instance=ExtResource("1_ll6tc")]
 meeple_names = Array[String](["Loaf", "Bigman", "Gallop", "Big Hot Mannie", "Flong", "One-and-a-Halfling", "Fillo", "Has-its-day", "Down Dog", "Gollog", "Fisth", "Baolang", "Dorito", "Haskins", "Rolque", "Tammald", "Shimbo", "Oskr", "Mathol"])
 health = 4
-soul_value = 5
 movement_speed = 12.0
 max_treasure = 5
 portrait = ExtResource("2_mnvh2")
@@ -36,3 +35,7 @@ trap_awareness_chance = 0.1
 [node name="Meeple" parent="." index="5"]
 modulate = Color(1, 0.452311, 0.237069, 1)
 sprite_frames = ExtResource("2_cjor0")
+
+[node name="Thought Peeper" parent="." index="11"]
+offset_top = -40.0
+offset_bottom = -20.0

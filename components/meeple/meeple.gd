@@ -32,8 +32,8 @@ enum RoomActivity {
 		info_changed.emit()
 		
 @export_group("Visual Modifiers")
-@export var portrait : Texture
-@export var tint : Color = Color(1,1,1,1)
+@export var portrait: Texture
+@export var tint: Color = Color(1, 1, 1, 1)
 
 @export_group("AI")
 @export var macguffin_strategy: MacguffinStrategy

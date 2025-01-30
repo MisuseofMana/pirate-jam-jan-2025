@@ -3,11 +3,11 @@
 [ext_resource type="Script" path="res://global/GameState.gd" id="1_6ccbp"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="2_7yvp7"]
 [ext_resource type="AudioStream" uid="uid://btlkfdy3vbvtu" path="res://audio/ambient_choir_taiko.mp3" id="2_temxw"]
-[ext_resource type="PackedScene" uid="uid://bhh3nvuvt5uf1" path="res://components/meeple/meeple_variants/meeple_normie.tscn" id="3_m0m8c"]
+[ext_resource type="PackedScene" uid="uid://hwnoth8qepay" path="res://components/meeple/meeple_variants/meeple_normie.tscn" id="3_m0m8c"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="3_yhpqw"]
 [ext_resource type="PackedScene" uid="uid://dywkg5qwj78u6" path="res://components/meeple/meeple_variants/meeple_sluggish.tscn" id="4_70xg7"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="4_ur7yj"]
-[ext_resource type="PackedScene" uid="uid://btuogvnelb872" path="res://components/meeple/meeple_variants/meeple_explora.tscn" id="5_kmgkn"]
+[ext_resource type="PackedScene" uid="uid://b8lqmcxs37mgc" path="res://components/meeple/meeple_variants/meeple_explora.tscn" id="5_kmgkn"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="5_mrhtl"]
 [ext_resource type="PackedScene" uid="uid://demfo8u0ru6hk" path="res://components/meeple/meeple_variants/meeple_greedy.tscn" id="6_q1rlw"]
 [ext_resource type="PackedScene" uid="uid://bcwkugn6v3oy7" path="res://addons/godot_state_charts/utilities/state_chart_debugger.tscn" id="11_q7lqb"]
@@ -16,7 +16,7 @@
 [node name="GameState" type="Node" node_paths=PackedStringArray("states")]
 process_mode = 3
 script = ExtResource("1_6ccbp")
-wave_1_meeps = Array[PackedScene]([ExtResource("3_m0m8c")])
+wave_1_meeps = Array[PackedScene]([ExtResource("6_q1rlw")])
 wave_2_meeps = Array[PackedScene]([ExtResource("3_m0m8c"), ExtResource("3_m0m8c"), ExtResource("3_m0m8c"), ExtResource("3_m0m8c"), ExtResource("3_m0m8c"), ExtResource("5_kmgkn"), ExtResource("4_70xg7"), ExtResource("6_q1rlw")])
 wave_2_threshold = 30
 wave_3_meeps = Array[PackedScene]([ExtResource("5_kmgkn"), ExtResource("6_q1rlw"), ExtResource("4_70xg7")])
