@@ -81,7 +81,6 @@ func get_sword_room_tile_coords():
 func zoom_in_on_sword():
 	get_tree().create_tween().tween_property(camera_node, "position", get_sword_room_tile_position(), camera_anim_speed)
 	get_tree().create_tween().tween_property(camera_node, "zoom", Vector2(1.5, 1.5), camera_anim_speed)
-	GameState.notify_meep_drawing_sword()
 	
 func run_sword_event(meep_attempting_event: Meeple):
 	zoom_in_on_sword()
@@ -91,6 +90,13 @@ func run_sword_event(meep_attempting_event: Meeple):
 	eventWrapper.position = get_sword_room_tile_position()
 	get_tree().root.add_child(eventWrapper)
 	eventWrapper.add_child(swordEventNode)
+	
+	var newSoulValue = GameState.souls - meep_attempting_event.soul_value
+	
+	if newSoulValue <= 0:
+		swordEventNode.show_worthy()
+	else:
+		swordEventNode.show_not_worthy(meep_attempting_event, self)
 
 func reset_camera_to_origin():
 	get_tree().create_tween().tween_property(camera_node, "position", Vector2(0, 0), camera_anim_speed)

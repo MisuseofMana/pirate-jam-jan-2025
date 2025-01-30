@@ -3,7 +3,7 @@ extends Node2D
 @onready var anims = $AnimationPlayer
 @onready var logo = $AnimatedLogo
 
-func _process(delta):
+func _process(_delta):
 	if Input.is_action_just_pressed("swap_meep"):
 		fade_to_black()
 

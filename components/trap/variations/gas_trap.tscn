@@ -95,6 +95,7 @@ radius = 7.0
 position = Vector2(0, -10)
 sprite_frames = SubResource("SpriteFrames_nwyxp")
 frame = 10
+frame_progress = 0.0
 
 [node name="DamageArea" parent="." index="1"]
 position = Vector2(0, 3)

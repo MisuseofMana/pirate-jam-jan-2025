@@ -8,7 +8,7 @@ signal meeple_available_to_peep
 signal select_new_available_meep
 
 @export var souls_win_threshold: int = 99
-@export var starting_souls: int = 1
+@export var starting_souls: int = 98
 
 # See state chart for wave frequency
 
@@ -46,8 +46,8 @@ var meeple_list : Array[Meeple] = []:
 		if meeple_list.size() > 1:
 			meeple_can_be_selected.emit()
 
-var sword_room_node : SwordRoom
 var dungeon_controller : DungeonRoomController
+
 #region Public Methods
 
 func start_game():
