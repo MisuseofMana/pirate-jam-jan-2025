@@ -80,6 +80,10 @@ func generate_new_dungeon():
 	for coord : Vector2i in valid_coords: 
 		set_cell(coord, 0, Vector2i(0, 0), random_room_ids.pop_front())
 		
+	#	set up entrance room and sword room fresh
+	set_cell(Vector2i(-2, -1), 0, Vector2i(0, 0), 9)
+	set_cell(Vector2i(0, -1), 0, Vector2i(0, 0), 11)
+
 func _get_configuration_warnings():
 	if camera_node == null:
 		return ["A Camera2D Node must be assigned in the inspector exports."]

@@ -8,7 +8,7 @@ signal meeple_available_to_peep
 signal select_new_available_meep
 
 @export var souls_win_threshold: int = 99
-@export var starting_souls: int = 6
+@export var starting_souls: int = 5
 
 # See state chart for wave frequency
 
@@ -50,10 +50,9 @@ var dungeon_controller : DungeonRoomController
 
 #region Public Methods
 
-
-
 func start_game():
 	souls = starting_souls
+	meeple_list = []
 	_switch_scene("res://scenes/game.tscn")
 	states.send_event("game_started")
 
