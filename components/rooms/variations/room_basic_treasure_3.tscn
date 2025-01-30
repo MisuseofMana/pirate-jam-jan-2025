@@ -1,0 +1,50 @@
+[gd_scene load_steps=8 format=3 uid="uid://cbumg71rnb3fw"]
+
+[ext_resource type="PackedScene" uid="uid://dqr12wo3gio00" path="res://components/rooms/room_basic_base.tscn" id="1_lik0b"]
+[ext_resource type="Shader" path="res://components/rooms/room_outline.gdshader" id="2_c4m6j"]
+[ext_resource type="PackedScene" uid="uid://csw3vkdw4erk5" path="res://components/treasure/treasure_base.tscn" id="3_bq207"]
+[ext_resource type="PackedScene" uid="uid://cfda3thgjer7u" path="res://components/furniture/variants/furniture_pot_med.tscn" id="4_1t4xd"]
+[ext_resource type="PackedScene" uid="uid://c8wlit763n85e" path="res://components/furniture/variants/furniture_pot_big.tscn" id="5_erwmy"]
+[ext_resource type="PackedScene" uid="uid://b5u0ftuvwj1mh" path="res://components/furniture/variants/furniture_pot_small.tscn" id="6_o24g0"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hi4fw"]
+resource_local_to_scene = true
+shader = ExtResource("2_c4m6j")
+shader_parameter/maxLineWidth = 0.0
+shader_parameter/minLineWidth = 0.0
+shader_parameter/speed = 1.0
+shader_parameter/blockSize = 20.0
+shader_parameter/color = Color(0.828964, 0.405913, 1, 1)
+shader_parameter/tolerance = 0.0
+
+[node name="Basic Room" instance=ExtResource("1_lik0b")]
+
+[node name="DungeonTile" parent="." index="3"]
+material = SubResource("ShaderMaterial_hi4fw")
+
+[node name="Treasure" parent="DungeonTile" index="0" instance=ExtResource("3_bq207")]
+position = Vector2(6, -1)
+
+[node name="Treasure2" parent="DungeonTile" index="1" instance=ExtResource("3_bq207")]
+position = Vector2(-6, 0)
+
+[node name="PotMedium" parent="DungeonTile" index="2" instance=ExtResource("4_1t4xd")]
+position = Vector2(-12, -20)
+
+[node name="PotMedium2" parent="DungeonTile" index="3" instance=ExtResource("4_1t4xd")]
+position = Vector2(-18, 19)
+
+[node name="PotBig" parent="DungeonTile" index="4" instance=ExtResource("5_erwmy")]
+position = Vector2(-19, -18)
+
+[node name="PotBig2" parent="DungeonTile" index="5" instance=ExtResource("5_erwmy")]
+position = Vector2(12, 19)
+
+[node name="PotBig3" parent="DungeonTile" index="6" instance=ExtResource("5_erwmy")]
+position = Vector2(19, 15)
+
+[node name="PotSmall" parent="DungeonTile" index="7" instance=ExtResource("6_o24g0")]
+position = Vector2(19, -21)
+
+[node name="PotSmall2" parent="DungeonTile" index="8" instance=ExtResource("6_o24g0")]
+position = Vector2(19, 20)

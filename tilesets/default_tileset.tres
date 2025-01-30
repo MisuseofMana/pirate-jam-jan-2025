@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=16 format=3 uid="uid://mrguig7k625p"]
+[gd_resource type="TileSet" load_steps=24 format=3 uid="uid://mrguig7k625p"]
 
 [ext_resource type="PackedScene" uid="uid://cdhyk8epjuhb1" path="res://components/rooms/variations/room_basic_trap_1.tscn" id="1_3uqb4"]
 [ext_resource type="PackedScene" uid="uid://bvcglq7r5ks1r" path="res://components/rooms/variations/room_basic_3.tscn" id="2_t20fu"]
@@ -8,12 +8,52 @@
 [ext_resource type="PackedScene" uid="uid://cvdehtbumolqb" path="res://components/rooms/variations/basic_room_4.tscn" id="4_n6m6m"]
 [ext_resource type="PackedScene" uid="uid://ca1edcsqoch32" path="res://components/rooms/variations/room_basic_1.tscn" id="5_oarm3"]
 [ext_resource type="PackedScene" uid="uid://dl4jddnxdvvs5" path="res://components/rooms/variations/room_basic_treasure_2.tscn" id="5_ol4ag"]
-[ext_resource type="PackedScene" uid="uid://dssoq3g3uxcvi" path="res://components/rooms/variations/kill_room.tscn" id="6_5tgit"]
 [ext_resource type="PackedScene" uid="uid://bus7x3mlryq4a" path="res://components/rooms/variations/room_basic_2.tscn" id="6_64ci0"]
+[ext_resource type="PackedScene" uid="uid://dqr12wo3gio00" path="res://components/rooms/room_basic_base.tscn" id="6_nvyl2"]
+[ext_resource type="Shader" path="res://components/rooms/room_outline.gdshader" id="7_685bw"]
 [ext_resource type="PackedScene" uid="uid://bqjk1hvcmyif7" path="res://components/rooms/variations/room_gas_trap.tscn" id="7_nxplw"]
 [ext_resource type="PackedScene" uid="uid://cwparulgglwjy" path="res://components/rooms/variations/room_basic_trap_2.tscn" id="8_7xrqu"]
+[ext_resource type="PackedScene" uid="uid://rofuo2xy4sja" path="res://components/trap/variations/fire_trap.tscn" id="8_lbs2k"]
+[ext_resource type="PackedScene" uid="uid://cp45vd4ntua2j" path="res://components/rooms/variations/room_trap_gas_spikes.tscn" id="9_arlm8"]
 [ext_resource type="PackedScene" uid="uid://uah5t5j5h8we" path="res://components/rooms/variations/room_trap_fire.tscn" id="9_qg01d"]
 [ext_resource type="PackedScene" uid="uid://b5d5j5jutd54a" path="res://components/rooms/event_rooms/room_entrance.tscn" id="10_2wk8o"]
+[ext_resource type="PackedScene" uid="uid://cbumg71rnb3fw" path="res://components/rooms/variations/room_basic_treasure_3.tscn" id="10_fn5gq"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_u1866"]
+vertices = PackedVector2Array(10, 10, 10, -10, 24, 8, 24, 24, 8, 24, -10, 10, 8, -24, 24, -24, 24, -8, 32, -8, 32, 8, -10, -10, -8, -24, 8, 32, -8, 32, -8, 24, -24, 24, -24, 8, -24, -8, -32, 8, -32, -8, -24, -24, 8, -32, -8, -32)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(0, 3, 4, 5), PackedInt32Array(6, 7, 8, 1), PackedInt32Array(8, 9, 10, 2), PackedInt32Array(8, 2, 1), PackedInt32Array(6, 1, 11, 12), PackedInt32Array(4, 13, 14, 15), PackedInt32Array(5, 4, 15), PackedInt32Array(5, 15, 16, 17), PackedInt32Array(11, 5, 17, 18), PackedInt32Array(17, 19, 20, 18), PackedInt32Array(11, 18, 21, 12), PackedInt32Array(22, 6, 12, 23)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(8, -32, 8, -24, 10, -10, -10, -10, -10, 10, 10, 10, 10, -10, 8, -24, 24, -24, 24, -8, 32, -8, 32, 8, 24, 8, 24, 24, 8, 24, 8, 32, -8, 32, -8, 24, -24, 24, -24, 8, -32, 8, -32, -8, -24, -8, -24, -24, -8, -24, -8, -32)])
+agent_radius = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gcnws"]
+resource_local_to_scene = true
+shader = ExtResource("7_685bw")
+shader_parameter/maxLineWidth = 0.0
+shader_parameter/minLineWidth = 0.0
+shader_parameter/speed = 1.0
+shader_parameter/blockSize = 20.0
+shader_parameter/color = Color(0.828964, 0.405913, 1, 1)
+shader_parameter/tolerance = 0.0
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_f6m8c"]
+vertices = PackedVector2Array(3.67188, 3.67188, -3.67188, 3.67188, -3.67188, -3.67188, 3.67188, -3.67188)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-3.67213, -3.67213, 3.67213, -3.67213, 3.67213, 3.67213, -3.67213, 3.67213)])
+agent_radius = 0.0
+
+[sub_resource type="PackedScene" id="PackedScene_g0gvm"]
+_bundled = {
+"base_scene": 0,
+"conn_count": 0,
+"conns": PackedInt32Array(),
+"editable_instances": [],
+"names": PackedStringArray("Basic Room", "NavigationRegion2D", "navigation_polygon", "DungeonTile", "material", "Trap2", "position", "frame_progress", "trap_cooldown", "NavigationRegion2D2", "NavigationRegion2D", "position", "scale", "navigation_polygon", "navigation_layers"),
+"node_count": 5,
+"node_paths": [NodePath("."), NodePath("."), NodePath("./DungeonTile"), NodePath(".")],
+"nodes": PackedInt32Array(-1, -1, 2147483647, 0, -1, 0, 0, 1073741824, -1, 2147483647, 524289, -1, 1, 2, 1, 0, 1073741825, -1, 2147483647, 1048579, -1, 1, 4, 2, 0, 1073741826, 0, 2147483647, 262149, 3, 3, 6, 4, 7, 5, 8, 6, 0, 1073741827, 0, 10, 2097161, -1, 4, 11, 7, 12, 8, 13, 9, 14, 10, 0),
+"variants": [ExtResource("6_nvyl2"), SubResource("NavigationPolygon_u1866"), SubResource("ShaderMaterial_gcnws"), ExtResource("8_lbs2k"), Vector2(-2.38419e-07, 0), 0.0, 1.0, Vector2(-2.38419e-07, 0), Vector2(2.17857, 2.17857), SubResource("NavigationPolygon_f6m8c"), 2],
+"version": 3
+}
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_5pp3v"]
 resource_name = "Rooms"
@@ -30,7 +70,9 @@ scenes/10/scene = ExtResource("2_t20fu")
 scenes/11/scene = ExtResource("3_p7g6u")
 scenes/12/scene = ExtResource("4_n6m6m")
 scenes/13/scene = ExtResource("5_ol4ag")
-scenes/14/scene = ExtResource("6_5tgit")
+scenes/14/scene = SubResource("PackedScene_g0gvm")
+scenes/15/scene = ExtResource("9_arlm8")
+scenes/16/scene = ExtResource("10_fn5gq")
 
 [resource]
 tile_size = Vector2i(64, 64)

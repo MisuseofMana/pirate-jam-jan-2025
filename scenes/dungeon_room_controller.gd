@@ -35,7 +35,51 @@ func _ready() -> void:
 	InputMap.load_from_project_settings()
 	GameState.paused.connect(func(): process_mode = ProcessMode.PROCESS_MODE_DISABLED)
 	GameState.resumed.connect(func(): process_mode = ProcessMode.PROCESS_MODE_ALWAYS)
+	generate_new_dungeon()
 
+func get_random_rooms() -> Array[int]:
+	var basic_room_ids : Array[int] = [4, 5, 10, 12]
+	var treasure_room_ids : Array[int] = [3, 13, 16]
+	var trap_room_ids : Array[int] = [1, 6, 7, 8, 15]
+	var empty_room_ids : Array[int] = [2, 2, 2, 2, 2]
+	
+	var selected_rooms : Array[int] = []
+	
+	basic_room_ids.shuffle()
+	treasure_room_ids.shuffle()
+	trap_room_ids.shuffle()
+	
+	selected_rooms.append_array(basic_room_ids.slice(0, 2))
+	selected_rooms.append_array(treasure_room_ids.slice(0, 2))
+	selected_rooms.append_array(trap_room_ids.slice(0, 4))
+	selected_rooms.append_array(empty_room_ids)
+	
+	return selected_rooms
+	
+func generate_new_dungeon():
+	var valid_coords : Array[Vector2i] = [
+		Vector2i(-3, -2),
+		Vector2i(-2, -2),
+		Vector2i(-1, -2),
+		Vector2i(0, -2),
+		Vector2i(1, -2),
+		Vector2i(-3, -1),
+		Vector2i(-1, -1),
+		Vector2i(1, -1),
+		Vector2i(-3, 0),
+		Vector2i(-2, 0),
+		Vector2i(-1, 0),
+		Vector2i(0, 0),
+		Vector2i(1, 0)
+	]
+
+	valid_coords.shuffle()
+	
+	var random_room_ids : Array[int] = get_random_rooms()
+	
+	for coord : Vector2i in valid_coords: 
+		set_cell(coord, 0, Vector2i(0, 0), random_room_ids.pop_front())
+		
 func _get_configuration_warnings():
 	if camera_node == null:
 		return ["A Camera2D Node must be assigned in the inspector exports."]
