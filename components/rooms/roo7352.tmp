@@ -1,0 +1,215 @@
+[gd_scene load_steps=18 format=3 uid="uid://dqr12wo3gio00"]
+
+[ext_resource type="Script" path="res://components/rooms/room.gd" id="1_fq4wr"]
+[ext_resource type="Shader" path="res://components/rooms/room_outline.gdshader" id="3_psxd6"]
+[ext_resource type="Script" path="res://components/rooms/room_click_detection.gd" id="4_5ngwb"]
+[ext_resource type="Texture2D" uid="uid://cy2lv2myk6ixs" path="res://art/rooms/room_sprite0.png" id="5_h8uem"]
+[ext_resource type="Script" path="res://components/rooms/dungeon_tile.gd" id="6_fo062"]
+[ext_resource type="AudioStream" uid="uid://b60uafwlykrt7" path="res://audio/sfx/UNDER_THE_PILLOW/ActivateRoomSFX.wav" id="7_xia87"]
+[ext_resource type="AudioStream" uid="uid://bccrmglda8e3y" path="res://audio/sfx/PLUCKING_WATER_DROPS/sfxZ12.wav" id="8_ymlgn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_brb8i"]
+size = Vector2(64, 64)
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_wroxa"]
+vertices = PackedVector2Array(8, -24, 24, -24, 24, -8, 32, -8, 32, 8, 24, 8, 24, 24, 8, 24, -24, -8, 8, 32, -8, 32, -8, 24, -24, 24, -24, 8, -32, 8, -32, -8, -24, -24, -8, -24, -8, -32, 8, -32)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2), PackedInt32Array(2, 3, 4, 5), PackedInt32Array(5, 6, 7, 8), PackedInt32Array(7, 9, 10, 11), PackedInt32Array(11, 12, 13), PackedInt32Array(13, 14, 15, 8), PackedInt32Array(8, 16, 17, 2, 5), PackedInt32Array(17, 18, 19, 0), PackedInt32Array(17, 0, 2), PackedInt32Array(8, 7, 11, 13)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-24, -24, -8, -24, -8, -32, 8, -32, 8, -24, 24, -24, 24, -8, 32, -8, 32, 8, 24, 8, 24, 24, 8, 24, 8, 32, -8, 32, -8, 24, -24, 24, -24, 8, -32, 8, -32, -8, -24, -8)])
+agent_radius = 0.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j8fb1"]
+size = Vector2(64, 64)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3kigi"]
+resource_local_to_scene = true
+shader = ExtResource("3_psxd6")
+shader_parameter/maxLineWidth = 0.0
+shader_parameter/minLineWidth = 0.0
+shader_parameter/speed = 1.0
+shader_parameter/blockSize = 20.0
+shader_parameter/color = Color(0.828964, 0.405913, 1, 1)
+shader_parameter/tolerance = 0.0
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_fgwvc"]
+random_pitch = 1.1
+streams_count = 1
+stream_0/stream = ExtResource("7_xia87")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_uwv4m"]
+streams_count = 1
+stream_0/stream = ExtResource("8_ymlgn")
+
+[sub_resource type="Animation" id="Animation_6ks3a"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DungeonTile:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("DungeonTile:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("DungeonTile:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_j4shi"]
+resource_name = "grow_room"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DungeonTile:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(0.5, 2),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("DungeonTile:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(0.5, 2),
+"update": 0,
+"values": [-6.28319, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("DungeonTile:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3333),
+"transitions": PackedFloat32Array(0.5, 2),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_t4mo4"]
+resource_name = "shrink_room"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DungeonTile:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(0.5, 2),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1e-05, 1e-05)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("DungeonTile:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(0.5, 2),
+"update": 0,
+"values": [0.0, 6.28319]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("DungeonTile:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.333333),
+"transitions": PackedFloat32Array(0.5, 2),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_sx1r0"]
+_data = {
+"RESET": SubResource("Animation_6ks3a"),
+"grow_room": SubResource("Animation_j4shi"),
+"shrink_room": SubResource("Animation_t4mo4")
+}
+
+[node name="Basic Room" type="Area2D" node_paths=PackedStringArray("collision_shape", "click_collision_shape") groups=["room"]]
+collision_layer = 4
+collision_mask = 0
+monitoring = false
+script = ExtResource("1_fq4wr")
+collision_shape = NodePath("CollisionShape2D")
+click_collision_shape = NodePath("RoomClickDetection/CollisionShape2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_brb8i")
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+navigation_polygon = SubResource("NavigationPolygon_wroxa")
+
+[node name="RoomClickDetection" type="Area2D" parent="."]
+z_index = 1
+collision_layer = 16
+collision_mask = 0
+monitorable = false
+script = ExtResource("4_5ngwb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RoomClickDetection"]
+shape = SubResource("RectangleShape2D_j8fb1")
+debug_color = Color(0.654902, 0.517647, 0, 0.164706)
+
+[node name="DungeonTile" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_3kigi")
+texture = ExtResource("5_h8uem")
+region_rect = Rect2(0, 0, 256, 256)
+script = ExtResource("6_fo062")
+
+[node name="ActivateRoomSFX" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_fgwvc")
+pitch_scale = 0.4
+
+[node name="ClickErrorSFX" type="AudioStreamPlayer2D" parent="."]
+stream = SubResource("AudioStreamRandomizer_uwv4m")
+pitch_scale = 0.6
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_sx1r0")
+}
+
+[connection signal="input_event" from="RoomClickDetection" to="RoomClickDetection" method="_on_input_event"]
+[connection signal="mouse_entered" from="RoomClickDetection" to="." method="show_outline_on_mouse_enter"]
+[connection signal="mouse_exited" from="RoomClickDetection" to="." method="hide_outline_on_hover_mouse_exit"]
+[connection signal="room_tile_clicked" from="RoomClickDetection" to="." method="handle_room_click"]

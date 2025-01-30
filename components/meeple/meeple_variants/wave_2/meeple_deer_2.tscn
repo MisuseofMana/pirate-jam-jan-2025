@@ -1,0 +1,61 @@
+[gd_scene load_steps=11 format=3 uid="uid://b8lqmcxs37mgc"]
+
+[ext_resource type="PackedScene" uid="uid://d1cw4mndlss2u" path="res://components/meeple/meeple.tscn" id="1_5qevk"]
+[ext_resource type="Texture2D" uid="uid://c5e3n11bwcr41" path="res://ui/meep-portraits-deer.png" id="2_x7rm2"]
+[ext_resource type="Script" path="res://components/meeple/ai/room_strategy.gd" id="3_xikfb"]
+[ext_resource type="Script" path="res://components/meeple/ai/room_activity_strategy.gd" id="4_e5m6l"]
+[ext_resource type="Texture2D" uid="uid://dg2wlotiq1k2c" path="res://art/meeple/deer.png" id="5_l14a4"]
+
+[sub_resource type="Resource" id="Resource_v1cl5"]
+script = ExtResource("3_xikfb")
+consideration_avoid_danger = 0.6
+consideration_avoid_crowds = 1.0
+consideration_favor_adjacent = 0.9
+consideration_favor_treasure_count = 0.0
+consideration_favor_unvisited = 1.0
+consideration_decide_randomly = 0.15
+
+[sub_resource type="Resource" id="Resource_xi6cl"]
+script = ExtResource("4_e5m6l")
+consideration_fill_pockets = 0.0
+consideration_avoid_loafing = 0.9
+consideration_decide_randomly = 0.2
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7vr6b"]
+atlas = ExtResource("5_l14a4")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r7f1e"]
+atlas = ExtResource("5_l14a4")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kc5u1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7vr6b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r7f1e")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="Meeple" instance=ExtResource("1_5qevk")]
+meeple_names = Array[String](["Mrs. Go", "Sitese", "Lar Crof", "Indee", "Slip Dog", "Grawk", "Droglet", "Briblesby", "Snorrt", "Stoneboi", "Swingk", "Dr. Bom Bag", "Sneepit", "Blaush", "Slingbag"])
+health = 3
+movement_speed = 50.0
+max_treasure = 2
+portrait = ExtResource("2_x7rm2")
+tint = Color(1, 0.858824, 0.819608, 1)
+next_room_strategy = SubResource("Resource_v1cl5")
+room_activity_strategy = SubResource("Resource_xi6cl")
+trap_awareness_chance = 0.5
+
+[node name="Meeple" parent="." index="6"]
+modulate = Color(1, 0.8602, 0.819532, 1)
+sprite_frames = SubResource("SpriteFrames_kc5u1")
+frame = 1
+frame_progress = 0.379545

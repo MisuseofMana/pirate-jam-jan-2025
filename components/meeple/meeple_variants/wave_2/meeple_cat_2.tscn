@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://bkgpoydced76"]
+
+[ext_resource type="PackedScene" uid="uid://d1cw4mndlss2u" path="res://components/meeple/meeple.tscn" id="1_js8v6"]
+
+[node name="Meeple" instance=ExtResource("1_js8v6")]
+health = 3
+movement_speed = 40.0
+max_treasure = 4
+tint = Color(0.8, 1, 0.878431, 1)
+
+[node name="Meeple" parent="." index="6"]
+modulate = Color(0.8, 1, 0.878431, 1)
+
+[connection signal="state_entered" from="Brain/Root/Exploring Dungon/Exploring Current Room/Picking Activity" to="." method="pick_pick_room_activity"]

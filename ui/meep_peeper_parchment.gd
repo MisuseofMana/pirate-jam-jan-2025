@@ -88,3 +88,8 @@ func get_new_target_meep():
 func _process(_delta):
 	if Input.is_action_just_pressed("swap_meep"):
 		get_new_target_meep()
+
+func on_parchment_click(event):
+	if event is InputEventMouseButton:
+		if event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+			get_new_target_meep()

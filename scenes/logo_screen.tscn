@@ -138,6 +138,7 @@ scale = Vector2(4, 4)
 zoom = Vector2(0.5, 0.5)
 
 [node name="Label" type="Label" parent="Camera2D"]
+visible = false
 offset_left = -44.0
 offset_top = 78.0
 offset_right = 44.0

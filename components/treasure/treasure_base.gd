@@ -2,7 +2,7 @@ class_name Treasure extends Node2D
 
 @onready var reset_clock = $ResetClock
 @onready var timer = $Timer
-@export var treasure_cooldown : int = 15
+@export var treasure_cooldown : int = 30
 @onready var treasure_icon = $TreasureIcon
 @onready var gpu_particles_2d = $GPUParticles2D
 

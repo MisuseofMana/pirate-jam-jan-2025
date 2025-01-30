@@ -1,7 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://bkbs6i83cmhyw"]
+[gd_scene load_steps=7 format=3 uid="uid://bkbs6i83cmhyw"]
 
 [ext_resource type="Theme" uid="uid://dbv4tc0bvbxj1" path="res://ui/default_theme.tres" id="1_krl63"]
 [ext_resource type="Script" path="res://scenes/lose_screen.gd" id="2_hucru"]
+[ext_resource type="Texture2D" uid="uid://d0d8yjtcp44bm" path="res://art/ui/lose-screen.png" id="3_4i5iq"]
+[ext_resource type="Texture2D" uid="uid://dmm5ypbsmbja3" path="res://ui/parchment-button-normal.png" id="3_hg56d"]
+[ext_resource type="Texture2D" uid="uid://r5irg3ifqid1" path="res://ui/parchment-button-pressed.png" id="4_18e8i"]
+[ext_resource type="Texture2D" uid="uid://s1ob3gxksy8l" path="res://ui/parchment-button-hover.png" id="5_eakfj"]
 
 [node name="LoseScreen" type="Control"]
 layout_mode = 3
@@ -12,7 +16,14 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_krl63")
 script = ExtResource("2_hucru")
-sword_names = Array[String](["Grandpa's Trinket", "Ole' Reliable", "Lil' Treasure", "That One Sword", "The Dullest Of Them All"])
+sword_names = Array[String](["Grandpa's Trinket", "Ole' Reliable", "Lil' Treasure", "That One Sword", "The Dullest Of Them", "Vorpal Morple", "Stick n' Poke", "Spare Iron", "Carnival Prop", "Babies First Sword", "Trusty Rusty"])
+
+[node name="TextureRect" type="TextureRect" parent="."]
+self_modulate = Color(0.637843, 0.637843, 0.637843, 1)
+offset_left = -8.0
+offset_right = 392.0
+offset_bottom = 400.0
+texture = ExtResource("3_4i5iq")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -52,8 +63,57 @@ text = "Sword Name Here"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Button" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "Play Again?"
+theme_override_constants/margin_top = 10
 
-[connection signal="pressed" from="MarginContainer/VBoxContainer/Button" to="." method="_on_button_pressed"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="TextureButton3" type="TextureButton" parent="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("3_hg56d")
+texture_pressed = ExtResource("4_18e8i")
+texture_hover = ExtResource("5_eakfj")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/TextureButton3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "HOW TO PLAY"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureButton2" type="TextureButton" parent="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("3_hg56d")
+texture_pressed = ExtResource("4_18e8i")
+texture_hover = ExtResource("5_eakfj")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/TextureButton2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "PLAY AGAIN?"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/TextureButton3" to="." method="_how_to_play"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/TextureButton2" to="." method="_start_game"]

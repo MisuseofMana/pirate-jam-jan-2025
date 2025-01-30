@@ -15,4 +15,4 @@ func fade_to_black():
 
 func _on_animation_player_animation_finished(anim_name):
 	if anim_name == 'fade_in_panel':
-		GameState.start_game()
+		GameState.go_to_main_menu()

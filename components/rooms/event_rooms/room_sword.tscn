@@ -31,6 +31,7 @@ animations = [{
 script = ExtResource("2_kep4c")
 
 [node name="DungeonTile" parent="." index="3"]
+self_modulate = Color(0.912278, 0.743193, 1, 1)
 material = SubResource("ShaderMaterial_uyu10")
 
 [node name="Sword" type="AnimatedSprite2D" parent="DungeonTile" index="0" groups=["macguffin", "sword"]]

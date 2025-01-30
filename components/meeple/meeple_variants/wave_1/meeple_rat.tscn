@@ -1,0 +1,35 @@
+[gd_scene load_steps=7 format=3 uid="uid://cknv2gdt22eda"]
+
+[ext_resource type="PackedScene" uid="uid://d1cw4mndlss2u" path="res://components/meeple/meeple.tscn" id="1_hoy03"]
+[ext_resource type="Texture2D" uid="uid://bk5ilfj0v2mv7" path="res://ui/meep-portraits-rat.png" id="2_je375"]
+[ext_resource type="Texture2D" uid="uid://cdelc0xvvkrtr" path="res://art/meeple/rat.png" id="3_yuvqc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_184q0"]
+atlas = ExtResource("3_yuvqc")
+region = Rect2(0, 0, 16, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mhlsq"]
+atlas = ExtResource("3_yuvqc")
+region = Rect2(16, 0, 16, 15)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kteab"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_184q0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mhlsq")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Meeple" instance=ExtResource("1_hoy03")]
+movement_speed = 50.0
+max_treasure = 4
+portrait = ExtResource("2_je375")
+
+[node name="Meeple" parent="." index="6"]
+sprite_frames = SubResource("SpriteFrames_kteab")

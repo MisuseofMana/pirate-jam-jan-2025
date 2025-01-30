@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://bryyady4m4fv7"]
+[gd_scene load_steps=7 format=3 uid="uid://bryyady4m4fv7"]
 
 [ext_resource type="Theme" uid="uid://dbv4tc0bvbxj1" path="res://ui/default_theme.tres" id="1_nf3a4"]
-[ext_resource type="Script" path="res://scenes/lose_screen.gd" id="2_b0xhe"]
+[ext_resource type="Script" path="res://scenes/win_screen.gd" id="2_ym82n"]
 [ext_resource type="Texture2D" uid="uid://dajed4laxx5h6" path="res://art/ui/win-screen.png" id="3_wcr2y"]
+[ext_resource type="Texture2D" uid="uid://dmm5ypbsmbja3" path="res://ui/parchment-button-normal.png" id="4_tlx8f"]
+[ext_resource type="Texture2D" uid="uid://r5irg3ifqid1" path="res://ui/parchment-button-pressed.png" id="5_wvbrk"]
+[ext_resource type="Texture2D" uid="uid://s1ob3gxksy8l" path="res://ui/parchment-button-hover.png" id="6_fvcup"]
 
 [node name="WinScreen" type="Control"]
 layout_mode = 3
@@ -12,11 +15,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_nf3a4")
-script = ExtResource("2_b0xhe")
-sword_names = Array[String](["Meepsbane the Foul", "Slayer of Meeps"])
+script = ExtResource("2_ym82n")
+sword_names = Array[String](["Meepsbane The Foul", "Excalibur 2", "MeepCalibur", "Meep Eater", "Meepsblood"])
 
 [node name="TextureRect" type="TextureRect" parent="."]
-self_modulate = Color(0.226707, 0.226707, 0.226707, 1)
+self_modulate = Color(0.415981, 0.41598, 0.41598, 1)
 layout_mode = 0
 offset_left = -8.0
 offset_top = -8.0
@@ -62,8 +65,57 @@ text = "Sword Name Here"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Button" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "Play Again?"
+theme_override_constants/margin_top = 10
 
-[connection signal="pressed" from="MarginContainer/VBoxContainer/Button" to="." method="_on_button_pressed"]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="TextureButton3" type="TextureButton" parent="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("4_tlx8f")
+texture_pressed = ExtResource("5_wvbrk")
+texture_hover = ExtResource("6_fvcup")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/TextureButton3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "HOW TO PLAY"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureButton2" type="TextureButton" parent="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource("4_tlx8f")
+texture_pressed = ExtResource("5_wvbrk")
+texture_hover = ExtResource("6_fvcup")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/TextureButton2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+text = "PLAY AGAIN?"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/TextureButton3" to="." method="_how_to_play"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/MarginContainer/HBoxContainer/TextureButton2" to="." method="_start_game"]

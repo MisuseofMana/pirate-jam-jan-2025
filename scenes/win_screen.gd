@@ -1,4 +1,4 @@
-class_name LoseScreen extends Control
+class_name WinScreen extends Control
 
 @export var sword_names : Array[String] = []
 @onready var sword_name = $MarginContainer/VBoxContainer/SwordName

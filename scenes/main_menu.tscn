@@ -1,11 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://dfxy731xmuy56"]
+[gd_scene load_steps=6 format=3 uid="uid://dfxy731xmuy56"]
 
+[ext_resource type="Script" path="res://scenes/main_menu.gd" id="1_01jvy"]
 [ext_resource type="Texture2D" uid="uid://bytkx1ixokanc" path="res://ui/itch-cover-image.png" id="1_q48k3"]
 [ext_resource type="Texture2D" uid="uid://dmm5ypbsmbja3" path="res://ui/parchment-button-normal.png" id="2_056cn"]
 [ext_resource type="Texture2D" uid="uid://r5irg3ifqid1" path="res://ui/parchment-button-pressed.png" id="3_da157"]
 [ext_resource type="Texture2D" uid="uid://s1ob3gxksy8l" path="res://ui/parchment-button-hover.png" id="4_b0i48"]
 
 [node name="MainMenu" type="Node2D"]
+script = ExtResource("1_01jvy")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(192, 152)
@@ -84,3 +86,6 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 text = "START GAME"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[connection signal="pressed" from="Control/MarginContainer/HBoxContainer/TextureButton2" to="." method="_go_to_how_to_play"]
+[connection signal="pressed" from="Control/MarginContainer/HBoxContainer/TextureButton" to="." method="_start_game"]

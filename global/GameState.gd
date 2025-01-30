@@ -8,7 +8,7 @@ signal meeple_available_to_peep
 signal select_new_available_meep
 
 @export var souls_win_threshold: int = 99
-@export var starting_souls: int = 98
+@export var starting_souls: int = 6
 
 # See state chart for wave frequency
 
@@ -54,6 +54,14 @@ func start_game():
 	souls = starting_souls
 	_switch_scene("res://scenes/game.tscn")
 	states.send_event("game_started")
+
+func go_to_main_menu():
+	_switch_scene("res://scenes/main_menu.tscn")
+	states.send_event("view_main_menu")
+	
+func go_to_how_to_play():
+	_switch_scene("res://scenes/how_to_play.tscn")
+	states.send_event("view_how_to_play")
 
 func notify_meep_drawing_sword():
 	states.send_event("meep_drawing_sword")

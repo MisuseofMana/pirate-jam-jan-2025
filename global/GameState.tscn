@@ -1,25 +1,36 @@
-[gd_scene load_steps=13 format=3 uid="uid://bmifa8hlavga4"]
+[gd_scene load_steps=23 format=3 uid="uid://bmifa8hlavga4"]
 
 [ext_resource type="Script" path="res://global/GameState.gd" id="1_6ccbp"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="2_7yvp7"]
 [ext_resource type="AudioStream" uid="uid://btlkfdy3vbvtu" path="res://audio/ambient_choir_taiko.mp3" id="2_temxw"]
-[ext_resource type="PackedScene" uid="uid://hwnoth8qepay" path="res://components/meeple/meeple_variants/meeple_normie.tscn" id="3_m0m8c"]
+[ext_resource type="PackedScene" uid="uid://cknv2gdt22eda" path="res://components/meeple/meeple_variants/wave_1/meeple_rat.tscn" id="3_i6o87"]
+[ext_resource type="PackedScene" uid="uid://hwnoth8qepay" path="res://components/meeple/meeple_variants/wave_1/meeple_cat.tscn" id="3_m0m8c"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="3_yhpqw"]
-[ext_resource type="PackedScene" uid="uid://dywkg5qwj78u6" path="res://components/meeple/meeple_variants/meeple_sluggish.tscn" id="4_70xg7"]
+[ext_resource type="PackedScene" uid="uid://cqlgt5aiuasb6" path="res://components/meeple/meeple_variants/wave_1/meeple_dog.tscn" id="4_5fwg2"]
+[ext_resource type="PackedScene" uid="uid://dywkg5qwj78u6" path="res://components/meeple/meeple_variants/wave_2/meeple_dog_2.tscn" id="4_70xg7"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="4_ur7yj"]
-[ext_resource type="PackedScene" uid="uid://b8lqmcxs37mgc" path="res://components/meeple/meeple_variants/meeple_explora.tscn" id="5_kmgkn"]
+[ext_resource type="PackedScene" uid="uid://b8lqmcxs37mgc" path="res://components/meeple/meeple_variants/wave_2/meeple_deer_2.tscn" id="5_kmgkn"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="5_mrhtl"]
-[ext_resource type="PackedScene" uid="uid://demfo8u0ru6hk" path="res://components/meeple/meeple_variants/meeple_greedy.tscn" id="6_q1rlw"]
-[ext_resource type="PackedScene" uid="uid://bcwkugn6v3oy7" path="res://addons/godot_state_charts/utilities/state_chart_debugger.tscn" id="11_q7lqb"]
+[ext_resource type="PackedScene" uid="uid://dsmcty2cr2vom" path="res://components/meeple/meeple_variants/wave_1/meeple_rabbit.tscn" id="5_yhbki"]
+[ext_resource type="PackedScene" uid="uid://cqfxlhwntnuij" path="res://components/meeple/meeple_variants/wave_1/meeple_deer.tscn" id="6_gv1mp"]
+[ext_resource type="PackedScene" uid="uid://demfo8u0ru6hk" path="res://components/meeple/meeple_variants/wave_2/meeple_rat_2.tscn" id="6_q1rlw"]
+[ext_resource type="PackedScene" uid="uid://bkgpoydced76" path="res://components/meeple/meeple_variants/wave_2/meeple_cat_2.tscn" id="8_icwh8"]
+[ext_resource type="PackedScene" uid="uid://fffbdxsg0glc" path="res://components/meeple/meeple_variants/wave_2/meeple_rabbit_2.tscn" id="10_jrgy0"]
 [ext_resource type="Script" path="res://addons/godot_state_charts/history_state.gd" id="11_sxerc"]
+[ext_resource type="PackedScene" uid="uid://e8qi5n5h8jw" path="res://components/meeple/meeple_variants/wave_3/meeple_cat_3.tscn" id="12_k7blj"]
+[ext_resource type="PackedScene" uid="uid://bonuaxhgbocgb" path="res://components/meeple/meeple_variants/wave_3/meeple_deer_3.tscn" id="13_5d5fm"]
+[ext_resource type="PackedScene" uid="uid://brnphmmluohu0" path="res://components/meeple/meeple_variants/wave_3/meeple_dog_3.tscn" id="14_u1rdi"]
+[ext_resource type="PackedScene" uid="uid://c2vgh8rq8fen3" path="res://components/meeple/meeple_variants/wave_3/meeple_rabbit_3.tscn" id="15_2x8u5"]
+[ext_resource type="PackedScene" uid="uid://b1w2tsfnj17oj" path="res://components/meeple/meeple_variants/wave_3/meeple_rat_3.tscn" id="16_87mpp"]
 
 [node name="GameState" type="Node" node_paths=PackedStringArray("states")]
 process_mode = 3
 script = ExtResource("1_6ccbp")
-wave_1_meeps = Array[PackedScene]([ExtResource("3_m0m8c")])
-wave_2_meeps = Array[PackedScene]([ExtResource("3_m0m8c"), ExtResource("3_m0m8c"), ExtResource("3_m0m8c"), ExtResource("3_m0m8c"), ExtResource("3_m0m8c"), ExtResource("5_kmgkn"), ExtResource("4_70xg7"), ExtResource("6_q1rlw")])
+wave_1_meeps = Array[PackedScene]([ExtResource("3_m0m8c"), ExtResource("3_i6o87"), ExtResource("4_5fwg2"), ExtResource("5_yhbki"), ExtResource("6_gv1mp")])
+wave_1_soul_value = 3
+wave_2_meeps = Array[PackedScene]([ExtResource("8_icwh8"), ExtResource("5_kmgkn"), ExtResource("4_70xg7"), ExtResource("10_jrgy0"), ExtResource("6_q1rlw")])
 wave_2_threshold = 30
-wave_3_meeps = Array[PackedScene]([ExtResource("5_kmgkn"), ExtResource("6_q1rlw"), ExtResource("4_70xg7")])
+wave_3_meeps = Array[PackedScene]([ExtResource("12_k7blj"), ExtResource("13_5d5fm"), ExtResource("14_u1rdi"), ExtResource("15_2x8u5"), ExtResource("16_87mpp")])
 wave_3_threshold = 60
 states = NodePath("Dungeon States")
 
@@ -36,12 +47,70 @@ script = ExtResource("3_yhpqw")
 initial_state = NodePath("On Non-Game Screen")
 
 [node name="On Non-Game Screen" type="Node" parent="Dungeon States/Root"]
+script = ExtResource("3_yhpqw")
+initial_state = NodePath("On Logo Screen")
+
+[node name="On Logo Screen" type="Node" parent="Dungeon States/Root/On Non-Game Screen"]
 script = ExtResource("4_ur7yj")
 
-[node name="Go to On Game Screen when game started" type="Node" parent="Dungeon States/Root/On Non-Game Screen"]
+[node name="Go To Main Menu Screen" type="Node" parent="Dungeon States/Root/On Non-Game Screen/On Logo Screen"]
 script = ExtResource("5_mrhtl")
-to = NodePath("../../On Game Screen")
+to = NodePath("../../On Main Menu Screen")
+event = &"view_main_menu"
+delay_in_seconds = "0.0"
+
+[node name="On Main Menu Screen" type="Node" parent="Dungeon States/Root/On Non-Game Screen"]
+script = ExtResource("4_ur7yj")
+
+[node name="Go to On Game Screen when game started" type="Node" parent="Dungeon States/Root/On Non-Game Screen/On Main Menu Screen"]
+script = ExtResource("5_mrhtl")
+to = NodePath("../../../On Game Screen")
 event = &"game_started"
+delay_in_seconds = "0.0"
+
+[node name="Go to How To Play Screen from main menu" type="Node" parent="Dungeon States/Root/On Non-Game Screen/On Main Menu Screen"]
+script = ExtResource("5_mrhtl")
+to = NodePath("../../On How To Play Screen")
+event = &"view_how_to_play"
+delay_in_seconds = "0.0"
+
+[node name="On How To Play Screen" type="Node" parent="Dungeon States/Root/On Non-Game Screen"]
+script = ExtResource("4_ur7yj")
+
+[node name="Go to On Game Screen when game started" type="Node" parent="Dungeon States/Root/On Non-Game Screen/On How To Play Screen"]
+script = ExtResource("5_mrhtl")
+to = NodePath("../../../On Game Screen")
+event = &"game_started"
+delay_in_seconds = "0.0"
+
+[node name="On Lose Screen" type="Node" parent="Dungeon States/Root/On Non-Game Screen"]
+script = ExtResource("4_ur7yj")
+
+[node name="Go to On Game Screen when game started" type="Node" parent="Dungeon States/Root/On Non-Game Screen/On Lose Screen"]
+script = ExtResource("5_mrhtl")
+to = NodePath("../../../On Game Screen")
+event = &"game_started"
+delay_in_seconds = "0.0"
+
+[node name="Go to How To Play Screen from lose screen" type="Node" parent="Dungeon States/Root/On Non-Game Screen/On Lose Screen"]
+script = ExtResource("5_mrhtl")
+to = NodePath("../../On How To Play Screen")
+event = &"view_how_to_play"
+delay_in_seconds = "0.0"
+
+[node name="On Win Screen" type="Node" parent="Dungeon States/Root/On Non-Game Screen"]
+script = ExtResource("4_ur7yj")
+
+[node name="Go to On Game Screen when game started" type="Node" parent="Dungeon States/Root/On Non-Game Screen/On Win Screen"]
+script = ExtResource("5_mrhtl")
+to = NodePath("../../../On Game Screen")
+event = &"game_started"
+delay_in_seconds = "0.0"
+
+[node name="Go to How To Play Screen from win screen" type="Node" parent="Dungeon States/Root/On Non-Game Screen/On Win Screen"]
+script = ExtResource("5_mrhtl")
+to = NodePath("../../On How To Play Screen")
+event = &"view_how_to_play"
 delay_in_seconds = "0.0"
 
 [node name="On Game Screen" type="Node" parent="Dungeon States/Root"]
@@ -95,29 +164,17 @@ to = NodePath("../../Spawning/Resume")
 event = &"meep_will_explode"
 delay_in_seconds = "0.0"
 
-[node name="Go to Non-Game Screen when game lost" type="Node" parent="Dungeon States/Root/On Game Screen"]
+[node name="Go to On Lose Screen when game lost" type="Node" parent="Dungeon States/Root/On Game Screen"]
 script = ExtResource("5_mrhtl")
-to = NodePath("../../On Non-Game Screen")
+to = NodePath("../../On Non-Game Screen/On Lose Screen")
 event = &"game_lost"
 delay_in_seconds = "0.0"
 
-[node name="Go to Non-Game Screen when game won" type="Node" parent="Dungeon States/Root/On Game Screen"]
+[node name="Go to On Win Screen when game won" type="Node" parent="Dungeon States/Root/On Game Screen"]
 script = ExtResource("5_mrhtl")
-to = NodePath("../../On Non-Game Screen")
+to = NodePath("../../On Non-Game Screen/On Win Screen")
 event = &"game_won"
 delay_in_seconds = "0.0"
-
-[node name="StateChartDebugger" parent="." instance=ExtResource("11_q7lqb")]
-visible = false
-anchors_preset = 0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_right = 386.0
-offset_bottom = 342.0
-grow_horizontal = 1
-grow_vertical = 1
-scale = Vector2(0.5, 0.5)
-initial_node_to_watch = NodePath("../Dungeon States")
 
 [connection signal="taken" from="Dungeon States/Root/On Game Screen/Initial Delay/Start spawning after delay" to="." method="_on_start_spawning_after_3_seconds_taken"]
 [connection signal="state_entered" from="Dungeon States/Root/On Game Screen/Spawning/Spawn" to="." method="_spawn_meeple"]

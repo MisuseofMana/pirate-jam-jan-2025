@@ -270,11 +270,12 @@ size_flags_horizontal = 4
 size_flags_vertical = 8
 theme_override_colors/font_color = Color(0.0674665, 0.056316, 0.0690611, 1)
 theme_override_font_sizes/font_size = 12
-text = "press [space] to change meep"
+text = "press [space] or [click] to change meep"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_s8r5h")
 }
 
+[connection signal="gui_input" from="UIContainer" to="." method="on_parchment_click"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

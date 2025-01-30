@@ -1,7 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://bhh3nvuvt5uf1"]
+[gd_scene load_steps=2 format=3 uid="uid://hwnoth8qepay"]
 
 [ext_resource type="PackedScene" uid="uid://d1cw4mndlss2u" path="res://components/meeple/meeple.tscn" id="1_rufu6"]
 
 [node name="Meeple" instance=ExtResource("1_rufu6")]
+health = 2
 
 [connection signal="state_entered" from="Brain/Root/Exploring Dungon/Exploring Current Room/Picking Activity" to="." method="pick_pick_room_activity"]

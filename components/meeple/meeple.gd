@@ -19,7 +19,7 @@ enum RoomActivity {
 @export var meeple_names: Array[String] = []
 
 @export_group("Stats")
-@export_range(1, 4) var health: int = 4:
+@export_range(1, 5) var health: int = 4:
 	set(value):
 		if value == health: return
 		health = value
@@ -57,7 +57,7 @@ enum RoomActivity {
 @onready var anims := $AnimationPlayer
 @onready var meeple_sprite := $Meeple
 
-@onready var meeple_name: String = meeple_names.pick_random()
+@onready var meeple_name: String
 @onready var current_room: Room = get_parent().get_parent():
 	set(value):
 		if value == current_room: return
@@ -106,7 +106,18 @@ static func get_all(node_in_tree: Node) -> Array[Meeple]:
 	return meeples
 
 func _ready() -> void:
-	add_to_group("meeple")
+	add_to_group("meeple") 
+	
+	var available_meep_names : Array[String] = meeple_names
+	
+	for meep : Meeple in GameState.meeple_list:
+		available_meep_names.erase(meep.meeple_name)
+		
+	if not available_meep_names.is_empty():
+		meeple_name = available_meep_names.pick_random()
+	else:
+		meeple_name = meeple_names.pick_random()
+	
 	add_meep_to_list()
 
 	meeple_sprite.modulate = tint
@@ -217,7 +228,7 @@ func _on_animation_player_animation_finished(anim_name):
 
 func animate_soul_decrement_to_parchment():
 	var decrement_node = DECREMENT_LABEL.instantiate()
-	decrement_node.position = position + Vector2(-6, -50)
+	decrement_node.position = global_position + Vector2(-6, -50)
 	decrement_node.text = str(-soul_value)
 	decrement_node.soul_value = soul_value
 	get_tree().root.add_child(decrement_node)
