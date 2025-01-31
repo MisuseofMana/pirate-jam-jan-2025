@@ -108,7 +108,7 @@ static func get_all(node_in_tree: Node) -> Array[Meeple]:
 func _ready() -> void:
 	add_to_group("meeple")
 	
-	var available_meep_names: Array[String] = meeple_names
+	var available_meep_names: Array[String] = meeple_names.duplicate()
 	
 	for meep: Meeple in GameState.meeple_list:
 		available_meep_names.erase(meep.meeple_name)
