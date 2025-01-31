@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://rofuo2xy4sja"]
 
-[ext_resource type="PackedScene" uid="uid://due6tipw8kq1h" path="res://components/trap/trap_base.tscn" id="1_bsgvm"]
+[ext_resource type="PackedScene" uid="uid://dtjpxll837wg" path="res://components/trap/trap_base.tscn" id="1_bsgvm"]
 [ext_resource type="Texture2D" uid="uid://by4vqen18u5hu" path="res://art/traps/fire_trap.png" id="2_rgchq"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gaudu"]
@@ -61,11 +61,12 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wd443"]
-radius = 8.06226
+radius = 7.0
 
 [node name="Trap" instance=ExtResource("1_bsgvm")]
 sprite_frames = SubResource("SpriteFrames_nkcwu")
 frame = 6
 
 [node name="CollisionShape2D" parent="DamageArea" index="0"]
+position = Vector2(0, 1)
 shape = SubResource("CircleShape2D_wd443")

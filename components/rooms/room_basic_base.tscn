@@ -12,9 +12,9 @@
 size = Vector2(64, 64)
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_wroxa"]
-vertices = PackedVector2Array(8, -24, 24, -24, 24, -8, 10, -10, 32, -8, 32, 8, 24, 4, 24, 8, 10, 4, -10, -10, -8, -24, -10, 8, 4, 8, 4, 24, -8, 24, 8, 24, 8, 32, -8, 32, -24, 24, -24, 8, -24, -8, -32, 8, -32, -8, -24, -24, 8, -32, -8, -32)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(2, 4, 5, 6), PackedInt32Array(5, 7, 6), PackedInt32Array(2, 6, 8, 3), PackedInt32Array(0, 3, 9, 10), PackedInt32Array(11, 12, 13, 14), PackedInt32Array(13, 15, 16, 17), PackedInt32Array(13, 17, 14), PackedInt32Array(11, 14, 18, 19), PackedInt32Array(9, 11, 19, 20), PackedInt32Array(19, 21, 22, 20), PackedInt32Array(9, 20, 23, 10), PackedInt32Array(24, 0, 10, 25)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-24, -24, -8, -24, -8, -32, 8, -32, 8, -24, 24, -24, 24, -8, 32, -8, 32, 8, 24, 8, 24, 4, 10, 4, 10, -10, -10, -10, -10, 8, 4, 8, 4, 24, 8, 24, 8, 32, -8, 32, -8, 24, -24, 24, -24, 8, -32, 8, -32, -8, -24, -8)])
+vertices = PackedVector2Array(8, -24, 24, -24, 24, -8, 32, -8, 32, 8, 24, 8, 24, 24, 8, 24, -24, -8, 8, 32, -8, 32, -8, 24, -24, 24, -24, 8, -32, 8, -32, -8, -24, -24, -8, -24, -8, -32, 8, -32)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2), PackedInt32Array(2, 3, 4, 5), PackedInt32Array(5, 6, 7, 8), PackedInt32Array(7, 9, 10, 11), PackedInt32Array(11, 12, 13), PackedInt32Array(13, 14, 15, 8), PackedInt32Array(8, 16, 17, 2, 5), PackedInt32Array(17, 18, 19, 0), PackedInt32Array(17, 0, 2), PackedInt32Array(8, 7, 11, 13)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-24, -24, -8, -24, -8, -32, 8, -32, 8, -24, 24, -24, 24, -8, 32, -8, 32, 8, 24, 8, 24, 24, 8, 24, 8, 32, -8, 32, -8, 24, -24, 24, -24, 8, -32, 8, -32, -8, -24, -8)])
 agent_radius = 0.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j8fb1"]

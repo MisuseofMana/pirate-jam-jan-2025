@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://v51fqceo0wvj"]
+[gd_scene load_steps=19 format=3 uid="uid://y00q0yifbk54"]
 
 [ext_resource type="FontFile" uid="uid://cewmixb1gjd4n" path="res://ui/PirataOne-Regular.ttf" id="1_36hyc"]
 [ext_resource type="Script" path="res://scenes/how_to_play.gd" id="1_eq2ng"]
@@ -6,9 +6,52 @@
 [ext_resource type="Texture2D" uid="uid://7u8caxjy4glf" path="res://art/rooms/swirl_particle_purple.png" id="2_wu8qy"]
 [ext_resource type="Texture2D" uid="uid://dmm5ypbsmbja3" path="res://ui/parchment-button-normal.png" id="4_hfehs"]
 [ext_resource type="Texture2D" uid="uid://dsasck5aq0gxc" path="res://ui/meep-portrait-cat.png" id="4_vdfyl"]
-[ext_resource type="Texture2D" uid="uid://bwgnum0dr0ymx" path="res://art/ui/trap_and_soul.png" id="5_lssds"]
 [ext_resource type="Texture2D" uid="uid://r5irg3ifqid1" path="res://ui/parchment-button-pressed.png" id="5_vetp6"]
 [ext_resource type="Texture2D" uid="uid://s1ob3gxksy8l" path="res://ui/parchment-button-hover.png" id="6_4dt1l"]
+[ext_resource type="Texture2D" uid="uid://c2q5l758r0e0k" path="res://ui/show_more_arrow_normal.png" id="7_8mju5"]
+[ext_resource type="Texture2D" uid="uid://dwyd25wxn4886" path="res://ui/show_more_arrow_pressed.png" id="8_i1gvo"]
+[ext_resource type="Texture2D" uid="uid://cf01as6adt8ck" path="res://ui/show_more_arrow.png" id="9_sk20l"]
+[ext_resource type="Texture2D" uid="uid://cuq3wr7u5fv2e" path="res://art/ui/soul-disentigrate-ui.png" id="10_1wa4h"]
+[ext_resource type="Texture2D" uid="uid://c5e3n11bwcr41" path="res://ui/meep-portraits-deer.png" id="11_24ang"]
+[ext_resource type="Texture2D" uid="uid://bk5ilfj0v2mv7" path="res://ui/meep-portraits-rat.png" id="11_du1d7"]
+[ext_resource type="Texture2D" uid="uid://b4sqf4yhiedef" path="res://art/rooms/entrance.png" id="13_ghlhn"]
+
+[sub_resource type="Animation" id="Animation_xob35"]
+resource_name = "slide"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(0.5, 2),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-376, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_1ba3r"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_n4s6f"]
+_data = {
+"RESET": SubResource("Animation_1ba3r"),
+"slide": SubResource("Animation_xob35")
+}
 
 [node name="HowToPlay" type="Node2D"]
 script = ExtResource("1_eq2ng")
@@ -17,28 +60,30 @@ script = ExtResource("1_eq2ng")
 custom_minimum_size = Vector2(384, 384)
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 384.0
+offset_bottom = 384.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Control"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 14.0
+offset_right = 744.0
+offset_bottom = 374.0
+theme_override_constants/separation = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/HBoxContainer"]
 layout_mode = 2
-offset_left = 12.0
-offset_top = 7.0
-offset_right = 372.0
-offset_bottom = 369.0
-grow_horizontal = 2
-grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
 theme_override_constants/separation = 5
 
-[node name="HBoxContainer4" type="HBoxContainer" parent="Control/VBoxContainer"]
+[node name="HBoxContainer4" type="HBoxContainer" parent="Control/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_constants/separation = 10
 
-[node name="Label2" type="RichTextLabel" parent="Control/VBoxContainer/HBoxContainer4"]
+[node name="Label2" type="RichTextLabel" parent="Control/HBoxContainer/VBoxContainer/HBoxContainer4"]
 clip_contents = false
 custom_minimum_size = Vector2(258, 34)
 layout_mode = 2
@@ -49,61 +94,62 @@ bbcode_enabled = true
 text = "[center]HOW TO PLAY[/center]"
 scroll_active = false
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="Control/VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="Control/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 10
 alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="Control/VBoxContainer/HBoxContainer2"]
-custom_minimum_size = Vector2(70, 40)
+[node name="TextureRect" type="TextureRect" parent="Control/HBoxContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
 texture = ExtResource("2_u8g4e")
+stretch_mode = 4
 
-[node name="Label" type="RichTextLabel" parent="Control/VBoxContainer/HBoxContainer2"]
+[node name="Label" type="RichTextLabel" parent="Control/HBoxContainer/VBoxContainer/HBoxContainer2"]
 clip_contents = false
-custom_minimum_size = Vector2(280, 60)
+custom_minimum_size = Vector2(284, 63)
 layout_mode = 2
 theme_override_constants/line_separation = -5
 theme_override_fonts/normal_font = ExtResource("1_36hyc")
 theme_override_font_sizes/normal_font_size = 18
 bbcode_enabled = true
-text = "Meeps look for [color=gold]treasure[/color] and the [color=ff00ca]Sword Room[/color] in the dungeon. Move rooms around to stall them from reaching the [color=ff00ca]Sword.[/color]"
+text = "Meeps are easily distracted by [color=gold]golden treasure![/color] They will wander the dungeon looting rooms as they go."
 scroll_active = false
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Control/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="Label2" type="RichTextLabel" parent="Control/VBoxContainer/HBoxContainer"]
+[node name="Label2" type="RichTextLabel" parent="Control/HBoxContainer/VBoxContainer/HBoxContainer"]
 clip_contents = false
-custom_minimum_size = Vector2(307, 63)
+custom_minimum_size = Vector2(277, 83)
 layout_mode = 2
 theme_override_constants/line_separation = -5
 theme_override_fonts/normal_font = ExtResource("1_36hyc")
 theme_override_font_sizes/normal_font_size = 18
 bbcode_enabled = true
-text = "Activate rooms with [color=ff00ca][Left Click][/color] then [color=ff00ca][Left Click][/color] any [color=ff00ca]swirl[/color] that appears to [color=ff00ca]relocate[/color] rooms. [color=00eeaa]Entrance[/color] and [color=ff00ca]Sword Room[/color] can not be moved.
+text = "Move rooms by first [color=ff00ca][Left Clicking][/color] a room then [color=ff00ca][Left Click][/color] any [color=ff00ca]swirl[/color] that appears. Note: the [color=00eeaa]Entrance[/color] and [color=ff00ca]Sword Room[/color] can not be moved.
 "
 
-[node name="TextureRect" type="TextureRect" parent="Control/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(30, 30)
+[node name="TextureRect" type="TextureRect" parent="Control/HBoxContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("2_wu8qy")
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="Control/VBoxContainer"]
+[node name="HBoxContainer3" type="HBoxContainer" parent="Control/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="TextureRect" type="TextureRect" parent="Control/VBoxContainer/HBoxContainer3"]
-custom_minimum_size = Vector2(30, 30)
+[node name="TextureRect" type="TextureRect" parent="Control/HBoxContainer/VBoxContainer/HBoxContainer3"]
+custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 texture = ExtResource("4_vdfyl")
 
-[node name="Label3" type="RichTextLabel" parent="Control/VBoxContainer/HBoxContainer3"]
+[node name="Label3" type="RichTextLabel" parent="Control/HBoxContainer/VBoxContainer/HBoxContainer3"]
 clip_contents = false
 custom_minimum_size = Vector2(274, 40)
 layout_mode = 2
@@ -111,36 +157,148 @@ theme_override_constants/line_separation = -5
 theme_override_fonts/normal_font = ExtResource("1_36hyc")
 theme_override_font_sizes/normal_font_size = 18
 bbcode_enabled = true
-text = "Press [color=ff00ca][Spacebar][/color] to cycle through available meeple stats.
-"
+text = "Move [color=gold]Treasure Rooms[/color] inbetween meeps and the [color=ff00ca]Sword Room[/color] to keep them at bay!"
 
-[node name="HBoxContainer5" type="HBoxContainer" parent="Control/VBoxContainer"]
+[node name="HBoxContainer5" type="HBoxContainer" parent="Control/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="Label3" type="RichTextLabel" parent="Control/VBoxContainer/HBoxContainer5"]
+[node name="Label3" type="RichTextLabel" parent="Control/HBoxContainer/VBoxContainer/HBoxContainer5"]
 clip_contents = false
-custom_minimum_size = Vector2(304, 40)
+custom_minimum_size = Vector2(347, 41)
 layout_mode = 2
 theme_override_constants/line_separation = -5
 theme_override_fonts/normal_font = ExtResource("1_36hyc")
 theme_override_font_sizes/normal_font_size = 18
 bbcode_enabled = true
-text = "Organize deadly trap rooms to eliminate meeple in the dungeon to reap their little [color=ff00ca]souls[/color]!
+text = "Move [color=ff0000]Trap Rooms[/color] around strategically to eliminate meeple in the dungeon to reap their little [color=ff00ca]souls[/color]!
 "
 
-[node name="TextureRect" type="TextureRect" parent="Control/VBoxContainer/HBoxContainer5"]
+[node name="MarginContainer" type="HBoxContainer" parent="Control/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 2
+
+[node name="Label" type="Label" parent="Control/HBoxContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 22
+text = "PROCEED"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureButton2" type="TextureButton" parent="Control/HBoxContainer/VBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+texture_normal = ExtResource("7_8mju5")
+texture_pressed = ExtResource("8_i1gvo")
+texture_hover = ExtResource("9_sk20l")
+stretch_mode = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 10
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Control/HBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_constants/separation = 5
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Control/HBoxContainer/MarginContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Control/HBoxContainer/MarginContainer/VBoxContainer2/HBoxContainer2"]
+custom_minimum_size = Vector2(70, 40)
+layout_mode = 2
+texture = ExtResource("10_1wa4h")
+
+[node name="Label" type="RichTextLabel" parent="Control/HBoxContainer/MarginContainer/VBoxContainer2/HBoxContainer2"]
+clip_contents = false
+custom_minimum_size = Vector2(273, 60)
+layout_mode = 2
+theme_override_constants/line_separation = -5
+theme_override_fonts/normal_font = ExtResource("1_36hyc")
+theme_override_font_sizes/normal_font_size = 18
+bbcode_enabled = true
+text = "When meeple die, they leave behind a [color=ff00ca]soul[/color], make sure [color=ff00ca]souls[/color] have a path to the [color=ff00ca]Sword Room[/color] to add the soul to you score!"
+scroll_active = false
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/HBoxContainer/MarginContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label2" type="RichTextLabel" parent="Control/HBoxContainer/MarginContainer/VBoxContainer2/HBoxContainer"]
+clip_contents = false
+custom_minimum_size = Vector2(288, 34)
+layout_mode = 2
+theme_override_constants/line_separation = -5
+theme_override_fonts/normal_font = ExtResource("1_36hyc")
+theme_override_font_sizes/normal_font_size = 18
+bbcode_enabled = true
+text = "If a meeple reaches the [color=ff00ca]Sword Room[/color], they will decrease your [color=ff00ca]soul[/color]  score, so watch out!"
+
+[node name="TextureRect" type="TextureRect" parent="Control/HBoxContainer/MarginContainer/VBoxContainer2/HBoxContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("11_24ang")
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="Control/HBoxContainer/MarginContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="TextureRect" type="TextureRect" parent="Control/HBoxContainer/MarginContainer/VBoxContainer2/HBoxContainer3"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("11_du1d7")
+
+[node name="Label3" type="RichTextLabel" parent="Control/HBoxContainer/MarginContainer/VBoxContainer2/HBoxContainer3"]
+clip_contents = false
+custom_minimum_size = Vector2(284, 60)
+layout_mode = 2
+theme_override_constants/line_separation = -5
+theme_override_fonts/normal_font = ExtResource("1_36hyc")
+theme_override_font_sizes/normal_font_size = 18
+bbcode_enabled = true
+text = "Press [color=ff00ca][Spacebar][/color] to cycle through meeple in the dungeon. Selected meeple show their stats at the bottom of the screen.
+"
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="Control/HBoxContainer/MarginContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label3" type="RichTextLabel" parent="Control/HBoxContainer/MarginContainer/VBoxContainer2/HBoxContainer5"]
+clip_contents = false
+custom_minimum_size = Vector2(304, 61)
+layout_mode = 2
+theme_override_constants/line_separation = -5
+theme_override_fonts/normal_font = ExtResource("1_36hyc")
+theme_override_font_sizes/normal_font_size = 18
+bbcode_enabled = true
+text = "Meeple who gather their max treasure will leave the dungeon, try to trap them before they reach the [color=00eeaa]Entrance.[/color]
+"
+
+[node name="TextureRect" type="TextureRect" parent="Control/HBoxContainer/MarginContainer/VBoxContainer2/HBoxContainer5"]
 custom_minimum_size = Vector2(40, 43)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-texture = ExtResource("5_lssds")
+texture = ExtResource("13_ghlhn")
 
-[node name="HBoxContainer6" type="HBoxContainer" parent="Control/VBoxContainer"]
+[node name="HBoxContainer6" type="HBoxContainer" parent="Control/HBoxContainer/MarginContainer/VBoxContainer2"]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="Label3" type="RichTextLabel" parent="Control/VBoxContainer/HBoxContainer6"]
+[node name="Label3" type="RichTextLabel" parent="Control/HBoxContainer/MarginContainer/VBoxContainer2/HBoxContainer6"]
 clip_contents = false
 custom_minimum_size = Vector2(354, 21)
 layout_mode = 2
@@ -148,14 +306,37 @@ theme_override_constants/line_separation = -5
 theme_override_fonts/normal_font = ExtResource("1_36hyc")
 theme_override_font_sizes/normal_font_size = 18
 bbcode_enabled = true
-text = "[center]Reach [color=ff00ca]99 souls[/color] to win. Good luck![/center]
+text = "[center]Collect [color=ff00ca]99 souls[/color] to win. Good luck![/center]
 "
 
-[node name="MarginContainer" type="MarginContainer" parent="Control/VBoxContainer"]
+[node name="MarginContainer2" type="HBoxContainer" parent="Control/HBoxContainer/MarginContainer/VBoxContainer2"]
 layout_mode = 2
-theme_override_constants/margin_top = 5
+theme_override_constants/separation = 10
 
-[node name="TextureButton2" type="TextureButton" parent="Control/VBoxContainer/MarginContainer"]
+[node name="TextureButton2" type="TextureButton" parent="Control/HBoxContainer/MarginContainer/VBoxContainer2/MarginContainer2"]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+texture_normal = ExtResource("7_8mju5")
+texture_pressed = ExtResource("8_i1gvo")
+texture_hover = ExtResource("9_sk20l")
+stretch_mode = 0
+flip_h = true
+
+[node name="Label" type="Label" parent="Control/HBoxContainer/MarginContainer/VBoxContainer2/MarginContainer2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 22
+text = "GO BACK"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Control/HBoxContainer/MarginContainer/VBoxContainer2/MarginContainer2"]
+layout_mode = 2
+theme_override_constants/margin_left = 50
+
+[node name="TextureButton2" type="TextureButton" parent="Control/HBoxContainer/MarginContainer/VBoxContainer2/MarginContainer2/MarginContainer"]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -165,7 +346,7 @@ texture_pressed = ExtResource("5_vetp6")
 texture_hover = ExtResource("6_4dt1l")
 stretch_mode = 0
 
-[node name="Label" type="Label" parent="Control/VBoxContainer/MarginContainer/TextureButton2"]
+[node name="Label" type="Label" parent="Control/HBoxContainer/MarginContainer/VBoxContainer2/MarginContainer2/MarginContainer/TextureButton2"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -177,4 +358,11 @@ text = "START GAME"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[connection signal="pressed" from="Control/VBoxContainer/MarginContainer/TextureButton2" to="." method="_start_game"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_n4s6f")
+}
+
+[connection signal="pressed" from="Control/HBoxContainer/VBoxContainer/MarginContainer/TextureButton2" to="." method="_slide_forward"]
+[connection signal="pressed" from="Control/HBoxContainer/MarginContainer/VBoxContainer2/MarginContainer2/TextureButton2" to="." method="_slide_back"]
+[connection signal="pressed" from="Control/HBoxContainer/MarginContainer/VBoxContainer2/MarginContainer2/MarginContainer/TextureButton2" to="." method="_start_game"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://due6tipw8kq1h"]
+[gd_scene load_steps=11 format=3 uid="uid://dtjpxll837wg"]
 
 [ext_resource type="Texture2D" uid="uid://rnxkegj4u03d" path="res://art/traps/spike-trap.png" id="1_7exbe"]
 [ext_resource type="Script" path="res://components/trap/trap.gd" id="2_d58yo"]

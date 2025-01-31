@@ -105,8 +105,8 @@ func update_own_tile_connections():
 	room_sprite.texture = atlas_register[atlas_decode]['room_sprite']
 
 func room_is_clickable() -> bool:
-	if dungeon_controller.room_movement_locked:
-		return false
+	#if dungeon_controller.room_movement_locked:
+		#return false
 	if anyRoomIsActive() and not iAmSelectedRoom():
 		return false
 		
@@ -125,9 +125,9 @@ func iAmSelectedRoom() -> bool:
 	return dungeon_controller.last_selected_dungeon_room == get_coords()
 
 func handle_room_click():
-	if dungeon_controller.room_movement_locked:
-		click_error_sfx.play()
-		return
+	#if dungeon_controller.room_movement_locked:
+		#click_error_sfx.play()
+		#return
 	if iAmSelectedRoom():
 		dungeon_controller.disable_empty_rooms()
 		dungeon_controller.last_selected_dungeon_room = null

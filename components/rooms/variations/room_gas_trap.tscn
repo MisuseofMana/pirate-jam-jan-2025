@@ -38,7 +38,8 @@ navigation_polygon = SubResource("NavigationPolygon_1713u")
 material = SubResource("ShaderMaterial_uu5np")
 
 [node name="Trap" parent="DungeonTile" index="0" instance=ExtResource("3_rodmy")]
-position = Vector2(-12, -15)
+position = Vector2(-12, -20)
+frame_progress = 0.0
 
 [node name="Treasure" parent="DungeonTile" index="1" instance=ExtResource("4_xycfv")]
 position = Vector2(17, 19)

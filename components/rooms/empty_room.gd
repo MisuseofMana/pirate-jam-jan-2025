@@ -16,9 +16,9 @@ func _ready():
 	room_moved_from_to.connect(dungeon_controller.relocate_room)
 
 func handle_empty_cell_click():
-	if dungeon_controller.room_movement_locked:
-		click_error_sfx.play()
-		return
+	#if dungeon_controller.room_movement_locked:
+		#click_error_sfx.play()
+		#return
 	var coords : Vector2i = get_coords()
 	if dungeon_controller.last_selected_dungeon_room != null:
 		room_moved_from_to.emit(dungeon_controller.last_selected_dungeon_room, coords)
