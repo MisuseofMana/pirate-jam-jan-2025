@@ -400,6 +400,7 @@ sprite_frames = SubResource("SpriteFrames_duwcw")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 path_desired_distance = 4.0
+target_desired_distance = 12.0
 path_max_distance = 10.0
 navigation_layers = 3
 
