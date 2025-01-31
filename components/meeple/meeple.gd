@@ -106,11 +106,11 @@ static func get_all(node_in_tree: Node) -> Array[Meeple]:
 	return meeples
 
 func _ready() -> void:
-	add_to_group("meeple") 
+	add_to_group("meeple")
 	
-	var available_meep_names : Array[String] = meeple_names
+	var available_meep_names: Array[String] = meeple_names
 	
-	for meep : Meeple in GameState.meeple_list:
+	for meep: Meeple in GameState.meeple_list:
 		available_meep_names.erase(meep.meeple_name)
 		
 	if not available_meep_names.is_empty():
@@ -178,6 +178,8 @@ func _update_movement(delta: float) -> void:
 	if agent_map_is_empty_or_unsynced:
 		return
 	if nav_agent.is_navigation_finished():
+		return
+	if not nav_agent.is_target_reachable():
 		return
 
 	movement_delta = movement_speed * delta
