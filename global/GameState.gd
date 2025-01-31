@@ -8,7 +8,7 @@ signal meeple_available_to_peep
 signal select_new_available_meep
 
 @export var souls_win_threshold: int = 99
-@export var starting_souls: int = 5
+@export var starting_souls: int = 12
 
 # See state chart for wave frequency
 

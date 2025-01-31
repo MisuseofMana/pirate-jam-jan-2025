@@ -18,9 +18,9 @@ shader_parameter/color = Color(0.828964, 0.405913, 1, 1)
 shader_parameter/tolerance = 0.0
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_ck1bg"]
-vertices = PackedVector2Array(22, 22, 6, 22, 6, 6, 8, 6, 22, 6, 8, 4, -8, 4, -8, -10, 8, -10)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4), PackedInt32Array(5, 6, 7, 8)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-8, -10, 8, -10, 8, 6, 22, 6, 22, 22, 6, 22, 6, 6, 8, 6, 8, 4, -8, 4)])
+vertices = PackedVector2Array(8, 4, 22, 4, 22, 20, 6, 20, 6, 4, 8, -10, -8, -10, -8, 4)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(0, 3, 4, 5), PackedInt32Array(6, 5, 4, 7)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-8, -10, 8, -10, 8, 4, 22, 4, 22, 20, 6, 20, 6, 4, -8, 4)])
 agent_radius = 0.0
 
 [node name="Basic Room" instance=ExtResource("1_0ylvh")]
@@ -38,11 +38,12 @@ position = Vector2(-17, 19)
 position = Vector2(18, -18)
 
 [node name="Trap" parent="DungeonTile" index="3" instance=ExtResource("5_hpyqw")]
-position = Vector2(0, -6)
+position = Vector2(0, -4)
 
 [node name="Trap2" parent="DungeonTile" index="4" instance=ExtResource("6_2c5b1")]
 position = Vector2(14, 14)
 
 [node name="NavigationRegion2D2" type="NavigationRegion2D" parent="." index="7"]
+position = Vector2(0, 2)
 navigation_polygon = SubResource("NavigationPolygon_ck1bg")
 navigation_layers = 3
