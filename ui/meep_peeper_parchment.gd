@@ -56,7 +56,7 @@ func auto_select_meep():
 
 func select_new_meep():
 	if GameState.meeple_list.size() > 0:
-		_meep = GameState.meeple_list.front()
+		_meep = GameState.meeple_list.back()
 		if meep_readout.modulate == no_alpha:
 			animation_player.play("fade_in_peeper")
 	else:
@@ -66,8 +66,7 @@ func select_new_meep():
 
 func _remove_selected_meep():
 	_meep = null
-	if meep_readout.modulate == full_alpha:
-		animation_player.play("fade_out_peeper")
+	get_new_target_meep()
 	
 func get_new_target_meep():
 	if GameState.meeple_list.size() == 0:
@@ -75,8 +74,8 @@ func get_new_target_meep():
 	elif GameState.meeple_list.size() > 1:
 		var displayed_meep_index = GameState.meeple_list.find(_meep)
 		if displayed_meep_index == -1:
-			if GameState.meeple_list.front():
-				_meep = GameState.meeple_list.front()
+			if GameState.meeple_list.back():
+				_meep = GameState.meeple_list.back()
 		else:
 			var next_meep_index = displayed_meep_index + 1
 			var meep_list_max_index = GameState.meeple_list.size() - 1

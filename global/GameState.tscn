@@ -27,11 +27,13 @@
 process_mode = 3
 script = ExtResource("1_6ccbp")
 wave_1_meeps = Array[PackedScene]([ExtResource("3_m0m8c"), ExtResource("3_i6o87"), ExtResource("4_5fwg2"), ExtResource("5_yhbki"), ExtResource("6_gv1mp")])
-wave_1_soul_value = 3
+wave_1_soul_value = 4
 wave_2_meeps = Array[PackedScene]([ExtResource("8_icwh8"), ExtResource("5_kmgkn"), ExtResource("4_70xg7"), ExtResource("10_jrgy0"), ExtResource("6_q1rlw")])
-wave_2_threshold = 30
+wave_2_threshold = 20
+wave_2_soul_value = 8
 wave_3_meeps = Array[PackedScene]([ExtResource("12_k7blj"), ExtResource("13_5d5fm"), ExtResource("14_u1rdi"), ExtResource("15_2x8u5"), ExtResource("16_87mpp")])
 wave_3_threshold = 60
+wave_3_soul_value = 10
 states = NodePath("Dungeon States")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]

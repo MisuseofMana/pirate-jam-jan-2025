@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://y00q0yifbk54"]
+[gd_scene load_steps=19 format=3 uid="uid://v51fqceo0wvj"]
 
 [ext_resource type="FontFile" uid="uid://cewmixb1gjd4n" path="res://ui/PirataOne-Regular.ttf" id="1_36hyc"]
 [ext_resource type="Script" path="res://scenes/how_to_play.gd" id="1_eq2ng"]
@@ -16,6 +16,21 @@
 [ext_resource type="Texture2D" uid="uid://bk5ilfj0v2mv7" path="res://ui/meep-portraits-rat.png" id="11_du1d7"]
 [ext_resource type="Texture2D" uid="uid://b4sqf4yhiedef" path="res://art/rooms/entrance.png" id="13_ghlhn"]
 
+[sub_resource type="Animation" id="Animation_1ba3r"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
 [sub_resource type="Animation" id="Animation_xob35"]
 resource_name = "slide"
 length = 0.3
@@ -30,21 +45,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(0.5, 2),
 "update": 0,
 "values": [Vector2(0, 0), Vector2(-376, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_1ba3r"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Control:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_n4s6f"]
